@@ -2334,11 +2334,11 @@ let filtered = properties.filter(item => {
         }
 
         function scrollToListings() {
-    const section = document.getElementById('property-grid') || document.getElementById('current-view-title');
-    if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
+            const section = document.getElementById('property-grid') || document.getElementById('current-view-title');
+            if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+         }
+        }
 
         function setFilterCategory(cat) {
             currentFilters.category = cat;
