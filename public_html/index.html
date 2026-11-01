@@ -453,7 +453,7 @@
                 </div>
             </div>
 
-            <!-- LIVE ZERO-BASED METRICS -->
+            <!-- LIVE METRICS -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
                 <div class="bg-white p-6 border border-neutral-300">
                     <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">LIVE LISTINGS</div>
@@ -537,7 +537,7 @@
                                     <th class="p-3">ID</th>
                                     <th class="p-3">PROPERTY TITLE</th>
                                     <th class="p-3">CATEGORY</th>
-                                    <th class="p-3">STATUS</th>
+                                    <th class="p-3">STATUS / SOLD</th>
                                     <th class="p-3">PRICE (PHP)</th>
                                     <th class="p-3 text-right">ACTIONS</th>
                                 </tr>
@@ -670,7 +670,7 @@
                                 <th class="p-3">ID</th>
                                 <th class="p-3">PROPERTY TITLE</th>
                                 <th class="p-3">CATEGORY</th>
-                                <th class="p-3">STATUS</th>
+                                <th class="p-3">STATUS / SOLD</th>
                                 <th class="p-3">PRICE (PHP)</th>
                                 <th class="p-3 text-right">ACTIONS</th>
                             </tr>
@@ -710,7 +710,7 @@
             
             <!-- GUIDELINE NOTIFICATION -->
             <div class="bg-neutral-100 border-l-4 border-brand-brown p-3 text-xs mb-4">
-                <strong>Image Guidelines:</strong> Banner: $1920\times600\text{px}$ (Max 5MB). Logo: $400\times400\text{px}$.
+                <strong>Image Guidelines:</strong> Banner: 1920x600px (Max 5MB). Logo: 400x400px.
             </div>
 
             <form onsubmit="handleSaveDeveloperSubmit(event)" class="space-y-4">
@@ -784,6 +784,14 @@
         <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
             <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
             <div id="modal-content-container" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX IMAGE PREVIEW MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 hidden">
+        <button onclick="closeLightboxModal()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-brand-brown transition-colors z-50">&times;</button>
+        <div class="relative max-w-6xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="Full Resolution Listing View" class="max-w-full max-h-[85vh] object-contain border-2 border-brand-brown shadow-2xl">
         </div>
     </div>
 
@@ -953,7 +961,7 @@
         </div>
     </div>
 
-    <!-- ADD / EDIT PROPERTY MODAL -->
+    <!-- ADD / EDIT PROPERTY MODAL WITH EXPLICIT SOLD FIELD -->
     <div id="add-listing-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-3xl my-8 border-2 border-black p-6 sm:p-8 relative">
             <button onclick="closeAddListingModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
@@ -983,7 +991,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Transaction Status *</label>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Transaction Status / Sold *</label>
                         <select id="crud-status" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
                             <option value="Sale">FOR SALE</option>
                             <option value="Rent">FOR RENT</option>
@@ -1077,15 +1085,13 @@
         </div>
     </div>
 
-    <!-- COMPASS AI CONCIERGE CHATBOX (SUBTITLE REMOVED) -->
+    <!-- COMPASS AI CONCIERGE CHATBOX -->
     <div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50">
-        <!-- TOGGLE BUTTON -->
         <button id="ai-chat-toggle" onclick="toggleAIChat()" class="bg-black hover:bg-brand-brown text-white p-4 border-2 border-brand-brown shadow-2xl flex items-center gap-3 transition-all">
             <i class="fa-solid fa-headset text-xl text-brand-brown"></i>
             <span class="text-xs font-bold uppercase tracking-widest hidden sm:inline">COMPASS AI CONCIERGE</span>
         </button>
 
-        <!-- CHAT WINDOW (NO ENGINE/DESTINATION SUBTITLE) -->
         <div id="ai-chat-window" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white border-2 border-black shadow-2xl flex flex-col h-[480px]">
             <div class="bg-black text-white p-4 border-b border-brand-brown flex justify-between items-center">
                 <div class="flex items-center gap-2">
@@ -1097,14 +1103,12 @@
                 <button onclick="toggleAIChat()" class="text-white hover:text-neutral-400 font-bold text-lg">&times;</button>
             </div>
 
-            <!-- CHAT MESSAGES CONTAINER -->
             <div id="ai-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-neutral-50 text-xs">
                 <div class="bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed">
                     Greetings! I am the Compass Realty AI Advisor. How may I assist you with our luxury portfolio or scheduling a private viewing?
                 </div>
             </div>
 
-            <!-- CHAT INPUT -->
             <form onsubmit="handleAIChatSubmit(event)" class="p-3 border-t border-neutral-300 bg-white flex gap-2">
                 <input type="text" id="ai-chat-input" placeholder="Ask about listings, pricing, specs..." required class="flex-grow bg-neutral-100 border border-neutral-400 p-2 text-xs focus:outline-none focus:border-brand-brown">
                 <button type="submit" class="bg-brand-brown hover:bg-black text-white px-4 text-xs font-bold uppercase">
@@ -1155,7 +1159,7 @@
 
     <!-- SCRIPT APPLICATION CONTROLLER & GOOGLE SHEETS CONNECTOR -->
     <script>
-        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxJ0fcddpP0OTFl4FdFvhtmmsjQhoyeRWtwqioc5thC4MCpRdT1sVkHIIruUIia-6WP2A/exec";
+        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbylOrCdSJ6LoXmn06CpJH4Kproh2452yekfEMDbXr-KiumWBJdQ_x0v91ajV945QuYKpw/exec";
 
         // STATE APP DATA
         let properties = [];
@@ -1180,8 +1184,6 @@
             { email: 'admin@compassprimerealty.com', role: 'admin' },
             { email: 'realtor@compassprimerealty.com', role: 'agent' }
         ];
-        let siteVisitorCount = Number(localStorage.getItem('cpr_visitor_count') || 0) + 1;
-        localStorage.setItem('cpr_visitor_count', siteVisitorCount);
 
         let favorites = [];
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
@@ -1199,7 +1201,24 @@
             return String(text || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
-        // FETCH AUTHENTIC DATA FROM SHEET TAB 1
+        // GENERATE SEQUENTIAL LISTING IDs STARTING FROM 1001
+        function getNextListingId() {
+            if (!properties || properties.length === 0) {
+                return 1001;
+            }
+            const numericIds = properties
+                .map(p => parseInt(p.id, 10))
+                .filter(id => !isNaN(id));
+            
+            if (numericIds.length === 0) {
+                return 1001;
+            }
+            
+            const maxId = Math.max(...numericIds);
+            return maxId < 1001 ? 1001 : maxId + 1;
+        }
+
+        // FETCH DATA FROM SHEET TAB 1
         async function fetchListingsFromGoogleSheets() {
             const spinner = document.getElementById('loading-spinner');
             const grid = document.getElementById('property-grid');
@@ -1219,7 +1238,7 @@
                         if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"];
 
                         return {
-                            id: item.id || Date.now() + Math.floor(Math.random() * 100),
+                            id: Number(item.id) || Date.now(),
                             title: item.title || item.propertyTitle || "Luxury Property",
                             location: item.location || "Metro Manila",
                             price: Number(item.price) || 0,
@@ -1239,7 +1258,7 @@
                     });
                 }
             } catch (err) {
-                console.error("Sheets Fetch:", err);
+                console.error("Sheets Fetch Error:", err);
             } finally {
                 if (spinner) spinner.classList.add('hidden');
                 if (grid) grid.classList.remove('hidden');
@@ -1296,13 +1315,16 @@
                 devProps.map(p => `
                     <div class="bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
                         <div>
-                            <div class="relative h-56 overflow-hidden bg-neutral-200">
+                            <div class="relative h-56 overflow-hidden bg-neutral-200 cursor-pointer" onclick="openLightboxModal('${p.images[0]}')">
                                 <img src="${p.images[0]}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute top-3 left-3">
                                     <span class="bg-black text-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest">
                                         FOR ${p.status.toUpperCase()}
                                     </span>
                                 </div>
+                                <button class="absolute bottom-3 right-3 bg-black/80 hover:bg-black text-white px-2.5 py-1 text-[9px] uppercase font-bold tracking-wider flex items-center gap-1">
+                                    <i class="fa-solid fa-expand"></i> FULL VIEW
+                                </button>
                             </div>
                             <div class="p-6">
                                 <span class="text-[10px] uppercase tracking-widest font-bold text-brand-brown">${dev.name}</span>
@@ -1351,7 +1373,6 @@
             developerInquiries.push(inquiryData);
             localStorage.setItem('cpr_dev_inquiries', JSON.stringify(developerInquiries));
 
-            // Sync to Sheet 4 in Google Sheets
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1360,7 +1381,7 @@
                     body: JSON.stringify({ sheetTab: "Sheet4", action: "addDeveloperInquiry", ...inquiryData })
                 });
             } catch (err) {
-                console.error("Sheet 4 Sync:", err);
+                console.error("Sheet 4 Sync Error:", err);
             }
 
             showToast("Project Inquiry Sent! Updated 4th Sheet in Google Sheets.", "success");
@@ -1441,7 +1462,7 @@
                         </button>
                         <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-between items-end">
                             <div>
-                                <span class="text-[10px] text-neutral-300 uppercase font-semibold block">${prop.category}</span>
+                                <span class="text-[10px] text-neutral-300 uppercase font-semibold block">${prop.category} &bull; ID #${prop.id}</span>
                                 <span class="text-white text-lg sm:text-xl font-bold tracking-tight">${priceFormatted}</span>
                             </div>
                             <span class="text-[10px] text-neutral-300 font-mono">${prop.area}</span>
@@ -1472,8 +1493,8 @@
                     <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
                         VIEW DETAILS
                     </button>
-                    <button onclick="openPropertyModal(${prop.id})" class="bg-brand-brown hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="Schedule Tour">
-                        <i class="fa-solid fa-calendar-plus"></i>
+                    <button onclick="openLightboxModal('${prop.images[0]}')" class="bg-neutral-800 hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="View Full Image">
+                        <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
             `;
@@ -1489,15 +1510,21 @@
             const container = document.getElementById('modal-content-container');
             const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
             let specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE SLOTS" : "PARKING SLOTS";
+            const isSold = String(prop.status).toUpperCase() === 'SOLD';
 
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-6">
-                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group">
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group cursor-pointer" onclick="openLightboxModal('${prop.images[0]}')">
                             <img id="carousel-img" src="${prop.images[0]}" class="w-full h-full object-cover transition-all duration-300">
+                            
+                            <button onclick="event.stopPropagation(); openLightboxModal(document.getElementById('carousel-img').src)" class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 flex items-center gap-1.5 border border-neutral-600">
+                                <i class="fa-solid fa-expand"></i> VIEW FULL IMAGE
+                            </button>
+
                             ${prop.images.length > 1 ? `
-                                <button onclick="navigateCarousel(${id}, -1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&lang;</button>
-                                <button onclick="navigateCarousel(${id}, 1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&rang;</button>
+                                <button onclick="event.stopPropagation(); navigateCarousel(${id}, -1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&lang;</button>
+                                <button onclick="event.stopPropagation(); navigateCarousel(${id}, 1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&rang;</button>
                                 <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 text-[10px] text-white font-mono" id="carousel-indicator">
                                     IMAGE 1 OF ${prop.images.length}
                                 </div>
@@ -1505,7 +1532,10 @@
                         </div>
 
                         <div>
-                            <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer}</span>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
+                                <span class="text-[9px] font-bold uppercase px-2 py-0.5 ${isSold ? 'bg-red-700 text-white' : 'bg-black text-white'}">${prop.status}</span>
+                            </div>
                             <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
                             <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
                         </div>
@@ -1583,6 +1613,16 @@
             document.getElementById('property-modal').classList.remove('hidden');
         }
 
+        // LIGHTBOX PREVIEW FUNCTIONALITY
+        function openLightboxModal(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightboxModal() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
         function escapeQuotes(str) {
             return String(str).replace(/'/g, "\\'");
         }
@@ -1627,7 +1667,7 @@
                     body: JSON.stringify({ sheetTab: "Sheet2", action: "addAppointment", ...inquiryObj })
                 });
             } catch (err) {
-                console.error("Sheet 2 error:", err);
+                console.error("Sheet 2 Error:", err);
             }
 
             showToast("Appointment Logged! Synced with Google Sheet Tab 2.", "success");
@@ -1663,7 +1703,7 @@
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("Sheet 3 recruitment error:", err);
+                console.error("Sheet 3 Recruitment Error:", err);
             }
 
             showToast("Recruitment Application & Resume Submitted!", "success");
@@ -1705,7 +1745,7 @@
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("Sheet 3 enlistment error:", err);
+                console.error("Sheet 3 Enlistment Error:", err);
             }
 
             showToast("Property Enlisted! Logged to Sheet Tab 3.", "success");
@@ -1797,7 +1837,6 @@
             document.getElementById('admin-stat-enquiries').textContent = inquiriesList.length;
             document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
 
-            // Render Listings Table
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
@@ -1813,7 +1852,6 @@
                 </tr>
             `).join('');
 
-            // Render Developers Table
             const tbodyDevs = document.getElementById('admin-developers-table');
             tbodyDevs.innerHTML = developersList.map(dev => {
                 const count = properties.filter(p => (p.developer || '').toLowerCase().includes(dev.name.toLowerCase())).length;
@@ -1821,7 +1859,7 @@
                     <tr class="hover:bg-neutral-50">
                         <td class="p-3 font-mono font-bold">${dev.slug}</td>
                         <td class="p-3 font-bold">${dev.name}</td>
-                        <td class="p-3"><img src="${dev.bannerUrl}" class="h-10 w-24 object-cover border border-black"></td>
+                        <td class="p-3"><img src="${dev.bannerUrl}" class="h-10 w-24 object-cover border border-black cursor-pointer" onclick="openLightboxModal('${dev.bannerUrl}')"></td>
                         <td class="p-3 font-mono font-bold">${count} Projects</td>
                         <td class="p-3 text-right">
                             <button onclick="showDeveloperPortalView('${dev.slug}')" class="text-brand-brown hover:underline font-bold">VIEW PORTAL</button>
@@ -1830,7 +1868,6 @@
                 `;
             }).join('');
 
-            // Render Developer Inquiries Table (Sheet 4 Metrics)
             const tbodyDevInq = document.getElementById('admin-devinquiries-table');
             tbodyDevInq.innerHTML = developerInquiries.length === 0 ?
                 `<tr><td colspan="6" class="p-4 text-center text-neutral-500 font-light">No developer project inquiries recorded yet.</td></tr>` :
@@ -1890,14 +1927,32 @@
             showToast(`Developer ${devObj.name} registered successfully!`, "success");
         }
 
-        function toggleSoldStatus(id) {
+        async function toggleSoldStatus(id) {
             const prop = properties.find(p => p.id === id);
             if (prop) {
                 prop.status = prop.status === 'Sold' ? 'Sale' : 'Sold';
+                
+                // Dispatch updated status to Google Sheet Tab 1
+                try {
+                    await fetch(GOOGLE_SHEETS_API_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            sheetTab: "Sheet1",
+                            action: "updateListing",
+                            ...prop,
+                            image: prop.images.join(',')
+                        })
+                    });
+                } catch (err) {
+                    console.error("Sold Toggle Sync Error:", err);
+                }
+
                 renderPropertyList();
                 if (activeAdminUser) renderAdminDashboardTables();
                 if (activeAgentUser) renderAgentDashboardTables();
-                showToast(`Property status updated to ${prop.status}!`, "success");
+                showToast(`Property Listing #${id} status updated to ${prop.status}!`, "success");
             }
         }
 
@@ -2038,13 +2093,85 @@
             showToast(`Notification email dispatched to ${recipient} via verify@compassprimerealty.com!`, "success");
         }
 
-        // CSV & LOCAL IMAGE UPLOAD
+        // ASYNCHRONOUS LISTING SAVING & EDITING WITH FULL GOOGLE SHEETS SYNC & SEQUENTIAL ID (FROM 1001)
+        async function handleListingCrudSubmit(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING TO SHEET...`;
+
+            const idVal = document.getElementById('crud-id').value;
+            const isEdit = Boolean(idVal);
+            
+            // Auto-generate ID starting from 1001 if creating a new listing
+            const listingId = isEdit ? parseInt(idVal, 10) : getNextListingId();
+
+            let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+            ];
+
+            const listingPayload = {
+                id: listingId,
+                title: document.getElementById('crud-title').value,
+                category: document.getElementById('crud-category').value,
+                status: document.getElementById('crud-status').value,
+                price: Number(document.getElementById('crud-price').value),
+                area: document.getElementById('crud-area').value,
+                beds: Number(document.getElementById('crud-beds').value),
+                baths: Number(document.getElementById('crud-baths').value),
+                parking: Number(document.getElementById('crud-parking').value),
+                location: document.getElementById('crud-location').value,
+                developer: document.getElementById('crud-developer').value || "Compass Realty",
+                description: document.getElementById('crud-description').value || "",
+                isDeal: document.getElementById('crud-isdeal').checked,
+                isFeatured: document.getElementById('crud-isfeatured').checked,
+                agentEmail: activeAgentUser || activeAdminUser || "admin@compassprimerealty.com",
+                images: imgs
+            };
+
+            // Update in-memory state
+            if (isEdit) {
+                const index = properties.findIndex(p => p.id === listingId);
+                if (index !== -1) {
+                    properties[index] = { ...properties[index], ...listingPayload };
+                }
+            } else {
+                properties.unshift(listingPayload);
+            }
+
+            // DISPATCH TO GOOGLE SHEETS (SHEET 1)
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: isEdit ? "updateListing" : "addListing",
+                        ...listingPayload,
+                        image: listingPayload.images.join(',')
+                    })
+                });
+            } catch (err) {
+                console.error("Google Sheets Sync Error:", err);
+            }
+
+            renderPropertyList();
+            if (activeAdminUser) renderAdminDashboardTables();
+            if (activeAgentUser) renderAgentDashboardTables();
+            
+            closeAddListingModal();
+            submitBtn.textContent = originalBtnText;
+            showToast(`Listing #${listingId} saved & synced with Google Sheet 1!`, "success");
+        }
+
+        // BULK CSV UPLOAD WITH SEQUENTIAL IDs & GOOGLE SHEETS SYNC
         function handleCSVUpload(event, source) {
             const file = event.target.files[0];
             if (!file) return;
 
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 const text = e.target.result;
                 const lines = text.split('\n');
                 let count = 0;
@@ -2054,8 +2181,9 @@
                     if (!line) continue;
                     const cols = line.split(',');
                     if (cols.length >= 4) {
-                        properties.unshift({
-                            id: Date.now() + Math.floor(Math.random() * 1000),
+                        const newId = getNextListingId();
+                        const listingItem = {
+                            id: newId,
                             title: cols[0].replace(/"/g, '').trim(),
                             category: cols[1]?.replace(/"/g, '').trim().toUpperCase() || "CONDOMINIUM",
                             status: cols[2]?.replace(/"/g, '').trim() || "Sale",
@@ -2065,31 +2193,52 @@
                             parking: Number(cols[6]) || 2,
                             area: cols[7]?.replace(/"/g, '').trim() || "300 sqm",
                             location: cols[8]?.replace(/"/g, '').trim() || "Metro Manila",
-                            developer: cols[9]?.replace(/"/g, '').trim() || "Shang Properties",
+                            developer: cols[9]?.replace(/"/g, '').trim() || "Compass Realty",
                             images: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"],
-                            description: "CSV imported listing."
-                        });
+                            description: "CSV imported listing.",
+                            agentEmail: activeAgentUser || activeAdminUser || "admin@compassprimerealty.com"
+                        };
+
+                        properties.unshift(listingItem);
                         count++;
+
+                        // Sync CSV items to Google Sheets
+                        try {
+                            await fetch(GOOGLE_SHEETS_API_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    sheetTab: "Sheet1",
+                                    action: "addListing",
+                                    ...listingItem,
+                                    image: listingItem.images.join(',')
+                                })
+                            });
+                        } catch (err) {
+                            console.error("CSV Row Sync Error:", err);
+                        }
                     }
                 }
+
                 renderPropertyList();
                 if (source === 'admin') showAdminDashboard();
                 if (source === 'agent') showAgentDashboard();
-                showToast(`Imported ${count} listings from CSV!`, "success");
+                showToast(`Imported ${count} listings with IDs starting from 1001 & synced to Google Sheets!`, "success");
             };
             reader.readAsText(file);
         }
 
         function exportListingsToCSV() {
-            let csv = "Title,Category,Status,Price,Beds,Baths,Parking,Area,Location\n";
+            let csv = "ID,Title,Category,Status,Price,Beds,Baths,Parking,Area,Location\n";
             properties.forEach(p => {
-                csv += `"${p.title}","${p.category}","${p.status}",${p.price},${p.beds},${p.baths},${p.parking},"${p.area}","${p.location}"\n`;
+                csv += `${p.id},"${p.title}","${p.category}","${p.status}",${p.price},${p.beds},${p.baths},${p.parking},"${p.area}","${p.location}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.setAttribute('href', url);
-            a.setAttribute('download', `Compass_Realty_${Date.now()}.csv`);
+            a.setAttribute('download', `Compass_Realty_Listings_${Date.now()}.csv`);
             a.click();
         }
 
@@ -2104,7 +2253,8 @@
                     uploadedLocalImages.push(e.target.result);
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.className = 'w-16 h-16 object-cover border border-black';
+                    img.className = 'w-16 h-16 object-cover border border-black cursor-pointer';
+                    img.onclick = () => openLightboxModal(e.target.result);
                     previewContainer.appendChild(img);
                 };
                 reader.readAsDataURL(file);
@@ -2116,6 +2266,7 @@
             document.getElementById('crud-id').value = '';
             document.getElementById('image-upload-previews').innerHTML = '';
             uploadedLocalImages = [];
+            document.getElementById('add-listing-modal-title').textContent = "UPLOAD NEW LUXURY LISTING";
             document.getElementById('add-listing-modal').classList.remove('hidden');
         }
 
@@ -2139,60 +2290,11 @@
             document.getElementById('crud-location').value = prop.location;
             document.getElementById('crud-developer').value = prop.developer;
             document.getElementById('crud-description').value = prop.description;
+            document.getElementById('crud-isdeal').checked = Boolean(prop.isDeal);
+            document.getElementById('crud-isfeatured').checked = Boolean(prop.isFeatured);
 
+            document.getElementById('add-listing-modal-title').textContent = `EDIT LISTING #${prop.id}`;
             document.getElementById('add-listing-modal').classList.remove('hidden');
-        }
-
-        function handleListingCrudSubmit(e) {
-            e.preventDefault();
-            const idVal = document.getElementById('crud-id').value;
-            let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
-                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
-            ];
-
-            if (idVal) {
-                const index = properties.findIndex(p => p.id === parseInt(idVal));
-                if (index !== -1) {
-                    properties[index] = {
-                        ...properties[index],
-                        title: document.getElementById('crud-title').value,
-                        category: document.getElementById('crud-category').value,
-                        status: document.getElementById('crud-status').value,
-                        price: Number(document.getElementById('crud-price').value),
-                        area: document.getElementById('crud-area').value,
-                        beds: Number(document.getElementById('crud-beds').value),
-                        baths: Number(document.getElementById('crud-baths').value),
-                        parking: Number(document.getElementById('crud-parking').value),
-                        location: document.getElementById('crud-location').value,
-                        developer: document.getElementById('crud-developer').value,
-                        description: document.getElementById('crud-description').value,
-                        images: uploadedLocalImages.length > 0 ? uploadedLocalImages : properties[index].images
-                    };
-                }
-            } else {
-                properties.unshift({
-                    id: Date.now(),
-                    title: document.getElementById('crud-title').value,
-                    category: document.getElementById('crud-category').value,
-                    status: document.getElementById('crud-status').value,
-                    price: Number(document.getElementById('crud-price').value),
-                    area: document.getElementById('crud-area').value,
-                    beds: Number(document.getElementById('crud-beds').value),
-                    baths: Number(document.getElementById('crud-baths').value),
-                    parking: Number(document.getElementById('crud-parking').value),
-                    location: document.getElementById('crud-location').value,
-                    developer: document.getElementById('crud-developer').value || "Shang Properties",
-                    description: document.getElementById('crud-description').value,
-                    agentEmail: activeAgentUser || "admin@compassprimerealty.com",
-                    images: imgs
-                });
-            }
-
-            renderPropertyList();
-            if (activeAdminUser) renderAdminDashboardTables();
-            if (activeAgentUser) renderAgentDashboardTables();
-            closeAddListingModal();
-            showToast("Property listing saved successfully!", "success");
         }
 
         // FAVORITES
@@ -2257,7 +2359,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // COMPASS AI CONCIERGE CHATBOX (SUBTITLE HIDDEN)
+        // COMPASS AI CONCIERGE CHATBOX
         function toggleAIChat() {
             document.getElementById('ai-chat-window').classList.toggle('hidden');
         }
@@ -2298,7 +2400,7 @@
                 });
             } catch (err) {}
 
-            const systemPrompt = `You are the executive luxury AI Concierge for Compass Realty. Assist visitors with inquiry responses based on real estate listings: ${JSON.stringify(properties.map(p => ({ title: p.title, price: p.price, location: p.location, category: p.category, status: p.status })))}. Maintain a polite, highly sophisticated tone. Keep answers under 3 concise sentences.`;
+            const systemPrompt = `You are the executive luxury AI Concierge for Compass Realty. Assist visitors with inquiry responses based on real estate listings: ${JSON.stringify(properties.map(p => ({ id: p.id, title: p.title, price: p.price, location: p.location, category: p.category, status: p.status })))}. Maintain a polite, highly sophisticated tone. Keep answers under 3 concise sentences.`;
             const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
@@ -2323,7 +2425,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // TOAST NOTIFICATION
+        // TOAST NOTIFICATION SYSTEM
         function showToast(message, type = "info") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
