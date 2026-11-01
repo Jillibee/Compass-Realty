@@ -1404,31 +1404,36 @@
             if (!grid) return;
             grid.innerHTML = '';
 
-            let filtered = properties.filter(item => {
-                if (currentFilters.status !== 'ALL') {
-                    const targetStatus = normalizeText(currentFilters.status);
-                    const itemStatus = normalizeText(item.status);
-                    if (!itemStatus.includes(targetStatus) && !targetStatus.includes(itemStatus)) return false;
-                }
+            // Locate this section inside renderPropertyList() in index.html
 
-                if (currentFilters.category !== 'ALL') {
-                    const targetCategory = normalizeText(currentFilters.category);
-                    const itemCategory = normalizeText(item.category);
-                    if (!itemCategory.includes(targetCategory) && !targetCategory.includes(itemCategory)) return false;
-                }
+let filtered = properties.filter(item => {
+    if (currentFilters.status !== 'ALL') {
+        const targetStatus = normalizeText(currentFilters.status);
+        const itemStatus = normalizeText(item.status);
+        if (itemStatus !== targetStatus) return false;
+    }
 
-                if (currentFilters.onlyDeals && !item.isDeal) return false;
-                if (currentFilters.onlyFeatured && !item.isFeatured) return false;
-                if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
-                if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
+    // FIX: Use exact equality (===) instead of .includes() for category filtering
+    if (currentFilters.category !== 'ALL') {
+        const targetCategory = normalizeText(currentFilters.category);
+        const itemCategory = normalizeText(item.category);
+        
+        // Match exact category string (e.g. 'lots' === 'lots', excluding 'houseandlots')
+        if (itemCategory !== targetCategory) return false;
+    }
 
-                if (currentFilters.keyword.trim() !== '') {
-                    const kw = currentFilters.keyword.toLowerCase();
-                    if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
-                }
+    if (currentFilters.onlyDeals && !item.isDeal) return false;
+    if (currentFilters.onlyFeatured && !item.isFeatured) return false;
+    if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
+    if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
 
-                return true;
-            });
+    if (currentFilters.keyword.trim() !== '') {
+        const kw = currentFilters.keyword.toLowerCase();
+        if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
+    }
+
+    return true;
+});
 
             if (filtered.length === 0) {
                 emptyState.classList.remove('hidden');
