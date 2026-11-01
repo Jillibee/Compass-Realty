@@ -1159,7 +1159,7 @@
 
     <!-- SCRIPT APPLICATION CONTROLLER & GOOGLE SHEETS CONNECTOR -->
     <script>
-        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbyJwjEfIoCr0oEW3d7lUWS5rsBRFJ_BxA7N05V-9cLoGtZxX_giYmr_bSUcSyF8KebnTw/exec";
+        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxmOq6MS2m7dqyTC3bmRI9ZRFS_T-frJKsNXDow2JXSZJCbdR3utes6zQY0M0XIXNAmyA/exec";
 
         // STATE APP DATA
         let properties = [];
@@ -1505,6 +1505,41 @@ let filtered = properties.filter(item => {
             `;
             return card;
         }
+        // Inside handleListingCrudSubmit() in index.html
+
+const listingPayload = {
+    id: listingId,
+    title: document.getElementById('crud-title').value,
+    category: document.getElementById('crud-category').value,
+    status: document.getElementById('crud-status').value,
+    price: Number(document.getElementById('crud-price').value),
+    area: document.getElementById('crud-area').value,
+    beds: Number(document.getElementById('crud-beds').value),
+    baths: Number(document.getElementById('crud-baths').value),
+    parking: Number(document.getElementById('crud-parking').value),
+    location: document.getElementById('crud-location').value,
+    developer: document.getElementById('crud-developer').value || "Compass Realty",
+    description: document.getElementById('crud-description').value || "",
+    isDeal: document.getElementById('crud-isdeal').checked,
+    isFeatured: document.getElementById('crud-isfeatured').checked,
+    agentEmail: activeAgentUser || activeAdminUser || "admin@compassprimerealty.com",
+    base64Images: uploadedLocalImages // Send array of base64 data URLs
+};
+
+try {
+    await fetch(GOOGLE_SHEETS_API_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            sheetTab: "Sheet1",
+            action: isEdit ? "updateListing" : "addListing",
+            ...listingPayload
+        })
+    });
+} catch (err) {
+    console.error("Google Sheets Image Sync Error:", err);
+}
 
         // PROPERTY DETAILS MODAL
         function openPropertyModal(id) {
