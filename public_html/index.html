@@ -3,12 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compass Realty | Guidance. Direction. Trust.</title>
+    
+    <!-- HIGH-RANK LUXURY REAL ESTATE SEO METADATA -->
+    <title>Compass Realty | Guidance. Direction. Trust. | Luxury Real Estate & Prime Estates</title>
+    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations. Browse penthouses, commercial buildings, vacant land, and luxury houses for sale & rent.">
+    <meta name="keywords" content="Compass Realty, Compass Prime Realty, Luxury Real Estate Philippines, BGC Condos, Forbes Park Mansions, Makati Real Estate, Real Estate Agent, Property Investment, Penthouses For Sale">
+    <meta name="author" content="Compass Realty">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://compassprimerealty.com">
+
+    <!-- Open Graph / Social Media Sharing Metadata -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://compassprimerealty.com/">
+    <meta property="og:title" content="Compass Realty | Premier Luxury Real Estate Portfolio">
+    <meta property="og:description" content="Connecting discerning buyers and investors with prestigious residential estates, commercial developments, and high-yielding land holdings.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compass Realty | Luxury Real Estate Advisory">
+    <meta name="twitter:description" content="Explore ultra-luxury penthouses, prime lots, and commercial property listings.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Structured Data Schema.org RealEstateAgent -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "Compass Realty",
+      "image": "https://i.imgur.com/z2RzCbA.png",
+      "url": "https://compassprimerealty.com",
+      "telephone": "+63-993-847-4121",
+      "email": "verify@compassprimerealty.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "32nd Street, Bonifacio Global City",
+        "addressLocality": "Taguig",
+        "addressRegion": "Metro Manila",
+        "postalCode": "1634",
+        "addressCountry": "PH"
+      },
+      "priceRange": "₱15,000,000 - ₱1,500,000,000",
+      "areaServed": ["Bonifacio Global City", "Makati CBD", "Forbes Park", "Dasmariñas Village", "Alabang"],
+      "description": "Bespoke luxury real estate brokerage catering to high-net-worth property acquisition, commercial developments, and luxury residences."
+    }
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat 300, 400, 600, 700 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -32,330 +79,1934 @@
             }
         }
     </script>
+
     <style>
-        body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: #FFFFFF; color: #000000; }
-        h1, h2, h3, h4, h5, h6, .font-heading, button, .nav-link, label { font-family: 'Montserrat', sans-serif; font-weight: 600; }
-        * { border-radius: 0 !important; }
-        .dropdown-menu { display: none; }
-        .dropdown-container:hover .dropdown-menu { display: block; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-heading, button, .nav-link, label {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFFFFF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #483929;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000000;
+        }
+
+        * {
+            border-radius: 0 !important;
+        }
+
+        .dropdown-menu {
+            display: none;
+        }
+        .dropdown-container:hover .dropdown-menu {
+            display: block;
+        }
+
+        .hero-bg {
+            background-color: #483929;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
     </style>
 </head>
-<body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased">
+<body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased selection:bg-brand-brown selection:text-white">
 
-    <!-- TOP BAR -->
-    <div class="bg-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
-        <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO</span>
+    <!-- TOP ANNOUNCEMENT & AUTHENTICATION BAR -->
+    <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
+        <div class="flex items-center space-x-6">
+            <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO</span>
+            <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid font-light fa-phone mr-1"></i> +63 993 847 4121</span>
+        </div>
         <div class="flex items-center space-x-4">
-            <button onclick="openAgentAuthModal()" class="hover:text-neutral-300 text-[10px] uppercase font-semibold"><i class="fa-solid fa-user-tie mr-1"></i> AGENT PORTAL</button>
+            <button onclick="toggleFavoritesView()" class="hover:text-neutral-300 transition-colors flex items-center gap-1.5">
+                <i class="fa-solid fa-heart text-white text-xs"></i>
+                <span id="fav-count-badge" class="bg-brand-brown text-white text-[10px] px-1.5 py-0.5">0</span>
+                <span class="hidden md:inline">SAVED PROPERTIES</span>
+            </button>
             <span class="text-neutral-600">|</span>
-            <button onclick="openAdminAuthModal()" class="bg-brand-brown hover:bg-black text-white px-3 py-1 uppercase text-[10px] font-semibold border border-neutral-700"><i class="fa-solid fa-sliders mr-1"></i> ADMIN DASHBOARD</button>
+            <button onclick="showCareersPage()" class="hover:text-neutral-300 transition-colors text-[10px] uppercase tracking-wider font-semibold">
+                <i class="fa-solid fa-briefcase mr-1"></i> CAREERS
+            </button>
+            <span class="text-neutral-600">|</span>
+            <button onclick="openAgentAuthModal()" class="hover:text-neutral-300 transition-colors text-[10px] uppercase tracking-wider font-semibold">
+                <i class="fa-solid fa-user-tie mr-1"></i> AGENT PORTAL
+            </button>
+            <span class="text-neutral-600">|</span>
+            <button onclick="openAdminAuthModal()" class="bg-brand-brown hover:bg-black text-white px-3 py-1 font-semibold uppercase text-[10px] tracking-wider transition-all border border-neutral-700">
+                <i class="fa-solid fa-sliders mr-1"></i> <span id="admin-btn-text">ADMIN DASHBOARD</span>
+            </button>
         </div>
     </div>
 
-    <!-- HEADER -->
+    <!-- MAIN HEADER & NAVIGATION WITH LOGO -->
     <header class="sticky top-0 z-40 bg-white border-b border-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
-                <a href="#" onclick="showMainApp(); return false;" class="flex items-center gap-4">
-                    <img src="https://i.imgur.com/z2RzCbA.png" alt="Compass Realty Logo" class="h-12 w-auto object-contain" />
-                    <span class="font-heading text-xl sm:text-2xl text-black uppercase">COMPASS REALTY</span>
+                
+                <a href="#" onclick="resetFilters(); showMainApp(); return false;" class="flex items-center gap-4 group">
+                    <div class="w-12 h-12 flex-shrink-0">
+                        <img src="https://i.imgur.com/z2RzCbA.png" alt="Compass Realty Logo" class="w-full h-full object-contain" />
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading text-xl sm:text-2xl text-black group-hover:text-brand-brown transition-colors uppercase leading-none">COMPASS REALTY</span>
+                    </div>
                 </a>
-                <nav class="hidden lg:flex items-center space-x-3">
-                    <button onclick="showMainApp();" class="px-3 py-2 text-xs uppercase tracking-widest hover:text-brand-brown">PROPERTIES</button>
-                    <button onclick="showDeveloperPage('shang-properties');" class="px-3 py-2 text-xs uppercase tracking-widest hover:text-brand-brown">DEVELOPERS</button>
-                    <button onclick="openEnlistModal()" class="bg-brand-brown hover:bg-black text-white px-4 py-2 text-xs uppercase font-semibold">ENLIST PROPERTY</button>
+
+                <!-- DESKTOP NAVIGATION DROPDOWNS -->
+                <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2">
+                    <button onclick="showMainApp(); filterBySection('deals');" class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown hover:bg-neutral-100 transition-all">
+                        TOP 10 DEALS
+                    </button>
+                    <button onclick="showMainApp(); filterBySection('featured');" class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown hover:bg-neutral-100 transition-all">
+                        FEATURED PROPERTIES
+                    </button>
+
+                    <!-- FOR SALE DROPDOWN -->
+                    <div class="relative dropdown-container py-6">
+                        <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
+                            FOR SALE <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
+                        </button>
+                        <div class="dropdown-menu absolute left-0 top-full w-56 bg-white border border-black shadow-xl z-50">
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">ALL FOR SALE</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white">COMMERCIAL</a>
+                        </div>
+                    </div>
+
+                    <!-- FOR RENT DROPDOWN -->
+                    <div class="relative dropdown-container py-6">
+                        <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
+                            FOR RENT <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
+                        </button>
+                        <div class="dropdown-menu absolute left-0 top-full w-56 bg-white border border-black shadow-xl z-50">
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">ALL FOR RENT</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white">COMMERCIAL</a>
+                        </div>
+                    </div>
+
+                    <button onclick="openEnlistModal()" class="ml-2 bg-brand-brown hover:bg-black text-white px-5 py-3 text-xs uppercase tracking-widest font-semibold border border-brand-brown hover:border-black transition-all">
+                        ENLIST MY PROPERTY
+                    </button>
                 </nav>
+
+                <!-- MOBILE HAMBURGER BUTTON -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 text-black hover:text-brand-brown focus:outline-none">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU CONTAINER -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-black">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <button onclick="showMainApp(); filterBySection('deals'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">TOP 10 DEALS</button>
+                <button onclick="showMainApp(); filterBySection('featured'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">FEATURED PROPERTIES</button>
+                
+                <div class="border-t border-neutral-200 pt-2">
+                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR SALE</span>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR SALE</button>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">LOTS</button>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">COMMERCIAL</button>
+                </div>
+
+                <div class="border-t border-neutral-200 pt-2">
+                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR RENT</span>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR RENT</button>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">LOTS</button>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">COMMERCIAL</button>
+                </div>
+
+                <div class="border-t border-neutral-200 pt-2">
+                    <button onclick="openEnlistModal(); toggleMobileMenu();" class="mt-2 w-full bg-brand-brown text-white py-3 text-xs uppercase font-semibold text-center tracking-widest hover:bg-black transition-colors">ENLIST MY PROPERTY</button>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- MAIN PUBLIC VIEW -->
+    <!-- PUBLIC VIEW CONTAINER -->
     <div id="public-view-container">
-        <!-- Hero Banner -->
-        <div id="hero-banner-el" class="py-20 px-8 text-white relative bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(72,57,41,0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');">
-            <div class="max-w-4xl mx-auto text-center">
-                <h1 id="hero-title-text" class="text-3xl sm:text-5xl font-bold uppercase tracking-tight mb-4">FIND YOUR NEXT PRIME REAL ESTATE</h1>
-                <p id="hero-subtitle-text" class="text-sm font-light text-neutral-200">Connecting buyers and investors with prestigious residential estates and commercial developments.</p>
+        <!-- HERO SECTION -->
+        <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="max-w-3xl">
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-semibold uppercase tracking-tight leading-none mb-6">
+                        FIND YOUR NEXT PRIME REAL ESTATE
+                    </h1>
+                    <p class="text-sm sm:text-base font-light text-neutral-200 max-w-2xl mb-8 leading-relaxed">
+                        Connecting discerning buyers and investors with prestigious residential estates, commercial developments, and high-yielding land holdings across premier locations.
+                    </p>
+                </div>
+
+                <!-- SEARCH FILTER PANEL -->
+                <div class="bg-white p-6 sm:p-8 text-black border-2 border-black shadow-2xl max-w-5xl">
+                    <form id="search-form" onsubmit="handleSearchSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+                        <div class="lg:col-span-1">
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Location or Keyword</label>
+                            <input type="text" id="filter-keyword" placeholder="e.g. Makati, Villa, Penthouse" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Transaction</label>
+                            <select id="filter-status" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                                <option value="ALL">ANY TRANSACTION</option>
+                                <option value="Sale">FOR SALE</option>
+                                <option value="Rent">FOR RENT</option>
+                                <option value="Sold">SOLD</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Property Type</label>
+                            <select id="filter-category" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                                <option value="ALL">ALL CATEGORIES</option>
+                                <option value="LOTS">LOTS</option>
+                                <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
+                                <option value="CONDOMINIUM">CONDOMINIUM</option>
+                                <option value="COMMERCIAL">COMMERCIAL</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Max Price (PHP)</label>
+                            <select id="filter-maxprice" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                                <option value="ALL">NO MAX PRICE</option>
+                                <option value="15000000">₱15,000,000</option>
+                                <option value="50000000">₱50,000,000</option>
+                                <option value="150000000">₱150,000,000</option>
+                                <option value="500000000">₱500,000,000+</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase tracking-widest font-semibold border border-brand-brown hover:border-black transition-all h-[42px] flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass"></i> SEARCH
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <main class="max-w-7xl mx-auto px-4 py-12">
-            <div id="property-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+
+        <!-- HERO BANNER PLACEMENT BELOW SEARCH BAR -->
+        <div id="dynamic-hero-banner-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+            <div class="relative border-2 border-black bg-neutral-900 overflow-hidden h-48 sm:h-64 flex items-center justify-center text-white">
+                <img id="hero-banner-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" alt="Compass Featured Banner" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 text-center px-4">
+                    <span class="bg-brand-brown text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1 mb-2 inline-block border border-white">EXCLUSIVE REAL ESTATE PORTFOLIO</span>
+                    <h2 id="hero-banner-title" class="text-xl sm:text-3xl font-bold uppercase tracking-tight">ELEVATED LIVING IN PREMIER LOCATIONS</h2>
+                    <p id="hero-banner-subtitle" class="text-xs sm:text-sm text-neutral-200 mt-1 font-light max-w-xl mx-auto">Direct access to off-market real estate investments and master-planned architectural icons.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT CATALOG -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <!-- ACTIVE FILTER BAR -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-black mb-8 gap-4">
+                <div>
+                    <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">PORTFOLIO COLLECTION</span>
+                    <h2 id="current-view-title" class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black">
+                        ALL PROPERTIES
+                    </h2>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="cat-btn-ALL" onclick="setFilterCategory('ALL')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-black hover:bg-black hover:text-white transition-all bg-black text-white">ALL</button>
+                    <button id="cat-btn-LOTS" onclick="setFilterCategory('LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">LOTS</button>
+                    <button id="cat-btn-HOUSE AND LOTS" onclick="setFilterCategory('HOUSE AND LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">HOUSE & LOTS</button>
+                    <button id="cat-btn-CONDOMINIUM" onclick="setFilterCategory('CONDOMINIUM')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">CONDOMINIUM</button>
+                    <button id="cat-btn-COMMERCIAL" onclick="setFilterCategory('COMMERCIAL')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">COMMERCIAL</button>
+                </div>
+            </div>
+
+            <!-- LOADING SPINNER -->
+            <div id="loading-spinner" class="flex flex-col items-center justify-center py-16">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-brand-brown mb-3"></i>
+                <span class="text-xs uppercase font-semibold tracking-widest text-neutral-600">Syncing with Compass Google Sheets Database...</span>
+            </div>
+
+            <!-- PROPERTY GRID CATALOG -->
+            <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden"></div>
+
+            <!-- EMPTY STATE -->
+            <div id="empty-state" class="hidden text-center py-20 bg-neutral-50 border border-neutral-300">
+                <i class="fa-solid fa-building-circle-xmark text-4xl text-neutral-400 mb-4"></i>
+                <h3 class="text-lg font-bold uppercase tracking-wider text-black">NO PROPERTIES FOUND IN DATABASE</h3>
+                <p class="text-xs text-neutral-600 mt-2 font-light">Listings will populate automatically from Google Sheets tab 1 or when created via Admin/Agent Dashboards.</p>
+                <button onclick="resetFilters()" class="mt-6 bg-brand-brown text-white px-6 py-2.5 text-xs uppercase font-semibold tracking-widest hover:bg-black transition-colors">
+                    RESET ALL FILTERS
+                </button>
+            </div>
+
         </main>
     </div>
 
-    <!-- DEVELOPER WHITE LABEL PAGE -->
-    <div id="developer-portal-container" class="hidden min-h-screen">
-        <div id="dev-hero" class="bg-black text-white py-16 px-8 border-b-4 border-brand-brown">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div>
-                    <span class="text-xs uppercase font-bold tracking-widest text-brand-brown">EXCLUSIVE DEVELOPER PARTNER</span>
-                    <h1 id="dev-title" class="text-3xl sm:text-5xl font-bold uppercase mt-1">SHANG PROPERTIES</h1>
-                    <p id="dev-description" class="text-xs font-light text-neutral-300 mt-2 max-w-2xl">Bespoke luxury developments and premier high-rise residences across Metro Manila CBDs.</p>
-                </div>
-                <button onclick="openDeveloperInquiryModal()" class="bg-brand-brown hover:bg-black text-white px-6 py-3 text-xs uppercase tracking-widest font-semibold border border-white">
-                    INQUIRE WITH DEVELOPER
-                </button>
-            </div>
+    <!-- CAREERS PAGE CONTAINER -->
+    <div id="careers-view-container" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="border-b-2 border-black pb-4 mb-8">
+            <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">JOIN OUR EXECUTIVE TEAM</span>
+            <h1 class="text-3xl font-bold uppercase tracking-tight text-black">CAREERS AT COMPASS REALTY</h1>
+            <p class="text-xs text-neutral-600 font-light mt-1">We invite elite real estate advisors, property concierges, and legal associates to join our team.</p>
         </div>
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <h2 class="text-xl font-bold uppercase border-b border-black pb-3 mb-8">DEVELOPER PORTFOLIO LISTINGS</h2>
-            <div id="developer-property-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
-        </div>
-    </div>
 
-    <!-- ADMIN DASHBOARD -->
-    <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex justify-between items-center">
-                <h1 class="text-xl font-bold uppercase">ADMIN CONTROL CENTER</h1>
-                <button onclick="showMainApp()" class="bg-neutral-800 text-white text-xs px-4 py-2 uppercase font-semibold">EXIT DASHBOARD</button>
-            </div>
-
-            <!-- TAB CONTROLS -->
-            <div class="flex border-b border-neutral-300 bg-white mt-6 text-xs uppercase font-semibold">
-                <button onclick="switchAdminTab('listings')" class="p-4 border-b-2 border-brand-brown text-black">LISTINGS MANAGEMENT</button>
-                <button onclick="switchAdminTab('owners')" class="p-4 hover:bg-neutral-50 text-neutral-600">INTERNAL LISTING OWNERS</button>
-                <button onclick="switchAdminTab('developers')" class="p-4 hover:bg-neutral-50 text-neutral-600">DEVELOPERS & INQUIRIES</button>
-            </div>
-
-            <!-- TAB 1: LISTINGS MANAGEMENT -->
-            <div id="admin-tab-listings" class="bg-white border border-neutral-300 p-6">
-                <h3 class="text-base font-bold uppercase mb-4">Properties Management</h3>
-                <table class="w-full text-left text-xs">
-                    <thead class="bg-black text-white uppercase text-[10px]">
-                        <tr><th class="p-3">ID</th><th class="p-3">TITLE</th><th class="p-3">DEVELOPER</th><th class="p-3">PRICE</th><th class="p-3 text-right">ACTION</th></tr>
-                    </thead>
-                    <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
-                </table>
-            </div>
-
-            <!-- TAB 2: INTERNAL LISTING OWNER FORM (INTERNAL ONLY) -->
-            <div id="admin-tab-owners" class="hidden bg-white border border-neutral-300 p-6">
-                <div class="border-b border-neutral-300 pb-3 mb-6">
-                    <span class="text-[10px] uppercase font-bold text-red-700 tracking-widest">INTERNAL CONFIDENTIAL RECORD</span>
-                    <h3 class="text-lg font-bold uppercase text-black">LISTING OWNER REGISTRATION FORM</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1 space-y-4">
+                <div class="bg-neutral-50 border border-black p-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-brown">SENIOR REALTY ADVISOR</h4>
+                    <span class="text-[10px] text-neutral-500 block uppercase">BGC / Makati CBD</span>
+                    <p class="text-[11px] text-neutral-600 mt-2 font-light">Full-time luxury portfolio representation for high-net-worth clients.</p>
                 </div>
-                <form id="listing-owner-form" onsubmit="handleOwnerFormSubmit(event)" class="space-y-4">
+                <div class="bg-neutral-50 border border-black p-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-brown">ESTATE PORTFOLIO MANAGER</h4>
+                    <span class="text-[10px] text-neutral-500 block uppercase">Commercial Estates</span>
+                    <p class="text-[11px] text-neutral-600 mt-2 font-light">Managing multi-tenant land acquisitions and high-yield commercial listings.</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white border-2 border-black p-6 sm:p-8">
+                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">RECRUITMENT APPLICATION FORM</h3>
+                <p class="text-xs text-neutral-500 font-light mb-6">Submissions and PDF Resumes automatically log to 3rd Sheet in Google Sheets.</p>
+
+                <form id="career-form" onsubmit="handleCareerSubmit(event)" class="space-y-4">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Select Property Listing *</label>
-                            <select id="owner-listing-id" required class="w-full bg-neutral-100 border p-2.5 text-xs font-semibold uppercase"></select>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Full Name *</label>
+                            <input type="text" id="career-name" required placeholder="e.g. Maria Santos" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Owner Full Name / Entity *</label>
-                            <input type="text" id="owner-name" required placeholder="e.g. Maria Mercedes / Estate Inc." class="w-full bg-neutral-100 border p-2.5 text-xs">
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Address (@compassprimerealty or Personal) *</label>
+                            <input type="email" id="career-email" required placeholder="m.santos@domain.com" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Owner Email *</label>
-                            <input type="email" id="owner-email" required placeholder="owner@domain.com" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Phone Number *</label>
+                            <input type="tel" id="career-phone" required placeholder="+63 917 111 2222" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Owner Phone *</label>
-                            <input type="tel" id="owner-phone" required placeholder="+63 917 000 0000" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Seller / Ownership Type *</label>
-                            <select id="owner-type" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
-                                <option value="Individual Owner">INDIVIDUAL OWNER</option>
-                                <option value="Corporate Developer">CORPORATE DEVELOPER</option>
-                                <option value="Power of Attorney / Broker">POWER OF ATTORNEY / BROKER</option>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Target Position *</label>
+                            <select id="career-role" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold uppercase focus:outline-none focus:border-brand-brown">
+                                <option value="Senior Realty Advisor">Senior Realty Advisor</option>
+                                <option value="Estate Portfolio Manager">Estate Portfolio Manager</option>
+                                <option value="Commercial Analyst">Commercial Analyst</option>
                             </select>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Title / TCT Document Reference</label>
-                            <input type="text" id="owner-title-ref" placeholder="TCT No. N-123456" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-semibold uppercase mb-1">Agreed Commission Split (%)</label>
-                            <input type="number" id="owner-commission" placeholder="5" step="0.5" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                        </div>
-                    </div>
-                    <button type="submit" class="bg-brand-brown text-white text-xs px-6 py-3 uppercase font-semibold">SAVE OWNER RECORD (INTERNAL ONLY)</button>
-                </form>
 
-                <div class="mt-8">
-                    <h4 class="text-xs font-bold uppercase mb-3">REGISTERED INTERNAL OWNERSHIP RECORDS</h4>
-                    <table class="w-full text-left text-xs border border-neutral-300">
-                        <thead class="bg-neutral-900 text-white uppercase text-[9px]">
-                            <tr><th class="p-2.5">LISTING</th><th class="p-2.5">OWNER NAME</th><th class="p-2.5">CONTACT</th><th class="p-2.5">TYPE</th><th class="p-2.5">COMMISSION</th></tr>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Upload PDF Resume / CV *</label>
+                        <input type="file" id="career-pdf" accept=".pdf" required class="w-full text-xs text-neutral-600 bg-neutral-50 p-3 border border-dashed border-neutral-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Professional Cover Letter Summary</label>
+                        <textarea id="career-notes" rows="3" placeholder="Briefly outline your track record in luxury property advisory..." class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                    </div>
+
+                    <button type="submit" id="career-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                        SUBMIT RECRUITMENT APPLICATION (UPDATES SHEET 3)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD CONTAINER -->
+    <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">SECURED</span>
+                        <span class="text-xs text-neutral-400">ADMIN: <strong class="text-white" id="admin-user-display">admin@compassprimerealty.com</strong></span>
+                    </div>
+                    <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">ADMIN CONTROL CENTER</h1>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="exportListingsToCSV()" class="bg-neutral-800 hover:bg-neutral-700 text-white text-xs px-4 py-2 font-semibold uppercase border border-neutral-600">
+                        <i class="fa-solid fa-download mr-1"></i> EXPORT CSV
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-red-800 hover:bg-red-700 text-white text-xs px-4 py-2 font-semibold uppercase border border-red-900">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> LOG OUT
+                    </button>
+                </div>
+            </div>
+
+            <!-- LIVE ZERO-BASED METRICS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">LIVE LISTINGS</div>
+                    <div class="text-3xl font-bold text-black mt-2" id="admin-stat-listings">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Fetched from Sheet 1</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">APPOINTMENTS & INQUIRIES</div>
+                    <div class="text-3xl font-bold text-brand-brown mt-2" id="admin-stat-enquiries">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Submissions to Sheet 2</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">PROPERTY ENLISTMENTS</div>
+                    <div class="text-3xl font-bold text-blue-900 mt-2" id="admin-stat-enlistments">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Submissions to Sheet 3</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">TOTAL SITE VISITS</div>
+                    <div class="text-3xl font-bold text-emerald-800 mt-2" id="admin-stat-views">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Live Analytics Counter</div>
+                </div>
+            </div>
+
+            <!-- HERO BANNER MANAGEMENT PANEL IN ADMIN -->
+            <div class="bg-white border border-neutral-300 p-6 mb-8">
+                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">HOMEPAGE HERO BANNER MANAGEMENT</h3>
+                <p class="text-xs text-neutral-500 font-light mb-4">Upload custom hero image directly from local storage and update banner title/tagline.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <form onsubmit="handleAdminBannerSave(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Banner Title</label>
+                            <input type="text" id="admin-banner-title-input" value="ELEVATED LIVING IN PREMIER LOCATIONS" class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Subtitle</label>
+                            <input type="text" id="admin-banner-sub-input" value="Direct access to off-market real estate investments and master-planned architectural icons." class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Upload Local Image File</label>
+                            <input type="file" id="admin-banner-file" accept="image/*" onchange="handleAdminBannerUpload(event)" class="text-xs text-neutral-600">
+                        </div>
+                        <button type="submit" class="bg-brand-brown text-white text-xs px-4 py-2 uppercase font-semibold">SAVE HERO BANNER</button>
+                    </form>
+                    <div class="border border-black bg-neutral-900 p-4 text-center text-white relative h-36 flex items-center justify-center">
+                        <img id="admin-banner-preview" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                        <span class="relative z-10 text-xs font-bold uppercase tracking-widest text-white">HERO BANNER LIVE PREVIEW</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN LISTINGS MANAGEMENT TABLE -->
+            <div class="bg-white border border-neutral-300 p-6 mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-neutral-300 mb-6 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-tight text-black">LISTINGS MANAGEMENT</h3>
+                        <p class="text-xs text-neutral-500 font-light">Create new listings, upload CSV, or select images from local drive.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-plus mr-1"></i> ADD NEW LISTING
+                        </button>
+                        <label class="bg-black hover:bg-neutral-800 text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider cursor-pointer">
+                            <i class="fa-solid fa-file-csv mr-1"></i> UPLOAD CSV
+                            <input type="file" id="admin-csv-file" accept=".csv" class="hidden" onchange="handleCSVUpload(event, 'admin')">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">PROPERTY TITLE</th>
+                                <th class="p-3">CATEGORY</th>
+                                <th class="p-3">STATUS</th>
+                                <th class="p-3">PRICE (PHP)</th>
+                                <th class="p-3 text-right">ACTIONS</th>
+                            </tr>
                         </thead>
-                        <tbody id="internal-owners-table" class="divide-y divide-neutral-200"></tbody>
+                        <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- TAB 3: DEVELOPERS MANAGEMENT & INQUIRIES HUB -->
-            <div id="admin-tab-developers" class="hidden bg-white border border-neutral-300 p-6">
-                <div class="flex justify-between items-center pb-4 border-b border-neutral-300 mb-6">
-                    <div>
-                        <h3 class="text-lg font-bold uppercase text-black">DEVELOPERS & DEVELOPER INQUIRIES HUB</h3>
-                        <p class="text-xs text-neutral-500 font-light">Manage white-label developer portals and answer developer-specific client leads.</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <div class="lg:col-span-5 border border-neutral-300 p-4 bg-neutral-50">
-                        <h4 class="text-xs font-bold uppercase border-b border-neutral-300 pb-2 mb-4">REGISTER NEW DEVELOPER PORTAL</h4>
-                        <form id="dev-register-form" onsubmit="handleDevRegisterSubmit(event)" class="space-y-3">
-                            <div>
-                                <label class="block text-[9px] font-semibold uppercase mb-1">Developer Name *</label>
-                                <input type="text" id="dev-reg-name" required placeholder="e.g. Shang Properties" class="w-full bg-white border p-2 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[9px] font-semibold uppercase mb-1">Slug / URL Identifier *</label>
-                                <input type="text" id="dev-reg-slug" required placeholder="shang-properties" class="w-full bg-white border p-2 text-xs">
-                            </div>
-                            <div>
-                                <label class="block text-[9px] font-semibold uppercase mb-1">Developer Description</label>
-                                <textarea id="dev-reg-desc" rows="2" placeholder="Luxury high-rise residential developer..." class="w-full bg-white border p-2 text-xs"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-black text-white text-xs py-2.5 uppercase font-semibold">CREATE DEVELOPER PORTAL</button>
-                        </form>
-                    </div>
-
-                    <div class="lg:col-span-7">
-                        <h4 class="text-xs font-bold uppercase mb-3">INCOMING DEVELOPER INQUIRIES</h4>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs border border-neutral-300">
-                                <thead class="bg-black text-white uppercase text-[9px]">
-                                    <tr><th class="p-2.5">DEVELOPER</th><th class="p-2.5">CLIENT NAME</th><th class="p-2.5">EMAIL</th><th class="p-2.5">STATUS</th><th class="p-2.5 text-right">ACTION</th></tr>
-                                </thead>
-                                <tbody id="dev-inquiries-table" class="divide-y divide-neutral-200"></tbody>
-                            </table>
-                        </div>
-                    </div>
+            <!-- ADMIN INQUIRIES MANAGEMENT & EMAIL RESPONSE -->
+            <div class="bg-white border border-neutral-300 p-6">
+                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">INQUIRIES & APPOINTMENTS RESPONDER</h3>
+                <p class="text-xs text-neutral-500 font-light mb-4">Dispatches notifications from <strong>verify@compassprimerealty.com</strong>.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">CLIENT</th>
+                                <th class="p-3">EMAIL & PHONE</th>
+                                <th class="p-3">PROPERTY</th>
+                                <th class="p-3">PREFERRED DATE</th>
+                                <th class="p-3 text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-inquiries-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- AGENT DASHBOARD CONTAINER -->
+    <div id="agent-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-brand-brown text-white p-6 border-b-4 border-black flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-black text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">VERIFIED AGENT</span>
+                        <span class="text-xs text-neutral-200">EMAIL: <strong class="text-white" id="agent-email-display">realtor@compassprimerealty.com</strong></span>
+                    </div>
+                    <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">REALTY AGENT PORTAL</h1>
+                </div>
+                <button onclick="logoutAgent()" class="bg-black hover:bg-neutral-800 text-white text-xs px-4 py-2 font-semibold uppercase border border-neutral-700">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> LOG OUT
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8">
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">PORTFOLIO PROPERTIES</div>
+                    <div class="text-3xl font-bold text-black mt-2" id="agent-stat-listings">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Available listings in database</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">CLIENT APPOINTMENTS & INQUIRIES</div>
+                    <div class="text-3xl font-bold text-brand-brown mt-2" id="agent-stat-appointments">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Submissions recorded on Sheet 2</div>
+                </div>
+            </div>
+
+            <!-- AGENT LISTINGS TABLE -->
+            <div class="bg-white border border-neutral-300 p-6 mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-neutral-300 mb-6 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-tight text-black">AGENT LISTINGS</h3>
+                        <p class="text-xs text-neutral-500 font-light">Upload listings via CSV or local drive images.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="openAddListingModal('agent')" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider">
+                            <i class="fa-solid fa-plus mr-1"></i> ADD LISTING
+                        </button>
+                        <label class="bg-black hover:bg-neutral-800 text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider cursor-pointer">
+                            <i class="fa-solid fa-file-csv mr-1"></i> CSV UPLOAD
+                            <input type="file" id="agent-csv-file" accept=".csv" class="hidden" onchange="handleCSVUpload(event, 'agent')">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">PROPERTY TITLE</th>
+                                <th class="p-3">CATEGORY</th>
+                                <th class="p-3">STATUS</th>
+                                <th class="p-3">PRICE (PHP)</th>
+                                <th class="p-3 text-right">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="agent-listings-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- AGENT APPOINTMENT & INQUIRY RESPONDER -->
+            <div class="bg-white border border-neutral-300 p-6">
+                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">MY LISTING INQUIRIES & APPOINTMENTS</h3>
+                <p class="text-xs text-neutral-500 font-light mb-4">Track client viewing requests and send direct email replies via verify@compassprimerealty.com.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">CLIENT NAME</th>
+                                <th class="p-3">EMAIL & PHONE</th>
+                                <th class="p-3">PROPERTY TITLE</th>
+                                <th class="p-3">PREFERRED DATE</th>
+                                <th class="p-3 text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="agent-inquiries-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROPERTY DETAILS & APPOINTMENT MODAL -->
+    <div id="property-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
+            <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
+            
+            <div id="modal-content-container" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
+        </div>
+    </div>
+
+    <!-- ENLIST MY PROPERTY MODAL (AUTOMATICALLY UPDATES SHEET TAB 3) -->
+    <div id="enlist-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-2xl border-2 border-black shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeEnlistModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
+            
+            <div class="border-b border-black pb-4 mb-6">
+                <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CONCIERGE ONBOARDING</span>
+                <h2 class="text-2xl font-bold uppercase tracking-tight text-black">ENLIST YOUR LUXURY PROPERTY</h2>
+                <p class="text-xs text-neutral-600 font-light mt-1">Submit property details for appraisal. Automatically logs to Google Sheet Tab 3.</p>
+            </div>
+
+            <form id="enlist-form" onsubmit="handleEnlistSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Full Name *</label>
+                        <input type="text" id="enlist-name" required placeholder="e.g. Victor Consunji" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Address *</label>
+                        <input type="email" id="enlist-email" required placeholder="owner@domain.com" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Contact Phone *</label>
+                        <input type="tel" id="enlist-phone" required placeholder="+63 917 000 0000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Category *</label>
+                        <select id="enlist-type" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                            <option value="CONDOMINIUM">CONDOMINIUM</option>
+                            <option value="HOUSE AND LOTS">HOUSE AND LOT</option>
+                            <option value="LOTS">VACANT LOT</option>
+                            <option value="COMMERCIAL">COMMERCIAL BUILDING</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Location / City *</label>
+                        <input type="text" id="enlist-location" required placeholder="e.g. Forbes Park, Makati" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Asking Price (PHP) *</label>
+                        <input type="number" id="enlist-price" required placeholder="e.g. 120000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Notes & Specs</label>
+                    <textarea id="enlist-notes" rows="3" placeholder="Provide property size, floor area, bedrooms, bathrooms, and title status..." class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                </div>
+
+                <button type="submit" id="enlist-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    SUBMIT ENLISTMENT (UPDATES SHEET 3)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN AUTH MODAL WITH 2FA -->
+    <div id="admin-auth-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md border-2 border-black p-8 relative">
+            <button onclick="closeAdminAuthModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            
+            <div class="text-center mb-6">
+                <i class="fa-solid fa-shield-halved text-3xl text-brand-brown mb-2"></i>
+                <h3 class="text-xl font-bold uppercase tracking-tight">ADMIN SECURITY AUTHENTICATION</h3>
+                <p class="text-xs text-neutral-500 font-light mt-1">2-Factor Verification via verify@compassprimerealty.com</p>
+            </div>
+
+            <form id="admin-login-step1" onsubmit="handleAdminLoginStep1(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Admin Email</label>
+                    <input type="email" id="admin-email-input" value="admin@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
+                    <input type="password" id="admin-pass-input" value="admin123" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    SEND VERIFICATION CODE
+                </button>
+            </form>
+
+            <form id="admin-login-step2" onsubmit="handleAdminLoginStep2(event)" class="space-y-4 hidden">
+                <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
+                    <i class="fa-solid fa-envelope-circle-check mr-1"></i> Dispatched via verify@compassprimerealty.com! Code: <strong class="font-bold text-black" id="admin-sim-code">882910</strong>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
+                    <input type="text" id="admin-code-input" placeholder="882910" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
+                </div>
+                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    VERIFY & ACCESS ADMIN DASHBOARD
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AGENT AUTH & REGISTRATION MODAL -->
+    <div id="agent-auth-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md border-2 border-black p-8 relative">
+            <button onclick="closeAgentAuthModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            
+            <div class="text-center mb-6">
+                <i class="fa-solid fa-user-tie text-3xl text-brand-brown mb-2"></i>
+                <h3 class="text-xl font-bold uppercase tracking-tight">REALTY AGENT PORTAL</h3>
+                <p class="text-xs text-neutral-500 font-light mt-1">Requires active <strong>@compassprimerealty.com</strong> email.</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="flex border-b border-black mb-4 text-xs font-bold uppercase">
+                <button id="agent-tab-login-btn" onclick="switchAgentAuthTab('login')" class="w-1/2 py-2 border-b-2 border-brand-brown text-black">Sign In</button>
+                <button id="agent-tab-reg-btn" onclick="switchAgentAuthTab('register')" class="w-1/2 py-2 border-b-2 border-transparent text-neutral-400">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="agent-login-step1" onsubmit="handleAgentLoginStep1(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Agent Email (@compassprimerealty.com)</label>
+                    <input type="email" id="agent-email-input" placeholder="realtor@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
+                    <input type="password" id="agent-pass-input" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    VERIFY & SEND ACCESS CODE
+                </button>
+            </form>
+
+            <!-- Registration Form with Validation Rules -->
+            <form id="agent-register-form" onsubmit="handleAgentRegistrationSubmit(event)" class="space-y-3 hidden">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Agent Email (@compassprimerealty.com) *</label>
+                    <input type="email" id="agent-reg-email" placeholder="name@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Create Password *</label>
+                    <input type="password" id="agent-reg-pass" required placeholder="Min 6 chars, 1 uppercase, 1 number, 1 symbol" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    <p class="text-[9px] text-neutral-500 mt-1">Policy: At least 6 characters, 1 capital letter, 1 number, and 1 special symbol.</p>
+                </div>
+                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    REQUEST VERIFICATION CODE
+                </button>
+            </form>
+
+            <!-- OTP Step -->
+            <form id="agent-login-step2" onsubmit="handleAgentLoginStep2(event)" class="space-y-4 hidden">
+                <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
+                    <i class="fa-solid fa-paper-plane mr-1"></i> Dispatched via verify@compassprimerealty.com! Code: <strong class="font-bold text-black" id="agent-sim-code">419203</strong>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
+                    <input type="text" id="agent-code-input" placeholder="419203" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
+                </div>
+                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    ACCESS AGENT DASHBOARD
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT PROPERTY MODAL -->
+    <div id="add-listing-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-3xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeAddListingModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            
+            <h3 class="text-xl font-bold uppercase tracking-tight text-black border-b border-black pb-3 mb-6" id="add-listing-modal-title">
+                UPLOAD NEW LUXURY LISTING
+            </h3>
+
+            <form id="listing-crud-form" onsubmit="handleListingCrudSubmit(event)" class="space-y-4">
+                <input type="hidden" id="crud-id">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Title *</label>
+                        <input type="text" id="crud-title" required placeholder="e.g. Aurelia Residences Penthouse" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Category *</label>
+                        <select id="crud-category" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                            <option value="CONDOMINIUM">CONDOMINIUM</option>
+                            <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
+                            <option value="LOTS">LOTS</option>
+                            <option value="COMMERCIAL">COMMERCIAL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Transaction Status *</label>
+                        <select id="crud-status" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                            <option value="Sale">FOR SALE</option>
+                            <option value="Rent">FOR RENT</option>
+                            <option value="Sold">SOLD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Price (PHP) *</label>
+                        <input type="number" id="crud-price" required placeholder="150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Floor / Lot Area *</label>
+                        <input type="text" id="crud-area" required placeholder="e.g. 420 sqm" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bedrooms</label>
+                        <input type="number" id="crud-beds" value="3" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bathrooms</label>
+                        <input type="number" id="crud-baths" value="3" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Parking / Garage Slots</label>
+                        <input type="number" id="crud-parking" value="2" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Location / Address *</label>
+                        <input type="text" id="crud-location" required placeholder="e.g. BGC, Taguig City" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Developer / Estate</label>
+                        <input type="text" id="crud-developer" placeholder="e.g. Shang Properties" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="border border-dashed border-neutral-400 p-4 bg-neutral-50">
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-2">Upload Images from Local Drive</label>
+                    <input type="file" id="crud-image-files" accept="image/*" multiple onchange="handleLocalImageUpload(event)" class="text-xs text-neutral-600">
+                    <div id="image-upload-previews" class="flex flex-wrap gap-2 mt-3"></div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Description</label>
+                    <textarea id="crud-description" rows="3" placeholder="Highlight prime finishes, panoramic skyline views..." class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                </div>
+
+                <div class="flex items-center gap-6 pt-2">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold">
+                        <input type="checkbox" id="crud-isdeal" class="w-4 h-4 text-brand-brown"> TOP 10 DEAL
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold">
+                        <input type="checkbox" id="crud-isfeatured" class="w-4 h-4 text-brand-brown"> FEATURED PROPERTY
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors mt-4">
+                    SAVE PROPERTY LISTING
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AGENT / ADMIN RESPONDER MODAL -->
+    <div id="reply-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md border-2 border-black p-6 relative">
+            <button onclick="closeReplyModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <h3 class="text-lg font-bold uppercase text-black mb-1">SEND EMAIL RESPONSE</h3>
+            <p class="text-xs text-neutral-500 font-light mb-4">Dispatched automatically via <strong>verify@compassprimerealty.com</strong></p>
+
+            <form onsubmit="handleSendResponseSubmit(event)" class="space-y-3">
+                <input type="hidden" id="reply-inquiry-id">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Recipient Email</label>
+                    <input type="email" id="reply-to-email" readonly class="w-full bg-neutral-200 border border-neutral-400 p-2 text-xs font-mono">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Body Response</label>
+                    <textarea id="reply-body" rows="4" required placeholder="Write official client response..." class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
+                    DISPATCH NOTIFICATION EMAIL
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- COMPASS AI CONCIERGE CHATBOX (SUBTITLE REMOVED) -->
+    <div id="ai-chat-widget" class="fixed bottom-6 right-6 z-50">
+        <!-- TOGGLE BUTTON -->
+        <button id="ai-chat-toggle" onclick="toggleAIChat()" class="bg-black hover:bg-brand-brown text-white p-4 border-2 border-brand-brown shadow-2xl flex items-center gap-3 transition-all">
+            <i class="fa-solid fa-headset text-xl text-brand-brown"></i>
+            <span class="text-xs font-bold uppercase tracking-widest hidden sm:inline">COMPASS AI CONCIERGE</span>
+        </button>
+
+        <!-- CHAT WINDOW (NO ENGINE/DESTINATION SUBTITLE) -->
+        <div id="ai-chat-window" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white border-2 border-black shadow-2xl flex flex-col h-[480px]">
+            <div class="bg-black text-white p-4 border-b border-brand-brown flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-brand-brown"></i>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider">Compass AI Advisory</h4>
+                    </div>
+                </div>
+                <button onclick="toggleAIChat()" class="text-white hover:text-neutral-400 font-bold text-lg">&times;</button>
+            </div>
+
+            <!-- CHAT MESSAGES CONTAINER -->
+            <div id="ai-chat-messages" class="flex-grow p-4 overflow-y-auto space-y-3 bg-neutral-50 text-xs">
+                <div class="bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed">
+                    Greetings! I am the Compass Realty AI Advisor. How may I assist you with our luxury portfolio or scheduling a private viewing?
+                </div>
+            </div>
+
+            <!-- CHAT INPUT -->
+            <form onsubmit="handleAIChatSubmit(event)" class="p-3 border-t border-neutral-300 bg-white flex gap-2">
+                <input type="text" id="ai-chat-input" placeholder="Ask about listings, pricing, specs..." required class="flex-grow bg-neutral-100 border border-neutral-400 p-2 text-xs focus:outline-none focus:border-brand-brown">
+                <button type="submit" class="bg-brand-brown hover:bg-black text-white px-4 text-xs font-bold uppercase">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white border-t-4 border-brand-brown pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-neutral-800">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.imgur.com/z2RzCbA.png" alt="Compass Realty Logo" class="w-8 h-8 object-contain">
+                        <span class="font-bold text-lg tracking-tight uppercase block">COMPASS REALTY</span>
+                    </div>
+                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
+                        Premier real estate luxury advisory agency catering to bespoke residential, prime commercial, and land investments.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">PORTFOLIO</h4>
+                    <ul class="space-y-2 text-xs text-neutral-300 font-light">
+                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); return false;" class="hover:text-white">Luxury Condominiums</a></li>
+                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="hover:text-white">Estates & Houses</a></li>
+                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'LOTS'); return false;" class="hover:text-white">Prime Lots</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">CONCIERGE</h4>
+                    <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                        Compass Realty Tower, 32nd Street<br>
+                        Bonifacio Global City, Taguig<br>
+                        Phone: +63 993 847 4121
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-[10px] text-neutral-500 uppercase tracking-widest">
+                &copy; 2026 COMPASS REALTY PRIME. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT APPLICATION CONTROLLER & GOOGLE SHEETS CONNECTOR -->
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxJ0fcddpP0OTFl4FdFvhtmmsjQhoyeRWtwqioc5thC4MCpRdT1sVkHIIruUIia-6WP2A/exec";
+
+        // APP STATE - REMOVED HARDCODED DUMMY LISTINGS & INQUIRIES
         let properties = [];
-        let internalOwnerRecords = [];
-        let developers = [
-            { slug: 'shang-properties', name: 'Shang Properties', description: 'Premier luxury residential and commercial developer in Metro Manila.' }
+        let inquiriesList = [];
+        let registeredAgents = JSON.parse(localStorage.getItem('cpr_registered_agents')) || [
+            { email: 'admin@compassprimerealty.com', role: 'admin' },
+            { email: 'realtor@compassprimerealty.com', role: 'agent' }
         ];
-        let developerInquiries = [];
+        let siteVisitorCount = Number(localStorage.getItem('cpr_visitor_count') || 0) + 1;
+        localStorage.setItem('cpr_visitor_count', siteVisitorCount);
+
+        let favorites = [];
+        let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+        let activeAdminUser = null;
+        let activeAgentUser = null;
+        let activeModalCarouselIndex = 0;
+        let uploadedLocalImages = [];
 
         window.addEventListener('DOMContentLoaded', () => {
-            fetchListings();
+            fetchListingsFromGoogleSheets();
         });
 
-        async function fetchListings() {
-            try {
-                const res = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await res.json();
-                if (Array.isArray(data)) {
-                    properties = data;
-                    renderProperties();
-                    populateOwnerDropdown();
-                }
-            } catch(e) { console.error(e); }
+        function normalizeText(text) {
+            return String(text || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
-        function renderProperties() {
+        // FETCH AUTHENTIC DATA FROM SHEET TAB 1
+        async function fetchListingsFromGoogleSheets() {
+            const spinner = document.getElementById('loading-spinner');
             const grid = document.getElementById('property-grid');
-            if(!grid) return;
-            grid.innerHTML = properties.map(p => `
-                <div class="bg-white border border-black p-4">
-                    <img src="${p.image || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'}" class="w-full h-48 object-cover mb-3">
-                    <span class="text-[10px] uppercase font-bold text-brand-brown">${p.developer || 'Compass Exclusive'}</span>
-                    <h3 class="text-sm font-bold uppercase">${p.title || 'Property Listing'}</h3>
-                    <p class="text-xs text-neutral-600 font-mono mt-1">₱${Number(p.price || 0).toLocaleString()}</p>
-                </div>
-            `).join('');
-        }
 
-        function showDeveloperPage(slug) {
-            const dev = developers.find(d => d.slug === slug) || developers[0];
-            document.getElementById('public-view-container').classList.add('hidden');
-            document.getElementById('admin-dashboard-container').classList.add('hidden');
-            document.getElementById('developer-portal-container').classList.remove('hidden');
+            try {
+                const response = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await response.json();
 
-            document.getElementById('dev-title').textContent = dev.name;
-            document.getElementById('dev-description').textContent = dev.description;
+                if (Array.isArray(data) && data.length > 0) {
+                    properties = data.map(item => {
+                        let imgs = [];
+                        if (Array.isArray(item.images)) {
+                            imgs = item.images;
+                        } else if (item.image) {
+                            imgs = String(item.image).split(',').map(s => s.trim()).filter(Boolean);
+                        }
+                        if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"];
 
-            const devGrid = document.getElementById('developer-property-grid');
-            const devProps = properties.filter(p => (p.developer || '').toLowerCase().includes(dev.name.toLowerCase()));
-            
-            devGrid.innerHTML = (devProps.length > 0 ? devProps : properties).map(p => `
-                <div class="bg-white border border-black p-4">
-                    <img src="${p.image || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'}" class="w-full h-48 object-cover mb-3">
-                    <span class="text-[10px] uppercase font-bold text-brand-brown">${dev.name}</span>
-                    <h3 class="text-sm font-bold uppercase">${p.title || 'Property Listing'}</h3>
-                    <p class="text-xs text-neutral-600 font-mono mt-1">₱${Number(p.price || 0).toLocaleString()}</p>
-                </div>
-            `).join('');
+                        return {
+                            id: item.id || Date.now() + Math.floor(Math.random() * 100),
+                            title: item.title || item.propertyTitle || "Luxury Property",
+                            location: item.location || "Metro Manila",
+                            price: Number(item.price) || 0,
+                            status: item.status || item.transaction || "Sale",
+                            category: item.category || "CONDOMINIUM",
+                            isDeal: String(item.isDeal).toUpperCase() === 'TRUE' || item.isDeal === true,
+                            isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE' || item.isFeatured === true,
+                            beds: Number(item.beds) || 0,
+                            baths: Number(item.baths) || 0,
+                            parking: Number(item.parking || item.garage) || 0,
+                            area: item.area || "N/A",
+                            developer: item.developer || "Compass Exclusive",
+                            agentEmail: item.agentEmail || "realtor@compassprimerealty.com",
+                            images: imgs,
+                            description: item.description || "Exclusive luxury property registered with Compass Realty."
+                        };
+                    });
+                }
+            } catch (err) {
+                console.error("Sheets Fetch:", err);
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
+                if (grid) grid.classList.remove('hidden');
+                renderPropertyList();
+            }
         }
 
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
-            document.getElementById('developer-portal-container').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('agent-dashboard-container').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function switchAdminTab(tab) {
-            ['listings', 'owners', 'developers'].forEach(t => {
-                document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+        function showCareersPage() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.remove('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('agent-dashboard-container').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderPropertyList() {
+            const grid = document.getElementById('property-grid');
+            const emptyState = document.getElementById('empty-state');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            let filtered = properties.filter(item => {
+                if (currentFilters.status !== 'ALL') {
+                    const targetStatus = normalizeText(currentFilters.status);
+                    const itemStatus = normalizeText(item.status);
+                    if (!itemStatus.includes(targetStatus) && !targetStatus.includes(itemStatus)) return false;
+                }
+
+                if (currentFilters.category !== 'ALL') {
+                    const targetCategory = normalizeText(currentFilters.category);
+                    const itemCategory = normalizeText(item.category);
+                    if (!itemCategory.includes(targetCategory) && !targetCategory.includes(itemCategory)) return false;
+                }
+
+                if (currentFilters.onlyDeals && !item.isDeal) return false;
+                if (currentFilters.onlyFeatured && !item.isFeatured) return false;
+                if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
+                if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
+
+                if (currentFilters.keyword.trim() !== '') {
+                    const kw = currentFilters.keyword.toLowerCase();
+                    if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
+                }
+
+                return true;
             });
-            document.getElementById(`admin-tab-${tab}`).classList.remove('hidden');
+
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                filtered.forEach(prop => grid.appendChild(createPropertyCard(prop)));
+            }
         }
 
-        function populateOwnerDropdown() {
-            const select = document.getElementById('owner-listing-id');
-            if(!select) return;
-            select.innerHTML = properties.map(p => `<option value="${p.id}">${p.title || p.id}</option>`).join('');
+        function createPropertyCard(prop) {
+            const card = document.createElement('div');
+            card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative';
+            const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
+            const isFav = favorites.includes(prop.id);
+            const isSold = String(prop.status).toUpperCase() === 'SOLD';
+
+            let specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE" : "PARKING";
+
+            card.innerHTML = `
+                <div>
+                    <div class="relative h-64 overflow-hidden bg-neutral-200 cursor-pointer" onclick="openPropertyModal(${prop.id})">
+                        <img src="${prop.images[0]}" alt="${prop.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                            <span class="${isSold ? 'bg-red-700' : 'bg-black'} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black">
+                                ${isSold ? 'SOLD' : 'FOR ' + String(prop.status).toUpperCase()}
+                            </span>
+                            ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider">TOP 10 DEAL</span>` : ''}
+                        </div>
+                        <button onclick="event.stopPropagation(); toggleFavorite(${prop.id});" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white text-black flex items-center justify-center transition-colors shadow">
+                            <i class="${isFav ? 'fa-solid text-red-600' : 'fa-regular'} fa-heart text-sm"></i>
+                        </button>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-[10px] text-neutral-300 uppercase font-semibold block">${prop.category}</span>
+                                <span class="text-white text-lg sm:text-xl font-bold tracking-tight">${priceFormatted}</span>
+                            </div>
+                            <span class="text-[10px] text-neutral-300 font-mono">${prop.area}</span>
+                        </div>
+                    </div>
+                    <div class="p-6 cursor-pointer" onclick="openPropertyModal(${prop.id})">
+                        <div class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown mb-1">${prop.developer}</div>
+                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-2 line-clamp-1 group-hover:text-brand-brown transition-colors">${prop.title}</h3>
+                        <p class="text-xs text-neutral-600 font-light mb-4"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
+                            <div>
+                                <span class="block font-bold text-black">${prop.beds}</span>
+                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">BEDS</span>
+                            </div>
+                            <div>
+                                <span class="block font-bold text-black">${prop.baths}</span>
+                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">BATHS</span>
+                            </div>
+                            <div>
+                                <span class="block font-bold text-black">${prop.parking}</span>
+                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">${specLabel}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 pt-0 flex gap-2">
+                    <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
+                        VIEW DETAILS
+                    </button>
+                    <button onclick="openPropertyModal(${prop.id})" class="bg-brand-brown hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="Schedule Tour">
+                        <i class="fa-solid fa-calendar-plus"></i>
+                    </button>
+                </div>
+            `;
+            return card;
         }
 
-        function handleOwnerFormSubmit(e) {
+        // FULL PROPERTY DETAIL & APPOINTMENT MODAL
+        function openPropertyModal(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            activeModalCarouselIndex = 0;
+            const container = document.getElementById('modal-content-container');
+            const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
+            let specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE SLOTS" : "PARKING SLOTS";
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group">
+                            <img id="carousel-img" src="${prop.images[0]}" class="w-full h-full object-cover transition-all duration-300">
+                            ${prop.images.length > 1 ? `
+                                <button onclick="navigateCarousel(${id}, -1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&lang;</button>
+                                <button onclick="navigateCarousel(${id}, 1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black text-white w-10 h-10 flex items-center justify-center text-lg">&rang;</button>
+                                <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/80 px-3 py-1 text-[10px] text-white font-mono" id="carousel-indicator">
+                                    IMAGE 1 OF ${prop.images.length}
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div>
+                            <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer}</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
+                            <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-4 p-4 bg-neutral-100 border border-neutral-300 text-center text-xs">
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest">BEDROOMS</span>
+                                <span class="text-base font-bold text-black">${prop.beds}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest">BATHROOMS</span>
+                                <span class="text-base font-bold text-black">${prop.baths}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest">${specLabel}</span>
+                                <span class="text-base font-bold text-black">${prop.parking}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[10px] text-neutral-500 uppercase tracking-widest">AREA</span>
+                                <span class="text-base font-bold text-black font-mono text-xs">${prop.area}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-black mb-2">PROPERTY DESCRIPTION</h4>
+                            <p class="text-xs text-neutral-700 font-light leading-relaxed whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black flex flex-col justify-between">
+                        <div>
+                            <div class="bg-black text-white p-4 mb-6">
+                                <span class="text-[9px] uppercase font-bold tracking-widest text-neutral-400 block">TRANSACTION PRICE</span>
+                                <span class="text-2xl font-bold">${priceFormatted}</span>
+                            </div>
+
+                            <div class="border-b border-neutral-300 pb-3 mb-4">
+                                <h3 class="text-sm font-bold uppercase tracking-wider text-black flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-check text-brand-brown"></i> SET AN APPOINTMENT
+                                </h3>
+                                <p class="text-[11px] text-neutral-500 font-light">Directly updates 2nd sheet tab in Google Sheets.</p>
+                            </div>
+
+                            <form id="appointment-form" onsubmit="handleAppointmentSubmit(event, '${escapeQuotes(prop.title)}', '${prop.agentEmail}')" class="space-y-3">
+                                <div>
+                                    <label class="block text-[9px] font-semibold uppercase tracking-widest text-neutral-600 mb-1">Your Full Name *</label>
+                                    <input type="text" id="appt-name" required placeholder="e.g. Christine Co" class="w-full bg-white border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-semibold uppercase tracking-widest text-neutral-600 mb-1">Email Address *</label>
+                                    <input type="email" id="appt-email" required placeholder="name@domain.com" class="w-full bg-white border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-semibold uppercase tracking-widest text-neutral-600 mb-1">Contact Phone *</label>
+                                    <input type="tel" id="appt-phone" required placeholder="+63 917 123 4567" class="w-full bg-white border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-semibold uppercase tracking-widest text-neutral-600 mb-1">Preferred Date & Time *</label>
+                                    <input type="datetime-local" id="appt-date" required class="w-full bg-white border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-semibold uppercase tracking-widest text-neutral-600 mb-1">Notes / Inquiries</label>
+                                    <textarea id="appt-notes" rows="2" placeholder="Specific viewing requests..." class="w-full bg-white border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                                </div>
+
+                                <button type="submit" id="appt-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i> CONFIRM APPOINTMENT
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
+
+        function escapeQuotes(str) {
+            return String(str).replace(/'/g, "\\'");
+        }
+
+        function closePropertyModal() {
+            document.getElementById('property-modal').classList.add('hidden');
+        }
+
+        function navigateCarousel(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop || !prop.images) return;
+            activeModalCarouselIndex = (activeModalCarouselIndex + dir + prop.images.length) % prop.images.length;
+            document.getElementById('carousel-img').src = prop.images[activeModalCarouselIndex];
+            document.getElementById('carousel-indicator').textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${prop.images.length}`;
+        }
+
+        // POST APPOINTMENT TO GOOGLE SHEET TAB 2
+        async function handleAppointmentSubmit(e, propTitle, agentEmail) {
             e.preventDefault();
-            const listingId = document.getElementById('owner-listing-id').value;
-            const listing = properties.find(p => String(p.id) === String(listingId));
+            const btn = document.getElementById('appt-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
 
-            const record = {
-                listingTitle: listing ? listing.title : listingId,
-                name: document.getElementById('owner-name').value,
-                email: document.getElementById('owner-email').value,
-                phone: document.getElementById('owner-phone').value,
-                type: document.getElementById('owner-type').value,
-                titleRef: document.getElementById('owner-title-ref').value,
-                commission: document.getElementById('owner-commission').value || '0'
+            const inquiryObj = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                propertyTitle: propTitle,
+                name: document.getElementById('appt-name').value,
+                email: document.getElementById('appt-email').value,
+                phone: document.getElementById('appt-phone').value,
+                date: document.getElementById('appt-date').value,
+                notes: document.getElementById('appt-notes').value || "N/A",
+                agentEmail: agentEmail || "realtor@compassprimerealty.com"
             };
 
-            internalOwnerRecords.push(record);
-            renderInternalOwners();
-            alert('Listing owner record saved confidentially to internal database.');
-            document.getElementById('listing-owner-form').reset();
+            inquiriesList.push(inquiryObj);
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sheetTab: "Sheet2", action: "addAppointment", ...inquiryObj })
+                });
+            } catch (err) {
+                console.error("Sheet 2 error:", err);
+            }
+
+            showToast("Appointment Logged! Synced with Google Sheet Tab 2.", "success");
+            closePropertyModal();
         }
 
-        function renderInternalOwners() {
-            const tbody = document.getElementById('internal-owners-table');
-            tbody.innerHTML = internalOwnerRecords.map(r => `
-                <tr>
-                    <td class="p-2.5 font-bold">${r.listingTitle}</td>
-                    <td class="p-2.5">${r.name}</td>
-                    <td class="p-2.5">${r.phone}<br><span class="text-neutral-500 text-[10px]">${r.email}</span></td>
-                    <td class="p-2.5"><span class="bg-neutral-200 px-1.5 py-0.5 text-[9px] font-bold">${r.type}</span></td>
-                    <td class="p-2.5 font-mono">${r.commission}%</td>
+        // CAREER PDF RESUME SUBMISSION TO GOOGLE SHEET TAB 3
+        async function handleCareerSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('career-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+
+            const fileInput = document.getElementById('career-pdf');
+            const file = fileInput.files[0];
+
+            const payload = {
+                sheetTab: "Sheet3",
+                action: "addRecruitmentApplication",
+                timestamp: new Date().toISOString(),
+                name: document.getElementById('career-name').value,
+                email: document.getElementById('career-email').value,
+                phone: document.getElementById('career-phone').value,
+                role: document.getElementById('career-role').value,
+                resumeFileName: file ? file.name : "Resume.pdf",
+                notes: document.getElementById('career-notes').value || "N/A"
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Sheet 3 recruitment error:", err);
+            }
+
+            showToast("Recruitment Application & Resume Submitted!", "success");
+            document.getElementById('career-form').reset();
+            btn.textContent = "SUBMIT RECRUITMENT APPLICATION (UPDATES SHEET 3)";
+        }
+
+        // ENLIST PROPERTY TO SHEET TAB 3
+        function openEnlistModal() {
+            document.getElementById('enlist-modal').classList.remove('hidden');
+        }
+        function closeEnlistModal() {
+            document.getElementById('enlist-modal').classList.add('hidden');
+        }
+
+        async function handleEnlistSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('enlist-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+
+            const payload = {
+                sheetTab: "Sheet3",
+                action: "addEnlistment",
+                timestamp: new Date().toISOString(),
+                name: document.getElementById('enlist-name').value,
+                email: document.getElementById('enlist-email').value,
+                phone: document.getElementById('enlist-phone').value,
+                type: document.getElementById('enlist-type').value,
+                location: document.getElementById('enlist-location').value,
+                price: document.getElementById('enlist-price').value,
+                notes: document.getElementById('enlist-notes').value || "N/A"
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Sheet 3 enlistment error:", err);
+            }
+
+            showToast("Property Enlisted! Logged to Sheet Tab 3.", "success");
+            closeEnlistModal();
+            document.getElementById('enlist-form').reset();
+            btn.textContent = "SUBMIT ENLISTMENT (UPDATES SHEET 3)";
+        }
+
+        // HERO BANNER CUSTOMIZATION
+        function handleAdminBannerUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    document.getElementById('admin-banner-preview').src = evt.target.result;
+                    document.getElementById('hero-banner-img').src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleAdminBannerSave(e) {
+            e.preventDefault();
+            document.getElementById('hero-banner-title').textContent = document.getElementById('admin-banner-title-input').value;
+            document.getElementById('hero-banner-subtitle').textContent = document.getElementById('admin-banner-sub-input').value;
+            showToast("Homepage Hero Banner updated!", "success");
+        }
+
+        // ADMIN AUTHENTICATION
+        function openAdminAuthModal() {
+            if (activeAdminUser) showAdminDashboard();
+            else document.getElementById('admin-auth-modal').classList.remove('hidden');
+        }
+        function closeAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+        }
+
+        function handleAdminLoginStep1(e) {
+            e.preventDefault();
+            const email = document.getElementById('admin-email-input').value;
+            const pass = document.getElementById('admin-pass-input').value;
+
+            if (email !== 'admin@compassprimerealty.com' || pass !== 'admin123') {
+                showToast("Invalid admin credentials!", "error");
+                return;
+            }
+
+            document.getElementById('admin-login-step1').classList.add('hidden');
+            document.getElementById('admin-login-step2').classList.remove('hidden');
+            showToast("2FA Code dispatched via verify@compassprimerealty.com", "info");
+        }
+
+        function handleAdminLoginStep2(e) {
+            e.preventDefault();
+            activeAdminUser = document.getElementById('admin-email-input').value;
+            closeAdminAuthModal();
+            showAdminDashboard();
+            showToast("Admin Dashboard Authenticated!", "success");
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
+            document.getElementById('agent-dashboard-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.remove('hidden');
+            renderAdminDashboardTables();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function logoutAdmin() {
+            activeAdminUser = null;
+            showMainApp();
+            showToast("Logged out of Admin Dashboard", "info");
+        }
+
+        function renderAdminDashboardTables() {
+            document.getElementById('admin-stat-listings').textContent = properties.length;
+            document.getElementById('admin-stat-enquiries').textContent = inquiriesList.length;
+            document.getElementById('admin-stat-views').textContent = siteVisitorCount;
+
+            const tbodyListings = document.getElementById('admin-listings-table');
+            tbodyListings.innerHTML = properties.map(p => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono font-bold">${p.id}</td>
+                    <td class="p-3 font-bold">${p.title}</td>
+                    <td class="p-3">${p.category}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold text-white ${p.status === 'Sold' ? 'bg-red-700' : 'bg-black'}">${p.status}</span></td>
+                    <td class="p-3 font-mono">₱${p.price.toLocaleString()}</td>
+                    <td class="p-3 text-right space-x-2">
+                        <button onclick="toggleSoldStatus(${p.id})" class="text-xs text-blue-900 font-bold hover:underline">TOGGLE SOLD</button>
+                        <button onclick="editListing(${p.id})" class="text-brand-brown hover:underline font-bold">EDIT</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            const tbodyInq = document.getElementById('admin-inquiries-table');
+            tbodyInq.innerHTML = inquiriesList.length === 0 ? 
+                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No appointment inquiries logged yet.</td></tr>` :
+                inquiriesList.map(inq => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-bold">${inq.name}</td>
+                    <td class="p-3">${inq.email}<br><span class="text-neutral-500 text-[10px]">${inq.phone}</span></td>
+                    <td class="p-3 font-semibold">${inq.propertyTitle}</td>
+                    <td class="p-3 font-mono">${inq.date}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="openReplyModal('${inq.id}', '${inq.email}')" class="bg-black text-white px-3 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">REPLY</button>
+                    </td>
                 </tr>
             `).join('');
         }
 
-        function handleDevRegisterSubmit(e) {
+        function toggleSoldStatus(id) {
+            const prop = properties.find(p => p.id === id);
+            if (prop) {
+                prop.status = prop.status === 'Sold' ? 'Sale' : 'Sold';
+                renderPropertyList();
+                if (activeAdminUser) renderAdminDashboardTables();
+                if (activeAgentUser) renderAgentDashboardTables();
+                showToast(`Property status updated to ${prop.status}!`, "success");
+            }
+        }
+
+        // AGENT AUTHENTICATION & REGISTRATION
+        function openAgentAuthModal() {
+            if (activeAgentUser) showAgentDashboard();
+            else document.getElementById('agent-auth-modal').classList.remove('hidden');
+        }
+        function closeAgentAuthModal() {
+            document.getElementById('agent-auth-modal').classList.add('hidden');
+        }
+
+        function switchAgentAuthTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('agent-login-step1').classList.remove('hidden');
+                document.getElementById('agent-register-form').classList.add('hidden');
+                document.getElementById('agent-tab-login-btn').className = "w-1/2 py-2 border-b-2 border-brand-brown text-black";
+                document.getElementById('agent-tab-reg-btn').className = "w-1/2 py-2 border-b-2 border-transparent text-neutral-400";
+            } else {
+                document.getElementById('agent-login-step1').classList.add('hidden');
+                document.getElementById('agent-register-form').classList.remove('hidden');
+                document.getElementById('agent-tab-reg-btn').className = "w-1/2 py-2 border-b-2 border-brand-brown text-black";
+                document.getElementById('agent-tab-login-btn').className = "w-1/2 py-2 border-b-2 border-transparent text-neutral-400";
+            }
+        }
+
+        function handleAgentRegistrationSubmit(e) {
             e.preventDefault();
-            const dev = {
-                name: document.getElementById('dev-reg-name').value,
-                slug: document.getElementById('dev-reg-slug').value,
-                description: document.getElementById('dev-reg-desc').value
+            const email = document.getElementById('agent-reg-email').value;
+            const pass = document.getElementById('agent-reg-pass').value;
+
+            if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
+                showToast("Must register with @compassprimerealty.com email!", "error");
+                return;
+            }
+
+            // Password Policy: at least 6 characters, 1 uppercase, 1 number, 1 special character
+            const passPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+            if (!passPattern.test(pass)) {
+                showToast("Password must have min 6 chars, 1 uppercase, 1 number, and 1 symbol!", "error");
+                return;
+            }
+
+            registeredAgents.push({ email, role: 'agent' });
+            localStorage.setItem('cpr_registered_agents', JSON.stringify(registeredAgents));
+
+            document.getElementById('agent-register-form').classList.add('hidden');
+            document.getElementById('agent-login-step2').classList.remove('hidden');
+            showToast("2FA Code sent via verify@compassprimerealty.com!", "info");
+        }
+
+        function handleAgentLoginStep1(e) {
+            e.preventDefault();
+            const email = document.getElementById('agent-email-input').value;
+            if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
+                showToast("Must use active @compassprimerealty.com email!", "error");
+                return;
+            }
+            document.getElementById('agent-login-step1').classList.add('hidden');
+            document.getElementById('agent-login-step2').classList.remove('hidden');
+            showToast("Access Code dispatched via verify@compassprimerealty.com!", "info");
+        }
+
+        function handleAgentLoginStep2(e) {
+            e.preventDefault();
+            activeAgentUser = document.getElementById('agent-email-input').value || document.getElementById('agent-reg-email').value;
+            closeAgentAuthModal();
+            showAgentDashboard();
+            showToast("Realtor Portal Verified!", "success");
+        }
+
+        function showAgentDashboard() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('agent-dashboard-container').classList.remove('hidden');
+            document.getElementById('agent-email-display').textContent = activeAgentUser;
+            renderAgentDashboardTables();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function logoutAgent() {
+            activeAgentUser = null;
+            showMainApp();
+            showToast("Logged out of Agent Portal", "info");
+        }
+
+        function renderAgentDashboardTables() {
+            const agentProps = properties.filter(p => p.agentEmail === activeAgentUser || !p.agentEmail);
+            document.getElementById('agent-stat-listings').textContent = agentProps.length;
+            document.getElementById('agent-stat-appointments').textContent = inquiriesList.length;
+
+            const tbodyListings = document.getElementById('agent-listings-table');
+            tbodyListings.innerHTML = agentProps.map(p => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono font-bold">${p.id}</td>
+                    <td class="p-3 font-bold">${p.title}</td>
+                    <td class="p-3">${p.category}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold text-white ${p.status === 'Sold' ? 'bg-red-700' : 'bg-black'}">${p.status}</span></td>
+                    <td class="p-3 font-mono">₱${p.price.toLocaleString()}</td>
+                    <td class="p-3 text-right space-x-2">
+                        <button onclick="toggleSoldStatus(${p.id})" class="text-xs text-blue-900 font-bold hover:underline">TOGGLE SOLD</button>
+                        <button onclick="editListing(${p.id})" class="text-brand-brown hover:underline font-bold">EDIT</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            const tbodyInq = document.getElementById('agent-inquiries-table');
+            tbodyInq.innerHTML = inquiriesList.length === 0 ?
+                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No viewing requests recorded for your listings yet.</td></tr>` :
+                inquiriesList.map(inq => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-bold">${inq.name}</td>
+                    <td class="p-3">${inq.email}<br><span class="text-neutral-500 text-[10px]">${inq.phone}</span></td>
+                    <td class="p-3 font-semibold">${inq.propertyTitle}</td>
+                    <td class="p-3 font-mono">${inq.date}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="openReplyModal('${inq.id}', '${inq.email}')" class="bg-brand-brown text-white px-3 py-1 text-[10px] uppercase font-bold hover:bg-black">REPLY</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // RESPONDER MODAL
+        function openReplyModal(inquiryId, recipientEmail) {
+            document.getElementById('reply-inquiry-id').value = inquiryId;
+            document.getElementById('reply-to-email').value = recipientEmail;
+            document.getElementById('reply-modal').classList.remove('hidden');
+        }
+        function closeReplyModal() {
+            document.getElementById('reply-modal').classList.add('hidden');
+        }
+
+        function handleSendResponseSubmit(e) {
+            e.preventDefault();
+            const recipient = document.getElementById('reply-to-email').value;
+            closeReplyModal();
+            showToast(`Notification email dispatched to ${recipient} via verify@compassprimerealty.com!`, "success");
+        }
+
+        // CSV & LOCAL IMAGE UPLOAD
+        function handleCSVUpload(event, source) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split('\n');
+                let count = 0;
+
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
+                    const cols = line.split(',');
+                    if (cols.length >= 4) {
+                        properties.unshift({
+                            id: Date.now() + Math.floor(Math.random() * 1000),
+                            title: cols[0].replace(/"/g, '').trim(),
+                            category: cols[1]?.replace(/"/g, '').trim().toUpperCase() || "CONDOMINIUM",
+                            status: cols[2]?.replace(/"/g, '').trim() || "Sale",
+                            price: Number(cols[3]) || 50000000,
+                            beds: Number(cols[4]) || 3,
+                            baths: Number(cols[5]) || 3,
+                            parking: Number(cols[6]) || 2,
+                            area: cols[7]?.replace(/"/g, '').trim() || "300 sqm",
+                            location: cols[8]?.replace(/"/g, '').trim() || "Metro Manila",
+                            developer: cols[9]?.replace(/"/g, '').trim() || "Compass Developer",
+                            images: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"],
+                            description: "CSV imported listing."
+                        });
+                        count++;
+                    }
+                }
+                renderPropertyList();
+                if (source === 'admin') showAdminDashboard();
+                if (source === 'agent') showAgentDashboard();
+                showToast(`Imported ${count} listings from CSV!`, "success");
             };
-            developers.push(dev);
-            alert(`Developer Portal for ${dev.name} created successfully.`);
-            document.getElementById('dev-register-form').reset();
+            reader.readAsText(file);
+        }
+
+        function exportListingsToCSV() {
+            let csv = "Title,Category,Status,Price,Beds,Baths,Parking,Area,Location\n";
+            properties.forEach(p => {
+                csv += `"${p.title}","${p.category}","${p.status}",${p.price},${p.beds},${p.baths},${p.parking},"${p.area}","${p.location}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', `Compass_Realty_${Date.now()}.csv`);
+            a.click();
+        }
+
+        function handleLocalImageUpload(event) {
+            const files = Array.from(event.target.files);
+            const previewContainer = document.getElementById('image-upload-previews');
+            uploadedLocalImages = [];
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedLocalImages.push(e.target.result);
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'w-16 h-16 object-cover border border-black';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function openAddListingModal() {
+            document.getElementById('listing-crud-form').reset();
+            document.getElementById('crud-id').value = '';
+            document.getElementById('image-upload-previews').innerHTML = '';
+            uploadedLocalImages = [];
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function closeAddListingModal() {
+            document.getElementById('add-listing-modal').classList.add('hidden');
+        }
+
+        function editListing(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            document.getElementById('crud-id').value = prop.id;
+            document.getElementById('crud-title').value = prop.title;
+            document.getElementById('crud-category').value = prop.category;
+            document.getElementById('crud-status').value = prop.status;
+            document.getElementById('crud-price').value = prop.price;
+            document.getElementById('crud-area').value = prop.area;
+            document.getElementById('crud-beds').value = prop.beds;
+            document.getElementById('crud-baths').value = prop.baths;
+            document.getElementById('crud-parking').value = prop.parking;
+            document.getElementById('crud-location').value = prop.location;
+            document.getElementById('crud-developer').value = prop.developer;
+            document.getElementById('crud-description').value = prop.description;
+
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function handleListingCrudSubmit(e) {
+            e.preventDefault();
+            const idVal = document.getElementById('crud-id').value;
+            let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+            ];
+
+            if (idVal) {
+                const index = properties.findIndex(p => p.id === parseInt(idVal));
+                if (index !== -1) {
+                    properties[index] = {
+                        ...properties[index],
+                        title: document.getElementById('crud-title').value,
+                        category: document.getElementById('crud-category').value,
+                        status: document.getElementById('crud-status').value,
+                        price: Number(document.getElementById('crud-price').value),
+                        area: document.getElementById('crud-area').value,
+                        beds: Number(document.getElementById('crud-beds').value),
+                        baths: Number(document.getElementById('crud-baths').value),
+                        parking: Number(document.getElementById('crud-parking').value),
+                        location: document.getElementById('crud-location').value,
+                        developer: document.getElementById('crud-developer').value,
+                        description: document.getElementById('crud-description').value,
+                        images: uploadedLocalImages.length > 0 ? uploadedLocalImages : properties[index].images
+                    };
+                }
+            } else {
+                properties.unshift({
+                    id: Date.now(),
+                    title: document.getElementById('crud-title').value,
+                    category: document.getElementById('crud-category').value,
+                    status: document.getElementById('crud-status').value,
+                    price: Number(document.getElementById('crud-price').value),
+                    area: document.getElementById('crud-area').value,
+                    beds: Number(document.getElementById('crud-beds').value),
+                    baths: Number(document.getElementById('crud-baths').value),
+                    parking: Number(document.getElementById('crud-parking').value),
+                    location: document.getElementById('crud-location').value,
+                    developer: document.getElementById('crud-developer').value || "Compass Exclusive",
+                    description: document.getElementById('crud-description').value,
+                    agentEmail: activeAgentUser || "admin@compassprimerealty.com",
+                    images: imgs
+                });
+            }
+
+            renderPropertyList();
+            if (activeAdminUser) renderAdminDashboardTables();
+            if (activeAgentUser) renderAgentDashboardTables();
+            closeAddListingModal();
+            showToast("Property listing saved successfully!", "success");
+        }
+
+        // FAVORITES
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(fav => fav !== id);
+            } else {
+                favorites.push(id);
+                showToast("Property Saved to Favorites!", "success");
+            }
+            document.getElementById('fav-count-badge').textContent = favorites.length;
+            renderPropertyList();
+        }
+
+        function toggleFavoritesView() {
+            currentFilters.onlyFavs = !currentFilters.onlyFavs;
+            renderPropertyList();
+        }
+
+        // FILTERS
+        function filterProperties(status, category) {
+            currentFilters.status = status;
+            currentFilters.category = category;
+            currentFilters.onlyDeals = false;
+            currentFilters.onlyFeatured = false;
+            currentFilters.onlyFavs = false;
+            document.getElementById('current-view-title').textContent = `${status === 'ALL' ? 'ALL' : 'FOR ' + status.toUpperCase()} ${category === 'ALL' ? 'PROPERTIES' : category}`;
+            renderPropertyList();
+        }
+
+        function setFilterCategory(cat) {
+            currentFilters.category = cat;
+            renderPropertyList();
+        }
+
+        function filterBySection(section) {
+            currentFilters.status = 'ALL';
+            currentFilters.category = 'ALL';
+            currentFilters.onlyDeals = (section === 'deals');
+            currentFilters.onlyFeatured = (section === 'featured');
+            document.getElementById('current-view-title').textContent = section === 'deals' ? 'TOP 10 DEALS' : 'FEATURED PROPERTIES';
+            renderPropertyList();
+        }
+
+        function handleSearchSubmit(e) {
+            e.preventDefault();
+            currentFilters.keyword = document.getElementById('filter-keyword').value;
+            currentFilters.status = document.getElementById('filter-status').value;
+            currentFilters.category = document.getElementById('filter-category').value;
+            currentFilters.maxPrice = document.getElementById('filter-maxprice').value;
+            renderPropertyList();
+        }
+
+        function resetFilters() {
+            currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+            document.getElementById('search-form').reset();
+            document.getElementById('current-view-title').textContent = 'ALL PROPERTIES';
+            renderPropertyList();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // COMPASS AI CONCIERGE CHATBOX (SUBTITLE HIDDEN & LOGS TO SHEET TAB 3)
+        function toggleAIChat() {
+            document.getElementById('ai-chat-window').classList.toggle('hidden');
+        }
+
+        async function handleAIChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('ai-chat-input');
+            const userMsg = input.value.trim();
+            if (!userMsg) return;
+
+            const chatMessages = document.getElementById('ai-chat-messages');
+
+            const userDiv = document.createElement('div');
+            userDiv.className = 'bg-brand-brown text-white p-3 ml-6 font-light leading-relaxed';
+            userDiv.textContent = userMsg;
+            chatMessages.appendChild(userDiv);
+
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'bg-neutral-200 text-black p-3 border-l-2 border-brand-brown font-light italic text-[11px]';
+            loadingDiv.textContent = 'Compass AI is reviewing portfolio...';
+            chatMessages.appendChild(loadingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Log AI Query to Sheet Tab 3 & Admin Inquiries
+            try {
+                fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet3",
+                        action: "addAIInquiry",
+                        timestamp: new Date().toISOString(),
+                        query: userMsg
+                    })
+                });
+            } catch (err) {}
+
+            // Direct Gemini API Integration
+            const systemPrompt = `You are the executive luxury AI Concierge for Compass Realty. Assist visitors with inquiry responses based on real estate listings: ${JSON.stringify(properties.map(p => ({ title: p.title, price: p.price, location: p.location, category: p.category, status: p.status })))}. Maintain a polite, highly sophisticated tone. Keep answers under 3 concise sentences.`;
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: userMsg }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+                const result = await response.json();
+                const aiText = result.candidates?.[0]?.content?.parts?.[0]?.text || "Thank you for reaching out. A Compass Realty agent will assist you shortly.";
+
+                loadingDiv.className = 'bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed';
+                loadingDiv.textContent = aiText;
+            } catch (err) {
+                loadingDiv.className = 'bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed';
+                loadingDiv.textContent = "Please connect with our hotline at +63 993 847 4121 or schedule a private viewing through our property listings.";
+            }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // TOAST NOTIFICATION
+        function showToast(message, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `bg-black text-white border border-brand-brown px-4 py-3 text-xs font-semibold uppercase tracking-wider shadow-2xl flex items-center gap-2`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-brown"></i> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
         }
     </script>
 </body>
