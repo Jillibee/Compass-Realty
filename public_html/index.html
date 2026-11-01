@@ -19,12 +19,6 @@
     <meta property="og:description" content="Connecting discerning buyers and investors with prestigious residential estates, commercial developments, and high-yielding land holdings.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
 
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Compass Realty | Luxury Real Estate Advisory">
-    <meta name="twitter:description" content="Explore ultra-luxury penthouses, prime lots, and commercial property listings.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80">
-
     <!-- Structured Data Schema.org RealEstateAgent -->
     <script type="application/ld+json">
     {
@@ -81,48 +75,19 @@
     </script>
 
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            background-color: #FFFFFF;
-            color: #000000;
-        }
-
-        h1, h2, h3, h4, h5, h6, .font-heading, button, .nav-link, label {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FFFFFF;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #483929;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #000000;
-        }
-
-        * {
-            border-radius: 0 !important;
-        }
-
-        .dropdown-menu {
-            display: none;
-        }
-        .dropdown-container:hover .dropdown-menu {
-            display: block;
-        }
-
+        body { font-family: 'Montserrat', sans-serif; font-weight: 300; background-color: #FFFFFF; color: #000000; }
+        h1, h2, h3, h4, h5, h6, .font-heading, button, .nav-link, label { font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #FFFFFF; }
+        ::-webkit-scrollbar-thumb { background: #483929; }
+        ::-webkit-scrollbar-thumb:hover { background: #000000; }
+        * { border-radius: 0 !important; }
+        .dropdown-menu { display: none; }
+        .dropdown-container:hover .dropdown-menu { display: block; }
         .hero-bg {
             background-color: #483929;
             background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
         }
     </style>
 </head>
@@ -177,6 +142,9 @@
                     <button onclick="showMainApp(); filterBySection('featured');" class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown hover:bg-neutral-100 transition-all">
                         FEATURED PROPERTIES
                     </button>
+                    <button onclick="showDeveloperPortalView();" class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown hover:bg-neutral-100 transition-all">
+                        DEVELOPERS
+                    </button>
 
                     <!-- FOR SALE DROPDOWN -->
                     <div class="relative dropdown-container py-6">
@@ -225,6 +193,7 @@
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <button onclick="showMainApp(); filterBySection('deals'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">TOP 10 DEALS</button>
                 <button onclick="showMainApp(); filterBySection('featured'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">FEATURED PROPERTIES</button>
+                <button onclick="showDeveloperPortalView(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">DEVELOPERS</button>
                 
                 <div class="border-t border-neutral-200 pt-2">
                     <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR SALE</span>
@@ -233,15 +202,6 @@
                     <button onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
                     <button onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
                     <button onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">COMMERCIAL</button>
-                </div>
-
-                <div class="border-t border-neutral-200 pt-2">
-                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR RENT</span>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR RENT</button>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">LOTS</button>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">COMMERCIAL</button>
                 </div>
 
                 <div class="border-t border-neutral-200 pt-2">
@@ -370,6 +330,37 @@
         </main>
     </div>
 
+    <!-- WHITE LABEL DEVELOPER PORTAL VIEW (/developer) -->
+    <div id="developer-portal-view" class="hidden min-h-screen">
+        <!-- DEVELOPER HEADER BANNER -->
+        <div id="dev-portal-banner" class="bg-black text-white py-20 px-4 sm:px-8 border-b-4 border-brand-brown relative bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80');">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown bg-white px-2.5 py-1 mb-2 inline-block">OFFICIAL DEVELOPER PARTNER</span>
+                    <h1 id="dev-portal-name" class="text-3xl sm:text-5xl font-bold uppercase tracking-tight">SHANG PROPERTIES</h1>
+                    <p id="dev-portal-desc" class="text-xs sm:text-sm font-light text-neutral-300 mt-2 max-w-2xl leading-relaxed">Pioneering benchmark luxury residential developments and high-rise architectural landmarks.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <select id="dev-selector-dropdown" onchange="switchDeveloperBrand(this.value)" class="bg-white text-black text-xs font-semibold uppercase px-4 py-3 border border-black focus:outline-none">
+                        <!-- Options dynamically loaded -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-black pb-4 mb-8 gap-4">
+                <div>
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown">EXCLUSIVES PORTFOLIO</span>
+                    <h2 class="text-2xl font-bold uppercase tracking-tight">DEVELOPER PROJECTS FOR SALE</h2>
+                </div>
+                <span class="text-xs text-neutral-500 font-mono" id="dev-projects-count">0 Projects Available</span>
+            </div>
+
+            <div id="dev-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </main>
+    </div>
+
     <!-- CAREERS PAGE CONTAINER -->
     <div id="careers-view-container" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="border-b-2 border-black pb-4 mb-8">
@@ -403,7 +394,7 @@
                             <input type="text" id="career-name" required placeholder="e.g. Maria Santos" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Address (@compassprimerealty or Personal) *</label>
+                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Address *</label>
                             <input type="email" id="career-email" required placeholder="m.santos@domain.com" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                         </div>
                     </div>
@@ -480,93 +471,148 @@
                     <div class="text-xs text-neutral-500 mt-1 font-light">Submissions to Sheet 3</div>
                 </div>
                 <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">TOTAL SITE VISITS</div>
-                    <div class="text-3xl font-bold text-emerald-800 mt-2" id="admin-stat-views">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Live Analytics Counter</div>
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEV PROJECT INQUIRIES</div>
+                    <div class="text-3xl font-bold text-purple-900 mt-2" id="admin-stat-devinquiries">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Submissions to Sheet 4</div>
                 </div>
             </div>
 
-            <!-- HERO BANNER MANAGEMENT PANEL IN ADMIN -->
-            <div class="bg-white border border-neutral-300 p-6 mb-8">
-                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">HOMEPAGE HERO BANNER MANAGEMENT</h3>
-                <p class="text-xs text-neutral-500 font-light mb-4">Upload custom hero image directly from local storage and update banner title/tagline.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                    <form onsubmit="handleAdminBannerSave(event)" class="space-y-3">
-                        <div>
-                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Banner Title</label>
-                            <input type="text" id="admin-banner-title-input" value="ELEVATED LIVING IN PREMIER LOCATIONS" class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+            <!-- ADMIN TABS CONTROL -->
+            <div class="flex border-b border-black bg-white mb-6 text-xs uppercase font-bold">
+                <button onclick="switchAdminSubTab('listings')" id="admin-subtab-btn-listings" class="p-4 border-b-2 border-brand-brown text-black">LISTINGS MANAGEMENT</button>
+                <button onclick="switchAdminSubTab('developers')" id="admin-subtab-btn-developers" class="p-4 border-b-2 border-transparent text-neutral-400">DEVELOPERS & PROJECT DASHBOARD</button>
+                <button onclick="switchAdminSubTab('devinquiries')" id="admin-subtab-btn-devinquiries" class="p-4 border-b-2 border-transparent text-neutral-400">DEV INQUIRIES METRICS (SHEET 4)</button>
+            </div>
+
+            <!-- ADMIN SUBTAB 1: LISTINGS MANAGEMENT -->
+            <div id="admin-subtab-listings" class="space-y-8">
+                <!-- HERO BANNER PANEL -->
+                <div class="bg-white border border-neutral-300 p-6">
+                    <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">HOMEPAGE HERO BANNER MANAGEMENT</h3>
+                    <p class="text-xs text-neutral-500 font-light mb-4">Upload custom hero image directly from local storage and update banner title/tagline.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <form onsubmit="handleAdminBannerSave(event)" class="space-y-3">
+                            <div>
+                                <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Banner Title</label>
+                                <input type="text" id="admin-banner-title-input" value="ELEVATED LIVING IN PREMIER LOCATIONS" class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Subtitle</label>
+                                <input type="text" id="admin-banner-sub-input" value="Direct access to off-market real estate investments and master-planned architectural icons." class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Upload Local Image File</label>
+                                <input type="file" id="admin-banner-file" accept="image/*" onchange="handleAdminBannerUpload(event)" class="text-xs text-neutral-600">
+                            </div>
+                            <button type="submit" class="bg-brand-brown text-white text-xs px-4 py-2 uppercase font-semibold">SAVE HERO BANNER</button>
+                        </form>
+                        <div class="border border-black bg-neutral-900 p-4 text-center text-white relative h-36 flex items-center justify-center">
+                            <img id="admin-banner-preview" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50">
+                            <span class="relative z-10 text-xs font-bold uppercase tracking-widest text-white">HERO BANNER LIVE PREVIEW</span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-neutral-300 p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-neutral-300 mb-6 gap-4">
                         <div>
-                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Hero Subtitle</label>
-                            <input type="text" id="admin-banner-sub-input" value="Direct access to off-market real estate investments and master-planned architectural icons." class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs">
+                            <h3 class="text-lg font-bold uppercase tracking-tight text-black">LISTINGS MANAGEMENT</h3>
+                            <p class="text-xs text-neutral-500 font-light">Create new listings, upload CSV, or select images from local drive.</p>
                         </div>
-                        <div>
-                            <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Upload Local Image File</label>
-                            <input type="file" id="admin-banner-file" accept="image/*" onchange="handleAdminBannerUpload(event)" class="text-xs text-neutral-600">
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider">
+                                <i class="fa-solid fa-plus mr-1"></i> ADD NEW LISTING
+                            </button>
+                            <label class="bg-black hover:bg-neutral-800 text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider cursor-pointer">
+                                <i class="fa-solid fa-file-csv mr-1"></i> UPLOAD CSV
+                                <input type="file" id="admin-csv-file" accept=".csv" class="hidden" onchange="handleCSVUpload(event, 'admin')">
+                            </label>
                         </div>
-                        <button type="submit" class="bg-brand-brown text-white text-xs px-4 py-2 uppercase font-semibold">SAVE HERO BANNER</button>
-                    </form>
-                    <div class="border border-black bg-neutral-900 p-4 text-center text-white relative h-36 flex items-center justify-center">
-                        <img id="admin-banner-preview" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80" class="absolute inset-0 w-full h-full object-cover opacity-50">
-                        <span class="relative z-10 text-xs font-bold uppercase tracking-widest text-white">HERO BANNER LIVE PREVIEW</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                                <tr>
+                                    <th class="p-3">ID</th>
+                                    <th class="p-3">PROPERTY TITLE</th>
+                                    <th class="p-3">CATEGORY</th>
+                                    <th class="p-3">STATUS</th>
+                                    <th class="p-3">PRICE (PHP)</th>
+                                    <th class="p-3 text-right">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- ADMIN LISTINGS MANAGEMENT TABLE -->
-            <div class="bg-white border border-neutral-300 p-6 mb-8">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-neutral-300 mb-6 gap-4">
+            <!-- ADMIN SUBTAB 2: DEVELOPERS & DEDICATED LISTING UPLOAD DASHBOARD -->
+            <div id="admin-subtab-developers" class="hidden bg-white border border-neutral-300 p-6">
+                <!-- SIZING GUIDELINES CONTAINER -->
+                <div class="bg-amber-50 border border-amber-300 p-4 mb-6">
+                    <h4 class="text-xs font-bold uppercase text-amber-900 flex items-center gap-1.5 mb-1">
+                        <i class="fa-solid fa-ruler-combined"></i> DEVELOPER UPLOAD IMAGE SIZING GUIDELINES
+                    </h4>
+                    <ul class="text-[11px] text-amber-800 space-y-1 font-light">
+                        <li>&bull; <strong>Header Banner:</strong> Recommended <strong class="font-bold">1920 &times; 600 px</strong> (16:5 Aspect Ratio), Max 5MB (JPG/PNG).</li>
+                        <li>&bull; <strong>Project Cards & Gallery Images:</strong> Recommended <strong class="font-bold">1200 &times; 800 px</strong> (3:2 Aspect Ratio), Max 3MB per file.</li>
+                    </ul>
+                </div>
+
+                <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
                     <div>
-                        <h3 class="text-lg font-bold uppercase tracking-tight text-black">LISTINGS MANAGEMENT</h3>
-                        <p class="text-xs text-neutral-500 font-light">Create new listings, upload CSV, or select images from local drive.</p>
+                        <h3 class="text-lg font-bold uppercase">DEVELOPER LISTING & PROJECT MANAGEMENT</h3>
+                        <p class="text-xs text-neutral-500 font-light">Add white-label developer brands and upload project portfolios directly from local drive.</p>
                     </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider">
-                            <i class="fa-solid fa-plus mr-1"></i> ADD NEW LISTING
-                        </button>
-                        <label class="bg-black hover:bg-neutral-800 text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider cursor-pointer">
-                            <i class="fa-solid fa-file-csv mr-1"></i> UPLOAD CSV
-                            <input type="file" id="admin-csv-file" accept=".csv" class="hidden" onchange="handleCSVUpload(event, 'admin')">
-                        </label>
-                    </div>
+                    <button onclick="openAddDeveloperModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 uppercase font-semibold">
+                        + REGISTER NEW DEVELOPER
+                    </button>
                 </div>
 
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                    <table class="w-full text-left text-xs border border-neutral-200">
+                        <thead class="bg-black text-white uppercase text-[10px]">
                             <tr>
-                                <th class="p-3">ID</th>
-                                <th class="p-3">PROPERTY TITLE</th>
-                                <th class="p-3">CATEGORY</th>
-                                <th class="p-3">STATUS</th>
-                                <th class="p-3">PRICE (PHP)</th>
+                                <th class="p-3">SLUG</th>
+                                <th class="p-3">DEVELOPER NAME</th>
+                                <th class="p-3">HEADER BANNER PREVIEW</th>
+                                <th class="p-3">ACTIVE PROJECTS</th>
                                 <th class="p-3 text-right">ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
+                        <tbody id="admin-developers-table" class="divide-y divide-neutral-200"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- ADMIN INQUIRIES MANAGEMENT & EMAIL RESPONSE -->
-            <div class="bg-white border border-neutral-300 p-6">
-                <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">INQUIRIES & APPOINTMENTS RESPONDER</h3>
-                <p class="text-xs text-neutral-500 font-light mb-4">Dispatches notifications from <strong>verify@compassprimerealty.com</strong>.</p>
+            <!-- ADMIN SUBTAB 3: DEVELOPER INQUIRIES METRICS (SYNCED TO SHEET 4) -->
+            <div id="admin-subtab-devinquiries" class="hidden bg-white border border-neutral-300 p-6">
+                <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase">DEVELOPER & PROJECT INQUIRIES METRICS</h3>
+                        <p class="text-xs text-neutral-500 font-light">Tracks inquiries submitted per developer project. Automatically synced with <strong>Sheet Tab 4</strong>.</p>
+                    </div>
+                </div>
+
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                    <table class="w-full text-left text-xs border border-neutral-200">
+                        <thead class="bg-black text-white uppercase text-[10px]">
                             <tr>
-                                <th class="p-3">CLIENT</th>
+                                <th class="p-3">DEVELOPER</th>
+                                <th class="p-3">PROJECT NAME</th>
+                                <th class="p-3">CLIENT NAME</th>
                                 <th class="p-3">EMAIL & PHONE</th>
-                                <th class="p-3">PROPERTY</th>
-                                <th class="p-3">PREFERRED DATE</th>
+                                <th class="p-3">TIMESTAMP</th>
                                 <th class="p-3 text-right">ACTION</th>
                             </tr>
                         </thead>
-                        <tbody id="admin-inquiries-table" class="divide-y divide-neutral-200"></tbody>
+                        <tbody id="admin-devinquiries-table" class="divide-y divide-neutral-200"></tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -634,7 +680,7 @@
                 </div>
             </div>
 
-            <!-- AGENT APPOINTMENT & INQUIRY RESPONDER -->
+            <!-- AGENT APPOINTMENT RESPONDER -->
             <div class="bg-white border border-neutral-300 p-6">
                 <h3 class="text-lg font-bold uppercase tracking-tight text-black mb-1">MY LISTING INQUIRIES & APPOINTMENTS</h3>
                 <p class="text-xs text-neutral-500 font-light mb-4">Track client viewing requests and send direct email replies via verify@compassprimerealty.com.</p>
@@ -656,16 +702,92 @@
         </div>
     </div>
 
+    <!-- MODAL: ADD / EDIT DEVELOPER & HEADER BANNER UPLOAD -->
+    <div id="add-developer-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeAddDeveloperModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">REGISTER DEVELOPER BRAND</h3>
+            
+            <!-- GUIDELINE NOTIFICATION -->
+            <div class="bg-neutral-100 border-l-4 border-brand-brown p-3 text-xs mb-4">
+                <strong>Image Guidelines:</strong> Banner: $1920\times600\text{px}$ (Max 5MB). Logo: $400\times400\text{px}$.
+            </div>
+
+            <form onsubmit="handleSaveDeveloperSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Developer Name *</label>
+                        <input type="text" id="dev-form-name" required placeholder="e.g. Shang Properties" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Slug Identifier *</label>
+                        <input type="text" id="dev-form-slug" required placeholder="shang-properties" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Header Banner Image (Upload from Local Drive)</label>
+                    <input type="file" id="dev-form-banner-file" accept="image/*" onchange="handleDevBannerLocalUpload(event)" class="text-xs text-neutral-600 mb-2">
+                    <input type="hidden" id="dev-form-banner-url">
+                    <div class="h-28 bg-neutral-200 border border-black overflow-hidden flex items-center justify-center">
+                        <img id="dev-form-banner-preview" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Brand Description</label>
+                    <textarea id="dev-form-desc" rows="3" placeholder="Highlight developer history, awards, and master-planned developments..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
+                    SAVE DEVELOPER BRAND
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: DEVELOPER PROJECT INQUIRY -->
+    <div id="dev-inquiry-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md border-2 border-black p-6 relative">
+            <button onclick="closeDevInquiryModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <span class="text-[9px] uppercase font-bold text-brand-brown tracking-widest block">DEVELOPER DIRECT DESK</span>
+            <h3 id="dev-inquiry-project-title" class="text-lg font-bold uppercase text-black mb-4">INQUIRE ABOUT PROJECT</h3>
+
+            <form onsubmit="handleDevInquirySubmit(event)" class="space-y-3">
+                <input type="hidden" id="dev-inquiry-devname">
+                <input type="hidden" id="dev-inquiry-projectname">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Your Full Name *</label>
+                    <input type="text" id="dev-inquiry-clientname" required placeholder="e.g. Victor Consunji" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Email Address *</label>
+                    <input type="email" id="dev-inquiry-clientemail" required placeholder="client@domain.com" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Phone Number *</label>
+                    <input type="tel" id="dev-inquiry-clientphone" required placeholder="+63 917 000 0000" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Inquiry Details</label>
+                    <textarea id="dev-inquiry-notes" rows="3" placeholder="Inquire about unit layouts, turn-over date, sample computation..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
+                </div>
+                <button type="submit" id="dev-inquiry-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
+                    SUBMIT INQUIRY (UPDATES SHEET 4)
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- PROPERTY DETAILS & APPOINTMENT MODAL -->
     <div id="property-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
             <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
-            
             <div id="modal-content-container" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
         </div>
     </div>
 
-    <!-- ENLIST MY PROPERTY MODAL (AUTOMATICALLY UPDATES SHEET TAB 3) -->
+    <!-- ENLIST MY PROPERTY MODAL -->
     <div id="enlist-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-2xl border-2 border-black shadow-2xl p-6 sm:p-8 relative">
             <button onclick="closeEnlistModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
@@ -1035,9 +1157,25 @@
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxJ0fcddpP0OTFl4FdFvhtmmsjQhoyeRWtwqioc5thC4MCpRdT1sVkHIIruUIia-6WP2A/exec";
 
-        // APP STATE - REMOVED HARDCODED DUMMY LISTINGS & INQUIRIES
+        // STATE APP DATA
         let properties = [];
         let inquiriesList = [];
+        let developerInquiries = JSON.parse(localStorage.getItem('cpr_dev_inquiries')) || [];
+        let developersList = JSON.parse(localStorage.getItem('cpr_developers')) || [
+            {
+                slug: 'shang-properties',
+                name: 'Shang Properties',
+                bannerUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80',
+                description: 'Pioneering benchmark luxury residential developments and high-rise architectural landmarks in Metro Manila.'
+            },
+            {
+                slug: 'ayala-land-premier',
+                name: 'Ayala Land Premier',
+                bannerUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80',
+                description: 'Exclusive residential estates, master-planned communities, and high-end suburban sanctuaries.'
+            }
+        ];
+
         let registeredAgents = JSON.parse(localStorage.getItem('cpr_registered_agents')) || [
             { email: 'admin@compassprimerealty.com', role: 'admin' },
             { email: 'realtor@compassprimerealty.com', role: 'agent' }
@@ -1051,6 +1189,7 @@
         let activeAgentUser = null;
         let activeModalCarouselIndex = 0;
         let uploadedLocalImages = [];
+        let selectedDevSlug = 'shang-properties';
 
         window.addEventListener('DOMContentLoaded', () => {
             fetchListingsFromGoogleSheets();
@@ -1092,7 +1231,7 @@
                             baths: Number(item.baths) || 0,
                             parking: Number(item.parking || item.garage) || 0,
                             area: item.area || "N/A",
-                            developer: item.developer || "Compass Exclusive",
+                            developer: item.developer || "Shang Properties",
                             agentEmail: item.agentEmail || "realtor@compassprimerealty.com",
                             images: imgs,
                             description: item.description || "Exclusive luxury property registered with Compass Realty."
@@ -1110,14 +1249,128 @@
 
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
             document.getElementById('agent-dashboard-container').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // WHITE LABEL DEVELOPER PORTAL VIEW (/developer)
+        function showDeveloperPortalView(slug) {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.remove('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('agent-dashboard-container').classList.add('hidden');
+
+            renderDeveloperSelectorDropdown();
+            if (slug) selectedDevSlug = slug;
+            switchDeveloperBrand(selectedDevSlug);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderDeveloperSelectorDropdown() {
+            const select = document.getElementById('dev-selector-dropdown');
+            select.innerHTML = developersList.map(d => `<option value="${d.slug}">${d.name}</option>`).join('');
+            select.value = selectedDevSlug;
+        }
+
+        function switchDeveloperBrand(slug) {
+            selectedDevSlug = slug;
+            const dev = developersList.find(d => d.slug === slug) || developersList[0];
+
+            document.getElementById('dev-portal-name').textContent = dev.name;
+            document.getElementById('dev-portal-desc').textContent = dev.description;
+            document.getElementById('dev-portal-banner').style.backgroundImage = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${dev.bannerUrl}')`;
+
+            const devProps = properties.filter(p => (p.developer || '').toLowerCase().includes(dev.name.toLowerCase()));
+            document.getElementById('dev-projects-count').textContent = `${devProps.length} Projects Available`;
+
+            const devGrid = document.getElementById('dev-projects-grid');
+            devGrid.innerHTML = devProps.length === 0 ? 
+                `<div class="col-span-full py-16 text-center border border-dashed border-neutral-400">
+                    <h3 class="text-base font-bold uppercase text-black">NO PROJECTS CURRENTLY LISTED FOR ${dev.name.toUpperCase()}</h3>
+                    <p class="text-xs text-neutral-500 mt-1">Upload projects under this developer in the Admin Control Panel.</p>
+                </div>` :
+                devProps.map(p => `
+                    <div class="bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
+                        <div>
+                            <div class="relative h-56 overflow-hidden bg-neutral-200">
+                                <img src="${p.images[0]}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute top-3 left-3">
+                                    <span class="bg-black text-white px-2.5 py-1 text-[9px] font-semibold uppercase tracking-widest">
+                                        FOR ${p.status.toUpperCase()}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <span class="text-[10px] uppercase tracking-widest font-bold text-brand-brown">${dev.name}</span>
+                                <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1">${p.title}</h3>
+                                <p class="text-xs text-neutral-600 mb-4"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${p.location}</p>
+                                <span class="text-lg font-bold text-black font-mono block">₱${p.price.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="openDevInquiryModal('${escapeQuotes(dev.name)}', '${escapeQuotes(p.title)}')" class="w-full bg-brand-brown hover:bg-black text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
+                                INQUIRE ABOUT PROJECT
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        // DEVELOPER PROJECT INQUIRY MODAL & SUBMISSION (LOGS TO SHEET 4)
+        function openDevInquiryModal(devName, projectName) {
+            document.getElementById('dev-inquiry-devname').value = devName;
+            document.getElementById('dev-inquiry-projectname').value = projectName;
+            document.getElementById('dev-inquiry-project-title').textContent = `INQUIRE: ${projectName.toUpperCase()}`;
+            document.getElementById('dev-inquiry-modal').classList.remove('hidden');
+        }
+
+        function closeDevInquiryModal() {
+            document.getElementById('dev-inquiry-modal').classList.add('hidden');
+        }
+
+        async function handleDevInquirySubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('dev-inquiry-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+
+            const inquiryData = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                developer: document.getElementById('dev-inquiry-devname').value,
+                project: document.getElementById('dev-inquiry-projectname').value,
+                clientName: document.getElementById('dev-inquiry-clientname').value,
+                email: document.getElementById('dev-inquiry-clientemail').value,
+                phone: document.getElementById('dev-inquiry-clientphone').value,
+                notes: document.getElementById('dev-inquiry-notes').value || "N/A"
+            };
+
+            developerInquiries.push(inquiryData);
+            localStorage.setItem('cpr_dev_inquiries', JSON.stringify(developerInquiries));
+
+            // Sync to Sheet 4 in Google Sheets
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sheetTab: "Sheet4", action: "addDeveloperInquiry", ...inquiryData })
+                });
+            } catch (err) {
+                console.error("Sheet 4 Sync:", err);
+            }
+
+            showToast("Project Inquiry Sent! Updated 4th Sheet in Google Sheets.", "success");
+            closeDevInquiryModal();
+            btn.textContent = "SUBMIT INQUIRY (UPDATES SHEET 4)";
+        }
+
         function showCareersPage() {
             document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.remove('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
             document.getElementById('agent-dashboard-container').classList.add('hidden');
@@ -1227,7 +1480,7 @@
             return card;
         }
 
-        // FULL PROPERTY DETAIL & APPOINTMENT MODAL
+        // PROPERTY DETAILS MODAL
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
@@ -1481,7 +1734,7 @@
             showToast("Homepage Hero Banner updated!", "success");
         }
 
-        // ADMIN AUTHENTICATION
+        // ADMIN DASHBOARD & SUBTAB SWITCHING
         function openAdminAuthModal() {
             if (activeAdminUser) showAdminDashboard();
             else document.getElementById('admin-auth-modal').classList.remove('hidden');
@@ -1515,11 +1768,22 @@
 
         function showAdminDashboard() {
             document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('agent-dashboard-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.remove('hidden');
             renderAdminDashboardTables();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAdminSubTab(subtab) {
+            ['listings', 'developers', 'devinquiries'].forEach(st => {
+                document.getElementById(`admin-subtab-${st}`).classList.add('hidden');
+                document.getElementById(`admin-subtab-btn-${st}`).className = "p-4 border-b-2 border-transparent text-neutral-400";
+            });
+
+            document.getElementById(`admin-subtab-${subtab}`).classList.remove('hidden');
+            document.getElementById(`admin-subtab-btn-${subtab}`).className = "p-4 border-b-2 border-brand-brown text-black";
         }
 
         function logoutAdmin() {
@@ -1531,8 +1795,9 @@
         function renderAdminDashboardTables() {
             document.getElementById('admin-stat-listings').textContent = properties.length;
             document.getElementById('admin-stat-enquiries').textContent = inquiriesList.length;
-            document.getElementById('admin-stat-views').textContent = siteVisitorCount;
+            document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
 
+            // Render Listings Table
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
@@ -1548,20 +1813,81 @@
                 </tr>
             `).join('');
 
-            const tbodyInq = document.getElementById('admin-inquiries-table');
-            tbodyInq.innerHTML = inquiriesList.length === 0 ? 
-                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No appointment inquiries logged yet.</td></tr>` :
-                inquiriesList.map(inq => `
-                <tr class="hover:bg-neutral-50">
-                    <td class="p-3 font-bold">${inq.name}</td>
-                    <td class="p-3">${inq.email}<br><span class="text-neutral-500 text-[10px]">${inq.phone}</span></td>
-                    <td class="p-3 font-semibold">${inq.propertyTitle}</td>
-                    <td class="p-3 font-mono">${inq.date}</td>
-                    <td class="p-3 text-right">
-                        <button onclick="openReplyModal('${inq.id}', '${inq.email}')" class="bg-black text-white px-3 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">REPLY</button>
-                    </td>
-                </tr>
-            `).join('');
+            // Render Developers Table
+            const tbodyDevs = document.getElementById('admin-developers-table');
+            tbodyDevs.innerHTML = developersList.map(dev => {
+                const count = properties.filter(p => (p.developer || '').toLowerCase().includes(dev.name.toLowerCase())).length;
+                return `
+                    <tr class="hover:bg-neutral-50">
+                        <td class="p-3 font-mono font-bold">${dev.slug}</td>
+                        <td class="p-3 font-bold">${dev.name}</td>
+                        <td class="p-3"><img src="${dev.bannerUrl}" class="h-10 w-24 object-cover border border-black"></td>
+                        <td class="p-3 font-mono font-bold">${count} Projects</td>
+                        <td class="p-3 text-right">
+                            <button onclick="showDeveloperPortalView('${dev.slug}')" class="text-brand-brown hover:underline font-bold">VIEW PORTAL</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Render Developer Inquiries Table (Sheet 4 Metrics)
+            const tbodyDevInq = document.getElementById('admin-devinquiries-table');
+            tbodyDevInq.innerHTML = developerInquiries.length === 0 ?
+                `<tr><td colspan="6" class="p-4 text-center text-neutral-500 font-light">No developer project inquiries recorded yet.</td></tr>` :
+                developerInquiries.map(di => `
+                    <tr class="hover:bg-neutral-50">
+                        <td class="p-3 font-bold text-brand-brown">${di.developer}</td>
+                        <td class="p-3 font-semibold">${di.project}</td>
+                        <td class="p-3 font-bold">${di.clientName}</td>
+                        <td class="p-3">${di.email}<br><span class="text-neutral-500 text-[10px]">${di.phone}</span></td>
+                        <td class="p-3 font-mono text-[10px]">${di.timestamp || 'N/A'}</td>
+                        <td class="p-3 text-right">
+                            <button onclick="openReplyModal('${di.id}', '${di.email}')" class="bg-black text-white px-3 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">REPLY</button>
+                        </td>
+                    </tr>
+                `).join('');
+        }
+
+        // DEVELOPER REGISTRATION IN ADMIN
+        function openAddDeveloperModal() {
+            document.getElementById('dev-form-name').value = '';
+            document.getElementById('dev-form-slug').value = '';
+            document.getElementById('dev-form-desc').value = '';
+            document.getElementById('dev-form-banner-url').value = '';
+            document.getElementById('dev-form-banner-preview').src = 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80';
+            document.getElementById('add-developer-modal').classList.remove('hidden');
+        }
+
+        function closeAddDeveloperModal() {
+            document.getElementById('add-developer-modal').classList.add('hidden');
+        }
+
+        function handleDevBannerLocalUpload(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    document.getElementById('dev-form-banner-url').value = evt.target.result;
+                    document.getElementById('dev-form-banner-preview').src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleSaveDeveloperSubmit(e) {
+            e.preventDefault();
+            const devObj = {
+                name: document.getElementById('dev-form-name').value,
+                slug: document.getElementById('dev-form-slug').value.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
+                description: document.getElementById('dev-form-desc').value,
+                bannerUrl: document.getElementById('dev-form-banner-url').value || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80'
+            };
+
+            developersList.push(devObj);
+            localStorage.setItem('cpr_developers', JSON.stringify(developersList));
+            closeAddDeveloperModal();
+            renderAdminDashboardTables();
+            showToast(`Developer ${devObj.name} registered successfully!`, "success");
         }
 
         function toggleSoldStatus(id) {
@@ -1608,7 +1934,6 @@
                 return;
             }
 
-            // Password Policy: at least 6 characters, 1 uppercase, 1 number, 1 special character
             const passPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
             if (!passPattern.test(pass)) {
                 showToast("Password must have min 6 chars, 1 uppercase, 1 number, and 1 symbol!", "error");
@@ -1645,6 +1970,7 @@
 
         function showAgentDashboard() {
             document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
             document.getElementById('agent-dashboard-container').classList.remove('hidden');
@@ -1739,7 +2065,7 @@
                             parking: Number(cols[6]) || 2,
                             area: cols[7]?.replace(/"/g, '').trim() || "300 sqm",
                             location: cols[8]?.replace(/"/g, '').trim() || "Metro Manila",
-                            developer: cols[9]?.replace(/"/g, '').trim() || "Compass Developer",
+                            developer: cols[9]?.replace(/"/g, '').trim() || "Shang Properties",
                             images: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"],
                             description: "CSV imported listing."
                         });
@@ -1855,7 +2181,7 @@
                     baths: Number(document.getElementById('crud-baths').value),
                     parking: Number(document.getElementById('crud-parking').value),
                     location: document.getElementById('crud-location').value,
-                    developer: document.getElementById('crud-developer').value || "Compass Exclusive",
+                    developer: document.getElementById('crud-developer').value || "Shang Properties",
                     description: document.getElementById('crud-description').value,
                     agentEmail: activeAgentUser || "admin@compassprimerealty.com",
                     images: imgs
@@ -1931,7 +2257,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // COMPASS AI CONCIERGE CHATBOX (SUBTITLE HIDDEN & LOGS TO SHEET TAB 3)
+        // COMPASS AI CONCIERGE CHATBOX (SUBTITLE HIDDEN)
         function toggleAIChat() {
             document.getElementById('ai-chat-window').classList.toggle('hidden');
         }
@@ -1958,7 +2284,6 @@
             chatMessages.appendChild(loadingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Log AI Query to Sheet Tab 3 & Admin Inquiries
             try {
                 fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1973,7 +2298,6 @@
                 });
             } catch (err) {}
 
-            // Direct Gemini API Integration
             const systemPrompt = `You are the executive luxury AI Concierge for Compass Realty. Assist visitors with inquiry responses based on real estate listings: ${JSON.stringify(properties.map(p => ({ title: p.title, price: p.price, location: p.location, category: p.category, status: p.status })))}. Maintain a polite, highly sophisticated tone. Keep answers under 3 concise sentences.`;
             const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
