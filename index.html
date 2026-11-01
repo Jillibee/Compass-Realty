@@ -2101,75 +2101,76 @@ try {
 
         // ASYNCHRONOUS LISTING SAVING & EDITING WITH FULL GOOGLE SHEETS SYNC & SEQUENTIAL ID (FROM 1001)
         async function handleListingCrudSubmit(e) {
-            e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING TO SHEET...`;
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING...`;
 
-            const idVal = document.getElementById('crud-id').value;
-            const isEdit = Boolean(idVal);
-            
-            // Auto-generate ID starting from 1001 if creating a new listing
-            const listingId = isEdit ? parseInt(idVal, 10) : getNextListingId();
+    const idVal = document.getElementById('crud-id').value;
+    const isEdit = Boolean(idVal);
+    const listingId = isEdit ? parseInt(idVal, 10) : getNextListingId();
 
-            let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
-                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
-            ];
+    let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+    ];
 
-            const listingPayload = {
-                id: listingId,
-                title: document.getElementById('crud-title').value,
-                category: document.getElementById('crud-category').value,
-                status: document.getElementById('crud-status').value,
-                price: Number(document.getElementById('crud-price').value),
-                area: document.getElementById('crud-area').value,
-                beds: Number(document.getElementById('crud-beds').value),
-                baths: Number(document.getElementById('crud-baths').value),
-                parking: Number(document.getElementById('crud-parking').value),
-                location: document.getElementById('crud-location').value,
-                developer: document.getElementById('crud-developer').value || "Compass Realty",
-                description: document.getElementById('crud-description').value || "",
-                isDeal: document.getElementById('crud-isdeal').checked,
-                isFeatured: document.getElementById('crud-isfeatured').checked,
-                agentEmail: activeAgentUser || activeAdminUser || "admin@compassprimerealty.com",
-                images: imgs
-            };
+    // Determine current logged-in agent or admin email
+    const currentAgentEmail = activeAgentUser || activeAdminUser || "admin@compassprimerealty.com";
 
-            // Update in-memory state
-            if (isEdit) {
-                const index = properties.findIndex(p => p.id === listingId);
-                if (index !== -1) {
-                    properties[index] = { ...properties[index], ...listingPayload };
-                }
-            } else {
-                properties.unshift(listingPayload);
-            }
+    const listingPayload = {
+        id: listingId,
+        title: document.getElementById('crud-title').value,
+        category: document.getElementById('crud-category').value,
+        status: document.getElementById('crud-status').value,
+        price: Number(document.getElementById('crud-price').value),
+        area: document.getElementById('crud-area').value,
+        beds: Number(document.getElementById('crud-beds').value),
+        baths: Number(document.getElementById('crud-baths').value),
+        parking: Number(document.getElementById('crud-parking').value),
+        location: document.getElementById('crud-location').value,
+        developer: document.getElementById('crud-developer').value || "Compass Realty",
+        description: document.getElementById('crud-description').value || "",
+        isDeal: document.getElementById('crud-isdeal').checked,
+        isFeatured: document.getElementById('crud-isfeatured').checked,
+        agentEmail: currentAgentEmail, // <--- INCLUDED AGENT OWNER
+        images: imgs
+    };
 
-            // DISPATCH TO GOOGLE SHEETS (SHEET 1)
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sheetTab: "Sheet1",
-                        action: isEdit ? "updateListing" : "addListing",
-                        ...listingPayload,
-                        image: listingPayload.images.join(',')
-                    })
-                });
-            } catch (err) {
-                console.error("Google Sheets Sync Error:", err);
-            }
-
-            renderPropertyList();
-            if (activeAdminUser) renderAdminDashboardTables();
-            if (activeAgentUser) renderAgentDashboardTables();
-            
-            closeAddListingModal();
-            submitBtn.textContent = originalBtnText;
-            showToast(`Listing #${listingId} saved & synced with Google Sheet 1!`, "success");
+    // Update local memory
+    if (isEdit) {
+        const index = properties.findIndex(p => p.id === listingId);
+        if (index !== -1) {
+            properties[index] = { ...properties[index], ...listingPayload };
         }
+    } else {
+        properties.unshift(listingPayload);
+    }
+
+    // DISPATCH TO GOOGLE SHEETS
+    try {
+        await fetch(GOOGLE_SHEETS_API_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sheetTab: "Sheet1",
+                action: isEdit ? "updateListing" : "addListing",
+                ...listingPayload,
+                image: listingPayload.images.join(',')
+            })
+        });
+    } catch (err) {
+        console.error("Google Sheets Sync Error:", err);
+    }
+
+    renderPropertyList();
+    if (activeAdminUser) renderAdminDashboardTables();
+    if (activeAgentUser) renderAgentDashboardTables();
+    
+    closeAddListingModal();
+    submitBtn.textContent = originalBtnText;
+    showToast(`Listing #${listingId} saved with Agent (${currentAgentEmail})!`, "success");
+}
 
         // BULK CSV UPLOAD WITH SEQUENTIAL IDs & GOOGLE SHEETS SYNC
         function handleCSVUpload(event, source) {
