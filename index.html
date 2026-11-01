@@ -2312,11 +2312,13 @@ let filtered = properties.filter(item => {
             }
             document.getElementById('fav-count-badge').textContent = favorites.length;
             renderPropertyList();
+            scrollToListings();
         }
 
         function toggleFavoritesView() {
             currentFilters.onlyFavs = !currentFilters.onlyFavs;
             renderPropertyList();
+            scrollToListings();
         }
 
         // FILTERS
@@ -2350,6 +2352,7 @@ let filtered = properties.filter(item => {
             currentFilters.onlyFeatured = (section === 'featured');
             document.getElementById('current-view-title').textContent = section === 'deals' ? 'TOP 10 DEALS' : 'FEATURED PROPERTIES';
             renderPropertyList();
+            scrollToListings();
         }
 
         function handleSearchSubmit(e) {
@@ -2359,6 +2362,7 @@ let filtered = properties.filter(item => {
             currentFilters.category = document.getElementById('filter-category').value;
             currentFilters.maxPrice = document.getElementById('filter-maxprice').value;
             renderPropertyList();
+            scrollToListings();
         }
 
         function resetFilters() {
@@ -2366,6 +2370,7 @@ let filtered = properties.filter(item => {
             document.getElementById('search-form').reset();
             document.getElementById('current-view-title').textContent = 'ALL PROPERTIES';
             renderPropertyList();
+            scrollToListings();
         }
 
         function toggleMobileMenu() {
