@@ -2328,7 +2328,15 @@ let filtered = properties.filter(item => {
             currentFilters.onlyFavs = false;
             document.getElementById('current-view-title').textContent = `${status === 'ALL' ? 'ALL' : 'FOR ' + status.toUpperCase()} ${category === 'ALL' ? 'PROPERTIES' : category}`;
             renderPropertyList();
+            scrollToListings();
         }
+
+        function scrollToListings() {
+    const section = document.getElementById('property-grid') || document.getElementById('current-view-title');
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
 
         function setFilterCategory(cat) {
             currentFilters.category = cat;
