@@ -1,0 +1,74 @@
+{
+  "siteConfig": {
+    "siteName": "Compass Prime Realty",
+    "tagline": "Guidance. Direction. Trust.",
+    "hotline": "+63 993 847 4121",
+    "verifySenderEmail": "verify@compassprimerealty.com",
+    "adminEmail": "admin@compassprimerealty.com",
+    "googleSheetsApiUrl": "https://script.google.com/macros/s/AKfycbxJ0fcddpP0OTFl4FdFvhtmmsjQhoyeRWtwqioc5thC4MCpRdT1sVkHIIruUIia-6WP2A/exec",
+    "heroBanner": {
+      "title": "FIND YOUR NEXT PRIME REAL ESTATE",
+      "subtitle": "Connecting discerning buyers and investors with prestigious residential estates, commercial developments, and high-yielding land holdings across premier locations.",
+      "imageUrl": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80"
+    }
+  },
+  "authConfig": {
+    "adminDefault": {
+      "email": "admin@compassprimerealty.com",
+      "role": "admin"
+    },
+    "agentPasswordRequirements": {
+      "minLength": 6,
+      "requireUppercase": true,
+      "requireNumber": true,
+      "requireSpecialChar": true,
+      "allowedDomain": "@compassprimerealty.com"
+    }
+  },
+  "sheetTabs": {
+    "tab1_listings": "Sheet1",
+    "tab2_appointments": "Sheet2",
+    "tab3_enlistments_applications_ai": "Sheet3"
+  },
+  "careers": [
+    {
+      "id": "job-001",
+      "role": "Senior Luxury Real Estate Consultant",
+      "department": "Sales & Portfolio",
+      "type": "Full-Time",
+      "location": "BGC, Taguig City",
+      "description": "Drive high-value luxury residential and commercial property sales for high-net-worth individuals and corporate clients.",
+      "requirements": [
+        "Licensed Real Estate Broker (PRC)",
+        "Minimum 3 years luxury market experience",
+        "Proven record in prime estate deals"
+      ]
+    },
+    {
+      "id": "job-002",
+      "role": "Commercial Property Acquisitions Specialist",
+      "department": "Commercial Advisory",
+      "type": "Full-Time",
+      "location": "Makati CBD",
+      "description": "Manage institutional and commercial land transactions, office building leasing, and strategic estate developments.",
+      "requirements": [
+        "Degree in Real Estate Management or Finance",
+        "Strong network in commercial brokerage",
+        "Expertise in property valuation & underwriting"
+      ]
+    },
+    {
+      "id": "job-003",
+      "role": "Digital Marketing & Brand Specialist",
+      "department": "Marketing",
+      "type": "Full-Time",
+      "location": "BGC, Taguig City",
+      "description": "Elevate brand identity, execute targeted luxury buyer campaigns, and maintain SEO/digital search dominance.",
+      "requirements": [
+        "3+ years experience in luxury brand marketing",
+        "Proficiency in meta-advertising & lead generation",
+        "Strong content curation & aesthetic portfolio"
+      ]
+    }
+  ]
+}
