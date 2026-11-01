@@ -1202,69 +1202,35 @@
         }
 
         // GENERATE SEQUENTIAL LISTING IDs STARTING FROM 1001
-        function getNextListingId() {
-            if (!properties || properties.length === 0) {
-                return 1001;
-            }
-            const numericIds = properties
-                .map(p => parseInt(p.id, 10))
-                .filter(id => !isNaN(id));
-            
-            if (numericIds.length === 0) {
-                return 1001;
-            }
-            
-            const maxId = Math.max(...numericIds);
-            return maxId < 1001 ? 1001 : maxId + 1;
-        }
-
-        // FETCH DATA FROM SHEET TAB 1
         async function fetchListingsFromGoogleSheets() {
-            const spinner = document.getElementById('loading-spinner');
-            const grid = document.getElementById('property-grid');
+    // 1. Load instantly from local cache if available
+    const cachedData = localStorage.getItem('cpr_cached_listings');
+    if (cachedData) {
+        properties = JSON.parse(cachedData);
+        renderPropertyList();
+        document.getElementById('loading-spinner')?.classList.add('hidden');
+        document.getElementById('property-grid')?.classList.remove('hidden');
+    }
 
-            try {
-                const response = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await response.json();
+    // 2. Fetch fresh data in the background
+    try {
+        const response = await fetch(GOOGLE_SHEETS_API_URL);
+        const data = await response.json();
 
-                if (Array.isArray(data) && data.length > 0) {
-                    properties = data.map(item => {
-                        let imgs = [];
-                        if (Array.isArray(item.images)) {
-                            imgs = item.images;
-                        } else if (item.image) {
-                            imgs = String(item.image).split(',').map(s => s.trim()).filter(Boolean);
-                        }
-                        if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"];
-
-                        return {
-                            id: Number(item.id) || Date.now(),
-                            title: item.title || item.propertyTitle || "Luxury Property",
-                            location: item.location || "Metro Manila",
-                            price: Number(item.price) || 0,
-                            status: item.status || item.transaction || "Sale",
-                            category: item.category || "CONDOMINIUM",
-                            isDeal: String(item.isDeal).toUpperCase() === 'TRUE' || item.isDeal === true,
-                            isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE' || item.isFeatured === true,
-                            beds: Number(item.beds) || 0,
-                            baths: Number(item.baths) || 0,
-                            parking: Number(item.parking || item.garage) || 0,
-                            area: item.area || "N/A",
-                            developer: item.developer || "Shang Properties",
-                            agentEmail: item.agentEmail || "realtor@compassprimerealty.com",
-                            images: imgs,
-                            description: item.description || "Exclusive luxury property registered with Compass Realty."
-                        };
-                    });
-                }
-            } catch (err) {
-                console.error("Sheets Fetch Error:", err);
-            } finally {
-                if (spinner) spinner.classList.add('hidden');
-                if (grid) grid.classList.remove('hidden');
-                renderPropertyList();
-            }
+        if (Array.isArray(data) && data.length > 0) {
+            properties = data.map(item => parseSheetItem(item));
+            
+            // Cache fresh result for instant loads next time
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            renderPropertyList();
         }
+    } catch (err) {
+        console.error("Sheets Fetch Error:", err);
+    } finally {
+        document.getElementById('loading-spinner')?.classList.add('hidden');
+        document.getElementById('property-grid')?.classList.remove('hidden');
+    }
+}
 
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
