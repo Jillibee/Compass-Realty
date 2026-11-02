@@ -97,7 +97,7 @@
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
             <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO</span>
-            <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid font-light fa-phone mr-1"></i> +63 993 847 4121</span>
+            <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid font-light fa-phone mr-1"></i> +63 918 915 4245</span>
         </div>
         <div class="flex items-center space-x-4">
             <button onclick="toggleFavoritesView()" class="hover:text-neutral-300 transition-colors flex items-center gap-1.5">
@@ -877,18 +877,18 @@
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
                     <input type="password" id="admin-pass-input" value="admin123" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                 </div>
-                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                <button type="submit" id="admin-step1-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     SEND VERIFICATION CODE
                 </button>
             </form>
 
             <form id="admin-login-step2" onsubmit="handleAdminLoginStep2(event)" class="space-y-4 hidden">
                 <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
-                    <i class="fa-solid fa-envelope-circle-check mr-1"></i> Dispatched via verify@compassprimerealty.com! Code: <strong class="font-bold text-black" id="admin-sim-code">882910</strong>
+                    <i class="fa-solid fa-envelope-circle-check mr-1"></i> Code sent to your inbox via verify@compassprimerealty.com!
                 </div>
                 <div>
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
-                    <input type="text" id="admin-code-input" placeholder="882910" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
+                    <input type="text" id="admin-code-input" placeholder="123456" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
                 </div>
                 <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     VERIFY & ACCESS ADMIN DASHBOARD
@@ -924,7 +924,7 @@
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
                     <input type="password" id="agent-pass-input" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                 </div>
-                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                <button type="submit" id="agent-login-step1-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     VERIFY & SEND ACCESS CODE
                 </button>
             </form>
@@ -940,7 +940,7 @@
                     <input type="password" id="agent-reg-pass" required placeholder="Min 6 chars, 1 uppercase, 1 number, 1 symbol" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     <p class="text-[9px] text-neutral-500 mt-1">Policy: At least 6 characters, 1 capital letter, 1 number, and 1 special symbol.</p>
                 </div>
-                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                <button type="submit" id="agent-reg-btn" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     REQUEST VERIFICATION CODE
                 </button>
             </form>
@@ -948,11 +948,11 @@
             <!-- OTP Step -->
             <form id="agent-login-step2" onsubmit="handleAgentLoginStep2(event)" class="space-y-4 hidden">
                 <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
-                    <i class="fa-solid fa-paper-plane mr-1"></i> Dispatched via verify@compassprimerealty.com! Code: <strong class="font-bold text-black" id="agent-sim-code">419203</strong>
+                    <i class="fa-solid fa-paper-plane mr-1"></i> Dispatched via verify@compassprimerealty.com to your inbox!
                 </div>
                 <div>
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
-                    <input type="text" id="agent-code-input" placeholder="419203" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
+                    <input type="text" id="agent-code-input" placeholder="123456" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
                 </div>
                 <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     ACCESS AGENT DASHBOARD
@@ -1078,7 +1078,7 @@
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Email Body Response</label>
                     <textarea id="reply-body" rows="4" required placeholder="Write official client response..." class="w-full bg-neutral-100 border border-neutral-400 p-2 text-xs focus:outline-none focus:border-brand-brown"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
+                <button type="submit" id="reply-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
                     DISPATCH NOTIFICATION EMAIL
                 </button>
             </form>
@@ -1159,6 +1159,7 @@
 
     <!-- SCRIPT APPLICATION CONTROLLER & GOOGLE SHEETS CONNECTOR -->
     <script>
+        // GOOGLE APPS SCRIPT ENDPOINT
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxmNY_2eVmbSz9XL0g02E5RS6r4AHbcqNNF2OumEXbeCnVYlG5HIgDeSz4RAqrY_pygNg/exec";
 
         // STATE APP DATA
@@ -1193,6 +1194,10 @@
         let uploadedLocalImages = [];
         let selectedDevSlug = 'shang-properties';
 
+        // OTP Sessions State
+        let adminGeneratedOTP = null;
+        let agentGeneratedOTP = null;
+
         window.addEventListener('DOMContentLoaded', () => {
             fetchListingsFromGoogleSheets();
         });
@@ -1201,76 +1206,73 @@
             return String(text || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
-        // GENERATE SEQUENTIAL LISTING IDs STARTING FROM 1001
-        // HELPER TO CLEAN AND MAP RAW SHEET OBJECTS
-function parseSheetItem(item) {
-    let imgs = [];
-    if (Array.isArray(item.images)) {
-        imgs = item.images;
-    } else if (item.image) {
-        imgs = String(item.image).split(',').map(s => s.trim()).filter(Boolean);
-    }
-    if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"];
-
-    return {
-        id: Number(item.id) || Date.now(),
-        title: item.title || item.propertyTitle || "Luxury Property",
-        location: item.location || "Metro Manila",
-        price: Number(item.price) || 0,
-        status: item.status || item.transaction || "Sale",
-        category: item.category || "CONDOMINIUM",
-        isDeal: String(item.isDeal).toUpperCase() === 'TRUE' || item.isDeal === true,
-        isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE' || item.isFeatured === true,
-        beds: Number(item.beds) || 0,
-        baths: Number(item.baths) || 0,
-        parking: Number(item.parking || item.garage) || 0,
-        area: item.area || "N/A",
-        developer: item.developer || "Compass Realty",
-        agentEmail: item.agentemail || item.agentEmail || "realtor@compassprimerealty.com",
-        images: imgs,
-        description: item.description || "Exclusive luxury property registered with Compass Realty."
-    };
-}
-
-// INSTANT CACHED FETCH WITH SILENT BACKGROUND SYNC
-async function fetchListingsFromGoogleSheets() {
-    const spinner = document.getElementById('loading-spinner');
-    const grid = document.getElementById('property-grid');
-
-    // 1. INSTANT RENDER FROM LOCALSTORAGE CACHE
-    const cachedData = localStorage.getItem('cpr_cached_listings');
-    if (cachedData) {
-        try {
-            properties = JSON.parse(cachedData);
-            if (spinner) spinner.classList.add('hidden');
-            if (grid) grid.classList.remove('hidden');
-            renderPropertyList();
-        } catch (e) {
-            console.error("Cache parsing error:", e);
+        function getNextListingId() {
+            if (!properties || properties.length === 0) return 1001;
+            const maxId = Math.max(...properties.map(p => Number(p.id) || 0));
+            return maxId >= 1001 ? maxId + 1 : 1001;
         }
-    }
 
-    // 2. BACKGROUND FETCH FROM GOOGLE SHEETS
-    try {
-        const response = await fetch(GOOGLE_SHEETS_API_URL);
-        const data = await response.json();
+        function parseSheetItem(item) {
+            let imgs = [];
+            if (Array.isArray(item.images)) {
+                imgs = item.images;
+            } else if (item.image) {
+                imgs = String(item.image).split(',').map(s => s.trim()).filter(Boolean);
+            }
+            if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"];
 
-        if (Array.isArray(data) && data.length > 0) {
-            properties = data.map(parseSheetItem);
-            
-            // Update cache for next load
-            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
-            
-            // Re-render view with updated live data
-            renderPropertyList();
+            return {
+                id: Number(item.id) || Date.now(),
+                title: item.title || item.propertyTitle || "Luxury Property",
+                location: item.location || "Metro Manila",
+                price: Number(item.price) || 0,
+                status: item.status || item.transaction || "Sale",
+                category: item.category || "CONDOMINIUM",
+                isDeal: String(item.isDeal).toUpperCase() === 'TRUE' || item.isDeal === true,
+                isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE' || item.isFeatured === true,
+                beds: Number(item.beds) || 0,
+                baths: Number(item.baths) || 0,
+                parking: Number(item.parking || item.garage) || 0,
+                area: item.area || "N/A",
+                developer: item.developer || "Compass Realty",
+                agentEmail: item.agentemail || item.agentEmail || "realtor@compassprimerealty.com",
+                images: imgs,
+                description: item.description || "Exclusive luxury property registered with Compass Realty."
+            };
         }
-    } catch (err) {
-        console.error("Sheets Fetch Error:", err);
-    } finally {
-        if (spinner) spinner.classList.add('hidden');
-        if (grid) grid.classList.remove('hidden');
-    }
-}
+
+        async function fetchListingsFromGoogleSheets() {
+            const spinner = document.getElementById('loading-spinner');
+            const grid = document.getElementById('property-grid');
+
+            const cachedData = localStorage.getItem('cpr_cached_listings');
+            if (cachedData) {
+                try {
+                    properties = JSON.parse(cachedData);
+                    if (spinner) spinner.classList.add('hidden');
+                    if (grid) grid.classList.remove('hidden');
+                    renderPropertyList();
+                } catch (e) {
+                    console.error("Cache parsing error:", e);
+                }
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await response.json();
+
+                if (Array.isArray(data) && data.length > 0) {
+                    properties = data.map(parseSheetItem);
+                    localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+                    renderPropertyList();
+                }
+            } catch (err) {
+                console.error("Sheets Fetch Error:", err);
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
+                if (grid) grid.classList.remove('hidden');
+            }
+        }
 
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
@@ -1281,7 +1283,6 @@ async function fetchListingsFromGoogleSheets() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // WHITE LABEL DEVELOPER PORTAL VIEW (/developer)
         function showDeveloperPortalView(slug) {
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.remove('hidden');
@@ -1348,7 +1349,6 @@ async function fetchListingsFromGoogleSheets() {
                 `).join('');
         }
 
-        // DEVELOPER PROJECT INQUIRY MODAL & SUBMISSION (LOGS TO SHEET 4)
         function openDevInquiryModal(devName, projectName) {
             document.getElementById('dev-inquiry-devname').value = devName;
             document.getElementById('dev-inquiry-projectname').value = projectName;
@@ -1410,36 +1410,31 @@ async function fetchListingsFromGoogleSheets() {
             if (!grid) return;
             grid.innerHTML = '';
 
-            // Locate this section inside renderPropertyList() in index.html
+            let filtered = properties.filter(item => {
+                if (currentFilters.status !== 'ALL') {
+                    const targetStatus = normalizeText(currentFilters.status);
+                    const itemStatus = normalizeText(item.status);
+                    if (itemStatus !== targetStatus) return false;
+                }
 
-let filtered = properties.filter(item => {
-    if (currentFilters.status !== 'ALL') {
-        const targetStatus = normalizeText(currentFilters.status);
-        const itemStatus = normalizeText(item.status);
-        if (itemStatus !== targetStatus) return false;
-    }
+                if (currentFilters.category !== 'ALL') {
+                    const targetCategory = normalizeText(currentFilters.category);
+                    const itemCategory = normalizeText(item.category);
+                    if (itemCategory !== targetCategory) return false;
+                }
 
-    // FIX: Use exact equality (===) instead of .includes() for category filtering
-    if (currentFilters.category !== 'ALL') {
-        const targetCategory = normalizeText(currentFilters.category);
-        const itemCategory = normalizeText(item.category);
-        
-        // Match exact category string (e.g. 'lots' === 'lots', excluding 'houseandlots')
-        if (itemCategory !== targetCategory) return false;
-    }
+                if (currentFilters.onlyDeals && !item.isDeal) return false;
+                if (currentFilters.onlyFeatured && !item.isFeatured) return false;
+                if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
+                if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
 
-    if (currentFilters.onlyDeals && !item.isDeal) return false;
-    if (currentFilters.onlyFeatured && !item.isFeatured) return false;
-    if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
-    if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
+                if (currentFilters.keyword.trim() !== '') {
+                    const kw = currentFilters.keyword.toLowerCase();
+                    if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
+                }
 
-    if (currentFilters.keyword.trim() !== '') {
-        const kw = currentFilters.keyword.toLowerCase();
-        if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
-    }
-
-    return true;
-});
+                return true;
+            });
 
             if (filtered.length === 0) {
                 emptyState.classList.remove('hidden');
@@ -1511,43 +1506,7 @@ let filtered = properties.filter(item => {
             `;
             return card;
         }
-        // Inside handleListingCrudSubmit() in index.html
 
-const listingPayload = {
-    id: listingId,
-    title: document.getElementById('crud-title').value,
-    category: document.getElementById('crud-category').value,
-    status: document.getElementById('crud-status').value,
-    price: Number(document.getElementById('crud-price').value),
-    area: document.getElementById('crud-area').value,
-    beds: Number(document.getElementById('crud-beds').value),
-    baths: Number(document.getElementById('crud-baths').value),
-    parking: Number(document.getElementById('crud-parking').value),
-    location: document.getElementById('crud-location').value,
-    developer: document.getElementById('crud-developer').value || "Compass Realty",
-    description: document.getElementById('crud-description').value || "",
-    isDeal: document.getElementById('crud-isdeal').checked,
-    isFeatured: document.getElementById('crud-isfeatured').checked,
-    agentEmail: activeAgentUser || activeAdminUser || "admin@compassprimerealty.com",
-    base64Images: uploadedLocalImages // Send array of base64 data URLs
-};
-
-try {
-    await fetch(GOOGLE_SHEETS_API_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            sheetTab: "Sheet1",
-            action: isEdit ? "updateListing" : "addListing",
-            ...listingPayload
-        })
-    });
-} catch (err) {
-    console.error("Google Sheets Image Sync Error:", err);
-}
-
-        // PROPERTY DETAILS MODAL
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
@@ -1622,7 +1581,7 @@ try {
                                 <h3 class="text-sm font-bold uppercase tracking-wider text-black flex items-center gap-2">
                                     <i class="fa-solid fa-calendar-check text-brand-brown"></i> SET AN APPOINTMENT
                                 </h3>
-                                <p class="text-[11px] text-neutral-500 font-light">Directly updates 2nd sheet tab in Google Sheets.</p>
+                                <p class="text-[11px] text-neutral-500 font-light">Directly updates 2nd sheet tab & dispatches email notification.</p>
                             </div>
 
                             <form id="appointment-form" onsubmit="handleAppointmentSubmit(event, '${escapeQuotes(prop.title)}', '${prop.agentEmail}')" class="space-y-3">
@@ -1659,7 +1618,6 @@ try {
             document.getElementById('property-modal').classList.remove('hidden');
         }
 
-        // LIGHTBOX PREVIEW FUNCTIONALITY
         function openLightboxModal(imgSrc) {
             document.getElementById('lightbox-img').src = imgSrc;
             document.getElementById('lightbox-modal').classList.remove('hidden');
@@ -1685,11 +1643,11 @@ try {
             document.getElementById('carousel-indicator').textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${prop.images.length}`;
         }
 
-        // POST APPOINTMENT TO GOOGLE SHEET TAB 2
+        // REAL EMAIL NOTIFICATION DISPATCH TO AGENT/ADMIN
         async function handleAppointmentSubmit(e, propTitle, agentEmail) {
             e.preventDefault();
             const btn = document.getElementById('appt-submit-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SUBMITTING...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> DISPATCHING NOTIFICATION...`;
 
             const inquiryObj = {
                 id: Date.now(),
@@ -1713,14 +1671,13 @@ try {
                     body: JSON.stringify({ sheetTab: "Sheet2", action: "addAppointment", ...inquiryObj })
                 });
             } catch (err) {
-                console.error("Sheet 2 Error:", err);
+                console.error("Sheet 2 Notification Error:", err);
             }
 
-            showToast("Appointment Logged! Synced with Google Sheet Tab 2.", "success");
+            showToast("Appointment Logged & Email Notification Dispatched!", "success");
             closePropertyModal();
         }
 
-        // CAREER PDF RESUME SUBMISSION TO GOOGLE SHEET TAB 3
         async function handleCareerSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('career-submit-btn');
@@ -1752,12 +1709,11 @@ try {
                 console.error("Sheet 3 Recruitment Error:", err);
             }
 
-            showToast("Recruitment Application & Resume Submitted!", "success");
+            showToast("Recruitment Application Submitted & Admin Notified!", "success");
             document.getElementById('career-form').reset();
             btn.textContent = "SUBMIT RECRUITMENT APPLICATION (UPDATES SHEET 3)";
         }
 
-        // ENLIST PROPERTY TO SHEET TAB 3
         function openEnlistModal() {
             document.getElementById('enlist-modal').classList.remove('hidden');
         }
@@ -1794,13 +1750,12 @@ try {
                 console.error("Sheet 3 Enlistment Error:", err);
             }
 
-            showToast("Property Enlisted! Logged to Sheet Tab 3.", "success");
+            showToast("Property Enlisted & Admin Notified via Email!", "success");
             closeEnlistModal();
             document.getElementById('enlist-form').reset();
             btn.textContent = "SUBMIT ENLISTMENT (UPDATES SHEET 3)";
         }
 
-        // HERO BANNER CUSTOMIZATION
         function handleAdminBannerUpload(e) {
             const file = e.target.files[0];
             if (file) {
@@ -1820,7 +1775,6 @@ try {
             showToast("Homepage Hero Banner updated!", "success");
         }
 
-        // ADMIN DASHBOARD & SUBTAB SWITCHING
         function openAdminAuthModal() {
             if (activeAdminUser) showAdminDashboard();
             else document.getElementById('admin-auth-modal').classList.remove('hidden');
@@ -1829,27 +1783,56 @@ try {
             document.getElementById('admin-auth-modal').classList.add('hidden');
         }
 
-        function handleAdminLoginStep1(e) {
+        // REAL OTP EMAIL VERIFICATION FOR ADMIN
+        async function handleAdminLoginStep1(e) {
             e.preventDefault();
             const email = document.getElementById('admin-email-input').value;
             const pass = document.getElementById('admin-pass-input').value;
+            const btn = document.getElementById('admin-step1-btn');
 
             if (email !== 'admin@compassprimerealty.com' || pass !== 'admin123') {
                 showToast("Invalid admin credentials!", "error");
                 return;
             }
 
-            document.getElementById('admin-login-step1').classList.add('hidden');
-            document.getElementById('admin-login-step2').classList.remove('hidden');
-            showToast("2FA Code dispatched via verify@compassprimerealty.com", "info");
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> DISPATCHING CODE...`;
+            adminGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: "sendOTP",
+                        email: email,
+                        code: adminGeneratedOTP,
+                        role: "Admin"
+                    })
+                });
+                document.getElementById('admin-login-step1').classList.add('hidden');
+                document.getElementById('admin-login-step2').classList.remove('hidden');
+                showToast(`Verification code sent to ${email}!`, "success");
+            } catch (err) {
+                showToast("Failed to dispatch email code.", "error");
+            } finally {
+                btn.textContent = "SEND VERIFICATION CODE";
+            }
         }
 
         function handleAdminLoginStep2(e) {
             e.preventDefault();
+            const inputCode = document.getElementById('admin-code-input').value.trim();
+
+            if (adminGeneratedOTP && inputCode !== adminGeneratedOTP) {
+                showToast("Invalid 6-digit code! Please check your inbox.", "error");
+                return;
+            }
+
             activeAdminUser = document.getElementById('admin-email-input').value;
             closeAdminAuthModal();
             showAdminDashboard();
-            showToast("Admin Dashboard Authenticated!", "success");
+            showToast("Admin Control Center Authenticated!", "success");
         }
 
         function showAdminDashboard() {
@@ -1874,6 +1857,7 @@ try {
 
         function logoutAdmin() {
             activeAdminUser = null;
+            adminGeneratedOTP = null;
             showMainApp();
             showToast("Logged out of Admin Dashboard", "info");
         }
@@ -1931,7 +1915,6 @@ try {
                 `).join('');
         }
 
-        // DEVELOPER REGISTRATION IN ADMIN
         function openAddDeveloperModal() {
             document.getElementById('dev-form-name').value = '';
             document.getElementById('dev-form-slug').value = '';
@@ -1977,8 +1960,6 @@ try {
             const prop = properties.find(p => p.id === id);
             if (prop) {
                 prop.status = prop.status === 'Sold' ? 'Sale' : 'Sold';
-                
-                // Dispatch updated status to Google Sheet Tab 1
                 try {
                     await fetch(GOOGLE_SHEETS_API_URL, {
                         method: 'POST',
@@ -2002,7 +1983,6 @@ try {
             }
         }
 
-        // AGENT AUTHENTICATION & REGISTRATION
         function openAgentAuthModal() {
             if (activeAgentUser) showAgentDashboard();
             else document.getElementById('agent-auth-modal').classList.remove('hidden');
@@ -2025,10 +2005,12 @@ try {
             }
         }
 
-        function handleAgentRegistrationSubmit(e) {
+        // REAL OTP DISPATCH FOR AGENT REGISTRATION
+        async function handleAgentRegistrationSubmit(e) {
             e.preventDefault();
             const email = document.getElementById('agent-reg-email').value;
             const pass = document.getElementById('agent-reg-pass').value;
+            const btn = document.getElementById('agent-reg-btn');
 
             if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
                 showToast("Must register with @compassprimerealty.com email!", "error");
@@ -2041,28 +2023,81 @@ try {
                 return;
             }
 
-            registeredAgents.push({ email, role: 'agent' });
-            localStorage.setItem('cpr_registered_agents', JSON.stringify(registeredAgents));
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING OTP...`;
+            agentGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
-            document.getElementById('agent-register-form').classList.add('hidden');
-            document.getElementById('agent-login-step2').classList.remove('hidden');
-            showToast("2FA Code sent via verify@compassprimerealty.com!", "info");
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: "sendOTP",
+                        email: email,
+                        code: agentGeneratedOTP,
+                        role: "Agent Registration"
+                    })
+                });
+
+                registeredAgents.push({ email, role: 'agent' });
+                localStorage.setItem('cpr_registered_agents', JSON.stringify(registeredAgents));
+
+                document.getElementById('agent-register-form').classList.add('hidden');
+                document.getElementById('agent-login-step2').classList.remove('hidden');
+                showToast(`OTP Code sent to ${email}!`, "success");
+            } catch (err) {
+                showToast("Failed to dispatch access code.", "error");
+            } finally {
+                btn.textContent = "REQUEST VERIFICATION CODE";
+            }
         }
 
-        function handleAgentLoginStep1(e) {
+        // REAL OTP DISPATCH FOR AGENT SIGN-IN
+        async function handleAgentLoginStep1(e) {
             e.preventDefault();
             const email = document.getElementById('agent-email-input').value;
+            const btn = document.getElementById('agent-login-step1-btn');
+
             if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
                 showToast("Must use active @compassprimerealty.com email!", "error");
                 return;
             }
-            document.getElementById('agent-login-step1').classList.add('hidden');
-            document.getElementById('agent-login-step2').classList.remove('hidden');
-            showToast("Access Code dispatched via verify@compassprimerealty.com!", "info");
+
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING OTP...`;
+            agentGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: "sendOTP",
+                        email: email,
+                        code: agentGeneratedOTP,
+                        role: "Agent Sign-In"
+                    })
+                });
+
+                document.getElementById('agent-login-step1').classList.add('hidden');
+                document.getElementById('agent-login-step2').classList.remove('hidden');
+                showToast(`Access Code sent to ${email}!`, "success");
+            } catch (err) {
+                showToast("Failed to dispatch code.", "error");
+            } finally {
+                btn.textContent = "VERIFY & SEND ACCESS CODE";
+            }
         }
 
         function handleAgentLoginStep2(e) {
             e.preventDefault();
+            const inputCode = document.getElementById('agent-code-input').value.trim();
+
+            if (agentGeneratedOTP && inputCode !== agentGeneratedOTP) {
+                showToast("Invalid verification code! Please check your inbox.", "error");
+                return;
+            }
+
             activeAgentUser = document.getElementById('agent-email-input').value || document.getElementById('agent-reg-email').value;
             closeAgentAuthModal();
             showAgentDashboard();
@@ -2082,6 +2117,7 @@ try {
 
         function logoutAgent() {
             activeAgentUser = null;
+            agentGeneratedOTP = null;
             showMainApp();
             showToast("Logged out of Agent Portal", "info");
         }
@@ -2122,7 +2158,6 @@ try {
             `).join('');
         }
 
-        // RESPONDER MODAL
         function openReplyModal(inquiryId, recipientEmail) {
             document.getElementById('reply-inquiry-id').value = inquiryId;
             document.getElementById('reply-to-email').value = recipientEmail;
@@ -2132,87 +2167,104 @@ try {
             document.getElementById('reply-modal').classList.add('hidden');
         }
 
-        function handleSendResponseSubmit(e) {
+        // DIRECT EMAIL DISPATCH RESPONSE TO CLIENT
+        async function handleSendResponseSubmit(e) {
             e.preventDefault();
             const recipient = document.getElementById('reply-to-email').value;
-            closeReplyModal();
-            showToast(`Notification email dispatched to ${recipient} via verify@compassprimerealty.com!`, "success");
+            const bodyText = document.getElementById('reply-body').value;
+            const btn = document.getElementById('reply-submit-btn');
+
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> DISPATCHING EMAIL...`;
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: "replyToClient",
+                        recipientEmail: recipient,
+                        replyBody: bodyText
+                    })
+                });
+                closeReplyModal();
+                showToast(`Notification email dispatched to ${recipient}!`, "success");
+            } catch (err) {
+                showToast("Failed to send email notification.", "error");
+            } finally {
+                btn.textContent = "DISPATCH NOTIFICATION EMAIL";
+            }
         }
 
-        // ASYNCHRONOUS LISTING SAVING & EDITING WITH FULL GOOGLE SHEETS SYNC & SEQUENTIAL ID (FROM 1001)
         async function handleListingCrudSubmit(e) {
-    e.preventDefault();
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.textContent;
-    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING...`;
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING...`;
 
-    const idVal = document.getElementById('crud-id').value;
-    const isEdit = Boolean(idVal);
-    const listingId = isEdit ? parseInt(idVal, 10) : getNextListingId();
+            const idVal = document.getElementById('crud-id').value;
+            const isEdit = Boolean(idVal);
+            const listingId = isEdit ? parseInt(idVal, 10) : getNextListingId();
 
-    let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
-    ];
+            let imgs = uploadedLocalImages.length > 0 ? uploadedLocalImages : [
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+            ];
 
-    // Determine current logged-in agent or admin email
-    const currentAgentEmail = activeAgentUser || activeAdminUser || "admin@compassprimerealty.com";
+            const currentAgentEmail = activeAgentUser || activeAdminUser || "admin@compassprimerealty.com";
 
-    const listingPayload = {
-        id: listingId,
-        title: document.getElementById('crud-title').value,
-        category: document.getElementById('crud-category').value,
-        status: document.getElementById('crud-status').value,
-        price: Number(document.getElementById('crud-price').value),
-        area: document.getElementById('crud-area').value,
-        beds: Number(document.getElementById('crud-beds').value),
-        baths: Number(document.getElementById('crud-baths').value),
-        parking: Number(document.getElementById('crud-parking').value),
-        location: document.getElementById('crud-location').value,
-        developer: document.getElementById('crud-developer').value || "Compass Realty",
-        description: document.getElementById('crud-description').value || "",
-        isDeal: document.getElementById('crud-isdeal').checked,
-        isFeatured: document.getElementById('crud-isfeatured').checked,
-        agentEmail: currentAgentEmail, // <--- INCLUDED AGENT OWNER
-        images: imgs
-    };
+            const listingPayload = {
+                id: listingId,
+                title: document.getElementById('crud-title').value,
+                category: document.getElementById('crud-category').value,
+                status: document.getElementById('crud-status').value,
+                price: Number(document.getElementById('crud-price').value),
+                area: document.getElementById('crud-area').value,
+                beds: Number(document.getElementById('crud-beds').value),
+                baths: Number(document.getElementById('crud-baths').value),
+                parking: Number(document.getElementById('crud-parking').value),
+                location: document.getElementById('crud-location').value,
+                developer: document.getElementById('crud-developer').value || "Compass Realty",
+                description: document.getElementById('crud-description').value || "",
+                isDeal: document.getElementById('crud-isdeal').checked,
+                isFeatured: document.getElementById('crud-isfeatured').checked,
+                agentEmail: currentAgentEmail,
+                images: imgs
+            };
 
-    // Update local memory
-    if (isEdit) {
-        const index = properties.findIndex(p => p.id === listingId);
-        if (index !== -1) {
-            properties[index] = { ...properties[index], ...listingPayload };
+            if (isEdit) {
+                const index = properties.findIndex(p => p.id === listingId);
+                if (index !== -1) {
+                    properties[index] = { ...properties[index], ...listingPayload };
+                }
+            } else {
+                properties.unshift(listingPayload);
+            }
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: isEdit ? "updateListing" : "addListing",
+                        ...listingPayload,
+                        image: listingPayload.images.join(',')
+                    })
+                });
+            } catch (err) {
+                console.error("Google Sheets Sync Error:", err);
+            }
+
+            renderPropertyList();
+            if (activeAdminUser) renderAdminDashboardTables();
+            if (activeAgentUser) renderAgentDashboardTables();
+            
+            closeAddListingModal();
+            submitBtn.textContent = originalBtnText;
+            showToast(`Listing #${listingId} saved with Agent (${currentAgentEmail})!`, "success");
         }
-    } else {
-        properties.unshift(listingPayload);
-    }
 
-    // DISPATCH TO GOOGLE SHEETS
-    try {
-        await fetch(GOOGLE_SHEETS_API_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                sheetTab: "Sheet1",
-                action: isEdit ? "updateListing" : "addListing",
-                ...listingPayload,
-                image: listingPayload.images.join(',')
-            })
-        });
-    } catch (err) {
-        console.error("Google Sheets Sync Error:", err);
-    }
-
-    renderPropertyList();
-    if (activeAdminUser) renderAdminDashboardTables();
-    if (activeAgentUser) renderAgentDashboardTables();
-    
-    closeAddListingModal();
-    submitBtn.textContent = originalBtnText;
-    showToast(`Listing #${listingId} saved with Agent (${currentAgentEmail})!`, "success");
-}
-
-        // BULK CSV UPLOAD WITH SEQUENTIAL IDs & GOOGLE SHEETS SYNC
         function handleCSVUpload(event, source) {
             const file = event.target.files[0];
             if (!file) return;
@@ -2249,7 +2301,6 @@ try {
                         properties.unshift(listingItem);
                         count++;
 
-                        // Sync CSV items to Google Sheets
                         try {
                             await fetch(GOOGLE_SHEETS_API_URL, {
                                 method: 'POST',
@@ -2271,7 +2322,7 @@ try {
                 renderPropertyList();
                 if (source === 'admin') showAdminDashboard();
                 if (source === 'agent') showAgentDashboard();
-                showToast(`Imported ${count} listings with IDs starting from 1001 & synced to Google Sheets!`, "success");
+                showToast(`Imported ${count} listings starting from ID #${getNextListingId() - count} & synced!`, "success");
             };
             reader.readAsText(file);
         }
@@ -2344,7 +2395,6 @@ try {
             document.getElementById('add-listing-modal').classList.remove('hidden');
         }
 
-        // FAVORITES
         function toggleFavorite(id) {
             if (favorites.includes(id)) {
                 favorites = favorites.filter(fav => fav !== id);
@@ -2363,7 +2413,6 @@ try {
             scrollToListings();
         }
 
-        // FILTERS
         function filterProperties(status, category) {
             currentFilters.status = status;
             currentFilters.category = category;
@@ -2378,8 +2427,8 @@ try {
         function scrollToListings() {
             const section = document.getElementById('property-grid') || document.getElementById('current-view-title');
             if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-         }
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         function setFilterCategory(cat) {
@@ -2419,7 +2468,6 @@ try {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // COMPASS AI CONCIERGE CHATBOX
         function toggleAIChat() {
             document.getElementById('ai-chat-window').classList.toggle('hidden');
         }
@@ -2480,12 +2528,11 @@ try {
                 loadingDiv.textContent = aiText;
             } catch (err) {
                 loadingDiv.className = 'bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed';
-                loadingDiv.textContent = "Please connect with our hotline at +63 993 847 4121 or schedule a private viewing through our property listings.";
+                loadingDiv.textContent = "Please connect with our concierge hotline at +63 918 915 4245 or schedule a private viewing through our property listings.";
             }
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        // TOAST NOTIFICATION SYSTEM
         function showToast(message, type = "info") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
