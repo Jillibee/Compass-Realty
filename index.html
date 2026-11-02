@@ -2114,7 +2114,7 @@
             } catch (err) {}
 
             const systemPrompt = `You are the executive luxury AI Concierge for Compass Realty. Assist visitors with inquiry responses based on real estate listings: ${JSON.stringify(properties.map(p => ({ id: p.id, title: p.title, price: p.price, location: p.location, category: p.category, status: p.status })))}. Maintain a polite, highly sophisticated tone. Keep answers under 3 concise sentences.`;
-            const apiKey = "";
+            const apiKey = "AQ.Ab8RN6JM8neDz4D5EUltok2tyvq2m2L1qwOKyCZa2RF5lLAB4w";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
             try {
