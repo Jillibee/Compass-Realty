@@ -97,7 +97,7 @@
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
             <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO</span>
-            <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid font-light fa-phone mr-1"></i> +63 918 915 4245</span>
+            <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid font-light fa-phone mr-1"></i> +63 993 847 4121</span>
         </div>
         <div class="flex items-center space-x-4">
             <button onclick="toggleFavoritesView()" class="hover:text-neutral-300 transition-colors flex items-center gap-1.5">
@@ -438,7 +438,7 @@
             <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">SECURED</span>
+                        <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">DIRECT ACCESS</span>
                         <span class="text-xs text-neutral-400">ADMIN: <strong class="text-white" id="admin-user-display">admin@compassprimerealty.com</strong></span>
                     </div>
                     <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">ADMIN CONTROL CENTER</h1>
@@ -857,7 +857,7 @@
         </div>
     </div>
 
-    <!-- ADMIN AUTH MODAL WITH 2FA -->
+    <!-- ADMIN AUTH MODAL (DIRECT LOGIN - NO 2FA) -->
     <div id="admin-auth-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-md border-2 border-black p-8 relative">
             <button onclick="closeAdminAuthModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
@@ -865,7 +865,7 @@
             <div class="text-center mb-6">
                 <i class="fa-solid fa-shield-halved text-3xl text-brand-brown mb-2"></i>
                 <h3 class="text-xl font-bold uppercase tracking-tight">ADMIN SECURITY AUTHENTICATION</h3>
-                <p class="text-xs text-neutral-500 font-light mt-1">2-Factor Verification via verify@compassprimerealty.com</p>
+                <p class="text-xs text-neutral-500 font-light mt-1">Direct Administrator Portal Access</p>
             </div>
 
             <form id="admin-login-step1" onsubmit="handleAdminLoginStep1(event)" class="space-y-4">
@@ -877,27 +877,14 @@
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
                     <input type="password" id="admin-pass-input" value="admin123" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                 </div>
-                <button type="submit" id="admin-step1-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                    SEND VERIFICATION CODE
-                </button>
-            </form>
-
-            <form id="admin-login-step2" onsubmit="handleAdminLoginStep2(event)" class="space-y-4 hidden">
-                <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
-                    <i class="fa-solid fa-envelope-circle-check mr-1"></i> Code sent to your inbox via verify@compassprimerealty.com!
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
-                    <input type="text" id="admin-code-input" placeholder="123456" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
-                </div>
-                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                    VERIFY & ACCESS ADMIN DASHBOARD
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                    LOGIN TO ADMIN DASHBOARD
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- AGENT AUTH & REGISTRATION MODAL -->
+    <!-- AGENT AUTH MODAL (DIRECT LOGIN - NO 2FA) -->
     <div id="agent-auth-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-md border-2 border-black p-8 relative">
             <button onclick="closeAgentAuthModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
@@ -908,53 +895,16 @@
                 <p class="text-xs text-neutral-500 font-light mt-1">Requires active <strong>@compassprimerealty.com</strong> email.</p>
             </div>
 
-            <!-- Tab Switcher -->
-            <div class="flex border-b border-black mb-4 text-xs font-bold uppercase">
-                <button id="agent-tab-login-btn" onclick="switchAgentAuthTab('login')" class="w-1/2 py-2 border-b-2 border-brand-brown text-black">Sign In</button>
-                <button id="agent-tab-reg-btn" onclick="switchAgentAuthTab('register')" class="w-1/2 py-2 border-b-2 border-transparent text-neutral-400">Register</button>
-            </div>
-
-            <!-- Login Form -->
             <form id="agent-login-step1" onsubmit="handleAgentLoginStep1(event)" class="space-y-4">
                 <div>
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Agent Email (@compassprimerealty.com)</label>
-                    <input type="email" id="agent-email-input" placeholder="realtor@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                    <input type="email" id="agent-email-input" value="realtor@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                 </div>
                 <div>
                     <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Password</label>
-                    <input type="password" id="agent-pass-input" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
+                    <input type="password" id="agent-pass-input" value="agent123" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs focus:outline-none focus:border-brand-brown">
                 </div>
-                <button type="submit" id="agent-login-step1-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                    VERIFY & SEND ACCESS CODE
-                </button>
-            </form>
-
-            <!-- Registration Form with Validation Rules -->
-            <form id="agent-register-form" onsubmit="handleAgentRegistrationSubmit(event)" class="space-y-3 hidden">
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Agent Email (@compassprimerealty.com) *</label>
-                    <input type="email" id="agent-reg-email" placeholder="name@compassprimerealty.com" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Create Password *</label>
-                    <input type="password" id="agent-reg-pass" required placeholder="Min 6 chars, 1 uppercase, 1 number, 1 symbol" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
-                    <p class="text-[9px] text-neutral-500 mt-1">Policy: At least 6 characters, 1 capital letter, 1 number, and 1 special symbol.</p>
-                </div>
-                <button type="submit" id="agent-reg-btn" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                    REQUEST VERIFICATION CODE
-                </button>
-            </form>
-
-            <!-- OTP Step -->
-            <form id="agent-login-step2" onsubmit="handleAgentLoginStep2(event)" class="space-y-4 hidden">
-                <div class="bg-amber-50 border border-amber-300 p-3 text-xs text-amber-900 mb-2">
-                    <i class="fa-solid fa-paper-plane mr-1"></i> Dispatched via verify@compassprimerealty.com to your inbox!
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Enter 6-Digit Email Code</label>
-                    <input type="text" id="agent-code-input" placeholder="123456" maxlength="6" required class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono text-center tracking-widest text-lg focus:outline-none focus:border-brand-brown">
-                </div>
-                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
                     ACCESS AGENT DASHBOARD
                 </button>
             </form>
@@ -1181,11 +1131,6 @@
             }
         ];
 
-        let registeredAgents = JSON.parse(localStorage.getItem('cpr_registered_agents')) || [
-            { email: 'admin@compassprimerealty.com', role: 'admin' },
-            { email: 'realtor@compassprimerealty.com', role: 'agent' }
-        ];
-
         let favorites = [];
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
         let activeAdminUser = null;
@@ -1194,13 +1139,31 @@
         let uploadedLocalImages = [];
         let selectedDevSlug = 'shang-properties';
 
-        // OTP Sessions State
-        let adminGeneratedOTP = null;
-        let agentGeneratedOTP = null;
-
         window.addEventListener('DOMContentLoaded', () => {
             fetchListingsFromGoogleSheets();
+            checkDirectURLRouting();
         });
+
+        // DIRECT ROUTING VIA UNIQUE URL PARAMS / HASHES
+        function checkDirectURLRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view')?.toLowerCase();
+
+            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
+                activeAdminUser = "admin@compassprimerealty.com";
+                showAdminDashboard();
+                showToast("Accessed Admin Control Center via Direct Link", "info");
+            } else if (hash === '#agent' || hash === '#agent-portal' || viewParam === 'agent') {
+                activeAgentUser = "realtor@compassprimerealty.com";
+                showAgentDashboard();
+                showToast("Accessed Agent Portal via Direct Link", "info");
+            } else if (hash === '#developer' || viewParam === 'developer') {
+                showDeveloperPortalView();
+            } else if (hash === '#careers' || viewParam === 'careers') {
+                showCareersPage();
+            }
+        }
 
         function normalizeText(text) {
             return String(text || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -1643,7 +1606,6 @@
             document.getElementById('carousel-indicator').textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${prop.images.length}`;
         }
 
-        // REAL EMAIL NOTIFICATION DISPATCH TO AGENT/ADMIN
         async function handleAppointmentSubmit(e, propTitle, agentEmail) {
             e.preventDefault();
             const btn = document.getElementById('appt-submit-btn');
@@ -1783,56 +1745,21 @@
             document.getElementById('admin-auth-modal').classList.add('hidden');
         }
 
-        // REAL OTP EMAIL VERIFICATION FOR ADMIN
-        async function handleAdminLoginStep1(e) {
+        // DIRECT ADMIN LOGIN (NO 2FA)
+        function handleAdminLoginStep1(e) {
             e.preventDefault();
             const email = document.getElementById('admin-email-input').value;
             const pass = document.getElementById('admin-pass-input').value;
-            const btn = document.getElementById('admin-step1-btn');
 
             if (email !== 'admin@compassprimerealty.com' || pass !== 'admin123') {
                 showToast("Invalid admin credentials!", "error");
                 return;
             }
 
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> DISPATCHING CODE...`;
-            adminGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: "sendOTP",
-                        email: email,
-                        code: adminGeneratedOTP,
-                        role: "Admin"
-                    })
-                });
-                document.getElementById('admin-login-step1').classList.add('hidden');
-                document.getElementById('admin-login-step2').classList.remove('hidden');
-                showToast(`Verification code sent to ${email}!`, "success");
-            } catch (err) {
-                showToast("Failed to dispatch email code.", "error");
-            } finally {
-                btn.textContent = "SEND VERIFICATION CODE";
-            }
-        }
-
-        function handleAdminLoginStep2(e) {
-            e.preventDefault();
-            const inputCode = document.getElementById('admin-code-input').value.trim();
-
-            if (adminGeneratedOTP && inputCode !== adminGeneratedOTP) {
-                showToast("Invalid 6-digit code! Please check your inbox.", "error");
-                return;
-            }
-
-            activeAdminUser = document.getElementById('admin-email-input').value;
+            activeAdminUser = email;
             closeAdminAuthModal();
             showAdminDashboard();
-            showToast("Admin Control Center Authenticated!", "success");
+            showToast("Admin Dashboard Authenticated!", "success");
         }
 
         function showAdminDashboard() {
@@ -1857,7 +1784,6 @@
 
         function logoutAdmin() {
             activeAdminUser = null;
-            adminGeneratedOTP = null;
             showMainApp();
             showToast("Logged out of Admin Dashboard", "info");
         }
@@ -1991,117 +1917,20 @@
             document.getElementById('agent-auth-modal').classList.add('hidden');
         }
 
-        function switchAgentAuthTab(tab) {
-            if (tab === 'login') {
-                document.getElementById('agent-login-step1').classList.remove('hidden');
-                document.getElementById('agent-register-form').classList.add('hidden');
-                document.getElementById('agent-tab-login-btn').className = "w-1/2 py-2 border-b-2 border-brand-brown text-black";
-                document.getElementById('agent-tab-reg-btn').className = "w-1/2 py-2 border-b-2 border-transparent text-neutral-400";
-            } else {
-                document.getElementById('agent-login-step1').classList.add('hidden');
-                document.getElementById('agent-register-form').classList.remove('hidden');
-                document.getElementById('agent-tab-reg-btn').className = "w-1/2 py-2 border-b-2 border-brand-brown text-black";
-                document.getElementById('agent-tab-login-btn').className = "w-1/2 py-2 border-b-2 border-transparent text-neutral-400";
-            }
-        }
-
-        // REAL OTP DISPATCH FOR AGENT REGISTRATION
-        async function handleAgentRegistrationSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('agent-reg-email').value;
-            const pass = document.getElementById('agent-reg-pass').value;
-            const btn = document.getElementById('agent-reg-btn');
-
-            if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
-                showToast("Must register with @compassprimerealty.com email!", "error");
-                return;
-            }
-
-            const passPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
-            if (!passPattern.test(pass)) {
-                showToast("Password must have min 6 chars, 1 uppercase, 1 number, and 1 symbol!", "error");
-                return;
-            }
-
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING OTP...`;
-            agentGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: "sendOTP",
-                        email: email,
-                        code: agentGeneratedOTP,
-                        role: "Agent Registration"
-                    })
-                });
-
-                registeredAgents.push({ email, role: 'agent' });
-                localStorage.setItem('cpr_registered_agents', JSON.stringify(registeredAgents));
-
-                document.getElementById('agent-register-form').classList.add('hidden');
-                document.getElementById('agent-login-step2').classList.remove('hidden');
-                showToast(`OTP Code sent to ${email}!`, "success");
-            } catch (err) {
-                showToast("Failed to dispatch access code.", "error");
-            } finally {
-                btn.textContent = "REQUEST VERIFICATION CODE";
-            }
-        }
-
-        // REAL OTP DISPATCH FOR AGENT SIGN-IN
-        async function handleAgentLoginStep1(e) {
+        // DIRECT AGENT LOGIN (NO 2FA)
+        function handleAgentLoginStep1(e) {
             e.preventDefault();
             const email = document.getElementById('agent-email-input').value;
-            const btn = document.getElementById('agent-login-step1-btn');
 
             if (!email.toLowerCase().endsWith('@compassprimerealty.com')) {
                 showToast("Must use active @compassprimerealty.com email!", "error");
                 return;
             }
 
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> SENDING OTP...`;
-            agentGeneratedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: "sendOTP",
-                        email: email,
-                        code: agentGeneratedOTP,
-                        role: "Agent Sign-In"
-                    })
-                });
-
-                document.getElementById('agent-login-step1').classList.add('hidden');
-                document.getElementById('agent-login-step2').classList.remove('hidden');
-                showToast(`Access Code sent to ${email}!`, "success");
-            } catch (err) {
-                showToast("Failed to dispatch code.", "error");
-            } finally {
-                btn.textContent = "VERIFY & SEND ACCESS CODE";
-            }
-        }
-
-        function handleAgentLoginStep2(e) {
-            e.preventDefault();
-            const inputCode = document.getElementById('agent-code-input').value.trim();
-
-            if (agentGeneratedOTP && inputCode !== agentGeneratedOTP) {
-                showToast("Invalid verification code! Please check your inbox.", "error");
-                return;
-            }
-
-            activeAgentUser = document.getElementById('agent-email-input').value || document.getElementById('agent-reg-email').value;
+            activeAgentUser = email;
             closeAgentAuthModal();
             showAgentDashboard();
-            showToast("Realtor Portal Verified!", "success");
+            showToast("Agent Portal Authenticated!", "success");
         }
 
         function showAgentDashboard() {
@@ -2117,7 +1946,6 @@
 
         function logoutAgent() {
             activeAgentUser = null;
-            agentGeneratedOTP = null;
             showMainApp();
             showToast("Logged out of Agent Portal", "info");
         }
@@ -2167,7 +1995,6 @@
             document.getElementById('reply-modal').classList.add('hidden');
         }
 
-        // DIRECT EMAIL DISPATCH RESPONSE TO CLIENT
         async function handleSendResponseSubmit(e) {
             e.preventDefault();
             const recipient = document.getElementById('reply-to-email').value;
@@ -2528,7 +2355,7 @@
                 loadingDiv.textContent = aiText;
             } catch (err) {
                 loadingDiv.className = 'bg-neutral-200 text-black p-3 border-l-2 border-brand-brown leading-relaxed';
-                loadingDiv.textContent = "Please connect with our concierge hotline at +63 918 915 4245 or schedule a private viewing through our property listings.";
+                loadingDiv.textContent = "Please connect with our concierge hotline at +63 993 847 4121 or schedule a private viewing through our property listings.";
             }
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
