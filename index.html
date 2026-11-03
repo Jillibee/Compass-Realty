@@ -98,7 +98,7 @@
                         FEATURED PROPERTIES
                     </button>
                     
-                    <!-- DEVELOPERS PORTAL (SEPARATE GROUP) -->
+                    <!-- DEVELOPERS PORTAL BUTTON -->
                     <button onclick="showDeveloperPortalView();" class="nav-link px-3 py-2 text-xs uppercase tracking-widest bg-neutral-100 text-brand-brown border border-brand-brown hover:bg-brand-brown hover:text-white transition-all font-bold">
                         <i class="fa-solid fa-city mr-1"></i> DEVELOPERS
                     </button>
@@ -259,7 +259,6 @@
 
     <!-- SEPARATE GROUP: DEVELOPERS PORTAL & TOWNSHIPS -->
     <div id="developer-portal-view" class="hidden min-h-screen">
-        <!-- FIRST BANNER: INTEGRATED SEARCH & QUICK SELECTOR -->
         <div id="dev-portal-banner" class="bg-black text-white py-16 lg:py-24 px-4 sm:px-8 border-b-4 border-brand-brown relative bg-cover bg-center transition-all duration-700" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80');">
             <div class="max-w-7xl mx-auto space-y-8">
                 
@@ -275,7 +274,6 @@
                         </p>
                     </div>
 
-                    <!-- BANNER DROPDOWN QUICK SELECTOR -->
                     <div class="w-full lg:w-auto bg-black/60 p-4 border border-neutral-700 backdrop-blur">
                         <label class="block text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-1">SELECT DEVELOPER BRAND</label>
                         <select id="dev-selector-dropdown" onchange="switchDeveloperBrand(this.value)" class="w-full lg:w-72 bg-white text-black text-xs font-semibold uppercase px-4 py-3 border border-black focus:outline-none cursor-pointer">
@@ -310,10 +308,8 @@
                     <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown">OFFICIAL MASTERPLAN PORTFOLIO</span>
                     <h2 class="text-2xl font-bold uppercase tracking-tight">DEVELOPER PROJECTS & UNIT SELECTIONS</h2>
                 </div>
+                <!-- Clean Header counter without any manual sync button -->
                 <div class="flex items-center gap-3">
-                    <button onclick="manualSyncDeveloperUnitsToSheet5()" class="text-xs bg-brand-brown hover:bg-black text-white px-3 py-1.5 uppercase font-bold flex items-center gap-1.5 transition-colors" title="Sync units with Google Sheet 5">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> SYNC TO SHEET 5
-                    </button>
                     <span class="text-xs bg-black text-white px-3 py-1 font-mono font-bold" id="dev-projects-count">0 PROJECTS</span>
                 </div>
             </div>
@@ -506,7 +502,7 @@
         </div>
     </div>
 
-    <!-- MODAL: ADD UNIT TO DEVELOPER PROJECT -->
+    <!-- MODAL: ADD UNIT TO DEVELOPER PROJECT (ADMIN ONLY) -->
     <div id="add-devunit-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
             <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
@@ -596,10 +592,10 @@
 
     <!-- SCRIPT APPLICATION CONTROLLER -->
     <script>
-        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzAbv-V8ZCaULYwWANu5NLaYhzK_DQ6wBN-YoT378aS6MA0OcoT5l__kVs3PSO01PGz4Q/exec";
+        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
         let properties = [];
-        let unitCarouselIndices = {}; // Track active carousel image index per unit
+        let unitCarouselIndices = {};
 
         // DEDICATED DEVELOPERS
         let developersList = JSON.parse(localStorage.getItem('cpr_dev_brands_v3')) || [
@@ -723,16 +719,13 @@
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
         let selectedDevSlug = 'ALL';
 
-        // LIGHTBOX STUDIO STATE
         let lightboxCurrentImages = [];
         let lightboxCurrentIndex = 0;
-        let lightboxCurrentTitle = "";
 
         window.addEventListener('DOMContentLoaded', () => {
-            fetchListingsFromGoogleSheets();
+            fetchDatabaseFromGoogleSheets();
             checkDirectURLRouting();
             populateTownshipFilterOptions();
-            autoSyncAllDeveloperUnitsToSheet5(); // AUTO-SYNC SHEET 5 ON LOAD
         });
 
         function checkDirectURLRouting() {
@@ -756,33 +749,105 @@
         }
 
         // ==========================================
-        // AUTO-FILL SHEET 5 SYNC ENGINE
+        // DYNAMIC TWO-WAY GOOGLE SHEETS SYNC
         // ==========================================
-        async function autoSyncAllDeveloperUnitsToSheet5() {
-            const hasSynced = sessionStorage.getItem('cpr_sheet5_synced');
-            if (hasSynced) return;
+        async function fetchDatabaseFromGoogleSheets() {
+            const spinner = document.getElementById('loading-spinner');
+            const grid = document.getElementById('property-grid');
 
-            for (const proj of developerProjects) {
-                for (const u of proj.units) {
-                    syncSingleUnitToSheet5(proj, u, false);
+            try {
+                const res = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await res.json();
+
+                // 1. Update Secondary Listings from Sheet 1
+                if (data.secondaryListings && Array.isArray(data.secondaryListings) && data.secondaryListings.length > 0) {
+                    properties = data.secondaryListings.map(item => ({
+                        id: Number(item.id) || Date.now(),
+                        title: item.title || "Luxury Property",
+                        location: item.location || "Metro Manila",
+                        price: Number(item.price) || 0,
+                        status: item.status || "Sale",
+                        category: item.category || "CONDOMINIUM",
+                        beds: Number(item.beds) || 0,
+                        baths: Number(item.baths) || 0,
+                        area: item.area || "N/A",
+                        images: item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"]
+                    }));
+                    renderPropertyList();
                 }
+
+                // 2. Update Developer Units from Sheet 5 automatically
+                if (data.developerUnits && Array.isArray(data.developerUnits) && data.developerUnits.length > 0) {
+                    mergeSheet5UnitsIntoProjects(data.developerUnits);
+                }
+
+            } catch (err) {
+                console.error("Sheets fetch error:", err);
+            } finally {
+                if (spinner) spinner.classList.add('hidden');
+                if (grid) grid.classList.remove('hidden');
             }
-            sessionStorage.setItem('cpr_sheet5_synced', 'true');
         }
 
-        async function manualSyncDeveloperUnitsToSheet5() {
-            showToast("Syncing all developer units to Sheet 5...", "info");
-            let count = 0;
-            for (const proj of developerProjects) {
-                for (const u of proj.units) {
-                    await syncSingleUnitToSheet5(proj, u, true);
-                    count++;
+        function mergeSheet5UnitsIntoProjects(sheetUnits) {
+            sheetUnits.forEach(su => {
+                const pId = su["Project ID"] || su.projectId;
+                const uId = su["Unit ID"] || su.unitId || ('U-' + Date.now());
+                const pName = su["Project Name"] || su.projectName;
+                const devName = su["Developer"] || su.developer;
+                const township = su["Township/Location"] || su.township;
+
+                let proj = developerProjects.find(p => p.id === pId || p.title.toLowerCase() === (pName || '').toLowerCase());
+                
+                // If project does not exist yet, initialize it
+                if (!proj && pName) {
+                    proj = {
+                        id: pId || ('DEV-' + Date.now()),
+                        devSlug: (devName || 'developer').toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                        developer: devName || "Developer Partner",
+                        title: pName,
+                        township: township || "Metro Manila",
+                        priceStart: 30000000,
+                        turnover: su["Turnover"] || "Preselling",
+                        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+                        description: "Exclusive masterplanned developer project.",
+                        units: []
+                    };
+                    developerProjects.push(proj);
                 }
-            }
-            showToast(`Synchronized ${count} developer units to Sheet 5!`, "success");
+
+                if (proj) {
+                    const rawImages = su["Unit Image Gallery URLs"] || su.images || "";
+                    const imagesArr = rawImages ? String(rawImages).split(',').map(s => s.trim()).filter(Boolean) : [proj.image];
+
+                    const existingUnitIndex = (proj.units || []).findIndex(u => u.id === uId || u.type === (su["Unit Type"] || su.unitType));
+
+                    const unitObj = {
+                        id: uId,
+                        type: su["Unit Type"] || su.unitType || "Luxury Suite",
+                        area: su["Floor Area"] || su.area || "N/A",
+                        priceRange: su["Price / Range"] || su.priceRange || "Inquire for Pricing",
+                        status: su["Unit Status"] || su.status || "Available",
+                        beds: Number(su["Bedrooms"] || su.beds) || 2,
+                        baths: Number(su["Bathrooms"] || su.baths) || 2,
+                        images: imagesArr
+                    };
+
+                    if (existingUnitIndex !== -1) {
+                        proj.units[existingUnitIndex] = unitObj;
+                    } else {
+                        if (!proj.units) proj.units = [];
+                        proj.units.push(unitObj);
+                    }
+                }
+            });
+
+            localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
+            populateTownshipFilterOptions();
+            filterDeveloperProjects();
         }
 
-        async function syncSingleUnitToSheet5(proj, unit, showNotice = false) {
+        async function syncSingleUnitToSheet5(proj, unit) {
             const payload = {
                 sheetTab: "Sheet5",
                 action: "syncDeveloperUnit",
@@ -808,7 +873,6 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
-                if (showNotice) showToast(`Synced unit ${unit.type} to Sheet 5`, "success");
             } catch (err) {
                 console.error("Sheet 5 sync error:", err);
             }
@@ -952,7 +1016,6 @@
             const modalContent = document.getElementById('dev-modal-content');
             modalContent.innerHTML = `
                 <div>
-                    <!-- PROJECT HERO -->
                     <div class="relative h-72 sm:h-80 bg-black border border-black overflow-hidden group">
                         <img src="${proj.image}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6">
@@ -965,27 +1028,24 @@
                         </div>
                     </div>
 
-                    <!-- PROJECT DESCRIPTION -->
                     <div class="my-6">
                         <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2">MASTERPLAN OVERVIEW</h4>
                         <p class="text-xs text-neutral-700 leading-relaxed font-light border-l-2 border-brand-brown pl-4">${proj.description}</p>
                     </div>
 
-                    <!-- UNITS WITH CAROUSEL & LIGHTBOX STUDIO -->
                     <div class="space-y-6">
                         <div class="flex justify-between items-center border-b border-black pb-2">
                             <h3 class="text-base font-bold uppercase">AVAILABLE UNIT LAYOUTS & PHOTO STUDIOS</h3>
-                            <span class="text-xs text-neutral-500 font-mono">Synchronized with Google Sheet 5</span>
+                            <span class="text-xs text-neutral-500 font-mono">Live Sync with Sheet 5</span>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${(proj.units || []).map((u, idx) => {
+                            ${(proj.units || []).map((u) => {
                                 unitCarouselIndices[u.id] = 0;
                                 const imgs = u.images && u.images.length > 0 ? u.images : [proj.image];
                                 return `
                                     <div class="bg-white border-2 border-neutral-300 hover:border-black flex flex-col justify-between transition-all">
                                         <div>
-                                            <!-- UNIT IMAGE CAROUSEL -->
                                             <div class="relative h-48 bg-neutral-900 overflow-hidden group">
                                                 <img id="unit-img-${u.id}" src="${imgs[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)">
                                                 
@@ -1053,14 +1113,12 @@
         // LIGHTBOX STUDIO CONTROLLER
         // ==========================================
         function openLightboxStudio(title, images, startIndex = 0) {
-            lightboxCurrentTitle = title;
             lightboxCurrentImages = images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"];
             lightboxCurrentIndex = startIndex;
 
             document.getElementById('lightbox-title').textContent = title;
             updateLightboxView();
 
-            // Render thumbnails
             const thumbsContainer = document.getElementById('lightbox-thumbnails');
             thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
                 <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
@@ -1073,7 +1131,6 @@
             document.getElementById('lightbox-main-img').src = lightboxCurrentImages[lightboxCurrentIndex];
             document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
             
-            // Highlight active thumbnail
             const thumbs = document.getElementById('lightbox-thumbnails').children;
             for (let i = 0; i < thumbs.length; i++) {
                 if (i === lightboxCurrentIndex) {
@@ -1151,7 +1208,7 @@
         }
 
         // ==========================================
-        // ADMIN MANAGEMENT (CRUD + SHEET 5 SYNC)
+        // ADMIN CONTROLLER & FORM SUBMISSION
         // ==========================================
         function showAdminDashboard() {
             document.getElementById('public-view-container').classList.add('hidden');
@@ -1179,7 +1236,6 @@
             document.getElementById('admin-stat-dev-units').textContent = totalUnits;
             document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
 
-            // Admin Developer Units table
             const tbodyUnits = document.getElementById('admin-dev-units-table');
             const unitRows = [];
             developerProjects.forEach(proj => {
@@ -1201,7 +1257,6 @@
             });
             tbodyUnits.innerHTML = unitRows.join('');
 
-            // Admin Developer Inquiries
             const tbodyDevInq = document.getElementById('admin-devinquiries-table');
             tbodyDevInq.innerHTML = developerInquiries.length === 0 ? 
                 `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No developer inquiries recorded yet.</td></tr>` :
@@ -1215,7 +1270,6 @@
                     </tr>
                 `).join('');
 
-            // Admin Realtor Listings Table
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
@@ -1265,46 +1319,17 @@
 
             localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
 
-            // AUTO-FILL AND SYNC TO SHEET 5
-            await syncSingleUnitToSheet5(proj, newUnit, true);
+            // AUTO-FILL AND APPEND INTO SHEET 5
+            await syncSingleUnitToSheet5(proj, newUnit);
 
             closeAddDevUnitModal();
             renderAdminDashboardTables();
-            showToast(`Added unit to ${proj.title} and synced to Sheet 5!`, "success");
+            showToast(`Added unit to ${proj.title} and auto-synced to Sheet 5!`, "success");
         }
 
         // ==========================================
         // SECONDARY BROKERAGE & MISC
         // ==========================================
-        async function fetchListingsFromGoogleSheets() {
-            const spinner = document.getElementById('loading-spinner');
-            const grid = document.getElementById('property-grid');
-            try {
-                const res = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await res.json();
-                if (Array.isArray(data) && data.length > 0) {
-                    properties = data.map(item => ({
-                        id: Number(item.id) || Date.now(),
-                        title: item.title || "Luxury Property",
-                        location: item.location || "Metro Manila",
-                        price: Number(item.price) || 0,
-                        status: item.status || "Sale",
-                        category: item.category || "CONDOMINIUM",
-                        beds: Number(item.beds) || 0,
-                        baths: Number(item.baths) || 0,
-                        area: item.area || "N/A",
-                        images: item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"]
-                    }));
-                    renderPropertyList();
-                }
-            } catch (err) {
-                console.error(err);
-            } finally {
-                if (spinner) spinner.classList.add('hidden');
-                if (grid) grid.classList.remove('hidden');
-            }
-        }
-
         function renderPropertyList() {
             const grid = document.getElementById('property-grid');
             if (!grid) return;
