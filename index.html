@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/z2RzCbA.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/png" href="https://i.imgur.com/zNCE455.png" media="(prefers-color-scheme: light)">
     
-    <title>Compass Realty | Guidance. Direction. Trust. | Luxury Real Estate & Prime Estates</title>
-    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations.">
+    <title>Compass Realty | Guidance. Direction. Trust. | Luxury Real Estate & Developer Townships</title>
+    <meta name="description" content="Compass Realty offers premier luxury real estate advisory and official direct developer township representations.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,7 +60,7 @@
     <!-- TOP ANNOUNCEMENT BAR -->
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
-            <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO</span>
+            <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO & DEVELOPER TOWNSHIPS</span>
             <span class="hidden sm:inline-block text-neutral-300"><i class="fa-solid fa-mobile-screen-button mr-1 text-xs"></i> +63 918 915 4245</span>
         </div>
         <div class="flex items-center space-x-4">
@@ -99,7 +98,7 @@
                         FEATURED PROPERTIES
                     </button>
                     
-                    <!-- DEVELOPERS PORTAL BUTTON -->
+                    <!-- DEVELOPERS PORTAL (SEPARATE GROUP) -->
                     <button onclick="showDeveloperPortalView();" class="nav-link px-3 py-2 text-xs uppercase tracking-widest bg-neutral-100 text-brand-brown border border-brand-brown hover:bg-brand-brown hover:text-white transition-all font-bold">
                         <i class="fa-solid fa-city mr-1"></i> DEVELOPERS
                     </button>
@@ -156,17 +155,12 @@
                     <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR SALE</button>
                     <button onclick="showMainApp(); filterProperties('Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR RENT</button>
                 </div>
-
-                <div class="border-t border-neutral-200 pt-2">
-                    <button onclick="openEnlistModal(); toggleMobileMenu();" class="mt-2 w-full bg-brand-brown text-white py-3 text-xs uppercase font-semibold text-center tracking-widest hover:bg-black transition-colors">ENLIST MY PROPERTY</button>
-                </div>
             </div>
         </div>
     </header>
 
     <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
     <div id="public-view-container">
-        <!-- HERO SECTION -->
         <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
             <div class="max-w-7xl mx-auto">
                 <div class="max-w-3xl">
@@ -228,13 +222,12 @@
             </div>
         </div>
 
-        <!-- MAIN CONTENT CATALOG -->
         <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-black mb-8 gap-4">
                 <div>
-                    <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">BROKERAGE PORTFOLIO</span>
+                    <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">SECONDARY MARKET COLLECTION</span>
                     <h2 id="current-view-title" class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black">
-                        ALL PROPERTIES (SECONDARY MARKET)
+                        ALL PROPERTIES
                     </h2>
                 </div>
 
@@ -257,7 +250,6 @@
             <div id="empty-state" class="hidden text-center py-20 bg-neutral-50 border border-neutral-300">
                 <i class="fa-solid fa-building-circle-xmark text-4xl text-neutral-400 mb-4"></i>
                 <h3 class="text-lg font-bold uppercase tracking-wider text-black">NO PROPERTIES FOUND</h3>
-                <p class="text-xs text-neutral-600 mt-2 font-light">Try adjusting your filters or search keywords.</p>
                 <button onclick="resetFilters()" class="mt-6 bg-brand-brown text-white px-6 py-2.5 text-xs uppercase font-semibold tracking-widest hover:bg-black transition-colors">
                     RESET ALL FILTERS
                 </button>
@@ -265,28 +257,27 @@
         </main>
     </div>
 
-    <!-- SEPARATE GROUP: DEVELOPERS PORTAL & TOWNSHIPS (/developer) -->
+    <!-- SEPARATE GROUP: DEVELOPERS PORTAL & TOWNSHIPS -->
     <div id="developer-portal-view" class="hidden min-h-screen">
-        
-        <!-- FIRST BANNER: DEVELOPER / TOWNSHIP SELECTOR + INTEGRATED SEARCH BAR -->
+        <!-- FIRST BANNER: INTEGRATED SEARCH & QUICK SELECTOR -->
         <div id="dev-portal-banner" class="bg-black text-white py-16 lg:py-24 px-4 sm:px-8 border-b-4 border-brand-brown relative bg-cover bg-center transition-all duration-700" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80');">
             <div class="max-w-7xl mx-auto space-y-8">
                 
                 <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
                     <div>
                         <div class="flex items-center gap-2 mb-2">
-                            <span class="text-[10px] uppercase font-bold tracking-widest text-white bg-brand-brown px-3 py-1">OFFICIAL DEVELOPER TOWNSHIPS</span>
-                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1">PRIMARY DEVELOPER UNITS ONLY</span>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-white bg-brand-brown px-3 py-1">DIRECT DEVELOPER PARTNERS</span>
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-black bg-white px-2 py-1">PRESELLING & PRIMARY UNITS ONLY</span>
                         </div>
-                        <h1 id="dev-portal-name" class="text-3xl sm:text-5xl font-bold uppercase tracking-tight">SHANG PROPERTIES</h1>
+                        <h1 id="dev-portal-name" class="text-3xl sm:text-5xl font-bold uppercase tracking-tight">DEVELOPER TOWNSHIPS</h1>
                         <p id="dev-portal-desc" class="text-xs sm:text-sm font-light text-neutral-300 mt-2 max-w-2xl leading-relaxed">
-                            Official direct developer partner selling preselling and newly turned-over developer inventory.
+                            Official direct developer inventory with verified unit specifications, interactive gallery previews, and direct payment terms.
                         </p>
                     </div>
 
-                    <!-- BANNER DROPDOWN QUICK SWITCH -->
+                    <!-- BANNER DROPDOWN QUICK SELECTOR -->
                     <div class="w-full lg:w-auto bg-black/60 p-4 border border-neutral-700 backdrop-blur">
-                        <label class="block text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-1">SELECT DEVELOPER PARTNER</label>
+                        <label class="block text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-1">SELECT DEVELOPER BRAND</label>
                         <select id="dev-selector-dropdown" onchange="switchDeveloperBrand(this.value)" class="w-full lg:w-72 bg-white text-black text-xs font-semibold uppercase px-4 py-3 border border-black focus:outline-none cursor-pointer">
                         </select>
                     </div>
@@ -297,7 +288,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
                         <div class="sm:col-span-8 relative">
                             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-xs"></i>
-                            <input type="text" id="dev-search-input" onkeyup="filterDeveloperProjects()" placeholder="Search developer name, project title, or township location..." class="w-full pl-9 pr-3 py-2.5 bg-neutral-100 border border-neutral-400 text-xs focus:outline-none focus:border-brand-brown uppercase">
+                            <input type="text" id="dev-search-input" onkeyup="filterDeveloperProjects()" placeholder="Search developer name, project title, or township..." class="w-full pl-9 pr-3 py-2.5 bg-neutral-100 border border-neutral-400 text-xs focus:outline-none focus:border-brand-brown uppercase">
                         </div>
                         <div class="sm:col-span-4 flex gap-2">
                             <select id="dev-township-filter" onchange="filterDeveloperProjects()" class="w-full bg-neutral-100 border border-neutral-400 py-2.5 px-3 text-xs uppercase font-semibold">
@@ -313,28 +304,50 @@
             </div>
         </div>
 
-        <!-- DEVELOPER PROJECTS CATALOG (EXCLUSIVELY DIRECT PROJECT UNITS) -->
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-black pb-4 mb-8 gap-4">
                 <div>
-                    <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown">PRIMARY PROJECT PORTFOLIO</span>
-                    <h2 class="text-2xl font-bold uppercase tracking-tight" id="dev-catalog-title">DEVELOPER MASTER-PLANNED PROJECTS</h2>
-                    <p class="text-xs text-neutral-500 font-light mt-0.5">Direct developer prices, flexible preselling payment schemes, and inventory without secondary broker markups.</p>
+                    <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown">OFFICIAL MASTERPLAN PORTFOLIO</span>
+                    <h2 class="text-2xl font-bold uppercase tracking-tight">DEVELOPER PROJECTS & UNIT SELECTIONS</h2>
                 </div>
-                <span class="text-xs bg-black text-white px-3 py-1 font-mono font-bold" id="dev-projects-count">0 PROJECTS</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="manualSyncDeveloperUnitsToSheet5()" class="text-xs bg-brand-brown hover:bg-black text-white px-3 py-1.5 uppercase font-bold flex items-center gap-1.5 transition-colors" title="Sync units with Google Sheet 5">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> SYNC TO SHEET 5
+                    </button>
+                    <span class="text-xs bg-black text-white px-3 py-1 font-mono font-bold" id="dev-projects-count">0 PROJECTS</span>
+                </div>
             </div>
 
-            <!-- DEVELOPER PROJECTS GRID -->
             <div id="dev-projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
         </main>
     </div>
 
-    <!-- INDIVIDUAL DEVELOPER PROJECT DETAILS MODAL -->
+    <!-- INDIVIDUAL DEVELOPER PROJECT & UNIT CAROUSELS MODAL -->
     <div id="dev-project-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative max-h-[92vh] flex flex-col">
+        <div class="bg-white w-full max-w-6xl my-8 border-2 border-black shadow-2xl relative max-h-[92vh] flex flex-col">
             <button onclick="closeDevProjectModal()" class="absolute top-4 right-4 z-30 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
             <div id="dev-modal-content" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
         </div>
+    </div>
+
+    <!-- LIGHTBOX STUDIO (FULLSCREEN MULTI-IMAGE PREVIEW) -->
+    <div id="lightbox-studio-modal" class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-between p-4 hidden select-none">
+        <div class="w-full max-w-6xl flex justify-between items-center text-white pb-3 border-b border-neutral-800">
+            <div>
+                <span id="lightbox-title" class="text-sm font-bold uppercase tracking-wider">UNIT STUDIO VIEW</span>
+                <span id="lightbox-counter" class="text-xs text-neutral-400 ml-3 font-mono">1 / 1</span>
+            </div>
+            <button onclick="closeLightboxStudio()" class="text-white hover:text-brand-brown text-3xl font-bold">&times;</button>
+        </div>
+
+        <div class="relative w-full max-w-5xl flex-grow flex items-center justify-center py-4">
+            <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-20 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&lang;</button>
+            <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain border border-neutral-800 shadow-2xl transition-all duration-300">
+            <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-20 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&rang;</button>
+        </div>
+
+        <!-- THUMBNAIL STRIP -->
+        <div id="lightbox-thumbnails" class="w-full max-w-3xl flex justify-center gap-2 overflow-x-auto py-2"></div>
     </div>
 
     <!-- DEVELOPER PROJECT INQUIRY MODAL -->
@@ -342,8 +355,8 @@
         <div class="bg-white w-full max-w-md border-2 border-black p-6 relative">
             <button onclick="closeDevInquiryModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
             <span class="text-[9px] uppercase font-bold text-brand-brown tracking-widest block">DEVELOPER DIRECT DESK</span>
-            <h3 id="dev-inquiry-project-title" class="text-lg font-bold uppercase text-black mb-1">INQUIRE ABOUT PROJECT</h3>
-            <p id="dev-inquiry-subtitle" class="text-xs text-neutral-500 mb-4 font-light">Official developer pricing and unit reservations.</p>
+            <h3 id="dev-inquiry-project-title" class="text-lg font-bold uppercase text-black mb-1">INQUIRE ABOUT UNIT</h3>
+            <p id="dev-inquiry-subtitle" class="text-xs text-neutral-500 mb-4 font-light"></p>
 
             <form onsubmit="handleDevInquirySubmit(event)" class="space-y-3">
                 <input type="hidden" id="dev-inquiry-devname">
@@ -362,33 +375,33 @@
                     <input type="tel" id="dev-inquiry-clientphone" required placeholder="+63 917 000 0000" class="w-full bg-neutral-100 border p-2.5 text-xs">
                 </div>
                 <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Inquiry / Unit Preference</label>
-                    <textarea id="dev-inquiry-notes" rows="3" placeholder="Inquire about unit layouts, payment options, sample computation..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Notes / Sample Computation Request</label>
+                    <textarea id="dev-inquiry-notes" rows="3" placeholder="Inquire about payment schedules, floor layouts, turn-over terms..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
                 </div>
                 <button type="submit" id="dev-inquiry-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
-                    SUBMIT INQUIRY TO DEVELOPER DESK
+                    SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- ADMIN DASHBOARD CONTAINER (URL ROUTE: #admin or ?view=admin) -->
+    <!-- ADMIN DASHBOARD CONTAINER (DIRECT SECURE ACCESS) -->
     <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <div class="flex items-center gap-2">
                         <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">DIRECT SECURE URL ACCESS</span>
-                        <span class="text-xs text-neutral-400">ADMINISTRATOR: <strong class="text-white" id="admin-user-display">verify@compassprimerealty.com</strong></span>
+                        <span class="text-xs text-neutral-400">ADMIN: <strong class="text-white">verify@compassprimerealty.com</strong></span>
                     </div>
                     <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">ADMIN CONTROL CENTER & INQUIRIES DESK</h1>
                 </div>
                 <div class="flex items-center gap-3">
                     <button onclick="showMainApp()" class="bg-neutral-800 hover:bg-neutral-700 text-white text-xs px-4 py-2 font-semibold uppercase border border-neutral-600">
-                        <i class="fa-solid fa-eye mr-1"></i> VIEW SECONDARY BROKERAGE
+                        BROKERAGE SITE
                     </button>
                     <button onclick="showDeveloperPortalView()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 font-semibold uppercase border border-white">
-                        <i class="fa-solid fa-city mr-1"></i> VIEW DEVELOPER PORTAL
+                        DEVELOPER PORTAL
                     </button>
                 </div>
             </div>
@@ -398,150 +411,64 @@
                 <div class="bg-white p-6 border border-neutral-300">
                     <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">REALTOR LISTINGS</div>
                     <div class="text-3xl font-bold text-black mt-2" id="admin-stat-listings">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Brokerage Properties</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 1</div>
                 </div>
                 <div class="bg-white p-6 border border-neutral-300">
                     <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER PROJECTS</div>
                     <div class="text-3xl font-bold text-brand-brown mt-2" id="admin-stat-dev-projects">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Direct Developer Projects</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Direct Developer Townships</div>
                 </div>
                 <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">BROKERAGE INQUIRIES</div>
-                    <div class="text-3xl font-bold text-blue-900 mt-2" id="admin-stat-enquiries">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 2</div>
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER UNITS</div>
+                    <div class="text-3xl font-bold text-blue-900 mt-2" id="admin-stat-dev-units">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Auto-synced to Sheet 5</div>
                 </div>
                 <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER PROJECT INQUIRIES</div>
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">PROJECT INQUIRIES</div>
                     <div class="text-3xl font-bold text-purple-900 mt-2" id="admin-stat-devinquiries">0</div>
                     <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 4</div>
                 </div>
             </div>
 
-            <!-- ADMIN TABS CONTROL -->
             <div class="flex border-b border-black bg-white mb-6 text-xs uppercase font-bold overflow-x-auto">
-                <button onclick="switchAdminSubTab('inquiries')" id="admin-subtab-btn-inquiries" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">BROKERAGE APPOINTMENTS (SHEET 2)</button>
-                <button onclick="switchAdminSubTab('listings')" id="admin-subtab-btn-listings" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">REALTOR LISTINGS (SHEET 1)</button>
-                <button onclick="switchAdminSubTab('developers')" id="admin-subtab-btn-developers" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PARTNERS & PROJECTS</button>
+                <button onclick="switchAdminSubTab('developers')" id="admin-subtab-btn-developers" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">DEVELOPER PROJECTS & UNIT INVENTORY</button>
                 <button onclick="switchAdminSubTab('devinquiries')" id="admin-subtab-btn-devinquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PROJECT INQUIRIES (SHEET 4)</button>
+                <button onclick="switchAdminSubTab('listings')" id="admin-subtab-btn-listings" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">REALTOR LISTINGS (SHEET 1)</button>
             </div>
 
-            <!-- SUBTAB 1: BROKERAGE INQUIRIES -->
-            <div id="admin-subtab-inquiries" class="bg-white border border-neutral-300 p-6">
-                <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
+            <!-- ADMIN SUBTAB: DEVELOPERS -->
+            <div id="admin-subtab-developers" class="bg-white border border-neutral-300 p-6 space-y-8">
+                <div class="flex justify-between items-center pb-4 border-b border-black">
                     <div>
-                        <h3 class="text-lg font-bold uppercase text-black">BROKERAGE VIEWINGS & APPOINTMENT DESK</h3>
-                        <p class="text-xs text-neutral-500 font-light">Direct property viewings from secondary listings.</p>
+                        <h3 class="text-lg font-bold uppercase">DEVELOPER UNITS DATABASE</h3>
+                        <p class="text-xs text-neutral-500 font-light">Every unit contains its own multi-image gallery synced with <strong>Google Sheet 5 (Developer_Units_Sync)</strong>.</p>
                     </div>
+                    <button onclick="openAddDevUnitModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 uppercase font-semibold">
+                        + ADD NEW UNIT TO PROJECT
+                    </button>
                 </div>
+                
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border border-neutral-200">
                         <thead class="bg-black text-white uppercase text-[10px]">
                             <tr>
-                                <th class="p-3">CLIENT NAME</th>
-                                <th class="p-3">EMAIL & PHONE</th>
-                                <th class="p-3">PROPERTY TITLE</th>
-                                <th class="p-3">PREFERRED DATE</th>
-                                <th class="p-3">NOTES</th>
+                                <th class="p-3">PROJECT</th>
+                                <th class="p-3">DEVELOPER</th>
+                                <th class="p-3">UNIT TYPE</th>
+                                <th class="p-3">AREA / SPECS</th>
+                                <th class="p-3">PRICE RANGE</th>
+                                <th class="p-3">IMAGES</th>
+                                <th class="p-3 text-right">ACTION</th>
                             </tr>
                         </thead>
-                        <tbody id="admin-inquiries-table" class="divide-y divide-neutral-200"></tbody>
+                        <tbody id="admin-dev-units-table" class="divide-y divide-neutral-200"></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- SUBTAB 2: SECONDARY REALTOR LISTINGS -->
-            <div id="admin-subtab-listings" class="hidden space-y-6">
-                <div class="bg-white border border-neutral-300 p-6">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-neutral-300 mb-6 gap-4">
-                        <div>
-                            <h3 class="text-lg font-bold uppercase tracking-tight text-black">SECONDARY REALTOR LISTINGS</h3>
-                            <p class="text-xs text-neutral-500 font-light">Properties represented on resale / secondary rental market.</p>
-                        </div>
-                        <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider">
-                            <i class="fa-solid fa-plus mr-1"></i> ADD REALTOR LISTING
-                        </button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
-                                <tr>
-                                    <th class="p-3">ID</th>
-                                    <th class="p-3">PROPERTY TITLE</th>
-                                    <th class="p-3">CATEGORY</th>
-                                    <th class="p-3">STATUS</th>
-                                    <th class="p-3">PRICE (PHP)</th>
-                                    <th class="p-3 text-right">ACTIONS</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SUBTAB 3: DEVELOPERS & DEDICATED PROJECT UPLOADS -->
-            <div id="admin-subtab-developers" class="hidden bg-white border border-neutral-300 p-6 space-y-8">
-                <div>
-                    <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
-                        <div>
-                            <h3 class="text-lg font-bold uppercase">DEVELOPER BRANDS & TOWNSHIPS</h3>
-                            <p class="text-xs text-neutral-500 font-light">Official partners selling their own exclusive project units.</p>
-                        </div>
-                        <button onclick="openAddDeveloperModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 uppercase font-semibold">
-                            + REGISTER NEW DEVELOPER
-                        </button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs border border-neutral-200">
-                            <thead class="bg-black text-white uppercase text-[10px]">
-                                <tr>
-                                    <th class="p-3">SLUG</th>
-                                    <th class="p-3">DEVELOPER NAME</th>
-                                    <th class="p-3">TOWNSHIP / HEADQUARTERS</th>
-                                    <th class="p-3">ACTIVE PROJECTS</th>
-                                    <th class="p-3 text-right">ACTIONS</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-developers-table" class="divide-y divide-neutral-200"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
-                        <div>
-                            <h3 class="text-lg font-bold uppercase">DIRECT DEVELOPER PROJECTS</h3>
-                            <p class="text-xs text-neutral-500 font-light">Projects exclusively owned by developers (with preselling units).</p>
-                        </div>
-                        <button onclick="openAddDevProjectModal()" class="bg-black hover:bg-brand-brown text-white text-xs px-4 py-2.5 uppercase font-semibold">
-                            + ADD DEVELOPER PROJECT
-                        </button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs border border-neutral-200">
-                            <thead class="bg-neutral-900 text-white uppercase text-[10px]">
-                                <tr>
-                                    <th class="p-3">PROJECT</th>
-                                    <th class="p-3">DEVELOPER</th>
-                                    <th class="p-3">TOWNSHIP / LOCATION</th>
-                                    <th class="p-3">PRICE STARTING</th>
-                                    <th class="p-3">TURNOVER</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-dev-projects-table" class="divide-y divide-neutral-200"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SUBTAB 4: DEVELOPER INQUIRIES -->
+            <!-- ADMIN SUBTAB: DEV INQUIRIES -->
             <div id="admin-subtab-devinquiries" class="hidden bg-white border border-neutral-300 p-6">
-                <div class="flex justify-between items-center pb-4 border-b border-black mb-6">
-                    <div>
-                        <h3 class="text-lg font-bold uppercase">DEVELOPER PROJECT UNIT INQUIRIES (SHEET 4)</h3>
-                        <p class="text-xs text-neutral-500 font-light">Inquiries specifically routed to Developer Sales Representatives.</p>
-                    </div>
-                </div>
+                <h3 class="text-lg font-bold uppercase mb-4">DIRECT DEVELOPER INQUIRIES (SHEET 4)</h3>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs border border-neutral-200">
                         <thead class="bg-black text-white uppercase text-[10px]">
@@ -550,7 +477,7 @@
                                 <th class="p-3">PROJECT / UNIT TYPE</th>
                                 <th class="p-3">CLIENT</th>
                                 <th class="p-3">CONTACT</th>
-                                <th class="p-3">NOTES</th>
+                                <th class="p-3">TIMESTAMP</th>
                             </tr>
                         </thead>
                         <tbody id="admin-devinquiries-table" class="divide-y divide-neutral-200"></tbody>
@@ -558,166 +485,77 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <!-- MODAL: ADD / EDIT DEVELOPER BRAND -->
-    <div id="add-developer-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
-            <button onclick="closeAddDeveloperModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
-            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">REGISTER DEVELOPER BRAND</h3>
-            <form onsubmit="handleSaveDeveloperSubmit(event)" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Developer Name *</label>
-                        <input type="text" id="dev-form-name" required placeholder="e.g. Shang Properties" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Slug Identifier *</label>
-                        <input type="text" id="dev-form-slug" required placeholder="shang-properties" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
+            <!-- ADMIN SUBTAB: REALTOR LISTINGS -->
+            <div id="admin-subtab-listings" class="hidden bg-white border border-neutral-300 p-6">
+                <h3 class="text-lg font-bold uppercase mb-4">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px]">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">TITLE</th>
+                                <th class="p-3">PRICE</th>
+                                <th class="p-3">LOCATION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Township / Key Hub</label>
-                    <input type="text" id="dev-form-township" placeholder="e.g. Ortigas Center / BGC" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Banner Image URL</label>
-                    <input type="text" id="dev-form-banner-url" placeholder="https://images.unsplash.com/..." class="w-full bg-neutral-100 border p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Brand Description</label>
-                    <textarea id="dev-form-desc" rows="3" placeholder="Highlight developer portfolio..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">SAVE DEVELOPER BRAND</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- MODAL: ADD NEW DEVELOPER PROJECT -->
-    <div id="add-devproject-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
-            <button onclick="closeAddDevProjectModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
-            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD DIRECT DEVELOPER PROJECT</h3>
-            <form onsubmit="handleSaveDevProjectSubmit(event)" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Developer Partner *</label>
-                        <select id="proj-dev-slug" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Project Name *</label>
-                        <input type="text" id="proj-title" required placeholder="e.g. Aurelia Residences" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Township / Location *</label>
-                        <input type="text" id="proj-location" required placeholder="e.g. Bonifacio Global City" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Starting Price (PHP) *</label>
-                        <input type="number" id="proj-price" required placeholder="55000000" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Turnover Year</label>
-                        <input type="text" id="proj-turnover" placeholder="e.g. Q4 2026 / Ready for Occupancy" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Image URL *</label>
-                        <input type="text" id="proj-image" required placeholder="https://..." class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Project Masterplan Summary</label>
-                    <textarea id="proj-desc" rows="3" placeholder="Township amenities, architectural partners, unit configurations..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-black hover:bg-brand-brown text-white p-3 text-xs uppercase font-semibold">SAVE DEVELOPER PROJECT</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- BROKERAGE PROPERTY DETAILS MODAL -->
-    <div id="property-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
-            <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
-            <div id="modal-content-container" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
-        </div>
-    </div>
-
-    <!-- ENLIST MY PROPERTY MODAL -->
-    <div id="enlist-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white w-full max-w-2xl border-2 border-black shadow-2xl p-6 sm:p-8 relative">
-            <button onclick="closeEnlistModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
-            <div class="border-b border-black pb-4 mb-6">
-                <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CONCIERGE ONBOARDING</span>
-                <h2 class="text-2xl font-bold uppercase tracking-tight text-black">ENLIST YOUR LUXURY PROPERTY</h2>
-                <p class="text-xs text-neutral-600 font-light mt-1">Submit secondary market properties for appraisal and representation.</p>
             </div>
-            <form id="enlist-form" onsubmit="handleEnlistSubmit(event)" class="space-y-4">
+
+        </div>
+    </div>
+
+    <!-- MODAL: ADD UNIT TO DEVELOPER PROJECT -->
+    <div id="add-devunit-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD UNIT TO DEVELOPER PROJECT</h3>
+            
+            <form onsubmit="handleSaveDevUnitSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Target Project *</label>
+                    <select id="unit-target-project" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
+                    </select>
+                </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Full Name *</label>
-                        <input type="text" id="enlist-name" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Unit Model / Type *</label>
+                        <input type="text" id="unit-form-type" required placeholder="e.g. 2-Bedroom Sky Suite" class="w-full bg-neutral-100 border p-2.5 text-xs">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Email *</label>
-                        <input type="email" id="enlist-email" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Floor Area *</label>
+                        <input type="text" id="unit-form-area" required placeholder="e.g. 145 sqm" class="w-full bg-neutral-100 border p-2.5 text-xs">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Phone *</label>
-                        <input type="tel" id="enlist-phone" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Price Range / Starting (PHP) *</label>
+                        <input type="text" id="unit-form-price" required placeholder="e.g. ₱55,000,000" class="w-full bg-neutral-100 border p-2.5 text-xs">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Type *</label>
-                        <select id="enlist-type" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
-                            <option value="CONDOMINIUM">CONDOMINIUM</option>
-                            <option value="HOUSE AND LOTS">HOUSE AND LOT</option>
-                            <option value="LOTS">LOT</option>
-                            <option value="COMMERCIAL">COMMERCIAL</option>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Status</label>
+                        <select id="unit-form-status" class="w-full bg-neutral-100 border p-2.5 text-xs font-semibold uppercase">
+                            <option value="Available">Available</option>
+                            <option value="Preselling">Preselling</option>
+                            <option value="Few Units Left">Few Units Left</option>
+                            <option value="Model Unit Available">Model Unit Available</option>
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Location *</label>
-                        <input type="text" id="enlist-location" required class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Asking Price (PHP) *</label>
-                        <input type="number" id="enlist-price" required class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Image URLs for Unit Carousel (comma-separated) *</label>
+                    <textarea id="unit-form-images" rows="3" required placeholder="https://images.unsplash.com/... , https://images.unsplash.com/..." class="w-full bg-neutral-100 border p-2.5 text-xs font-mono"></textarea>
+                    <p class="text-[10px] text-neutral-500 mt-1">Separate multiple image URLs with commas to populate the unit's carousel and lightbox.</p>
                 </div>
-                <button type="submit" id="enlist-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
-                    SUBMIT ENLISTMENT (UPDATES SHEET 3)
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
+                    SAVE UNIT & AUTO-SYNC TO SHEET 5
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- LIGHTBOX IMAGE PREVIEW MODAL -->
-    <div id="lightbox-modal" class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 hidden">
-        <button onclick="closeLightboxModal()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-brand-brown transition-colors z-50">&times;</button>
-        <div class="relative max-w-6xl max-h-[90vh] w-full h-full flex items-center justify-center">
-            <img id="lightbox-img" src="" alt="Full Preview" class="max-w-full max-h-[85vh] object-contain border-2 border-brand-brown shadow-2xl">
-        </div>
-    </div>
-
-    <!-- CAREERS PAGE CONTAINER -->
-    <div id="careers-view-container" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="border-b-2 border-black pb-4 mb-8">
-            <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CAREERS</span>
-            <h1 class="text-3xl font-bold uppercase tracking-tight text-black">JOIN OUR EXECUTIVE TEAM</h1>
-        </div>
-        <p class="text-xs text-neutral-600">Please submit your resume to verify@compassprimerealty.com</p>
-    </div>
-
-    <!-- TOAST NOTIFICATION CONTAINER -->
+    <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
 
     <!-- FOOTER -->
@@ -734,15 +572,15 @@
                     </p>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">PORTFOLIO DEPARTMENTS</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">PORTFOLIO</h4>
                     <ul class="space-y-2 text-xs text-neutral-300 font-light">
                         <li><a href="#" onclick="showDeveloperPortalView(); return false;" class="text-white hover:text-brand-brown font-semibold">&bull; Official Developer Townships</a></li>
-                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="hover:text-white">&bull; Secondary Market Resales & Leases</a></li>
-                        <li><a href="#admin" onclick="accessDirectAdminDashboard(); return false;" class="text-neutral-500 hover:text-neutral-300">&bull; Admin Console Direct Access</a></li>
+                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="hover:text-white">&bull; Secondary Brokerage Listings</a></li>
+                        <li><a href="#admin" onclick="accessDirectAdminDashboard(); return false;" class="text-neutral-500 hover:text-neutral-300">&bull; Admin Console Access</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">CONCIERGE</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">HEAD OFFICE</h4>
                     <p class="text-xs text-neutral-300 font-light leading-relaxed">
                         Compass Realty Tower, 32nd Street<br>
                         Bonifacio Global City, Taguig<br>
@@ -756,15 +594,15 @@
         </div>
     </footer>
 
-    <!-- LOGIC APPLICATION CONTROLLER -->
+    <!-- SCRIPT APPLICATION CONTROLLER -->
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
-        // SECONDARY BROKERAGE REALTOR PROPERTIES (Sheet 1)
         let properties = [];
+        let unitCarouselIndices = {}; // Track active carousel image index per unit
 
-        // DEDICATED DEVELOPER ENTITIES (Completely separate group)
-        let developersList = JSON.parse(localStorage.getItem('cpr_developers_v2')) || [
+        // DEDICATED DEVELOPERS
+        let developersList = JSON.parse(localStorage.getItem('cpr_dev_brands_v3')) || [
             {
                 slug: 'shang-properties',
                 name: 'Shang Properties',
@@ -782,14 +620,14 @@
             {
                 slug: 'megaworld-townships',
                 name: 'Megaworld Townships',
-                township: 'McKinley Hill, Uptown Bonifacio, Eastwood City',
+                township: 'McKinley Hill, Uptown Bonifacio, Eastwood',
                 bannerUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80',
                 description: 'Pioneer of the LIVE-WORK-PLAY-LEARN integrated township concept throughout the Philippines.'
             }
         ];
 
-        // DIRECT DEVELOPER PROJECT UNITS (Separate from realtor properties)
-        let developerProjects = JSON.parse(localStorage.getItem('cpr_dev_projects_v2')) || [
+        // DIRECT DEVELOPER PROJECTS WITH IMAGES PER UNIT
+        let developerProjects = JSON.parse(localStorage.getItem('cpr_dev_projects_v3')) || [
             {
                 id: 'DEV-101',
                 devSlug: 'shang-properties',
@@ -799,74 +637,104 @@
                 priceStart: 95000000,
                 turnover: 'Turnover: 2026',
                 image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                description: 'An architectural icon positioned at the junction of McKinley Parkway and 5th Avenue in BGC. Collaboration between Shang Properties and Robinsons Land.',
+                description: 'An architectural icon positioned at the corner of McKinley Parkway and 5th Avenue, BGC. Features bespoke Italian-designed units with private lift lobbies.',
                 units: [
-                    { type: 'Deluxe 2-Bedroom Suite', area: '242 sqm', priceRange: '₱95M - ₱110M', status: 'Few Units Left' },
-                    { type: 'Premier 3-Bedroom Residence', area: '335 sqm', priceRange: '₱145M - ₱170M', status: 'Available' },
-                    { type: 'Penthouse Collection', area: '580 sqm', priceRange: '₱350M+', status: 'Special Request' }
+                    {
+                        id: 'AUR-U1',
+                        type: 'Deluxe 2-Bedroom Suite',
+                        area: '242 sqm',
+                        priceRange: '₱95,000,000 - ₱110,000,000',
+                        status: 'Few Units Left',
+                        beds: 2, baths: 3,
+                        images: [
+                            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80'
+                        ]
+                    },
+                    {
+                        id: 'AUR-U2',
+                        type: 'Premier 3-Bedroom Residence',
+                        area: '335 sqm',
+                        priceRange: '₱145,000,000 - ₱170,000,000',
+                        status: 'Available',
+                        beds: 3, baths: 4,
+                        images: [
+                            'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80'
+                        ]
+                    },
+                    {
+                        id: 'AUR-U3',
+                        type: 'Sky Penthouse Villa',
+                        area: '580 sqm',
+                        priceRange: '₱350,000,000+',
+                        status: 'Special Request',
+                        beds: 4, baths: 5,
+                        images: [
+                            'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80'
+                        ]
+                    }
                 ]
             },
             {
                 id: 'DEV-102',
-                devSlug: 'shang-properties',
-                developer: 'Shang Properties',
-                title: 'Haraya Residences',
-                township: 'Bridgetowne Destination Estate, Pasig',
-                priceStart: 28000000,
-                turnover: 'Turnover: 2028',
-                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
-                description: 'Vertical gated community in Bridgetowne, designed with extensive loggias and verdant landscaping.',
-                units: [
-                    { type: '1-Bedroom Loggia Suite', area: '67 sqm', priceRange: '₱28M - ₱34M', status: 'Available' },
-                    { type: '2-Bedroom Loggia Suite', area: '107 sqm', priceRange: '₱45M - ₱52M', status: 'Available' },
-                    { type: '3-Bedroom Penthouse Unit', area: '187 sqm', priceRange: '₱85M+', status: 'Low Inventory' }
-                ]
-            },
-            {
-                id: 'DEV-103',
                 devSlug: 'ayala-land-premier',
                 developer: 'Ayala Land Premier',
                 title: 'Park Villas Makati',
                 township: 'Legazpi Village, Makati CBD',
                 priceStart: 250000000,
                 turnover: 'Turnover: 2027',
-                image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
-                description: 'Ultra-exclusive residential tower offering full-floor and half-floor residences opposite Legazpi Active Park.',
+                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
+                description: 'Full-floor and half-floor residences overlooking the greenery of Legazpi Active Park and Washington SyCip Park.',
                 units: [
-                    { type: 'Half-Floor Villa (3-BR)', area: '450 sqm', priceRange: '₱250M - ₱310M', status: 'Preselling' },
-                    { type: 'Full-Floor Penthouse (4-BR)', area: '920 sqm', priceRange: '₱550M+', status: 'Bespoke Order' }
-                ]
-            },
-            {
-                id: 'DEV-104',
-                devSlug: 'megaworld-townships',
-                developer: 'Megaworld Townships',
-                title: 'Uptown Arts Residence',
-                township: 'Uptown Bonifacio, Taguig',
-                priceStart: 18000000,
-                turnover: 'Ready for Occupancy 2025/2026',
-                image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80',
-                description: 'Elevated luxury living in the vibrant 15-hectare Uptown Bonifacio township.',
-                units: [
-                    { type: 'Executive 1-Bedroom', area: '41.5 sqm', priceRange: '₱18M - ₱22M', status: 'Available' },
-                    { type: '2-Bedroom Suite with Balcony', area: '84 sqm', priceRange: '₱35M - ₱42M', status: 'Available' }
+                    {
+                        id: 'PV-U1',
+                        type: 'Half-Floor Villa (3-Bedroom)',
+                        area: '450 sqm',
+                        priceRange: '₱250,000,000 - ₱310,000,000',
+                        status: 'Preselling',
+                        beds: 3, baths: 4,
+                        images: [
+                            'https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80'
+                        ]
+                    },
+                    {
+                        id: 'PV-U2',
+                        type: 'Full-Floor Villa (4-Bedroom)',
+                        area: '920 sqm',
+                        priceRange: '₱550,000,000+',
+                        status: 'Bespoke Order',
+                        beds: 4, baths: 6,
+                        images: [
+                            'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+                            'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80'
+                        ]
+                    }
                 ]
             }
         ];
 
-        let inquiriesList = [];
         let developerInquiries = JSON.parse(localStorage.getItem('cpr_dev_inquiries')) || [];
         let favorites = [];
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
         let selectedDevSlug = 'ALL';
 
+        // LIGHTBOX STUDIO STATE
+        let lightboxCurrentImages = [];
+        let lightboxCurrentIndex = 0;
+        let lightboxCurrentTitle = "";
+
         window.addEventListener('DOMContentLoaded', () => {
             fetchListingsFromGoogleSheets();
             checkDirectURLRouting();
             populateTownshipFilterOptions();
+            autoSyncAllDeveloperUnitsToSheet5(); // AUTO-SYNC SHEET 5 ON LOAD
         });
 
-        // ROUTE HANDLING
         function checkDirectURLRouting() {
             const hash = window.location.hash.toLowerCase();
             const urlParams = new URLSearchParams(window.location.search);
@@ -874,7 +742,7 @@
 
             if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
                 showAdminDashboard();
-                showToast("Accessed Admin Control via Secure Direct Link", "info");
+                showToast("Admin Console active", "info");
             } else if (hash === '#developer' || viewParam === 'developer') {
                 showDeveloperPortalView();
             } else if (hash === '#careers' || viewParam === 'careers') {
@@ -887,13 +755,72 @@
             showAdminDashboard();
         }
 
-        // DEVELOPER PORTAL VIEW CONTROLLER
+        // ==========================================
+        // AUTO-FILL SHEET 5 SYNC ENGINE
+        // ==========================================
+        async function autoSyncAllDeveloperUnitsToSheet5() {
+            const hasSynced = sessionStorage.getItem('cpr_sheet5_synced');
+            if (hasSynced) return;
+
+            for (const proj of developerProjects) {
+                for (const u of proj.units) {
+                    syncSingleUnitToSheet5(proj, u, false);
+                }
+            }
+            sessionStorage.setItem('cpr_sheet5_synced', 'true');
+        }
+
+        async function manualSyncDeveloperUnitsToSheet5() {
+            showToast("Syncing all developer units to Sheet 5...", "info");
+            let count = 0;
+            for (const proj of developerProjects) {
+                for (const u of proj.units) {
+                    await syncSingleUnitToSheet5(proj, u, true);
+                    count++;
+                }
+            }
+            showToast(`Synchronized ${count} developer units to Sheet 5!`, "success");
+        }
+
+        async function syncSingleUnitToSheet5(proj, unit, showNotice = false) {
+            const payload = {
+                sheetTab: "Sheet5",
+                action: "syncDeveloperUnit",
+                projectId: proj.id,
+                projectName: proj.title,
+                developer: proj.developer,
+                township: proj.township,
+                turnover: proj.turnover,
+                unitId: unit.id,
+                unitType: unit.type,
+                area: unit.area,
+                priceRange: unit.priceRange,
+                status: unit.status,
+                beds: unit.beds || 0,
+                baths: unit.baths || 0,
+                images: unit.images
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (showNotice) showToast(`Synced unit ${unit.type} to Sheet 5`, "success");
+            } catch (err) {
+                console.error("Sheet 5 sync error:", err);
+            }
+        }
+
+        // ==========================================
+        // DEVELOPER PORTAL VIEW & SEARCH
+        // ==========================================
         function showDeveloperPortalView(slug = 'ALL') {
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.remove('hidden');
-            document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
-
             renderDeveloperSelectorDropdown();
             selectedDevSlug = slug;
             switchDeveloperBrand(selectedDevSlug);
@@ -908,9 +835,9 @@
         }
 
         function populateTownshipFilterOptions() {
-            const townshipSelect = document.getElementById('dev-township-filter');
+            const select = document.getElementById('dev-township-filter');
             const townships = Array.from(new Set(developerProjects.map(p => p.township)));
-            townshipSelect.innerHTML = `<option value="ALL">ALL TOWNSHIPS</option>` +
+            select.innerHTML = `<option value="ALL">ALL TOWNSHIPS</option>` +
                 townships.map(t => `<option value="${t}">${t}</option>`).join('');
         }
 
@@ -921,8 +848,8 @@
             const descEl = document.getElementById('dev-portal-desc');
 
             if (slug === 'ALL') {
-                nameEl.textContent = "OFFICIAL DEVELOPER TOWNSHIPS";
-                descEl.textContent = "Browse exclusive primary inventory, master-planned estates, and direct developer payment schemes across benchmark Philippine developers.";
+                nameEl.textContent = "DEVELOPER TOWNSHIPS";
+                descEl.textContent = "Browse exclusive primary developer inventory, master-planned estates, and direct payment schemes across benchmark Philippine developers.";
                 banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80')`;
             } else {
                 const dev = developersList.find(d => d.slug === slug) || developersList[0];
@@ -939,20 +866,14 @@
             const selectedTownship = document.getElementById('dev-township-filter')?.value || 'ALL';
 
             const filtered = developerProjects.filter(proj => {
-                // Developer dropdown match
                 if (selectedDevSlug !== 'ALL' && proj.devSlug !== selectedDevSlug) return false;
-                
-                // Township dropdown match
                 if (selectedTownship !== 'ALL' && proj.township !== selectedTownship) return false;
-
-                // Search keyword across developer, title, township
                 if (searchKw) {
                     const matchName = proj.title.toLowerCase().includes(searchKw);
                     const matchDev = proj.developer.toLowerCase().includes(searchKw);
                     const matchTown = proj.township.toLowerCase().includes(searchKw);
                     if (!matchName && !matchDev && !matchTown) return false;
                 }
-
                 return true;
             });
 
@@ -966,23 +887,21 @@
             switchDeveloperBrand('ALL');
         }
 
-        function renderDeveloperProjectsGrid(projectsToRender) {
+        function renderDeveloperProjectsGrid(projects) {
             const grid = document.getElementById('dev-projects-grid');
-            document.getElementById('dev-projects-count').textContent = `${projectsToRender.length} PROJECTS`;
+            document.getElementById('dev-projects-count').textContent = `${projects.length} PROJECTS`;
 
-            if (projectsToRender.length === 0) {
+            if (projects.length === 0) {
                 grid.innerHTML = `
-                    <div class="col-span-full py-20 text-center border-2 border-dashed border-neutral-300 bg-neutral-50">
-                        <i class="fa-solid fa-city text-4xl text-neutral-400 mb-3"></i>
-                        <h3 class="text-base font-bold uppercase text-black">NO DEVELOPER PROJECTS FOUND</h3>
-                        <p class="text-xs text-neutral-500 mt-1 font-light">Try searching for other townships or reset developer filters.</p>
-                        <button onclick="resetDevSearch()" class="mt-4 bg-brand-brown text-white px-5 py-2 text-xs uppercase font-semibold">VIEW ALL DEVELOPER PROJECTS</button>
+                    <div class="col-span-full py-16 text-center border-2 border-dashed border-neutral-300 bg-neutral-50">
+                        <i class="fa-solid fa-city text-3xl text-neutral-400 mb-2"></i>
+                        <h3 class="text-sm font-bold uppercase">NO DEVELOPER PROJECTS FOUND</h3>
                     </div>`;
                 return;
             }
 
-            grid.innerHTML = projectsToRender.map(p => `
-                <div class="bg-white border-2 border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300">
+            grid.innerHTML = projects.map(p => `
+                <div class="bg-white border-2 border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
                     <div>
                         <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openDevProjectModal('${p.id}')">
                             <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
@@ -1007,30 +926,25 @@
                             <p class="text-xs text-neutral-500 font-light line-clamp-2 leading-relaxed mb-4">
                                 ${p.description}
                             </p>
-
                             <div class="bg-neutral-50 p-3 border border-neutral-300 flex justify-between items-center mb-2">
-                                <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">STARTING PRICE</span>
-                                <span class="text-base font-bold text-black font-mono">₱${p.priceStart.toLocaleString()}</span>
-                            </div>
-                            <div class="text-[10px] text-neutral-500 uppercase tracking-widest flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check text-green-700"></i> Direct Preselling Terms Available
+                                <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">UNITS AVAILABLE</span>
+                                <span class="text-xs font-bold text-black font-mono">${(p.units || []).length} Unit Types</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="p-6 pt-0 space-y-2">
                         <button onclick="openDevProjectModal('${p.id}')" class="w-full bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-list-check"></i> VIEW PROJECT & UNIT LAYOUTS
-                        </button>
-                        <button onclick="openDevInquiryModal('${escapeQuotes(p.developer)}', '${escapeQuotes(p.title)}', 'General Project Inquiry')" class="w-full bg-white hover:bg-neutral-100 text-black border border-black py-2 text-xs font-semibold uppercase tracking-wider transition-colors">
-                            INQUIRE TO DEVELOPER DESK
+                            <i class="fa-solid fa-images"></i> VIEW UNITS & IMAGE CAROUSELS
                         </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // INDIVIDUAL DEVELOPER PROJECT VIEW
+        // ==========================================
+        // INDIVIDUAL PROJECT & UNIT CAROUSELS
+        // ==========================================
         function openDevProjectModal(projectId) {
             const proj = developerProjects.find(p => p.id === projectId);
             if (!proj) return;
@@ -1038,92 +952,79 @@
             const modalContent = document.getElementById('dev-modal-content');
             modalContent.innerHTML = `
                 <div>
-                    <!-- PROJECT BANNER -->
-                    <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group">
+                    <!-- PROJECT HERO -->
+                    <div class="relative h-72 sm:h-80 bg-black border border-black overflow-hidden group">
                         <img src="${proj.image}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="bg-brand-brown text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1">${proj.developer}</span>
-                                <span class="bg-white text-black text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 font-mono">${proj.turnover}</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="bg-brand-brown text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5">${proj.developer}</span>
+                                <span class="bg-white text-black text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 font-mono">${proj.turnover}</span>
                             </div>
-                            <h2 class="text-2xl sm:text-4xl font-bold uppercase tracking-tight text-white">${proj.title}</h2>
-                            <p class="text-xs sm:text-sm text-neutral-200 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${proj.township}</p>
+                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">${proj.title}</h2>
+                            <p class="text-xs text-neutral-300 font-light"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${proj.township}</p>
                         </div>
                     </div>
 
-                    <!-- PROJECT SPECIFICATIONS & DESCRIPTION -->
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-                        <div class="lg:col-span-2 space-y-6">
-                            <div>
-                                <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2">PROJECT OVERVIEW & TOWNSHIP CONTEXT</h4>
-                                <p class="text-xs text-neutral-700 leading-relaxed font-light whitespace-pre-line border-l-2 border-brand-brown pl-4">${proj.description}</p>
-                            </div>
+                    <!-- PROJECT DESCRIPTION -->
+                    <div class="my-6">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2">MASTERPLAN OVERVIEW</h4>
+                        <p class="text-xs text-neutral-700 leading-relaxed font-light border-l-2 border-brand-brown pl-4">${proj.description}</p>
+                    </div>
 
-                            <!-- AVAILABLE UNITS TABLE (AS IN REFERENCE) -->
-                            <div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <h4 class="text-xs font-bold uppercase tracking-widest text-black">DEVELOPER UNIT INVENTORY & PRICING</h4>
-                                    <span class="text-[10px] text-neutral-500 font-mono">Updated Direct from Developer</span>
-                                </div>
-                                <div class="border border-black overflow-x-auto">
-                                    <table class="w-full text-left text-xs">
-                                        <thead class="bg-black text-white text-[10px] uppercase font-bold">
-                                            <tr>
-                                                <th class="p-3">UNIT TYPE</th>
-                                                <th class="p-3">FLOOR AREA</th>
-                                                <th class="p-3">INDICATIVE PRICE</th>
-                                                <th class="p-3">AVAILABILITY</th>
-                                                <th class="p-3 text-right">ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="divide-y divide-neutral-200">
-                                            ${(proj.units || []).map(u => `
-                                                <tr class="hover:bg-neutral-50">
-                                                    <td class="p-3 font-bold text-black">${u.type}</td>
-                                                    <td class="p-3 font-mono">${u.area}</td>
-                                                    <td class="p-3 font-bold text-brand-brown font-mono">${u.priceRange}</td>
-                                                    <td class="p-3"><span class="bg-neutral-100 text-neutral-800 px-2 py-0.5 text-[10px] font-semibold uppercase">${u.status}</span></td>
-                                                    <td class="p-3 text-right">
-                                                        <button onclick="openDevInquiryModal('${escapeQuotes(proj.developer)}', '${escapeQuotes(proj.title)}', '${escapeQuotes(u.type)}')" class="bg-brand-brown hover:bg-black text-white px-3 py-1.5 text-[10px] uppercase font-bold">INQUIRE UNIT</button>
-                                                    </td>
-                                                </tr>
-                                            `).join('')}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <!-- UNITS WITH CAROUSEL & LIGHTBOX STUDIO -->
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center border-b border-black pb-2">
+                            <h3 class="text-base font-bold uppercase">AVAILABLE UNIT LAYOUTS & PHOTO STUDIOS</h3>
+                            <span class="text-xs text-neutral-500 font-mono">Synchronized with Google Sheet 5</span>
                         </div>
 
-                        <!-- PROJECT SIDEBAR -->
-                        <div class="bg-neutral-50 border border-black p-6 flex flex-col justify-between">
-                            <div class="space-y-4">
-                                <div class="bg-black text-white p-4">
-                                    <span class="text-[9px] uppercase tracking-widest font-bold text-neutral-400 block">STARTING PRICE</span>
-                                    <span class="text-2xl font-bold font-mono">₱${proj.priceStart.toLocaleString()}</span>
-                                </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${(proj.units || []).map((u, idx) => {
+                                unitCarouselIndices[u.id] = 0;
+                                const imgs = u.images && u.images.length > 0 ? u.images : [proj.image];
+                                return `
+                                    <div class="bg-white border-2 border-neutral-300 hover:border-black flex flex-col justify-between transition-all">
+                                        <div>
+                                            <!-- UNIT IMAGE CAROUSEL -->
+                                            <div class="relative h-48 bg-neutral-900 overflow-hidden group">
+                                                <img id="unit-img-${u.id}" src="${imgs[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)">
+                                                
+                                                ${imgs.length > 1 ? `
+                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, -1)" class="absolute left-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-10">&lang;</button>
+                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 1)" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-10">&rang;</button>
+                                                    <div class="absolute bottom-2 left-2 bg-black/80 text-[9px] text-white font-mono px-2 py-0.5" id="unit-indicator-${u.id}">
+                                                        1 / ${imgs.length} PHOTOS
+                                                    </div>
+                                                ` : ''}
 
-                                <div class="space-y-2 text-xs">
-                                    <div class="flex justify-between py-1.5 border-b border-neutral-300">
-                                        <span class="text-neutral-500 uppercase text-[10px] font-bold">DEVELOPER</span>
-                                        <span class="font-bold">${proj.developer}</span>
-                                    </div>
-                                    <div class="flex justify-between py-1.5 border-b border-neutral-300">
-                                        <span class="text-neutral-500 uppercase text-[10px] font-bold">ESTATE / TOWNSHIP</span>
-                                        <span class="font-bold text-right">${proj.township}</span>
-                                    </div>
-                                    <div class="flex justify-between py-1.5 border-b border-neutral-300">
-                                        <span class="text-neutral-500 uppercase text-[10px] font-bold">ESTIMATED TURNOVER</span>
-                                        <span class="font-bold font-mono">${proj.turnover}</span>
-                                    </div>
-                                </div>
-                            </div>
+                                                <button onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)" class="absolute top-2 right-2 bg-black/80 hover:bg-brand-brown text-white text-[9px] font-bold uppercase px-2 py-1 flex items-center gap-1 border border-neutral-600">
+                                                    <i class="fa-solid fa-expand"></i> STUDIO
+                                                </button>
+                                            </div>
 
-                            <div class="mt-6">
-                                <button onclick="openDevInquiryModal('${escapeQuotes(proj.developer)}', '${escapeQuotes(proj.title)}', 'Masterplan & Presentation Request')" class="w-full bg-brand-brown hover:bg-black text-white py-3 text-xs uppercase font-semibold tracking-wider transition-colors mb-2">
-                                    REQUEST DEVELOPER PRESENTATION
-                                </button>
-                                <span class="text-[10px] text-neutral-500 block text-center">Submissions log directly into Developer Desk Tab 4</span>
-                            </div>
+                                            <div class="p-4">
+                                                <div class="flex justify-between items-start mb-1">
+                                                    <h4 class="text-sm font-bold uppercase line-clamp-1">${u.type}</h4>
+                                                    <span class="text-[9px] bg-neutral-100 px-1.5 py-0.5 font-semibold uppercase text-neutral-800">${u.status}</span>
+                                                </div>
+                                                <p class="text-xs font-bold text-brand-brown font-mono">${u.priceRange}</p>
+                                                
+                                                <div class="grid grid-cols-3 gap-1 py-2 my-2 border-y border-neutral-200 text-center text-[10px]">
+                                                    <div><span class="font-bold">${u.area}</span><br><span class="text-neutral-500">AREA</span></div>
+                                                    <div><span class="font-bold">${u.beds || '-'}</span><br><span class="text-neutral-500">BEDS</span></div>
+                                                    <div><span class="font-bold">${u.baths || '-'}</span><br><span class="text-neutral-500">BATHS</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-4 pt-0">
+                                            <button onclick="openDevInquiryModal('${escapeQuotes(proj.developer)}', '${escapeQuotes(proj.title)}', '${escapeQuotes(u.type)}')" class="w-full bg-brand-brown hover:bg-black text-white py-2 text-xs font-semibold uppercase tracking-wider transition-colors">
+                                                INQUIRE THIS UNIT
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 </div>
@@ -1136,12 +1037,76 @@
             document.getElementById('dev-project-modal').classList.add('hidden');
         }
 
+        function navigateUnitCarousel(unitId, images, dir) {
+            if (!images || images.length === 0) return;
+            const currentIdx = unitCarouselIndices[unitId] || 0;
+            const nextIdx = (currentIdx + dir + images.length) % images.length;
+            unitCarouselIndices[unitId] = nextIdx;
+
+            const imgEl = document.getElementById(`unit-img-${unitId}`);
+            const indEl = document.getElementById(`unit-indicator-${unitId}`);
+            if (imgEl) imgEl.src = images[nextIdx];
+            if (indEl) indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
+        }
+
+        // ==========================================
+        // LIGHTBOX STUDIO CONTROLLER
+        // ==========================================
+        function openLightboxStudio(title, images, startIndex = 0) {
+            lightboxCurrentTitle = title;
+            lightboxCurrentImages = images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"];
+            lightboxCurrentIndex = startIndex;
+
+            document.getElementById('lightbox-title').textContent = title;
+            updateLightboxView();
+
+            // Render thumbnails
+            const thumbsContainer = document.getElementById('lightbox-thumbnails');
+            thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
+                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
+            `).join('');
+
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+
+        function updateLightboxView() {
+            document.getElementById('lightbox-main-img').src = lightboxCurrentImages[lightboxCurrentIndex];
+            document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
+            
+            // Highlight active thumbnail
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                if (i === lightboxCurrentIndex) {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105";
+                } else {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 hover:opacity-100 cursor-pointer";
+                }
+            }
+        }
+
+        function navigateLightbox(dir) {
+            lightboxCurrentIndex = (lightboxCurrentIndex + dir + lightboxCurrentImages.length) % lightboxCurrentImages.length;
+            updateLightboxView();
+        }
+
+        function setLightboxIndex(idx) {
+            lightboxCurrentIndex = idx;
+            updateLightboxView();
+        }
+
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // DEVELOPER INQUIRY CONTROLLER (SHEET 4)
+        // ==========================================
         function openDevInquiryModal(devName, projectName, unitType = '') {
             document.getElementById('dev-inquiry-devname').value = devName;
             document.getElementById('dev-inquiry-projectname').value = projectName;
             document.getElementById('dev-inquiry-unittype').value = unitType;
             document.getElementById('dev-inquiry-project-title').textContent = `INQUIRE: ${projectName.toUpperCase()}`;
-            document.getElementById('dev-inquiry-subtitle').textContent = unitType ? `Unit Selection: ${unitType}` : `Official developer sales desk for ${devName}`;
+            document.getElementById('dev-inquiry-subtitle').textContent = unitType ? `Selected Unit: ${unitType}` : `Direct Developer Desk for ${devName}`;
             document.getElementById('dev-inquiry-modal').classList.remove('hidden');
         }
 
@@ -1152,13 +1117,14 @@
         async function handleDevInquirySubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('dev-inquiry-submit-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING TO DEVELOPER DESK...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
 
             const inquiryData = {
                 id: Date.now(),
                 timestamp: new Date().toISOString(),
                 developer: document.getElementById('dev-inquiry-devname').value,
-                project: document.getElementById('dev-inquiry-projectname').value + (document.getElementById('dev-inquiry-unittype').value ? ` (${document.getElementById('dev-inquiry-unittype').value})` : ''),
+                project: document.getElementById('dev-inquiry-projectname').value,
+                unitType: document.getElementById('dev-inquiry-unittype').value || "Standard Layout",
                 clientName: document.getElementById('dev-inquiry-clientname').value,
                 email: document.getElementById('dev-inquiry-clientemail').value,
                 phone: document.getElementById('dev-inquiry-clientphone').value,
@@ -1179,27 +1145,27 @@
                 console.error("Sheet 4 Sync Error:", err);
             }
 
-            showToast("Inquiry Transmitted to Developer Desk (Sheet 4 Updated)!", "success");
+            showToast("Inquiry logged to Developer Desk (Sheet 4 updated)!", "success");
             closeDevInquiryModal();
-            btn.textContent = "SUBMIT INQUIRY TO DEVELOPER DESK";
+            btn.textContent = "SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)";
         }
 
-        // ADMIN CONTROLLER
+        // ==========================================
+        // ADMIN MANAGEMENT (CRUD + SHEET 5 SYNC)
+        // ==========================================
         function showAdminDashboard() {
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.remove('hidden');
             renderAdminDashboardTables();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function switchAdminSubTab(subtab) {
-            ['inquiries', 'listings', 'developers', 'devinquiries'].forEach(st => {
+            ['developers', 'devinquiries', 'listings'].forEach(st => {
                 document.getElementById(`admin-subtab-${st}`).classList.add('hidden');
                 document.getElementById(`admin-subtab-btn-${st}`).className = "p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap";
             });
-
             document.getElementById(`admin-subtab-${subtab}`).classList.remove('hidden');
             document.getElementById(`admin-subtab-btn-${subtab}`).className = "p-4 border-b-2 border-brand-brown text-black whitespace-nowrap";
         }
@@ -1207,150 +1173,115 @@
         function renderAdminDashboardTables() {
             document.getElementById('admin-stat-listings').textContent = properties.length;
             document.getElementById('admin-stat-dev-projects').textContent = developerProjects.length;
-            document.getElementById('admin-stat-enquiries').textContent = inquiriesList.length;
+            
+            let totalUnits = 0;
+            developerProjects.forEach(p => totalUnits += (p.units || []).length);
+            document.getElementById('admin-stat-dev-units').textContent = totalUnits;
             document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
 
-            // Realtor listings table
+            // Admin Developer Units table
+            const tbodyUnits = document.getElementById('admin-dev-units-table');
+            const unitRows = [];
+            developerProjects.forEach(proj => {
+                (proj.units || []).forEach(u => {
+                    unitRows.push(`
+                        <tr class="hover:bg-neutral-50">
+                            <td class="p-3 font-bold">${proj.title}</td>
+                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
+                            <td class="p-3 font-semibold">${u.type}</td>
+                            <td class="p-3 font-mono">${u.area}</td>
+                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
+                            <td class="p-3 font-mono text-[10px]">${(u.images || []).length} photos</td>
+                            <td class="p-3 text-right">
+                                <button onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(u.images || []).replace(/"/g, '&quot;')}, 0)" class="bg-black text-white px-2.5 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">PREVIEW</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+            tbodyUnits.innerHTML = unitRows.join('');
+
+            // Admin Developer Inquiries
+            const tbodyDevInq = document.getElementById('admin-devinquiries-table');
+            tbodyDevInq.innerHTML = developerInquiries.length === 0 ? 
+                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No developer inquiries recorded yet.</td></tr>` :
+                developerInquiries.map(di => `
+                    <tr class="hover:bg-neutral-50">
+                        <td class="p-3 font-bold text-brand-brown">${di.developer}</td>
+                        <td class="p-3 font-semibold">${di.project} (${di.unitType || 'Layout'})</td>
+                        <td class="p-3 font-bold">${di.clientName}</td>
+                        <td class="p-3 font-mono">${di.email}<br>${di.phone}</td>
+                        <td class="p-3 font-mono text-[10px]">${di.timestamp || 'N/A'}</td>
+                    </tr>
+                `).join('');
+
+            // Admin Realtor Listings Table
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
                     <td class="p-3 font-mono font-bold">${p.id}</td>
                     <td class="p-3 font-bold">${p.title}</td>
-                    <td class="p-3">${p.category}</td>
-                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold text-white bg-black">${p.status}</span></td>
                     <td class="p-3 font-mono">₱${p.price.toLocaleString()}</td>
-                    <td class="p-3 text-right">
-                        <button onclick="toggleSoldStatus(${p.id})" class="text-xs text-blue-900 font-bold hover:underline">TOGGLE SOLD</button>
-                    </td>
+                    <td class="p-3">${p.location}</td>
                 </tr>
             `).join('');
-
-            // Developers brand table
-            const tbodyDevs = document.getElementById('admin-developers-table');
-            tbodyDevs.innerHTML = developersList.map(dev => {
-                const count = developerProjects.filter(p => p.devSlug === dev.slug).length;
-                return `
-                    <tr class="hover:bg-neutral-50">
-                        <td class="p-3 font-mono font-bold">${dev.slug}</td>
-                        <td class="p-3 font-bold">${dev.name}</td>
-                        <td class="p-3">${dev.township || 'N/A'}</td>
-                        <td class="p-3 font-mono font-bold">${count} Projects</td>
-                        <td class="p-3 text-right">
-                            <button onclick="showDeveloperPortalView('${dev.slug}')" class="text-brand-brown hover:underline font-bold">VIEW PORTAL</button>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-
-            // Developer Projects table
-            const tbodyDevProj = document.getElementById('admin-dev-projects-table');
-            tbodyDevProj.innerHTML = developerProjects.map(proj => `
-                <tr class="hover:bg-neutral-50">
-                    <td class="p-3 font-bold">${proj.title}</td>
-                    <td class="p-3 font-semibold text-brand-brown">${proj.developer}</td>
-                    <td class="p-3">${proj.township}</td>
-                    <td class="p-3 font-mono font-bold">₱${proj.priceStart.toLocaleString()}</td>
-                    <td class="p-3 font-mono text-[10px]">${proj.turnover}</td>
-                </tr>
-            `).join('');
-
-            // Developer inquiries desk
-            const tbodyDevInq = document.getElementById('admin-devinquiries-table');
-            tbodyDevInq.innerHTML = developerInquiries.length === 0 ?
-                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No direct developer inquiries logged yet.</td></tr>` :
-                developerInquiries.map(di => `
-                    <tr class="hover:bg-neutral-50">
-                        <td class="p-3 font-bold text-brand-brown">${di.developer}</td>
-                        <td class="p-3 font-semibold">${di.project}</td>
-                        <td class="p-3 font-bold">${di.clientName}</td>
-                        <td class="p-3 font-mono">${di.email}<br>${di.phone}</td>
-                        <td class="p-3 text-neutral-600 font-light">${di.notes}</td>
-                    </tr>
-                `).join('');
         }
 
-        function openAddDeveloperModal() {
-            document.getElementById('dev-form-name').value = '';
-            document.getElementById('dev-form-slug').value = '';
-            document.getElementById('dev-form-township').value = '';
-            document.getElementById('dev-form-banner-url').value = '';
-            document.getElementById('dev-form-desc').value = '';
-            document.getElementById('add-developer-modal').classList.remove('hidden');
+        function openAddDevUnitModal() {
+            const select = document.getElementById('unit-target-project');
+            select.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
+            document.getElementById('unit-form-type').value = '';
+            document.getElementById('unit-form-area').value = '';
+            document.getElementById('unit-form-price').value = '';
+            document.getElementById('unit-form-images').value = '';
+            document.getElementById('add-devunit-modal').classList.remove('hidden');
         }
 
-        function closeAddDeveloperModal() {
-            document.getElementById('add-developer-modal').classList.add('hidden');
+        function closeAddDevUnitModal() {
+            document.getElementById('add-devunit-modal').classList.add('hidden');
         }
 
-        function handleSaveDeveloperSubmit(e) {
+        async function handleSaveDevUnitSubmit(e) {
             e.preventDefault();
-            const devObj = {
-                name: document.getElementById('dev-form-name').value,
-                slug: document.getElementById('dev-form-slug').value.toLowerCase().replace(/[^a-z0-9-]/g, '-'),
-                township: document.getElementById('dev-form-township').value || 'Metro Manila',
-                bannerUrl: document.getElementById('dev-form-banner-url').value || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80',
-                description: document.getElementById('dev-form-desc').value
+            const projId = document.getElementById('unit-target-project').value;
+            const proj = developerProjects.find(p => p.id === projId);
+            if (!proj) return;
+
+            const rawImgs = document.getElementById('unit-form-images').value;
+            const parsedImages = rawImgs.split(',').map(s => s.trim()).filter(Boolean);
+
+            const newUnit = {
+                id: 'UNIT-' + Date.now(),
+                type: document.getElementById('unit-form-type').value,
+                area: document.getElementById('unit-form-area').value,
+                priceRange: document.getElementById('unit-form-price').value,
+                status: document.getElementById('unit-form-status').value,
+                beds: 3, baths: 3,
+                images: parsedImages.length > 0 ? parsedImages : [proj.image]
             };
 
-            developersList.push(devObj);
-            localStorage.setItem('cpr_developers_v2', JSON.stringify(developersList));
-            closeAddDeveloperModal();
+            if (!proj.units) proj.units = [];
+            proj.units.push(newUnit);
+
+            localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
+
+            // AUTO-FILL AND SYNC TO SHEET 5
+            await syncSingleUnitToSheet5(proj, newUnit, true);
+
+            closeAddDevUnitModal();
             renderAdminDashboardTables();
-            renderDeveloperSelectorDropdown();
-            showToast(`Developer Partner ${devObj.name} registered!`, "success");
+            showToast(`Added unit to ${proj.title} and synced to Sheet 5!`, "success");
         }
 
-        function openAddDevProjectModal() {
-            const select = document.getElementById('proj-dev-slug');
-            select.innerHTML = developersList.map(d => `<option value="${d.slug}">${d.name}</option>`).join('');
-            document.getElementById('proj-title').value = '';
-            document.getElementById('proj-location').value = '';
-            document.getElementById('proj-price').value = '';
-            document.getElementById('proj-turnover').value = '';
-            document.getElementById('proj-image').value = '';
-            document.getElementById('proj-desc').value = '';
-            document.getElementById('add-devproject-modal').classList.remove('hidden');
-        }
-
-        function closeAddDevProjectModal() {
-            document.getElementById('add-devproject-modal').classList.add('hidden');
-        }
-
-        function handleSaveDevProjectSubmit(e) {
-            e.preventDefault();
-            const slug = document.getElementById('proj-dev-slug').value;
-            const dev = developersList.find(d => d.slug === slug);
-
-            const newProject = {
-                id: 'DEV-' + (developerProjects.length + 101),
-                devSlug: slug,
-                developer: dev ? dev.name : 'Shang Properties',
-                title: document.getElementById('proj-title').value,
-                township: document.getElementById('proj-location').value,
-                priceStart: Number(document.getElementById('proj-price').value),
-                turnover: document.getElementById('proj-turnover').value || 'Preselling',
-                image: document.getElementById('proj-image').value || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
-                description: document.getElementById('proj-desc').value,
-                units: [
-                    { type: 'Standard Suite Layout', area: '120 sqm', priceRange: 'Inquire for Computation', status: 'Available' }
-                ]
-            };
-
-            developerProjects.push(newProject);
-            localStorage.setItem('cpr_dev_projects_v2', JSON.stringify(developerProjects));
-            populateTownshipFilterOptions();
-            closeAddDevProjectModal();
-            renderAdminDashboardTables();
-            showToast(`Developer Project ${newProject.title} registered!`, "success");
-        }
-
-        // SECONDARY BROKERAGE FUNCTIONS
+        // ==========================================
+        // SECONDARY BROKERAGE & MISC
+        // ==========================================
         async function fetchListingsFromGoogleSheets() {
             const spinner = document.getElementById('loading-spinner');
             const grid = document.getElementById('property-grid');
             try {
-                const response = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await response.json();
+                const res = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await res.json();
                 if (Array.isArray(data) && data.length > 0) {
                     properties = data.map(item => ({
                         id: Number(item.id) || Date.now(),
@@ -1359,20 +1290,15 @@
                         price: Number(item.price) || 0,
                         status: item.status || "Sale",
                         category: item.category || "CONDOMINIUM",
-                        isDeal: String(item.isDeal).toUpperCase() === 'TRUE',
-                        isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE',
                         beds: Number(item.beds) || 0,
                         baths: Number(item.baths) || 0,
-                        parking: Number(item.parking) || 0,
                         area: item.area || "N/A",
-                        developer: item.developer || "Compass Realty",
-                        images: item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"],
-                        description: item.description || ""
+                        images: item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"]
                     }));
                     renderPropertyList();
                 }
             } catch (err) {
-                console.error("Brokerage Fetch Error:", err);
+                console.error(err);
             } finally {
                 if (spinner) spinner.classList.add('hidden');
                 if (grid) grid.classList.remove('hidden');
@@ -1381,139 +1307,49 @@
 
         function renderPropertyList() {
             const grid = document.getElementById('property-grid');
-            const emptyState = document.getElementById('empty-state');
             if (!grid) return;
-            grid.innerHTML = '';
-
-            let filtered = properties.filter(item => {
-                if (currentFilters.status !== 'ALL' && item.status.toLowerCase() !== currentFilters.status.toLowerCase()) return false;
-                if (currentFilters.category !== 'ALL' && item.category.toLowerCase() !== currentFilters.category.toLowerCase()) return false;
-                if (currentFilters.onlyDeals && !item.isDeal) return false;
-                if (currentFilters.onlyFeatured && !item.isFeatured) return false;
-                if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
-                if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
-                if (currentFilters.keyword) {
-                    const kw = currentFilters.keyword.toLowerCase();
-                    if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
-                }
-                return true;
-            });
-
-            if (filtered.length === 0) {
-                emptyState.classList.remove('hidden');
-            } else {
-                emptyState.classList.add('hidden');
-                filtered.forEach(prop => {
-                    const card = document.createElement('div');
-                    card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300';
-                    card.innerHTML = `
-                        <div>
-                            <div class="relative h-64 overflow-hidden bg-neutral-200 cursor-pointer" onclick="openPropertyModal(${prop.id})">
-                                <img src="${prop.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <span class="absolute top-3 left-3 bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest">
-                                    FOR ${prop.status.toUpperCase()}
-                                </span>
-                            </div>
-                            <div class="p-6">
-                                <span class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown mb-1 block">${prop.category} &bull; ID #${prop.id}</span>
-                                <h3 class="text-base font-bold text-black uppercase tracking-tight mb-2 line-clamp-1">${prop.title}</h3>
-                                <p class="text-xs text-neutral-600 mb-4"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
-                                <span class="text-lg font-bold text-black font-mono block">₱${prop.price.toLocaleString()}</span>
-                            </div>
+            grid.innerHTML = properties.map(p => `
+                <div class="bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
+                    <div>
+                        <div class="relative h-60 overflow-hidden bg-neutral-200">
+                            <img src="${p.images[0]}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-black text-white px-2 py-0.5 text-[9px] uppercase font-bold">FOR ${p.status}</span>
                         </div>
-                        <div class="p-6 pt-0">
-                            <button onclick="openPropertyModal(${prop.id})" class="w-full bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
-                                VIEW BROKERAGE DETAILS
-                            </button>
+                        <div class="p-6">
+                            <h3 class="text-base font-bold uppercase line-clamp-1 mb-1">${p.title}</h3>
+                            <p class="text-xs text-neutral-600 mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${p.location}</p>
+                            <span class="text-lg font-bold font-mono">₱${p.price.toLocaleString()}</span>
                         </div>
-                    `;
-                    grid.appendChild(card);
-                });
-            }
+                    </div>
+                </div>
+            `).join('');
         }
 
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('careers-view-container').classList.add('hidden');
             document.getElementById('admin-dashboard-container').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showCareersPage() {
-            document.getElementById('public-view-container').classList.add('hidden');
-            document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('careers-view-container').classList.remove('hidden');
-            document.getElementById('admin-dashboard-container').classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function openEnlistModal() { document.getElementById('enlist-modal').classList.remove('hidden'); }
-        function closeEnlistModal() { document.getElementById('enlist-modal').classList.add('hidden'); }
-
-        function openPropertyModal(id) {
-            const prop = properties.find(p => p.id === id);
-            if (!prop) return;
-            const container = document.getElementById('modal-content-container');
-            container.innerHTML = `
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div>
-                        <img src="${prop.images[0]}" class="w-full h-80 object-cover border border-black mb-4">
-                        <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
-                        <p class="text-xs text-neutral-600 mb-2">${prop.location}</p>
-                        <p class="text-xs text-neutral-700 leading-relaxed">${prop.description}</p>
-                    </div>
-                    <div class="bg-neutral-50 p-6 border border-black">
-                        <span class="text-2xl font-bold font-mono block mb-4">₱${prop.price.toLocaleString()}</span>
-                        <h4 class="text-xs font-bold uppercase mb-2">SCHEDULE SECONDARY VIEWING</h4>
-                        <p class="text-xs text-neutral-500 mb-4">Call our brokerage concierge desk at +63 918 915 4245.</p>
-                    </div>
-                </div>
-            `;
-            document.getElementById('property-modal').classList.remove('hidden');
-        }
-
-        function closePropertyModal() { document.getElementById('property-modal').classList.add('hidden'); }
         function escapeQuotes(str) { return String(str).replace(/'/g, "\\'"); }
-        function showToast(message) {
+        function showToast(msg, type = "info") {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = `bg-black text-white border border-brand-brown px-4 py-3 text-xs font-semibold uppercase tracking-wider shadow-2xl`;
-            toast.textContent = message;
+            toast.className = 'bg-black text-white border border-brand-brown px-4 py-3 text-xs font-semibold uppercase tracking-wider shadow-2xl';
+            toast.textContent = msg;
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 3500);
         }
 
-        function filterBySection(sec) {
-            currentFilters.onlyDeals = (sec === 'deals');
-            currentFilters.onlyFeatured = (sec === 'featured');
-            renderPropertyList();
-        }
-
-        function filterProperties(status, cat) {
-            currentFilters.status = status;
-            currentFilters.category = cat;
-            renderPropertyList();
-        }
-
-        function setFilterCategory(cat) {
-            currentFilters.category = cat;
-            renderPropertyList();
-        }
-
-        function resetFilters() {
-            currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
-            renderPropertyList();
-        }
-
-        function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        }
-
-        function toggleFavoritesView() {
-            currentFilters.onlyFavs = !currentFilters.onlyFavs;
-            renderPropertyList();
-        }
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function resetFilters() { renderPropertyList(); }
+        function setFilterCategory(cat) { currentFilters.category = cat; }
+        function filterBySection(sec) { }
+        function filterProperties(s, c) { }
+        function toggleFavoritesView() { }
+        function showCareersPage() { }
+        function openEnlistModal() { }
     </script>
 </body>
 </html>
