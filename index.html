@@ -8,8 +8,7 @@
     <link rel="icon" type="image/png" href="https://i.imgur.com/zNCE455.png" media="(prefers-color-scheme: light)">
     
     <title>Compass Realty | Guidance. Direction. Trust. | Luxury Real Estate & Prime Estates</title>
-    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations. Browse penthouses, commercial buildings, vacant land, and luxury houses for sale & rent.">
-    <meta name="keywords" content="Compass Realty, Luxury Real Estate Philippines, BGC Condos, Forbes Park Mansions, Makati Real Estate">
+    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -55,6 +54,28 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; background-position: center;
         }
+
+        /* WATERMARK OVERLAY STYLES */
+        .watermark-container {
+            position: absolute;
+            bottom: 0.85rem;
+            left: 0.85rem;
+            width: 25%;
+            min-width: 90px;
+            max-width: 180px;
+            pointer-events: none;
+            z-index: 25;
+            transition: all 0.3s ease;
+        }
+        .watermark-container img {
+            width: 100%;
+            height: auto;
+            object-contain: contain;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45));
+        }
+        .watermark-light-drop {
+            filter: drop-shadow(0 2px 5px rgba(255,255,255,0.65)) !important;
+        }
     </style>
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased selection:bg-brand-brown selection:text-white">
@@ -92,7 +113,6 @@
                     </div>
                 </a>
 
-                <!-- DESKTOP NAVIGATION -->
                 <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2">
                     <button onclick="showMainApp(); filterBySection('deals');" class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown hover:bg-neutral-100 transition-all">
                         TOP 10 DEALS
@@ -101,7 +121,6 @@
                         FEATURED PROPERTIES
                     </button>
                     
-                    <!-- DEVELOPERS PORTAL TAB -->
                     <button onclick="showDeveloperPortalView();" class="nav-link px-3 py-2 text-xs uppercase tracking-widest bg-neutral-100 text-brand-brown border border-brand-brown hover:bg-brand-brown hover:text-white transition-all font-bold">
                         <i class="fa-solid fa-city mr-1"></i> DEVELOPERS
                     </button>
@@ -146,25 +165,9 @@
                 </div>
             </div>
         </div>
-
-        <!-- MOBILE MENU -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-black">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <button onclick="showMainApp(); filterBySection('deals'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">TOP 10 DEALS</button>
-                <button onclick="showMainApp(); filterBySection('featured'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">FEATURED PROPERTIES</button>
-                <button onclick="showDeveloperPortalView(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-brand-brown font-bold hover:bg-neutral-100">DEVELOPERS PORTAL</button>
-                
-                <div class="border-t border-neutral-200 pt-2">
-                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR SALE</span>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR SALE</button>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
-                </div>
-            </div>
-        </div>
     </header>
 
-    <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE & LANDING PAGE -->
+    <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
     <div id="public-view-container">
         <!-- HERO SECTION -->
         <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
@@ -248,19 +251,11 @@
                 </div>
             </div>
 
-            <!-- LOADING SPINNER (Hidden after render) -->
-            <div id="loading-spinner" class="hidden flex-col items-center justify-center py-8">
-                <i class="fa-solid fa-spinner fa-spin text-2xl text-brand-brown mb-2"></i>
-                <span class="text-xs uppercase font-semibold tracking-widest text-neutral-500">Checking Google Sheets Database...</span>
-            </div>
-
-            <!-- PROPERTY GRID (RENDERED IMMEDIATELY) -->
             <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
             <div id="empty-state" class="hidden text-center py-20 bg-neutral-50 border border-neutral-300">
                 <i class="fa-solid fa-building-circle-xmark text-4xl text-neutral-400 mb-4"></i>
                 <h3 class="text-lg font-bold uppercase tracking-wider text-black">NO PROPERTIES FOUND</h3>
-                <p class="text-xs text-neutral-600 mt-2 font-light">Try adjusting your filters or search keywords.</p>
                 <button onclick="resetFilters()" class="mt-6 bg-brand-brown text-white px-6 py-2.5 text-xs uppercase font-semibold tracking-widest hover:bg-black transition-colors">
                     RESET ALL FILTERS
                 </button>
@@ -319,7 +314,6 @@
                     <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown">OFFICIAL MASTERPLAN PORTFOLIO</span>
                     <h2 class="text-2xl font-bold uppercase tracking-tight">DEVELOPER PROJECTS & UNIT SELECTIONS</h2>
                 </div>
-                <!-- Clean count indicator with NO manual sync button -->
                 <div class="flex items-center gap-3">
                     <span class="text-xs bg-black text-white px-3 py-1 font-mono font-bold" id="dev-projects-count">0 PROJECTS</span>
                 </div>
@@ -337,7 +331,7 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX STUDIO (FULLSCREEN MULTI-IMAGE PREVIEW) -->
+    <!-- LIGHTBOX STUDIO WITH AUTOMATIC WATERMARK -->
     <div id="lightbox-studio-modal" class="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-between p-4 hidden select-none">
         <div class="w-full max-w-6xl flex justify-between items-center text-white pb-3 border-b border-neutral-800">
             <div>
@@ -348,9 +342,16 @@
         </div>
 
         <div class="relative w-full max-w-5xl flex-grow flex items-center justify-center py-4">
-            <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-20 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&lang;</button>
-            <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain border border-neutral-800 shadow-2xl transition-all duration-300">
-            <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-20 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&rang;</button>
+            <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-30 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&lang;</button>
+            
+            <!-- WATERMARKED LIGHTBOX IMAGE WRAPPER -->
+            <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl">
+                <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain">
+                <!-- Watermark injected dynamically -->
+                <div id="lightbox-watermark" class="watermark-container"></div>
+            </div>
+
+            <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-30 bg-black/80 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700">&rang;</button>
         </div>
 
         <div id="lightbox-thumbnails" class="w-full max-w-3xl flex justify-center gap-2 overflow-x-auto py-2"></div>
@@ -399,174 +400,6 @@
         </div>
     </div>
 
-    <!-- ADMIN DASHBOARD CONTAINER (DIRECT SECURE ACCESS VIA #admin) -->
-    <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">DIRECT SECURE URL ACCESS</span>
-                        <span class="text-xs text-neutral-400">ADMIN: <strong class="text-white">verify@compassprimerealty.com</strong></span>
-                    </div>
-                    <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">ADMIN CONTROL CENTER & INQUIRIES DESK</h1>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="showMainApp()" class="bg-neutral-800 hover:bg-neutral-700 text-white text-xs px-4 py-2 font-semibold uppercase border border-neutral-600">
-                        BROKERAGE SITE
-                    </button>
-                    <button onclick="showDeveloperPortalView()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 font-semibold uppercase border border-white">
-                        DEVELOPER PORTAL
-                    </button>
-                </div>
-            </div>
-
-            <!-- LIVE METRICS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
-                <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">REALTOR LISTINGS</div>
-                    <div class="text-3xl font-bold text-black mt-2" id="admin-stat-listings">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 1</div>
-                </div>
-                <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER PROJECTS</div>
-                    <div class="text-3xl font-bold text-brand-brown mt-2" id="admin-stat-dev-projects">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Direct Developer Townships</div>
-                </div>
-                <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER UNITS</div>
-                    <div class="text-3xl font-bold text-blue-900 mt-2" id="admin-stat-dev-units">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Auto-synced to Sheet 5</div>
-                </div>
-                <div class="bg-white p-6 border border-neutral-300">
-                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">PROJECT INQUIRIES</div>
-                    <div class="text-3xl font-bold text-purple-900 mt-2" id="admin-stat-devinquiries">0</div>
-                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 4</div>
-                </div>
-            </div>
-
-            <div class="flex border-b border-black bg-white mb-6 text-xs uppercase font-bold overflow-x-auto">
-                <button onclick="switchAdminSubTab('developers')" id="admin-subtab-btn-developers" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">DEVELOPER PROJECTS & UNIT INVENTORY</button>
-                <button onclick="switchAdminSubTab('devinquiries')" id="admin-subtab-btn-devinquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PROJECT INQUIRIES (SHEET 4)</button>
-                <button onclick="switchAdminSubTab('listings')" id="admin-subtab-btn-listings" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">REALTOR LISTINGS (SHEET 1)</button>
-            </div>
-
-            <!-- ADMIN SUBTAB: DEVELOPERS -->
-            <div id="admin-subtab-developers" class="bg-white border border-neutral-300 p-6 space-y-8">
-                <div class="flex justify-between items-center pb-4 border-b border-black">
-                    <div>
-                        <h3 class="text-lg font-bold uppercase">DEVELOPER UNITS DATABASE</h3>
-                        <p class="text-xs text-neutral-500 font-light">Units auto-sync directly with <strong>Sheet 5 (Developer_Units_Sync)</strong>.</p>
-                    </div>
-                    <button onclick="openAddDevUnitModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 uppercase font-semibold">
-                        + ADD NEW UNIT TO PROJECT
-                    </button>
-                </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs border border-neutral-200">
-                        <thead class="bg-black text-white uppercase text-[10px]">
-                            <tr>
-                                <th class="p-3">PROJECT</th>
-                                <th class="p-3">DEVELOPER</th>
-                                <th class="p-3">UNIT TYPE</th>
-                                <th class="p-3">AREA / SPECS</th>
-                                <th class="p-3">PRICE RANGE</th>
-                                <th class="p-3">IMAGES</th>
-                                <th class="p-3 text-right">ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-dev-units-table" class="divide-y divide-neutral-200"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ADMIN SUBTAB: DEV INQUIRIES -->
-            <div id="admin-subtab-devinquiries" class="hidden bg-white border border-neutral-300 p-6">
-                <h3 class="text-lg font-bold uppercase mb-4">DIRECT DEVELOPER INQUIRIES (SHEET 4)</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs border border-neutral-200">
-                        <thead class="bg-black text-white uppercase text-[10px]">
-                            <tr>
-                                <th class="p-3">DEVELOPER</th>
-                                <th class="p-3">PROJECT / UNIT TYPE</th>
-                                <th class="p-3">CLIENT</th>
-                                <th class="p-3">CONTACT</th>
-                                <th class="p-3">TIMESTAMP</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-devinquiries-table" class="divide-y divide-neutral-200"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- ADMIN SUBTAB: REALTOR LISTINGS -->
-            <div id="admin-subtab-listings" class="hidden bg-white border border-neutral-300 p-6">
-                <h3 class="text-lg font-bold uppercase mb-4">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-neutral-900 text-white uppercase text-[10px]">
-                            <tr>
-                                <th class="p-3">ID</th>
-                                <th class="p-3">TITLE</th>
-                                <th class="p-3">PRICE</th>
-                                <th class="p-3">LOCATION</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: ADD UNIT TO DEVELOPER PROJECT (ADMIN ONLY) -->
-    <div id="add-devunit-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
-        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
-            <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
-            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD UNIT TO DEVELOPER PROJECT</h3>
-            
-            <form onsubmit="handleSaveDevUnitSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Target Project *</label>
-                    <select id="unit-target-project" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
-                    </select>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Unit Model / Type *</label>
-                        <input type="text" id="unit-form-type" required placeholder="e.g. 2-Bedroom Sky Suite" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Floor Area *</label>
-                        <input type="text" id="unit-form-area" required placeholder="e.g. 145 sqm" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Price Range / Starting (PHP) *</label>
-                        <input type="text" id="unit-form-price" required placeholder="e.g. ₱55,000,000" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Status</label>
-                        <select id="unit-form-status" class="w-full bg-neutral-100 border p-2.5 text-xs font-semibold uppercase">
-                            <option value="Available">Available</option>
-                            <option value="Preselling">Preselling</option>
-                            <option value="Few Units Left">Few Units Left</option>
-                            <option value="Model Unit Available">Model Unit Available</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Image URLs for Unit Carousel (comma-separated) *</label>
-                    <textarea id="unit-form-images" rows="3" required placeholder="https://images.unsplash.com/... , https://images.unsplash.com/..." class="w-full bg-neutral-100 border p-2.5 text-xs font-mono"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
-                    SAVE UNIT & AUTO-SYNC TO SHEET 5
-                </button>
-            </form>
-        </div>
-    </div>
-
     <!-- ENLIST MODAL -->
     <div id="enlist-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-2xl border-2 border-black shadow-2xl p-6 sm:p-8 relative">
@@ -600,16 +433,6 @@
                             <option value="LOTS">LOT</option>
                             <option value="COMMERCIAL">COMMERCIAL</option>
                         </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Location *</label>
-                        <input type="text" id="enlist-location" required class="w-full bg-neutral-100 border p-2.5 text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-semibold uppercase mb-1">Asking Price (PHP) *</label>
-                        <input type="number" id="enlist-price" required class="w-full bg-neutral-100 border p-2.5 text-xs">
                     </div>
                 </div>
                 <button type="submit" id="enlist-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
@@ -649,7 +472,6 @@
                     <ul class="space-y-2 text-xs text-neutral-300 font-light">
                         <li><a href="#" onclick="showDeveloperPortalView(); return false;" class="text-white hover:text-brand-brown font-semibold">&bull; Official Developer Townships</a></li>
                         <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="hover:text-white">&bull; Secondary Brokerage Listings</a></li>
-                        <li><a href="#admin" onclick="accessDirectAdminDashboard(); return false;" class="text-neutral-500 hover:text-neutral-300">&bull; Admin Console Access</a></li>
                     </ul>
                 </div>
                 <div>
@@ -667,11 +489,117 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT APPLICATION CONTROLLER -->
+    <!-- JAVASCRIPT APPLICATION CONTROLLER WITH AUTO-WATERMARK SYSTEM -->
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
-        // CURATED LUXURY LISTINGS (Always visible immediately)
+        // =========================================================================
+        // COMPASS REALTY VECTOR EMBEDDED WATERMARKS (WHITE & BLACK)
+        // =========================================================================
+        const WATERMARK_WHITE_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
+                <g fill="#FFFFFF">
+                    <!-- Icon / Compass Logo -->
+                    <path d="M 65 0 C 29.1 0 0 29.1 0 65 C 0 100.9 29.1 130 65 130 C 95.8 130 121.7 108.6 128.3 80 L 114.2 80 C 108 101.2 88.3 117 65 117 C 36.3 117 13 93.7 13 65 C 13 36.3 36.3 13 65 13 C 88.3 13 108 28.8 114.2 50 L 128.3 50 C 121.7 21.4 95.8 0 65 0 Z"/>
+                    <polygon points="45,80 95,35 75,55"/>
+                    <!-- Typographic Wordmark -->
+                    <text x="160" y="93" font-family="'Montserrat', sans-serif" font-weight="700" font-size="82" letter-spacing="3" fill="#FFFFFF">COMPASS REALTY</text>
+                </g>
+            </svg>
+        `);
+
+        const WATERMARK_BLACK_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
+                <g fill="#000000">
+                    <!-- Icon / Compass Logo -->
+                    <path d="M 65 0 C 29.1 0 0 29.1 0 65 C 0 100.9 29.1 130 65 130 C 95.8 130 121.7 108.6 128.3 80 L 114.2 80 C 108 101.2 88.3 117 65 117 C 36.3 117 13 93.7 13 65 C 13 36.3 36.3 13 65 13 C 88.3 13 108 28.8 114.2 50 L 128.3 50 C 121.7 21.4 95.8 0 65 0 Z"/>
+                    <polygon points="45,80 95,35 75,55"/>
+                    <!-- Typographic Wordmark -->
+                    <text x="160" y="93" font-family="'Montserrat', sans-serif" font-weight="700" font-size="82" letter-spacing="3" fill="#000000">COMPASS REALTY</text>
+                </g>
+            </svg>
+        `);
+
+        // Cache luminance results by URL so we compute each image once
+        const imageLuminanceCache = {};
+
+        /**
+         * Detects perceived brightness of bottom-left corner of image.
+         * Returns 'dark' (requires white logo) or 'light' (requires black logo).
+         */
+        function detectImageCornerBrightness(imgElement, callback) {
+            const src = imgElement.src || imgElement.currentSrc;
+            if (imageLuminanceCache[src]) {
+                callback(imageLuminanceCache[src]);
+                return;
+            }
+
+            const offCanvas = document.createElement('canvas');
+            const ctx = offCanvas.getContext('2d');
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+
+            img.onload = function() {
+                try {
+                    offCanvas.width = 64;
+                    offCanvas.height = 64;
+                    // Draw image
+                    ctx.drawImage(img, 0, 0, 64, 64);
+                    // Sample bottom-left 25% area
+                    const sampleWidth = Math.floor(64 * 0.35);
+                    const sampleHeight = Math.floor(64 * 0.25);
+                    const sampleY = 64 - sampleHeight;
+                    const imgData = ctx.getImageData(0, sampleY, sampleWidth, sampleHeight);
+                    const data = imgData.data;
+
+                    let totalLuminance = 0;
+                    let count = 0;
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i+1];
+                        const b = data[i+2];
+                        // Standard Photometric / ITU-R BT.709 perceived luminance
+                        const lum = (0.299 * r) + (0.587 * g) + (0.114 * b);
+                        totalLuminance += lum;
+                        count++;
+                    }
+
+                    const avgLuminance = totalLuminance / (count || 1);
+                    // Threshold: < 135 is dark background, >= 135 is light background
+                    const isDark = avgLuminance < 135;
+                    const result = isDark ? 'dark' : 'light';
+                    imageLuminanceCache[src] = result;
+                    callback(result);
+                } catch (err) {
+                    // CORS fallback: default to white logo with contrast drop-shadow
+                    callback('dark');
+                }
+            };
+
+            img.onerror = function() {
+                callback('dark');
+            };
+
+            img.src = src;
+        }
+
+        /**
+         * Injects watermark dynamically into a wrapper containing an image element
+         */
+        function applyWatermarkToContainer(containerId, imgElement) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            detectImageCornerBrightness(imgElement, function(brightness) {
+                const logoSrc = brightness === 'dark' ? WATERMARK_WHITE_SVG : WATERMARK_BLACK_SVG;
+                const shadowClass = brightness === 'light' ? 'watermark-light-drop' : '';
+                container.innerHTML = `<img src="${logoSrc}" class="${shadowClass}" alt="Compass Realty Watermark">`;
+            });
+        }
+
+        // =========================================================================
+        // LISTINGS DATA REPOSITORY
+        // =========================================================================
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
@@ -691,7 +619,7 @@
                     "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
                     "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "Panoramic double-height penthouse featuring bespoke finishes, unobstructed views of the Manila Golf Club, and a private lift lobby."
+                description: "Panoramic double-height penthouse featuring bespoke finishes, unobstructed views of the Manila Golf Club, and private lift lobbies."
             },
             {
                 id: 1002,
@@ -715,7 +643,7 @@
             },
             {
                 id: 1003,
-                title: "Uratex Tower Prime Commercial Land",
+                title: "Prime Commercial Development Land",
                 location: "Chino Roces Avenue, Makati CBD",
                 price: 320000000,
                 status: "Sale",
@@ -730,11 +658,11 @@
                 images: [
                     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "High-density zoning suitable for mid-to-high rise headquarters, boutique residential towers, or showroom logistics."
+                description: "High-density zoning suitable for headquarters, boutique residential towers, or showroom logistics."
             },
             {
                 id: 1004,
-                title: "The Suites at One Bonifacio Corner Residence",
+                title: "The Suites at One Bonifacio Corner Unit",
                 location: "One Bonifacio High Street, BGC",
                 price: 450000,
                 status: "Rent",
@@ -791,11 +719,9 @@
             }
         ];
 
-        // LOAD FROM LOCAL STORAGE OR USE DEFAULTS
         let properties = JSON.parse(localStorage.getItem('cpr_cached_listings')) || DEFAULT_PROPERTIES;
         let unitCarouselIndices = {};
 
-        // DEDICATED DEVELOPERS
         let developersList = JSON.parse(localStorage.getItem('cpr_dev_brands_v3')) || [
             {
                 slug: 'shang-properties',
@@ -820,7 +746,6 @@
             }
         ];
 
-        // DIRECT DEVELOPER PROJECTS WITH IMAGES PER UNIT
         let developerProjects = JSON.parse(localStorage.getItem('cpr_dev_projects_v3')) || [
             {
                 id: 'DEV-101',
@@ -831,7 +756,7 @@
                 priceStart: 95000000,
                 turnover: 'Turnover: 2026',
                 image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                description: 'An architectural icon positioned at the corner of McKinley Parkway and 5th Avenue, BGC. Features bespoke Italian-designed units with private lift lobbies.',
+                description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC. Bespoke Italian finishes with private lift lobbies.',
                 units: [
                     {
                         id: 'AUR-U1',
@@ -869,7 +794,7 @@
                 priceStart: 250000000,
                 turnover: 'Turnover: 2027',
                 image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
-                description: 'Full-floor and half-floor residences overlooking the greenery of Legazpi Active Park and Washington SyCip Park.',
+                description: 'Full-floor and half-floor residences overlooking the greenery of Legazpi Active Park.',
                 units: [
                     {
                         id: 'PV-U1',
@@ -895,151 +820,16 @@
         let lightboxCurrentImages = [];
         let lightboxCurrentIndex = 0;
 
-        // INITIALIZE ON LOAD
         window.addEventListener('DOMContentLoaded', () => {
-            renderPropertyList(); // RENDER INSTANTLY FROM CACHE / DEFAULT LISTINGS
+            renderPropertyList();
             fetchDatabaseFromGoogleSheets();
-            checkDirectURLRouting();
             populateTownshipFilterOptions();
             document.getElementById('fav-count-badge').textContent = favorites.length;
         });
 
-        function checkDirectURLRouting() {
-            const hash = window.location.hash.toLowerCase();
-            const urlParams = new URLSearchParams(window.location.search);
-            const viewParam = urlParams.get('view')?.toLowerCase();
-
-            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
-                showAdminDashboard();
-                showToast("Admin Console active", "info");
-            } else if (hash === '#developer' || viewParam === 'developer') {
-                showDeveloperPortalView();
-            } else if (hash === '#careers' || viewParam === 'careers') {
-                showCareersPage();
-            }
-        }
-
-        function accessDirectAdminDashboard() {
-            window.history.pushState({}, '', '?view=admin#admin');
-            showAdminDashboard();
-        }
-
-        // UNIVERSAL SHEET LOADER (ADAPTS TO ANY RETURNED FORMAT)
-        async function fetchDatabaseFromGoogleSheets() {
-            try {
-                const res = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await res.json();
-
-                let incomingListings = [];
-                let incomingDevUnits = [];
-
-                if (Array.isArray(data)) {
-                    incomingListings = data;
-                } else if (data && typeof data === 'object') {
-                    if (Array.isArray(data.secondaryListings)) incomingListings = data.secondaryListings;
-                    if (Array.isArray(data.developerUnits)) incomingDevUnits = data.developerUnits;
-                }
-
-                if (incomingListings.length > 0) {
-                    properties = incomingListings.map(parseSheetListingItem);
-                    localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
-                    renderPropertyList();
-                }
-
-                if (incomingDevUnits.length > 0) {
-                    mergeSheet5UnitsIntoProjects(incomingDevUnits);
-                }
-            } catch (err) {
-                console.warn("Could not fetch remote sheets, maintaining local data:", err);
-            }
-        }
-
-        function parseSheetListingItem(item) {
-            let imgs = [];
-            if (Array.isArray(item.images)) {
-                imgs = item.images;
-            } else if (item.image) {
-                imgs = String(item.image).split(',').map(s => s.trim()).filter(Boolean);
-            }
-            if (imgs.length === 0) imgs = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
-
-            return {
-                id: Number(item.id) || Date.now(),
-                title: item.title || item.propertyTitle || "Luxury Property",
-                location: item.location || "Metro Manila",
-                price: Number(item.price) || 0,
-                status: item.status || item.transaction || "Sale",
-                category: String(item.category || "CONDOMINIUM").toUpperCase(),
-                isDeal: String(item.isDeal).toUpperCase() === 'TRUE' || item.isDeal === true,
-                isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE' || item.isFeatured === true,
-                beds: Number(item.beds) || 0,
-                baths: Number(item.baths) || 0,
-                parking: Number(item.parking || item.garage) || 0,
-                area: item.area || "N/A",
-                developer: item.developer || "Compass Realty",
-                images: imgs,
-                description: item.description || "Exclusive luxury property registered with Compass Realty."
-            };
-        }
-
-        function mergeSheet5UnitsIntoProjects(sheetUnits) {
-            sheetUnits.forEach(su => {
-                const pId = su["Project ID"] || su.projectId;
-                const uId = su["Unit ID"] || su.unitId || ('U-' + Date.now());
-                const pName = su["Project Name"] || su.projectName;
-                const devName = su["Developer"] || su.developer;
-                const township = su["Township/Location"] || su.township;
-
-                let proj = developerProjects.find(p => p.id === pId || p.title.toLowerCase() === (pName || '').toLowerCase());
-                
-                if (!proj && pName) {
-                    proj = {
-                        id: pId || ('DEV-' + Date.now()),
-                        devSlug: (devName || 'developer').toLowerCase().replace(/[^a-z0-9]/g, '-'),
-                        developer: devName || "Developer Partner",
-                        title: pName,
-                        township: township || "Metro Manila",
-                        priceStart: 30000000,
-                        turnover: su["Turnover"] || "Preselling",
-                        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-                        description: "Exclusive masterplanned developer project.",
-                        units: []
-                    };
-                    developerProjects.push(proj);
-                }
-
-                if (proj) {
-                    const rawImages = su["Unit Image Gallery URLs"] || su.images || "";
-                    const imagesArr = rawImages ? String(rawImages).split(',').map(s => s.trim()).filter(Boolean) : [proj.image];
-
-                    const existingIndex = (proj.units || []).findIndex(u => u.id === uId || u.type === (su["Unit Type"] || su.unitType));
-
-                    const unitObj = {
-                        id: uId,
-                        type: su["Unit Type"] || su.unitType || "Luxury Suite",
-                        area: su["Floor Area"] || su.area || "N/A",
-                        priceRange: su["Price / Range"] || su.priceRange || "Inquire for Pricing",
-                        status: su["Unit Status"] || su.status || "Available",
-                        beds: Number(su["Bedrooms"] || su.beds) || 2,
-                        baths: Number(su["Bathrooms"] || su.baths) || 2,
-                        images: imagesArr
-                    };
-
-                    if (existingIndex !== -1) {
-                        proj.units[existingIndex] = unitObj;
-                    } else {
-                        if (!proj.units) proj.units = [];
-                        proj.units.push(unitObj);
-                    }
-                }
-            });
-
-            localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
-            populateTownshipFilterOptions();
-            filterDeveloperProjects();
-        }
-
-        // RENDER BROKERAGE LISTINGS
+        // =========================================================================
+        // BROKERAGE GRID & CARDS WITH AUTO-WATERMARK
+        // =========================================================================
         function renderPropertyList() {
             const grid = document.getElementById('property-grid');
             const emptyState = document.getElementById('empty-state');
@@ -1075,49 +865,49 @@
             const isFav = favorites.includes(prop.id);
             const isSold = String(prop.status).toUpperCase() === 'SOLD';
             const specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE" : "PARKING";
+            const watermarkId = `wm-card-${prop.id}`;
 
             card.innerHTML = `
                 <div>
+                    <!-- IMAGE WRAPPER WITH AUTO-WATERMARK -->
                     <div class="relative h-64 overflow-hidden bg-neutral-200 cursor-pointer" onclick="openPropertyModal(${prop.id})">
-                        <img src="${prop.images[0]}" alt="${prop.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img id="img-card-${prop.id}" src="${prop.images[0]}" alt="${prop.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Top status badges -->
                         <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
                             <span class="${isSold ? 'bg-red-700' : 'bg-black'} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black">
                                 ${isSold ? 'SOLD' : 'FOR ' + String(prop.status).toUpperCase()}
                             </span>
                             ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider">TOP 10 DEAL</span>` : ''}
                         </div>
+
+                        <!-- Favorite button -->
                         <button onclick="event.stopPropagation(); toggleFavorite(${prop.id});" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white text-black flex items-center justify-center transition-colors shadow">
                             <i class="${isFav ? 'fa-solid text-red-600' : 'fa-regular'} fa-heart text-sm"></i>
                         </button>
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex justify-between items-end">
-                            <div>
-                                <span class="text-[10px] text-neutral-300 uppercase font-semibold block">${prop.category} &bull; ID #${prop.id}</span>
-                                <span class="text-white text-lg sm:text-xl font-bold tracking-tight">${priceFormatted}</span>
-                            </div>
-                            <span class="text-[10px] text-neutral-300 font-mono">${prop.area}</span>
-                        </div>
+
+                        <!-- Bottom-left Embedded Watermark -->
+                        <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
+
                     <div class="p-6 cursor-pointer" onclick="openPropertyModal(${prop.id})">
-                        <div class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown mb-1">${prop.developer}</div>
-                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-2 line-clamp-1 group-hover:text-brand-brown transition-colors">${prop.title}</h3>
-                        <p class="text-xs text-neutral-600 font-light mb-4"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown">${prop.developer}</span>
+                            <span class="text-[10px] text-neutral-400 font-mono">${prop.area}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1 group-hover:text-brand-brown transition-colors">${prop.title}</h3>
+                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
                         
+                        <div class="text-lg font-bold text-black font-mono mb-4">${priceFormatted}</div>
+
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
-                            <div>
-                                <span class="block font-bold text-black">${prop.beds}</span>
-                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">BEDS</span>
-                            </div>
-                            <div>
-                                <span class="block font-bold text-black">${prop.baths}</span>
-                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">BATHS</span>
-                            </div>
-                            <div>
-                                <span class="block font-bold text-black">${prop.parking}</span>
-                                <span class="text-[9px] uppercase tracking-wider text-neutral-500">${specLabel}</span>
-                            </div>
+                            <div><span class="block font-bold text-black">${prop.beds}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">BEDS</span></div>
+                            <div><span class="block font-bold text-black">${prop.baths}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">BATHS</span></div>
+                            <div><span class="block font-bold text-black">${prop.parking}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">${specLabel}</span></div>
                         </div>
                     </div>
                 </div>
+
                 <div class="p-6 pt-0 flex gap-2">
                     <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
                         VIEW DETAILS
@@ -1127,10 +917,259 @@
                     </button>
                 </div>
             `;
+
+            // Detect background brightness and apply watermark
+            setTimeout(() => {
+                const imgEl = card.querySelector(`#img-card-${prop.id}`);
+                if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
+            }, 10);
+
             return card;
         }
 
-        // BROKERAGE DETAILS MODAL
+        // =========================================================================
+        // DEVELOPER MASTERPLAN PROJECTS & UNITS WITH AUTO-WATERMARKS
+        // =========================================================================
+        function renderDeveloperProjectsGrid(projects) {
+            const grid = document.getElementById('dev-projects-grid');
+            document.getElementById('dev-projects-count').textContent = `${projects.length} PROJECTS`;
+
+            if (projects.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center border-2 border-dashed border-neutral-300 bg-neutral-50">
+                        <i class="fa-solid fa-city text-3xl text-neutral-400 mb-2"></i>
+                        <h3 class="text-sm font-bold uppercase">NO DEVELOPER PROJECTS FOUND</h3>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = projects.map(p => {
+                const wmId = `wm-proj-${p.id}`;
+                return `
+                    <div class="bg-white border-2 border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
+                        <div>
+                            <!-- PROJECT COVER WITH AUTO-WATERMARK -->
+                            <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openDevProjectModal('${p.id}')">
+                                <img id="img-proj-${p.id}" src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                                
+                                <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                                    <span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest border border-white">
+                                        DIRECT DEVELOPER PROJECT
+                                    </span>
+                                    <span class="bg-black text-white px-2 py-0.5 text-[9px] uppercase font-mono font-semibold">
+                                        ${p.turnover}
+                                    </span>
+                                </div>
+
+                                <!-- Watermark at bottom left -->
+                                <div id="${wmId}" class="watermark-container"></div>
+                            </div>
+
+                            <div class="p-6">
+                                <span class="text-[10px] text-brand-brown uppercase font-bold tracking-wider">${p.developer}</span>
+                                <h3 class="text-lg font-bold text-black uppercase tracking-tight mt-0.5 line-clamp-1">${p.title}</h3>
+                                <p class="text-xs text-neutral-600 mb-2 font-medium">
+                                    <i class="fa-solid fa-map-location-dot text-brand-brown mr-1"></i> ${p.township}
+                                </p>
+                                <p class="text-xs text-neutral-500 font-light line-clamp-2 leading-relaxed mb-4">
+                                    ${p.description}
+                                </p>
+                                <div class="bg-neutral-50 p-3 border border-neutral-300 flex justify-between items-center mb-2">
+                                    <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">UNITS AVAILABLE</span>
+                                    <span class="text-xs font-bold text-black font-mono">${(p.units || []).length} Unit Types</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6 pt-0 space-y-2">
+                            <button onclick="openDevProjectModal('${p.id}')" class="w-full bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-images"></i> VIEW UNITS & IMAGE CAROUSELS
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Apply watermarks to all project covers
+            projects.forEach(p => {
+                setTimeout(() => {
+                    const imgEl = document.getElementById(`img-proj-${p.id}`);
+                    if (imgEl) applyWatermarkToContainer(`wm-proj-${p.id}`, imgEl);
+                }, 10);
+            });
+        }
+
+        // INDIVIDUAL PROJECT MODAL (UNIT CAROUSELS WITH WATERMARKS)
+        function openDevProjectModal(projectId) {
+            const proj = developerProjects.find(p => p.id === projectId);
+            if (!proj) return;
+
+            const modalContent = document.getElementById('dev-modal-content');
+            modalContent.innerHTML = `
+                <div>
+                    <!-- PROJECT HERO WITH WATERMARK -->
+                    <div class="relative h-72 sm:h-80 bg-black border border-black overflow-hidden group">
+                        <img id="img-hero-proj" src="${proj.image}" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 flex items-center gap-2 z-10">
+                            <span class="bg-brand-brown text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5">${proj.developer}</span>
+                            <span class="bg-white text-black text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 font-mono">${proj.turnover}</span>
+                        </div>
+                        <div id="wm-hero-proj" class="watermark-container"></div>
+                    </div>
+
+                    <div class="my-6">
+                        <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black">${proj.title}</h2>
+                        <p class="text-xs text-neutral-500 mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${proj.township}</p>
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2">MASTERPLAN OVERVIEW</h4>
+                        <p class="text-xs text-neutral-700 leading-relaxed font-light border-l-2 border-brand-brown pl-4">${proj.description}</p>
+                    </div>
+
+                    <!-- UNITS WITH CAROUSEL & WATERMARKS -->
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center border-b border-black pb-2">
+                            <h3 class="text-base font-bold uppercase">AVAILABLE UNIT LAYOUTS & PHOTO STUDIOS</h3>
+                            <span class="text-xs text-neutral-500 font-mono">Verified Developer Specifications</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            ${(proj.units || []).map((u) => {
+                                unitCarouselIndices[u.id] = 0;
+                                const imgs = u.images && u.images.length > 0 ? u.images : [proj.image];
+                                const wmUnitId = `wm-unit-${u.id}`;
+                                return `
+                                    <div class="bg-white border-2 border-neutral-300 hover:border-black flex flex-col justify-between transition-all">
+                                        <div>
+                                            <!-- UNIT CAROUSEL WITH AUTO WATERMARK -->
+                                            <div class="relative h-48 bg-neutral-900 overflow-hidden group">
+                                                <img id="unit-img-${u.id}" src="${imgs[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)">
+                                                
+                                                ${imgs.length > 1 ? `
+                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, -1)" class="absolute left-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-30">&lang;</button>
+                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 1)" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-30">&rang;</button>
+                                                    <div class="absolute top-2 right-2 bg-black/80 text-[9px] text-white font-mono px-2 py-0.5 z-20" id="unit-indicator-${u.id}">
+                                                        1 / ${imgs.length} PHOTOS
+                                                    </div>
+                                                ` : ''}
+
+                                                <!-- Embedded Watermark at bottom left -->
+                                                <div id="${wmUnitId}" class="watermark-container"></div>
+                                            </div>
+
+                                            <div class="p-4">
+                                                <div class="flex justify-between items-start mb-1">
+                                                    <h4 class="text-sm font-bold uppercase line-clamp-1">${u.type}</h4>
+                                                    <span class="text-[9px] bg-neutral-100 px-1.5 py-0.5 font-semibold uppercase text-neutral-800">${u.status}</span>
+                                                </div>
+                                                <p class="text-xs font-bold text-brand-brown font-mono">${u.priceRange}</p>
+                                                
+                                                <div class="grid grid-cols-3 gap-1 py-2 my-2 border-y border-neutral-200 text-center text-[10px]">
+                                                    <div><span class="font-bold">${u.area}</span><br><span class="text-neutral-500">AREA</span></div>
+                                                    <div><span class="font-bold">${u.beds || '-'}</span><br><span class="text-neutral-500">BEDS</span></div>
+                                                    <div><span class="font-bold">${u.baths || '-'}</span><br><span class="text-neutral-500">BATHS</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-4 pt-0">
+                                            <button onclick="openDevInquiryModal('${escapeQuotes(proj.developer)}', '${escapeQuotes(proj.title)}', '${escapeQuotes(u.type)}')" class="w-full bg-brand-brown hover:bg-black text-white py-2 text-xs font-semibold uppercase tracking-wider transition-colors">
+                                                INQUIRE THIS UNIT
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('dev-project-modal').classList.remove('hidden');
+
+            // Apply watermarks
+            setTimeout(() => {
+                const heroImg = document.getElementById('img-hero-proj');
+                if (heroImg) applyWatermarkToContainer('wm-hero-proj', heroImg);
+
+                (proj.units || []).forEach(u => {
+                    const uImg = document.getElementById(`unit-img-${u.id}`);
+                    if (uImg) applyWatermarkToContainer(`wm-unit-${u.id}`, uImg);
+                });
+            }, 15);
+        }
+
+        function closeDevProjectModal() {
+            document.getElementById('dev-project-modal').classList.add('hidden');
+        }
+
+        function navigateUnitCarousel(unitId, images, dir) {
+            if (!images || images.length === 0) return;
+            const currentIdx = unitCarouselIndices[unitId] || 0;
+            const nextIdx = (currentIdx + dir + images.length) % images.length;
+            unitCarouselIndices[unitId] = nextIdx;
+
+            const imgEl = document.getElementById(`unit-img-${unitId}`);
+            const indEl = document.getElementById(`unit-indicator-${unitId}`);
+            if (imgEl) {
+                imgEl.src = images[nextIdx];
+                applyWatermarkToContainer(`wm-unit-${unitId}`, imgEl);
+            }
+            if (indEl) indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
+        }
+
+        // =========================================================================
+        // LIGHTBOX STUDIO WITH AUTOMATIC WATERMARK
+        // =========================================================================
+        function openLightboxStudio(title, images, startIndex = 0) {
+            lightboxCurrentImages = images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"];
+            lightboxCurrentIndex = startIndex;
+
+            document.getElementById('lightbox-title').textContent = title;
+            updateLightboxView();
+
+            const thumbsContainer = document.getElementById('lightbox-thumbnails');
+            thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
+                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
+            `).join('');
+
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+
+        function updateLightboxView() {
+            const mainImg = document.getElementById('lightbox-main-img');
+            mainImg.src = lightboxCurrentImages[lightboxCurrentIndex];
+            document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
+
+            // Apply watermark to lightbox image
+            applyWatermarkToContainer('lightbox-watermark', mainImg);
+
+            // Update active thumbnail
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                if (i === lightboxCurrentIndex) {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105";
+                } else {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 hover:opacity-100 cursor-pointer";
+                }
+            }
+        }
+
+        function navigateLightbox(dir) {
+            lightboxCurrentIndex = (lightboxCurrentIndex + dir + lightboxCurrentImages.length) % lightboxCurrentImages.length;
+            updateLightboxView();
+        }
+
+        function setLightboxIndex(idx) {
+            lightboxCurrentIndex = idx;
+            updateLightboxView();
+        }
+
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
+
+        // =========================================================================
+        // BROKERAGE DETAILS MODAL (WITH WATERMARK)
+        // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
@@ -1142,11 +1181,13 @@
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-6">
+                        <!-- MODAL HERO IMAGE WITH AUTO-WATERMARK -->
                         <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(prop.images).replace(/"/g, '&quot;')}, 0)">
-                            <img src="${prop.images[0]}" class="w-full h-full object-cover">
-                            <span class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600">
+                            <img id="img-modal-prop" src="${prop.images[0]}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30">
                                 <i class="fa-solid fa-expand mr-1"></i> FULL PHOTO STUDIO
                             </span>
+                            <div id="wm-modal-prop" class="watermark-container"></div>
                         </div>
 
                         <div>
@@ -1195,10 +1236,87 @@
                 </div>
             `;
             document.getElementById('property-modal').classList.remove('hidden');
+
+            setTimeout(() => {
+                const modalImg = document.getElementById('img-modal-prop');
+                if (modalImg) applyWatermarkToContainer('wm-modal-prop', modalImg);
+            }, 15);
         }
 
         function closePropertyModal() {
             document.getElementById('property-modal').classList.add('hidden');
+        }
+
+        // =========================================================================
+        // GOOGLE SHEETS SYNC & APPOINTMENTS
+        // =========================================================================
+        async function fetchDatabaseFromGoogleSheets() {
+            try {
+                const res = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await res.json();
+
+                let incomingListings = [];
+                let incomingDevUnits = [];
+
+                if (Array.isArray(data)) {
+                    incomingListings = data;
+                } else if (data && typeof data === 'object') {
+                    if (Array.isArray(data.secondaryListings)) incomingListings = data.secondaryListings;
+                    if (Array.isArray(data.developerUnits)) incomingDevUnits = data.developerUnits;
+                }
+
+                if (incomingListings.length > 0) {
+                    properties = incomingListings.map(item => ({
+                        id: Number(item.id) || Date.now(),
+                        title: item.title || "Luxury Property",
+                        location: item.location || "Metro Manila",
+                        price: Number(item.price) || 0,
+                        status: item.status || "Sale",
+                        category: String(item.category || "CONDOMINIUM").toUpperCase(),
+                        isDeal: String(item.isDeal).toUpperCase() === 'TRUE',
+                        isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE',
+                        beds: Number(item.beds) || 0,
+                        baths: Number(item.baths) || 0,
+                        parking: Number(item.parking) || 0,
+                        area: item.area || "N/A",
+                        developer: item.developer || "Compass Realty",
+                        images: item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"],
+                        description: item.description || ""
+                    }));
+                    localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+                    renderPropertyList();
+                }
+
+                if (incomingDevUnits.length > 0) {
+                    incomingDevUnits.forEach(su => {
+                        const pId = su["Project ID"] || su.projectId;
+                        const uId = su["Unit ID"] || su.unitId;
+                        let proj = developerProjects.find(p => p.id === pId);
+                        if (proj) {
+                            const rawImages = su["Unit Image Gallery URLs"] || su.images || "";
+                            const imagesArr = rawImages ? String(rawImages).split(',').map(s => s.trim()).filter(Boolean) : [proj.image];
+                            const unitIndex = (proj.units || []).findIndex(u => u.id === uId);
+                            const unitObj = {
+                                id: uId,
+                                type: su["Unit Type"] || su.unitType || "Luxury Suite",
+                                area: su["Floor Area"] || su.area || "N/A",
+                                priceRange: su["Price / Range"] || su.priceRange || "Inquire for Pricing",
+                                status: su["Unit Status"] || su.status || "Available",
+                                beds: Number(su["Bedrooms"] || su.beds) || 2,
+                                baths: Number(su["Bathrooms"] || su.baths) || 2,
+                                images: imagesArr
+                            };
+                            if (unitIndex !== -1) proj.units[unitIndex] = unitObj;
+                            else (proj.units = proj.units || []).push(unitObj);
+                        }
+                    });
+                    localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
+                    populateTownshipFilterOptions();
+                    filterDeveloperProjects();
+                }
+            } catch (err) {
+                console.warn("Using local cached data:", err);
+            }
         }
 
         async function handleAppointmentSubmit(e, propTitle) {
@@ -1230,11 +1348,59 @@
             closePropertyModal();
         }
 
-        // DEVELOPER PORTAL VIEW CONTROLLER
+        function openDevInquiryModal(devName, projectName, unitType = '') {
+            document.getElementById('dev-inquiry-devname').value = devName;
+            document.getElementById('dev-inquiry-projectname').value = projectName;
+            document.getElementById('dev-inquiry-unittype').value = unitType;
+            document.getElementById('dev-inquiry-project-title').textContent = `INQUIRE: ${projectName.toUpperCase()}`;
+            document.getElementById('dev-inquiry-subtitle').textContent = unitType ? `Selected Unit: ${unitType}` : `Direct Developer Desk for ${devName}`;
+            document.getElementById('dev-inquiry-modal').classList.remove('hidden');
+        }
+
+        function closeDevInquiryModal() {
+            document.getElementById('dev-inquiry-modal').classList.add('hidden');
+        }
+
+        async function handleDevInquirySubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('dev-inquiry-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            const inquiryData = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                developer: document.getElementById('dev-inquiry-devname').value,
+                project: document.getElementById('dev-inquiry-projectname').value,
+                unitType: document.getElementById('dev-inquiry-unittype').value || "Standard Layout",
+                clientName: document.getElementById('dev-inquiry-clientname').value,
+                email: document.getElementById('dev-inquiry-clientemail').value,
+                phone: document.getElementById('dev-inquiry-clientphone').value,
+                notes: document.getElementById('dev-inquiry-notes').value || "N/A"
+            };
+
+            developerInquiries.push(inquiryData);
+            localStorage.setItem('cpr_dev_inquiries', JSON.stringify(developerInquiries));
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sheetTab: "Sheet4", action: "addDeveloperInquiry", ...inquiryData })
+                });
+            } catch (err) {}
+
+            showToast("Inquiry logged to Developer Desk (Sheet 4 updated)!", "success");
+            closeDevInquiryModal();
+            btn.textContent = "SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)";
+        }
+
+        // =========================================================================
+        // VIEW NAVIGATION & SEARCH ROUTINES
+        // =========================================================================
         function showDeveloperPortalView(slug = 'ALL') {
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.remove('hidden');
-            document.getElementById('admin-dashboard-container').classList.add('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
 
             renderDeveloperSelectorDropdown();
@@ -1303,397 +1469,20 @@
             switchDeveloperBrand('ALL');
         }
 
-        function renderDeveloperProjectsGrid(projects) {
-            const grid = document.getElementById('dev-projects-grid');
-            document.getElementById('dev-projects-count').textContent = `${projects.length} PROJECTS`;
-
-            if (projects.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full py-16 text-center border-2 border-dashed border-neutral-300 bg-neutral-50">
-                        <i class="fa-solid fa-city text-3xl text-neutral-400 mb-2"></i>
-                        <h3 class="text-sm font-bold uppercase">NO DEVELOPER PROJECTS FOUND</h3>
-                    </div>`;
-                return;
-            }
-
-            grid.innerHTML = projects.map(p => `
-                <div class="bg-white border-2 border-black group flex flex-col justify-between hover:shadow-2xl transition-all">
-                    <div>
-                        <div class="relative h-64 overflow-hidden bg-neutral-900 cursor-pointer" onclick="openDevProjectModal('${p.id}')">
-                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
-                            <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
-                                <span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest border border-white">
-                                    DIRECT DEVELOPER PROJECT
-                                </span>
-                                <span class="bg-black text-white px-2 py-0.5 text-[9px] uppercase font-mono font-semibold">
-                                    ${p.turnover}
-                                </span>
-                            </div>
-                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent p-4">
-                                <span class="text-[10px] text-brand-brown bg-white px-2 py-0.5 uppercase font-bold tracking-wider">${p.developer}</span>
-                                <h3 class="text-lg font-bold text-white uppercase tracking-tight mt-1 line-clamp-1">${p.title}</h3>
-                            </div>
-                        </div>
-
-                        <div class="p-6">
-                            <p class="text-xs text-neutral-600 mb-2 font-medium">
-                                <i class="fa-solid fa-map-location-dot text-brand-brown mr-1"></i> ${p.township}
-                            </p>
-                            <p class="text-xs text-neutral-500 font-light line-clamp-2 leading-relaxed mb-4">
-                                ${p.description}
-                            </p>
-                            <div class="bg-neutral-50 p-3 border border-neutral-300 flex justify-between items-center mb-2">
-                                <span class="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">UNITS AVAILABLE</span>
-                                <span class="text-xs font-bold text-black font-mono">${(p.units || []).length} Unit Types</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-6 pt-0 space-y-2">
-                        <button onclick="openDevProjectModal('${p.id}')" class="w-full bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-images"></i> VIEW UNITS & IMAGE CAROUSELS
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // INDIVIDUAL DEVELOPER PROJECT & UNIT CAROUSELS
-        function openDevProjectModal(projectId) {
-            const proj = developerProjects.find(p => p.id === projectId);
-            if (!proj) return;
-
-            const modalContent = document.getElementById('dev-modal-content');
-            modalContent.innerHTML = `
-                <div>
-                    <div class="relative h-72 sm:h-80 bg-black border border-black overflow-hidden group">
-                        <img src="${proj.image}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="bg-brand-brown text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5">${proj.developer}</span>
-                                <span class="bg-white text-black text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 font-mono">${proj.turnover}</span>
-                            </div>
-                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white">${proj.title}</h2>
-                            <p class="text-xs text-neutral-300 font-light"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${proj.township}</p>
-                        </div>
-                    </div>
-
-                    <div class="my-6">
-                        <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-2">MASTERPLAN OVERVIEW</h4>
-                        <p class="text-xs text-neutral-700 leading-relaxed font-light border-l-2 border-brand-brown pl-4">${proj.description}</p>
-                    </div>
-
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-center border-b border-black pb-2">
-                            <h3 class="text-base font-bold uppercase">AVAILABLE UNIT LAYOUTS & PHOTO STUDIOS</h3>
-                            <span class="text-xs text-neutral-500 font-mono">Live Sync with Sheet 5</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${(proj.units || []).map((u) => {
-                                unitCarouselIndices[u.id] = 0;
-                                const imgs = u.images && u.images.length > 0 ? u.images : [proj.image];
-                                return `
-                                    <div class="bg-white border-2 border-neutral-300 hover:border-black flex flex-col justify-between transition-all">
-                                        <div>
-                                            <div class="relative h-48 bg-neutral-900 overflow-hidden group">
-                                                <img id="unit-img-${u.id}" src="${imgs[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)">
-                                                
-                                                ${imgs.length > 1 ? `
-                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, -1)" class="absolute left-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-10">&lang;</button>
-                                                    <button onclick="navigateUnitCarousel('${u.id}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 1)" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-black/75 hover:bg-black text-white w-7 h-7 flex items-center justify-center text-xs z-10">&rang;</button>
-                                                    <div class="absolute bottom-2 left-2 bg-black/80 text-[9px] text-white font-mono px-2 py-0.5" id="unit-indicator-${u.id}">
-                                                        1 / ${imgs.length} PHOTOS
-                                                    </div>
-                                                ` : ''}
-
-                                                <button onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(imgs).replace(/"/g, '&quot;')}, 0)" class="absolute top-2 right-2 bg-black/80 hover:bg-brand-brown text-white text-[9px] font-bold uppercase px-2 py-1 flex items-center gap-1 border border-neutral-600">
-                                                    <i class="fa-solid fa-expand"></i> STUDIO
-                                                </button>
-                                            </div>
-
-                                            <div class="p-4">
-                                                <div class="flex justify-between items-start mb-1">
-                                                    <h4 class="text-sm font-bold uppercase line-clamp-1">${u.type}</h4>
-                                                    <span class="text-[9px] bg-neutral-100 px-1.5 py-0.5 font-semibold uppercase text-neutral-800">${u.status}</span>
-                                                </div>
-                                                <p class="text-xs font-bold text-brand-brown font-mono">${u.priceRange}</p>
-                                                
-                                                <div class="grid grid-cols-3 gap-1 py-2 my-2 border-y border-neutral-200 text-center text-[10px]">
-                                                    <div><span class="font-bold">${u.area}</span><br><span class="text-neutral-500">AREA</span></div>
-                                                    <div><span class="font-bold">${u.beds || '-'}</span><br><span class="text-neutral-500">BEDS</span></div>
-                                                    <div><span class="font-bold">${u.baths || '-'}</span><br><span class="text-neutral-500">BATHS</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="p-4 pt-0">
-                                            <button onclick="openDevInquiryModal('${escapeQuotes(proj.developer)}', '${escapeQuotes(proj.title)}', '${escapeQuotes(u.type)}')" class="w-full bg-brand-brown hover:bg-black text-white py-2 text-xs font-semibold uppercase tracking-wider transition-colors">
-                                                INQUIRE THIS UNIT
-                                            </button>
-                                        </div>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('dev-project-modal').classList.remove('hidden');
-        }
-
-        function closeDevProjectModal() {
-            document.getElementById('dev-project-modal').classList.add('hidden');
-        }
-
-        function navigateUnitCarousel(unitId, images, dir) {
-            if (!images || images.length === 0) return;
-            const currentIdx = unitCarouselIndices[unitId] || 0;
-            const nextIdx = (currentIdx + dir + images.length) % images.length;
-            unitCarouselIndices[unitId] = nextIdx;
-
-            const imgEl = document.getElementById(`unit-img-${unitId}`);
-            const indEl = document.getElementById(`unit-indicator-${unitId}`);
-            if (imgEl) imgEl.src = images[nextIdx];
-            if (indEl) indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
-        }
-
-        // LIGHTBOX STUDIO CONTROLLER
-        function openLightboxStudio(title, images, startIndex = 0) {
-            lightboxCurrentImages = images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"];
-            lightboxCurrentIndex = startIndex;
-
-            document.getElementById('lightbox-title').textContent = title;
-            updateLightboxView();
-
-            const thumbsContainer = document.getElementById('lightbox-thumbnails');
-            thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
-                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
-            `).join('');
-
-            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
-        }
-
-        function updateLightboxView() {
-            document.getElementById('lightbox-main-img').src = lightboxCurrentImages[lightboxCurrentIndex];
-            document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
-            
-            const thumbs = document.getElementById('lightbox-thumbnails').children;
-            for (let i = 0; i < thumbs.length; i++) {
-                if (i === lightboxCurrentIndex) {
-                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105";
-                } else {
-                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 hover:opacity-100 cursor-pointer";
-                }
-            }
-        }
-
-        function navigateLightbox(dir) {
-            lightboxCurrentIndex = (lightboxCurrentIndex + dir + lightboxCurrentImages.length) % lightboxCurrentImages.length;
-            updateLightboxView();
-        }
-
-        function setLightboxIndex(idx) {
-            lightboxCurrentIndex = idx;
-            updateLightboxView();
-        }
-
-        function closeLightboxStudio() {
-            document.getElementById('lightbox-studio-modal').classList.add('hidden');
-        }
-
-        // DEVELOPER UNIT INQUIRY (AUTO-LOGS TO SHEET 4)
-        function openDevInquiryModal(devName, projectName, unitType = '') {
-            document.getElementById('dev-inquiry-devname').value = devName;
-            document.getElementById('dev-inquiry-projectname').value = projectName;
-            document.getElementById('dev-inquiry-unittype').value = unitType;
-            document.getElementById('dev-inquiry-project-title').textContent = `INQUIRE: ${projectName.toUpperCase()}`;
-            document.getElementById('dev-inquiry-subtitle').textContent = unitType ? `Selected Unit: ${unitType}` : `Direct Developer Desk for ${devName}`;
-            document.getElementById('dev-inquiry-modal').classList.remove('hidden');
-        }
-
-        function closeDevInquiryModal() {
-            document.getElementById('dev-inquiry-modal').classList.add('hidden');
-        }
-
-        async function handleDevInquirySubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('dev-inquiry-submit-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
-
-            const inquiryData = {
-                id: Date.now(),
-                timestamp: new Date().toISOString(),
-                developer: document.getElementById('dev-inquiry-devname').value,
-                project: document.getElementById('dev-inquiry-projectname').value,
-                unitType: document.getElementById('dev-inquiry-unittype').value || "Standard Layout",
-                clientName: document.getElementById('dev-inquiry-clientname').value,
-                email: document.getElementById('dev-inquiry-clientemail').value,
-                phone: document.getElementById('dev-inquiry-clientphone').value,
-                notes: document.getElementById('dev-inquiry-notes').value || "N/A"
-            };
-
-            developerInquiries.push(inquiryData);
-            localStorage.setItem('cpr_dev_inquiries', JSON.stringify(developerInquiries));
-
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ sheetTab: "Sheet4", action: "addDeveloperInquiry", ...inquiryData })
-                });
-            } catch (err) {}
-
-            showToast("Inquiry logged to Developer Desk (Sheet 4 updated)!", "success");
-            closeDevInquiryModal();
-            btn.textContent = "SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)";
-        }
-
-        // ADMIN CONTROLLER
-        function showAdminDashboard() {
-            document.getElementById('public-view-container').classList.add('hidden');
+        function showMainApp() {
+            document.getElementById('public-view-container').classList.remove('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('admin-dashboard-container').classList.remove('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
-            renderAdminDashboardTables();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function switchAdminSubTab(subtab) {
-            ['developers', 'devinquiries', 'listings'].forEach(st => {
-                document.getElementById(`admin-subtab-${st}`).classList.add('hidden');
-                document.getElementById(`admin-subtab-btn-${st}`).className = "p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap";
-            });
-            document.getElementById(`admin-subtab-${subtab}`).classList.remove('hidden');
-            document.getElementById(`admin-subtab-btn-${subtab}`).className = "p-4 border-b-2 border-brand-brown text-black whitespace-nowrap";
+        function showCareersPage() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderAdminDashboardTables() {
-            document.getElementById('admin-stat-listings').textContent = properties.length;
-            document.getElementById('admin-stat-dev-projects').textContent = developerProjects.length;
-            
-            let totalUnits = 0;
-            developerProjects.forEach(p => totalUnits += (p.units || []).length);
-            document.getElementById('admin-stat-dev-units').textContent = totalUnits;
-            document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
-
-            const tbodyUnits = document.getElementById('admin-dev-units-table');
-            const unitRows = [];
-            developerProjects.forEach(proj => {
-                (proj.units || []).forEach(u => {
-                    unitRows.push(`
-                        <tr class="hover:bg-neutral-50">
-                            <td class="p-3 font-bold">${proj.title}</td>
-                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
-                            <td class="p-3 font-semibold">${u.type}</td>
-                            <td class="p-3 font-mono">${u.area}</td>
-                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
-                            <td class="p-3 font-mono text-[10px]">${(u.images || []).length} photos</td>
-                            <td class="p-3 text-right">
-                                <button onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(u.images || []).replace(/"/g, '&quot;')}, 0)" class="bg-black text-white px-2.5 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">PREVIEW</button>
-                            </td>
-                        </tr>
-                    `);
-                });
-            });
-            tbodyUnits.innerHTML = unitRows.join('');
-
-            const tbodyDevInq = document.getElementById('admin-devinquiries-table');
-            tbodyDevInq.innerHTML = developerInquiries.length === 0 ? 
-                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No developer inquiries recorded yet.</td></tr>` :
-                developerInquiries.map(di => `
-                    <tr class="hover:bg-neutral-50">
-                        <td class="p-3 font-bold text-brand-brown">${di.developer}</td>
-                        <td class="p-3 font-semibold">${di.project} (${di.unitType || 'Layout'})</td>
-                        <td class="p-3 font-bold">${di.clientName}</td>
-                        <td class="p-3 font-mono">${di.email}<br>${di.phone}</td>
-                        <td class="p-3 font-mono text-[10px]">${di.timestamp || 'N/A'}</td>
-                    </tr>
-                `).join('');
-
-            const tbodyListings = document.getElementById('admin-listings-table');
-            tbodyListings.innerHTML = properties.map(p => `
-                <tr class="hover:bg-neutral-50">
-                    <td class="p-3 font-mono font-bold">${p.id}</td>
-                    <td class="p-3 font-bold">${p.title}</td>
-                    <td class="p-3 font-mono">₱${p.price.toLocaleString()}</td>
-                    <td class="p-3">${p.location}</td>
-                </tr>
-            `).join('');
-        }
-
-        function openAddDevUnitModal() {
-            const select = document.getElementById('unit-target-project');
-            select.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
-            document.getElementById('unit-form-type').value = '';
-            document.getElementById('unit-form-area').value = '';
-            document.getElementById('unit-form-price').value = '';
-            document.getElementById('unit-form-images').value = '';
-            document.getElementById('add-devunit-modal').classList.remove('hidden');
-        }
-
-        function closeAddDevUnitModal() {
-            document.getElementById('add-devunit-modal').classList.add('hidden');
-        }
-
-        async function handleSaveDevUnitSubmit(e) {
-            e.preventDefault();
-            const projId = document.getElementById('unit-target-project').value;
-            const proj = developerProjects.find(p => p.id === projId);
-            if (!proj) return;
-
-            const rawImgs = document.getElementById('unit-form-images').value;
-            const parsedImages = rawImgs.split(',').map(s => s.trim()).filter(Boolean);
-
-            const newUnit = {
-                id: 'UNIT-' + Date.now(),
-                type: document.getElementById('unit-form-type').value,
-                area: document.getElementById('unit-form-area').value,
-                priceRange: document.getElementById('unit-form-price').value,
-                status: document.getElementById('unit-form-status').value,
-                beds: 3, baths: 3,
-                images: parsedImages.length > 0 ? parsedImages : [proj.image]
-            };
-
-            if (!proj.units) proj.units = [];
-            proj.units.push(newUnit);
-
-            localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
-
-            // AUTO-APPEND INTO SHEET 5
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sheetTab: "Sheet5",
-                        action: "syncDeveloperUnit",
-                        projectId: proj.id,
-                        projectName: proj.title,
-                        developer: proj.developer,
-                        township: proj.township,
-                        turnover: proj.turnover,
-                        unitId: newUnit.id,
-                        unitType: newUnit.type,
-                        area: newUnit.area,
-                        priceRange: newUnit.priceRange,
-                        status: newUnit.status,
-                        beds: newUnit.beds,
-                        baths: newUnit.baths,
-                        images: newUnit.images
-                    })
-                });
-            } catch (err) {}
-
-            closeAddDevUnitModal();
-            renderAdminDashboardTables();
-            showToast(`Added unit to ${proj.title} and auto-synced to Sheet 5!`, "success");
-        }
-
-        // BROKERAGE FILTER FUNCTIONS
         function setFilterCategory(cat) {
             currentFilters.category = cat;
             ['ALL', 'LOTS', 'HOUSE AND LOTS', 'CONDOMINIUM', 'COMMERCIAL'].forEach(c => {
@@ -1754,22 +1543,6 @@
         function toggleFavoritesView() {
             currentFilters.onlyFavs = !currentFilters.onlyFavs;
             renderPropertyList();
-        }
-
-        function showMainApp() {
-            document.getElementById('public-view-container').classList.remove('hidden');
-            document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('admin-dashboard-container').classList.add('hidden');
-            document.getElementById('careers-view-container').classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showCareersPage() {
-            document.getElementById('public-view-container').classList.add('hidden');
-            document.getElementById('developer-portal-view').classList.add('hidden');
-            document.getElementById('admin-dashboard-container').classList.add('hidden');
-            document.getElementById('careers-view-container').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function openEnlistModal() { document.getElementById('enlist-modal').classList.remove('hidden'); }
