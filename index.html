@@ -57,14 +57,14 @@
             background-size: cover; background-position: center;
         }
 
-        /* WATERMARK OVERLAY: ENLARGED THRICE (45% CONTAINER WIDTH) */
+        /* WATERMARK OVERLAY: SIZED AT 45% (THRICE ITS PREVIOUS 15% SIZE) */
         .watermark-container {
             position: absolute;
             bottom: 0.85rem;
             left: 0.85rem;
-            width: 30%;
-            min-width: 155px;
-            max-width: 390px;
+            width: 45%;
+            min-width: 195px;
+            max-width: 360px;
             pointer-events: none;
             z-index: 25;
             transition: all 0.3s ease;
@@ -127,7 +127,7 @@
                         <i class="fa-solid fa-city mr-1"></i> DEVELOPERS
                     </button>
 
-                    <!-- FOR SALE DROPDOWN -->
+                    <!-- FOR SALE DROPDOWN (INCLUDES FOR SALE & RENT) -->
                     <div class="relative dropdown-container py-6">
                         <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
                             FOR SALE <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
@@ -137,11 +137,12 @@
                             <a href="#" onclick="showMainApp(); filterProperties('Sale', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
 
-                    <!-- FOR RENT DROPDOWN -->
+                    <!-- FOR RENT DROPDOWN (INCLUDES FOR SALE & RENT) -->
                     <div class="relative dropdown-container py-6">
                         <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
                             FOR RENT <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
@@ -151,7 +152,8 @@
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
 
@@ -176,10 +178,10 @@
                 <button onclick="showDeveloperPortalView(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-brand-brown font-bold hover:bg-neutral-100">DEVELOPERS PORTAL</button>
                 
                 <div class="border-t border-neutral-200 pt-2">
-                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">FOR SALE</span>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">ALL FOR SALE</button>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">CONDOMINIUM</button>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">HOUSE AND LOTS</button>
+                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">TRANSACTIONS</span>
+                    <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">FOR SALE (INCL. BOTH)</button>
+                    <button onclick="showMainApp(); filterProperties('Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">FOR RENT (INCL. BOTH)</button>
+                    <button onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-brand-brown font-bold hover:bg-neutral-100 uppercase">FOR SALE & RENT ONLY</button>
                 </div>
             </div>
         </div>
@@ -211,8 +213,9 @@
                             <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Transaction</label>
                             <select id="filter-status" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
                                 <option value="ALL">ANY TRANSACTION</option>
-                                <option value="Sale">FOR SALE</option>
-                                <option value="Rent">FOR RENT</option>
+                                <option value="Sale">FOR SALE (INCL. BOTH)</option>
+                                <option value="Rent">FOR RENT (INCL. BOTH)</option>
+                                <option value="Sale & Rent">FOR SALE & RENT (DUAL)</option>
                                 <option value="Sold">SOLD</option>
                             </select>
                         </div>
@@ -366,7 +369,7 @@
             <!-- WATERMARKED LIGHTBOX IMAGE WRAPPER -->
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain">
-                <!-- Watermark injected dynamically at 45% width (thrice its previous size) -->
+                <!-- Watermark injected dynamically at 45% width -->
                 <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
 
@@ -470,6 +473,291 @@
         <p class="text-xs text-neutral-600">Please submit your resume to verify@compassprimerealty.com</p>
     </div>
 
+    <!-- ADMIN DASHBOARD CONTAINER (DIRECT SECURE ACCESS VIA #admin) -->
+    <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-black text-white p-6 border-b-4 border-brand-brown flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-red-700 text-white text-[9px] uppercase font-bold px-2 py-0.5 tracking-wider">DIRECT SECURE URL ACCESS</span>
+                        <span class="text-xs text-neutral-400">ADMIN: <strong class="text-white">verify@compassprimerealty.com</strong></span>
+                    </div>
+                    <h1 class="text-2xl font-bold uppercase tracking-tight mt-1">ADMIN CONTROL CENTER & INQUIRIES DESK</h1>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="showMainApp()" class="bg-neutral-800 hover:bg-neutral-700 text-white text-xs px-4 py-2 font-semibold uppercase border border-neutral-600">
+                        BROKERAGE SITE
+                    </button>
+                    <button onclick="showDeveloperPortalView()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 font-semibold uppercase border border-white">
+                        DEVELOPER PORTAL
+                    </button>
+                </div>
+            </div>
+
+            <!-- LIVE METRICS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-8">
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">REALTOR LISTINGS</div>
+                    <div class="text-3xl font-bold text-black mt-2" id="admin-stat-listings">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 1</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER PROJECTS</div>
+                    <div class="text-3xl font-bold text-brand-brown mt-2" id="admin-stat-dev-projects">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Direct Developer Townships</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">DEVELOPER UNITS</div>
+                    <div class="text-3xl font-bold text-blue-900 mt-2" id="admin-stat-dev-units">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Auto-synced to Sheet 5</div>
+                </div>
+                <div class="bg-white p-6 border border-neutral-300">
+                    <div class="text-[10px] font-semibold uppercase tracking-widest text-neutral-500">PROJECT INQUIRIES</div>
+                    <div class="text-3xl font-bold text-purple-900 mt-2" id="admin-stat-devinquiries">0</div>
+                    <div class="text-xs text-neutral-500 mt-1 font-light">Sheet Tab 4</div>
+                </div>
+            </div>
+
+            <div class="flex border-b border-black bg-white mb-6 text-xs uppercase font-bold overflow-x-auto">
+                <button onclick="switchAdminSubTab('listings')" id="admin-subtab-btn-listings" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">LISTINGS MANAGEMENT (SHEET 1)</button>
+                <button onclick="switchAdminSubTab('developers')" id="admin-subtab-btn-developers" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PROJECTS & UNIT INVENTORY</button>
+                <button onclick="switchAdminSubTab('devinquiries')" id="admin-subtab-btn-devinquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PROJECT INQUIRIES (SHEET 4)</button>
+            </div>
+
+            <!-- ADMIN SUBTAB 1: LISTINGS MANAGEMENT (FULLY EDITABLE) -->
+            <div id="admin-subtab-listings" class="bg-white border border-neutral-300 p-6 space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-neutral-300 gap-4">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase tracking-tight text-black">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
+                        <p class="text-xs text-neutral-500 font-light">All changes save instantly to Google Sheet 1 and cannot be overwritten by Drive text files.</p>
+                    </div>
+                    <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors">
+                        <i class="fa-solid fa-plus mr-1"></i> ADD NEW LISTING
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-neutral-900 text-white uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="p-3">ID</th>
+                                <th class="p-3">TITLE</th>
+                                <th class="p-3">LOCATION</th>
+                                <th class="p-3">STATUS</th>
+                                <th class="p-3">CATEGORY</th>
+                                <th class="p-3">PRICE (PHP)</th>
+                                <th class="p-3 text-right">ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-listings-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ADMIN SUBTAB 2: DEVELOPERS -->
+            <div id="admin-subtab-developers" class="hidden bg-white border border-neutral-300 p-6 space-y-8">
+                <div class="flex justify-between items-center pb-4 border-b border-black">
+                    <div>
+                        <h3 class="text-lg font-bold uppercase">DEVELOPER UNITS DATABASE</h3>
+                        <p class="text-xs text-neutral-500 font-light">Units auto-sync directly with <strong>Sheet 5 (Developer_Units_Sync)</strong>.</p>
+                    </div>
+                    <button onclick="openAddDevUnitModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 uppercase font-semibold">
+                        + ADD NEW UNIT TO PROJECT
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border border-neutral-200">
+                        <thead class="bg-black text-white uppercase text-[10px]">
+                            <tr>
+                                <th class="p-3">PROJECT</th>
+                                <th class="p-3">DEVELOPER</th>
+                                <th class="p-3">UNIT TYPE</th>
+                                <th class="p-3">AREA / SPECS</th>
+                                <th class="p-3">PRICE RANGE</th>
+                                <th class="p-3">IMAGES</th>
+                                <th class="p-3 text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-dev-units-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ADMIN SUBTAB 3: DEV INQUIRIES -->
+            <div id="admin-subtab-devinquiries" class="hidden bg-white border border-neutral-300 p-6">
+                <h3 class="text-lg font-bold uppercase mb-4">DIRECT DEVELOPER INQUIRIES (SHEET 4)</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border border-neutral-200">
+                        <thead class="bg-black text-white uppercase text-[10px]">
+                            <tr>
+                                <th class="p-3">DEVELOPER</th>
+                                <th class="p-3">PROJECT / UNIT TYPE</th>
+                                <th class="p-3">CLIENT</th>
+                                <th class="p-3">CONTACT</th>
+                                <th class="p-3">TIMESTAMP</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-devinquiries-table" class="divide-y divide-neutral-200"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD / EDIT SECONDARY LISTING (ADMIN FULL EDITING) -->
+    <div id="add-listing-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-3xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeAddListingModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            
+            <h3 class="text-xl font-bold uppercase tracking-tight text-black border-b border-black pb-3 mb-6" id="add-listing-modal-title">
+                EDIT LUXURY LISTING
+            </h3>
+
+            <form id="listing-crud-form" onsubmit="handleListingCrudSubmit(event)" class="space-y-4">
+                <input type="hidden" id="crud-id">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Title *</label>
+                        <input type="text" id="crud-title" required placeholder="e.g. Aurelia Residences" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Category *</label>
+                        <select id="crud-category" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                            <option value="CONDOMINIUM">CONDOMINIUM</option>
+                            <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
+                            <option value="LOTS">LOTS</option>
+                            <option value="COMMERCIAL">COMMERCIAL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Transaction Status *</label>
+                        <select id="crud-status" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
+                            <option value="Sale">FOR SALE</option>
+                            <option value="Rent">FOR RENT</option>
+                            <option value="Sale & Rent">FOR SALE & RENT (DUAL)</option>
+                            <option value="Sold">SOLD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Price (PHP) *</label>
+                        <input type="number" id="crud-price" required placeholder="150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Floor / Lot Area *</label>
+                        <input type="text" id="crud-area" required placeholder="e.g. 420 sqm" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bedrooms</label>
+                        <input type="number" id="crud-beds" value="3" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bathrooms</label>
+                        <input type="number" id="crud-baths" value="3" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Parking / Garage Slots</label>
+                        <input type="number" id="crud-parking" value="2" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Location / Address *</label>
+                        <input type="text" id="crud-location" required placeholder="e.g. BGC, Taguig City" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Developer / Estate</label>
+                        <input type="text" id="crud-developer" placeholder="e.g. Shang Properties" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Agent Email</label>
+                    <input type="email" id="crud-agentemail" value="gailamistoso@compassprimerealty.com" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Image URLs (comma-separated or Google Drive links)</label>
+                    <textarea id="crud-images" rows="2" placeholder="https://drive.google.com/thumbnail?id=... , https://images.unsplash.com/..." class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-mono"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Description</label>
+                    <textarea id="crud-description" rows="3" placeholder="Highlight prime finishes, panoramic skyline views..." class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown"></textarea>
+                </div>
+
+                <div class="flex items-center gap-6 pt-2">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold">
+                        <input type="checkbox" id="crud-isdeal" class="w-4 h-4 text-brand-brown"> TOP 10 DEAL
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold">
+                        <input type="checkbox" id="crud-isfeatured" class="w-4 h-4 text-brand-brown"> FEATURED PROPERTY
+                    </label>
+                </div>
+
+                <button type="submit" id="crud-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors mt-4">
+                    SAVE PROPERTY LISTING & SYNC TO SHEET 1
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD UNIT TO DEVELOPER PROJECT -->
+    <div id="add-devunit-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
+            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD UNIT TO DEVELOPER PROJECT</h3>
+            
+            <form onsubmit="handleSaveDevUnitSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Target Project *</label>
+                    <select id="unit-target-project" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
+                    </select>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Unit Model / Type *</label>
+                        <input type="text" id="unit-form-type" required placeholder="e.g. 2-Bedroom Sky Suite" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Floor Area *</label>
+                        <input type="text" id="unit-form-area" required placeholder="e.g. 145 sqm" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Price Range / Starting (PHP) *</label>
+                        <input type="text" id="unit-form-price" required placeholder="e.g. ₱55,000,000" class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Status</label>
+                        <select id="unit-form-status" class="w-full bg-neutral-100 border p-2.5 text-xs font-semibold uppercase">
+                            <option value="Available">Available</option>
+                            <option value="Preselling">Preselling</option>
+                            <option value="Few Units Left">Few Units Left</option>
+                            <option value="Model Unit Available">Model Unit Available</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Image URLs for Unit Carousel (comma-separated) *</label>
+                    <textarea id="unit-form-images" rows="3" required placeholder="https://images.unsplash.com/... , https://drive.google.com/..." class="w-full bg-neutral-100 border p-2.5 text-xs font-mono"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
+                    SAVE UNIT & AUTO-SYNC TO SHEET 5
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
 
@@ -510,7 +798,7 @@
 
     <!-- JAVASCRIPT APPLICATION CONTROLLER -->
     <script>
-        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxrXQubfgWcYgrbydoLo4DYCkaDmoGtn_Xu93LHh4hXycU2Zy_1n9qPc-B8mmEbHizlOQ/exec";
+        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
         // =========================================================================
         // GOOGLE DRIVE LINK TO DIRECT EMBEDDABLE IMAGE RESOLVER
@@ -576,7 +864,6 @@
                     offCanvas.width = 64;
                     offCanvas.height = 64;
                     ctx.drawImage(img, 0, 0, 64, 64);
-                    // Sample bottom-left 45% x 30% area
                     const sampleWidth = Math.floor(64 * 0.45);
                     const sampleHeight = Math.floor(64 * 0.30);
                     const sampleY = 64 - sampleHeight;
@@ -623,6 +910,31 @@
         }
 
         // =========================================================================
+        // STATUS MATCHING HELPER (INCLUDES DUAL "SALE & RENT" / "BOTH")
+        // =========================================================================
+        function isStatusMatch(itemStatus, filterStatus) {
+            if (!filterStatus || filterStatus === 'ALL') return true;
+            const itemNorm = String(itemStatus || '').toLowerCase().trim();
+            const filterNorm = String(filterStatus || '').toLowerCase().trim();
+
+            const isBoth = (itemNorm.includes('sale') && (itemNorm.includes('rent') || itemNorm.includes('lease'))) || itemNorm === 'both' || itemNorm === 'sale & rent' || itemNorm === 'sale/rent';
+
+            if (filterNorm === 'sale') {
+                return itemNorm === 'sale' || isBoth;
+            }
+            if (filterNorm === 'rent' || filterNorm === 'lease') {
+                return itemNorm === 'rent' || itemNorm === 'lease' || isBoth;
+            }
+            if (filterNorm === 'sale & rent' || filterNorm === 'both' || filterNorm === 'sale/rent') {
+                return isBoth;
+            }
+            if (filterNorm === 'sold') {
+                return itemNorm === 'sold';
+            }
+            return itemNorm === filterNorm;
+        }
+
+        // =========================================================================
         // LISTINGS DATA REPOSITORY
         // =========================================================================
         const DEFAULT_PROPERTIES = [
@@ -640,16 +952,35 @@
                 parking: 1,
                 area: "300 sqm",
                 developer: "Federal Land",
+                agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
                     "https://drive.google.com/thumbnail?id=1Z3MUHInW4CkbWYzWum9ZdtalPlc7VYeB&sz=w1600",
                     "https://drive.google.com/thumbnail?id=12gqFsxb2BfPxRejpeW5Tr4PEunMUrukT&sz=w1600",
                     "https://drive.google.com/thumbnail?id=1ma-hhsGBs6zme3c9SEHTNY80aY-PWLnk&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1UbVQPhrrDO9vq5xKF8jpV3Ap1yLUaxVs&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1wJtHfX9rONu78Wvhp8bQ4bgdxFPzm80l&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1-dkqyKuhp27iIFBA0Erwpc2kK1RqcpSc&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1ZTompFf3EuLPKe3WLmujk80ipMITtpS2&sz=w1600"
+                    "https://drive.google.com/thumbnail?id=1UbVQPhrrDO9vq5xKF8jpV3Ap1yLUaxVs&sz=w1600"
                 ],
-                description: "Elevated urban living at its finest. A prestigious address offering five-star hotel-inspired amenities, refined residences, and the convenience of being at the heart of Bonifacio Global City."
+                description: "Elevated urban living at its finest. A prestigious address offering five-star hotel-inspired amenities in BGC."
+            },
+            {
+                id: 1008,
+                title: "One Rockwell | East Tower",
+                location: "Rockwell Center, Makati City",
+                price: 27000000,
+                status: "Sale & Rent", // DUAL STATUS EXAMPLE
+                category: "CONDOMINIUM",
+                isDeal: true,
+                isFeatured: true,
+                beds: 2,
+                baths: 2,
+                parking: 1,
+                area: "70 sqm",
+                developer: "Rockwell Land",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://drive.google.com/thumbnail?id=1qUk4ESSNQZzxR9mMHxxLq6aQq9CJbgka&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1eFbAuPbcMWS4e3PqS3jKXccWMlSghq7v&sz=w1600"
+                ],
+                description: "FOR SALE & FOR LEASE. Live in the heart of Rockwell with direct mall access, high zone floor, and signature skyline views. P27,000,000 for sale or P85,000/month."
             },
             {
                 id: 1002,
@@ -662,74 +993,13 @@
                 isFeatured: false,
                 beds: 5,
                 baths: 5,
-                parking: 1,
-                area: "325 sqm",
+                parking: 4,
+                area: "427 sqm",
                 developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
                     "https://drive.google.com/thumbnail?id=1by-VDTQz9--xXRotLMh68JPUBsERASrw&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=18TdW9vUrJP894O358iXcIWhxmWKuaZ3o&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1tfw4W8tCEgCTVy6XXbia5dY-ThnsttWP&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1BZKGN6xAKNUNiVYbkM3s0G3D0nTDC3fL&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1TPD7MLMx33b-joj42TOKXc8KwbfShJv8&sz=w1600"
-                ],
-                description: "Timeless prestige, privacy, and an exceptional community. A coveted address offering spacious living, lush surroundings, and unmatched exclusivity in the South."
-            },
-            {
-                id: 1003,
-                title: "One Roxas Triangle",
-                location: "Makati City",
-                price: 125000000,
-                status: "Sale",
-                category: "CONDOMINIUM",
-                isDeal: true,
-                isFeatured: false,
-                beds: 3,
-                baths: 3,
-                parking: 1,
-                area: "313 sqm",
-                developer: "Ayala Land Premier",
-                images: [
-                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-                ],
-                description: "A rare opportunity to own a prestigious residence at One Roxas Triangle, Makati. Timeless luxury. Unmatched location."
-            },
-            {
-                id: 1004,
-                title: "Grand Hyatt Residences Executive Suite",
-                location: "BGC, Taguig",
-                price: 65000000,
-                status: "Sale",
-                category: "CONDOMINIUM",
-                isDeal: true,
-                isFeatured: false,
-                beds: 2,
-                baths: 2,
-                parking: 1,
-                area: "104 sqm",
-                developer: "Federal Land",
-                images: [
-                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"
-                ],
-                description: "Elevated urban living at its finest. Five-star hotel-inspired amenities in Bonifacio Global City."
-            },
-            {
-                id: 1005,
-                title: "Ayala Alabang Luxury Villa",
-                location: "Alabang, Muntinlupa",
-                price: 95000000,
-                status: "Sold",
-                category: "HOUSE AND LOTS",
-                isDeal: true,
-                isFeatured: false,
-                beds: 3,
-                baths: 5,
-                parking: 1,
-                area: "350 sqm",
-                developer: "Compass Realty Exclusive",
-                images: [
-                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+                    "https://drive.google.com/thumbnail?id=18TdW9vUrJP894O358iXcIWhxmWKuaZ3o&sz=w1600"
                 ],
                 description: "Timeless prestige, privacy, and an exceptional community in the South."
             },
@@ -744,32 +1014,14 @@
                 isFeatured: false,
                 beds: 4,
                 baths: 4,
-                parking: 0,
+                parking: 4,
                 area: "716 sqm",
                 developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80"
+                    "https://drive.google.com/thumbnail?id=1fdxDjawcW1SOKSe_4nOhWq1ugnzcwEup&sz=w1600"
                 ],
                 description: "Prime expansive residence available for lease with private garden and swimming pool."
-            },
-            {
-                id: 1007,
-                title: "Poblacion Prime Vacant Lot",
-                location: "Poblacion, Makati",
-                price: 50000000,
-                status: "Sale",
-                category: "LOTS",
-                isDeal: false,
-                isFeatured: false,
-                beds: 0,
-                baths: 0,
-                parking: 0,
-                area: "210 sqm",
-                developer: "Compass Realty Exclusive",
-                images: [
-                    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
-                ],
-                description: "Rare prime parcel situated in the vibrant district of Poblacion, ideal for boutique commercial or residential development."
             }
         ];
 
@@ -792,13 +1044,6 @@
                 township: 'Makati CBD, Nuvali, Arca South',
                 bannerUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80',
                 description: 'Exclusive residential estates, master-planned townships, and prime suburban sanctuaries.'
-            },
-            {
-                slug: 'megaworld-townships',
-                name: 'Megaworld Townships',
-                township: 'McKinley Hill, Uptown Bonifacio, Eastwood',
-                bannerUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80',
-                description: 'Pioneer of the LIVE-WORK-PLAY-LEARN integrated township concept throughout the Philippines.'
             }
         ];
 
@@ -823,45 +1068,7 @@
                         beds: 2, baths: 3,
                         images: [
                             'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
-                            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80'
-                        ]
-                    },
-                    {
-                        id: 'AUR-U2',
-                        type: 'Premier 3-Bedroom Residence',
-                        area: '335 sqm',
-                        priceRange: '₱145,000,000 - ₱170,000,000',
-                        status: 'Available',
-                        beds: 3, baths: 4,
-                        images: [
-                            'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80',
-                            'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80'
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 'DEV-102',
-                devSlug: 'ayala-land-premier',
-                developer: 'Ayala Land Premier',
-                title: 'Park Villas Makati',
-                township: 'Legazpi Village, Makati CBD',
-                priceStart: 250000000,
-                turnover: 'Turnover: 2027',
-                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
-                description: 'Full-floor and half-floor residences overlooking the greenery of Legazpi Active Park.',
-                units: [
-                    {
-                        id: 'PV-U1',
-                        type: 'Half-Floor Villa (3-Bedroom)',
-                        area: '450 sqm',
-                        priceRange: '₱250,000,000 - ₱310,000,000',
-                        status: 'Preselling',
-                        beds: 3, baths: 4,
-                        images: [
-                            'https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=1200&q=80',
-                            'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80'
+                            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80'
                         ]
                     }
                 ]
@@ -879,9 +1086,31 @@
         window.addEventListener('DOMContentLoaded', () => {
             renderPropertyList();
             fetchDatabaseFromGoogleSheets();
+            checkDirectURLRouting();
             populateTownshipFilterOptions();
             document.getElementById('fav-count-badge').textContent = favorites.length;
         });
+
+        // ROUTING
+        function checkDirectURLRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view')?.toLowerCase();
+
+            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
+                showAdminDashboard();
+                showToast("Admin Console active", "info");
+            } else if (hash === '#developer' || viewParam === 'developer') {
+                showDeveloperPortalView();
+            } else if (hash === '#careers' || viewParam === 'careers') {
+                showCareersPage();
+            }
+        }
+
+        function accessDirectAdminDashboard() {
+            window.history.pushState({}, '', '?view=admin#admin');
+            showAdminDashboard();
+        }
 
         // KEYBOARD CONTROLS FOR LIGHTBOX
         window.addEventListener('keydown', (e) => {
@@ -907,7 +1136,9 @@
             grid.innerHTML = '';
 
             let filtered = properties.filter(item => {
-                if (currentFilters.status !== 'ALL' && item.status.toLowerCase() !== currentFilters.status.toLowerCase()) return false;
+                // STATUS FILTER WITH DUAL "SALE & RENT" SUPPORT
+                if (!isStatusMatch(item.status, currentFilters.status)) return false;
+
                 if (currentFilters.category !== 'ALL' && item.category.toLowerCase() !== currentFilters.category.toLowerCase()) return false;
                 if (currentFilters.onlyDeals && !item.isDeal) return false;
                 if (currentFilters.onlyFeatured && !item.isFeatured) return false;
@@ -934,6 +1165,8 @@
             const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
             const isFav = favorites.includes(prop.id);
             const isSold = String(prop.status).toUpperCase() === 'SOLD';
+            const isBoth = isStatusMatch(prop.status, 'Sale & Rent') && !isSold;
+            const isRent = String(prop.status).toUpperCase() === 'RENT' && !isBoth;
             const specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE" : "PARKING";
             const watermarkId = `wm-card-${prop.id}`;
             
@@ -941,6 +1174,20 @@
             const resolvedImages = rawImages.map(resolveDriveImageUrl);
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
             const currentImgIndex = cardCarouselIndices[prop.id];
+
+            // Badge Color & Label
+            let badgeBg = "bg-black";
+            let badgeText = `FOR ${String(prop.status).toUpperCase()}`;
+            if (isSold) {
+                badgeBg = "bg-red-700";
+                badgeText = "SOLD";
+            } else if (isBoth) {
+                badgeBg = "bg-brand-brown";
+                badgeText = "FOR SALE & RENT";
+            } else if (isRent) {
+                badgeBg = "bg-neutral-800";
+                badgeText = "FOR RENT";
+            }
 
             card.innerHTML = `
                 <div>
@@ -950,8 +1197,8 @@
                         
                         <!-- Top status badges -->
                         <div class="absolute top-3 left-3 flex flex-col gap-1 z-20 pointer-events-none">
-                            <span class="${isSold ? 'bg-red-700' : 'bg-black'} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
-                                ${isSold ? 'SOLD' : 'FOR ' + String(prop.status).toUpperCase()}
+                            <span class="${badgeBg} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                                ${badgeText}
                             </span>
                             ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider shadow">TOP 10 DEAL</span>` : ''}
                         </div>
@@ -971,7 +1218,7 @@
                             </div>
                         ` : ''}
 
-                        <!-- Bottom-left Embedded Watermark (45% Width) -->
+                        <!-- Bottom-left Embedded Watermark -->
                         <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
@@ -1034,7 +1281,7 @@
         }
 
         // =========================================================================
-        // BROKERAGE DETAILS MODAL (WITH EMBEDDED CAROUSEL & LIGHTBOX ON CLICK)
+        // BROKERAGE DETAILS MODAL (WITH CAROUSEL & LIGHTBOX ON CLICK)
         // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
@@ -1050,7 +1297,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-6">
                         
-                        <!-- DETAILS HERO CAROUSEL (CLICK IMAGE TO LAUNCH LIGHTBOX) -->
+                        <!-- DETAILS HERO CAROUSEL -->
                         <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
                             <img id="img-modal-prop" src="${propImages[activeModalCarouselIndex]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)">
                             
@@ -1071,7 +1318,10 @@
                         </div>
 
                         <div>
-                            <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
+                                <span class="text-[9px] uppercase font-bold px-2 py-0.5 bg-black text-white">${prop.status}</span>
+                            </div>
                             <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
                             <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
                         </div>
@@ -1147,8 +1397,355 @@
         }
 
         // =========================================================================
-        // DEVELOPER MASTERPLAN PROJECTS & UNITS WITH CAROUSELS
+        // LIGHTBOX STUDIO (FULLSCREEN, Z-[9999], WATERMARKED AT 45% WIDTH)
         // =========================================================================
+        function openLightboxStudio(title, images, startIndex = 0) {
+            lightboxCurrentTitle = title;
+            lightboxCurrentImages = (images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+            lightboxCurrentIndex = startIndex;
+
+            document.getElementById('lightbox-title').textContent = title;
+            updateLightboxView();
+
+            const thumbsContainer = document.getElementById('lightbox-thumbnails');
+            thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
+                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
+            `).join('');
+
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+
+        function updateLightboxView() {
+            const mainImg = document.getElementById('lightbox-main-img');
+            mainImg.src = lightboxCurrentImages[lightboxCurrentIndex];
+            document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
+
+            applyWatermarkToContainer('lightbox-watermark', mainImg);
+
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                if (i === lightboxCurrentIndex) {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105";
+                } else {
+                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 hover:opacity-100 cursor-pointer";
+                }
+            }
+        }
+
+        function navigateLightbox(dir) {
+            lightboxCurrentIndex = (lightboxCurrentIndex + dir + lightboxCurrentImages.length) % lightboxCurrentImages.length;
+            updateLightboxView();
+        }
+
+        function setLightboxIndex(idx) {
+            lightboxCurrentIndex = idx;
+            updateLightboxView();
+        }
+
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
+
+        // =========================================================================
+        // ADMIN DASHBOARD & LISTING EDITING ENGINE
+        // =========================================================================
+        function showAdminDashboard() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.remove('hidden');
+            renderAdminDashboardTables();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAdminSubTab(subtab) {
+            ['listings', 'developers', 'devinquiries'].forEach(st => {
+                document.getElementById(`admin-subtab-${st}`).classList.add('hidden');
+                document.getElementById(`admin-subtab-btn-${st}`).className = "p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap";
+            });
+            document.getElementById(`admin-subtab-${subtab}`).classList.remove('hidden');
+            document.getElementById(`admin-subtab-btn-${subtab}`).className = "p-4 border-b-2 border-brand-brown text-black whitespace-nowrap";
+        }
+
+        function renderAdminDashboardTables() {
+            document.getElementById('admin-stat-listings').textContent = properties.length;
+            document.getElementById('admin-stat-dev-projects').textContent = developerProjects.length;
+            
+            let totalUnits = 0;
+            developerProjects.forEach(p => totalUnits += (p.units || []).length);
+            document.getElementById('admin-stat-dev-units').textContent = totalUnits;
+            document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
+
+            // Admin Editable Secondary Listings Table
+            const tbodyListings = document.getElementById('admin-listings-table');
+            tbodyListings.innerHTML = properties.map(p => {
+                const isSold = String(p.status).toUpperCase() === 'SOLD';
+                const isBoth = isStatusMatch(p.status, 'Sale & Rent') && !isSold;
+                let badgeClass = isSold ? 'bg-red-700 text-white' : (isBoth ? 'bg-brand-brown text-white' : 'bg-black text-white');
+                return `
+                    <tr class="hover:bg-neutral-50 transition-colors">
+                        <td class="p-3 font-mono font-bold">${p.id}</td>
+                        <td class="p-3 font-bold text-black">${p.title}</td>
+                        <td class="p-3 text-neutral-600">${p.location}</td>
+                        <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${badgeClass}">${p.status}</span></td>
+                        <td class="p-3 uppercase text-[10px] font-semibold">${p.category}</td>
+                        <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
+                        <td class="p-3 text-right space-x-2 whitespace-nowrap">
+                            <button onclick="editListing(${p.id})" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] uppercase font-bold transition-colors">
+                                <i class="fa-solid fa-pen-to-square mr-1"></i> EDIT
+                            </button>
+                            <button onclick="toggleSoldStatus(${p.id})" class="bg-neutral-200 hover:bg-neutral-300 text-neutral-800 px-2 py-1 text-[10px] uppercase font-bold transition-colors">
+                                TOGGLE SOLD
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // Admin Developer Units Table
+            const tbodyUnits = document.getElementById('admin-dev-units-table');
+            const unitRows = [];
+            developerProjects.forEach(proj => {
+                (proj.units || []).forEach(u => {
+                    unitRows.push(`
+                        <tr class="hover:bg-neutral-50">
+                            <td class="p-3 font-bold">${proj.title}</td>
+                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
+                            <td class="p-3 font-semibold">${u.type}</td>
+                            <td class="p-3 font-mono">${u.area}</td>
+                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
+                            <td class="p-3 font-mono text-[10px]">${(u.images || []).length} photos</td>
+                            <td class="p-3 text-right">
+                                <button onclick="openLightboxStudio('${escapeQuotes(proj.title)} - ${escapeQuotes(u.type)}', ${JSON.stringify(u.images || []).replace(/"/g, '&quot;')}, 0)" class="bg-black text-white px-2.5 py-1 text-[10px] uppercase font-bold hover:bg-brand-brown">PREVIEW</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+            tbodyUnits.innerHTML = unitRows.join('');
+
+            // Admin Developer Inquiries
+            const tbodyDevInq = document.getElementById('admin-devinquiries-table');
+            tbodyDevInq.innerHTML = developerInquiries.length === 0 ? 
+                `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No developer inquiries recorded yet.</td></tr>` :
+                developerInquiries.map(di => `
+                    <tr class="hover:bg-neutral-50">
+                        <td class="p-3 font-bold text-brand-brown">${di.developer}</td>
+                        <td class="p-3 font-semibold">${di.project} (${di.unitType || 'Layout'})</td>
+                        <td class="p-3 font-bold">${di.clientName}</td>
+                        <td class="p-3 font-mono">${di.email}<br>${di.phone}</td>
+                        <td class="p-3 font-mono text-[10px]">${di.timestamp || 'N/A'}</td>
+                    </tr>
+                `).join('');
+        }
+
+        // EDIT LISTING MODAL PRE-FILL & OPEN
+        function editListing(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            document.getElementById('crud-id').value = prop.id;
+            document.getElementById('crud-title').value = prop.title;
+            document.getElementById('crud-category').value = prop.category;
+            document.getElementById('crud-status').value = prop.status;
+            document.getElementById('crud-price').value = prop.price;
+            document.getElementById('crud-area').value = prop.area;
+            document.getElementById('crud-beds').value = prop.beds;
+            document.getElementById('crud-baths').value = prop.baths;
+            document.getElementById('crud-parking').value = prop.parking;
+            document.getElementById('crud-location').value = prop.location;
+            document.getElementById('crud-developer').value = prop.developer || "Compass Realty Exclusive";
+            document.getElementById('crud-agentemail').value = prop.agentEmail || "gailamistoso@compassprimerealty.com";
+            document.getElementById('crud-images').value = (prop.images || []).join(', ');
+            document.getElementById('crud-description').value = prop.description;
+            document.getElementById('crud-isdeal').checked = Boolean(prop.isDeal);
+            document.getElementById('crud-isfeatured').checked = Boolean(prop.isFeatured);
+
+            document.getElementById('add-listing-modal-title').textContent = `EDIT LISTING #${prop.id}`;
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function openAddListingModal() {
+            document.getElementById('listing-crud-form').reset();
+            document.getElementById('crud-id').value = '';
+            document.getElementById('crud-agentemail').value = "gailamistoso@compassprimerealty.com";
+            document.getElementById('add-listing-modal-title').textContent = "ADD NEW LUXURY LISTING";
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function closeAddListingModal() {
+            document.getElementById('add-listing-modal').classList.add('hidden');
+        }
+
+        async function handleListingCrudSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('crud-submit-btn');
+            const originalText = btn.textContent;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING...`;
+
+            const idVal = document.getElementById('crud-id').value;
+            const isEdit = Boolean(idVal);
+            const listingId = isEdit ? parseInt(idVal, 10) : (Math.max(...properties.map(p => Number(p.id) || 1000)) + 1);
+
+            const rawImages = document.getElementById('crud-images').value;
+            const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+            ];
+
+            const payload = {
+                id: listingId,
+                title: document.getElementById('crud-title').value,
+                category: document.getElementById('crud-category').value,
+                status: document.getElementById('crud-status').value, // Supports Sale, Rent, Sale & Rent, Sold
+                price: Number(document.getElementById('crud-price').value),
+                area: document.getElementById('crud-area').value,
+                beds: Number(document.getElementById('crud-beds').value),
+                baths: Number(document.getElementById('crud-baths').value),
+                parking: Number(document.getElementById('crud-parking').value),
+                location: document.getElementById('crud-location').value,
+                developer: document.getElementById('crud-developer').value,
+                agentEmail: document.getElementById('crud-agentemail').value,
+                description: document.getElementById('crud-description').value,
+                isDeal: document.getElementById('crud-isdeal').checked,
+                isFeatured: document.getElementById('crud-isfeatured').checked,
+                images: imagesArr
+            };
+
+            // Update in local memory
+            if (isEdit) {
+                const idx = properties.findIndex(p => p.id === listingId);
+                if (idx !== -1) properties[idx] = payload;
+            } else {
+                properties.unshift(payload);
+            }
+
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+
+            // Sync to Sheet 1
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: isEdit ? "updateListing" : "addListing",
+                        ...payload,
+                        image: payload.images.join(', ')
+                    })
+                });
+            } catch (err) {
+                console.error("Sheet sync error:", err);
+            }
+
+            renderPropertyList();
+            renderAdminDashboardTables();
+            closeAddListingModal();
+            btn.textContent = originalText;
+            showToast(`Listing #${listingId} successfully saved and synced to Sheet 1!`, "success");
+        }
+
+        async function toggleSoldStatus(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            prop.status = (String(prop.status).toUpperCase() === 'SOLD') ? 'Sale' : 'Sold';
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: "updateListing",
+                        ...prop,
+                        image: prop.images.join(', ')
+                    })
+                });
+            } catch (err) {}
+
+            renderPropertyList();
+            renderAdminDashboardTables();
+            showToast(`Listing #${id} status changed to ${prop.status}!`, "success");
+        }
+
+        // =========================================================================
+        // DEVELOPER PROJECT MODALS & UNITS
+        // =========================================================================
+        function showDeveloperPortalView(slug = 'ALL') {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.remove('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('careers-view-container').classList.add('hidden');
+
+            renderDeveloperSelectorDropdown();
+            selectedDevSlug = slug;
+            switchDeveloperBrand(selectedDevSlug);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderDeveloperSelectorDropdown() {
+            const select = document.getElementById('dev-selector-dropdown');
+            select.innerHTML = `<option value="ALL">ALL DEVELOPERS & TOWNSHIPS</option>` + 
+                developersList.map(d => `<option value="${d.slug}">${d.name}</option>`).join('');
+            select.value = selectedDevSlug;
+        }
+
+        function populateTownshipFilterOptions() {
+            const select = document.getElementById('dev-township-filter');
+            const townships = Array.from(new Set(developerProjects.map(p => p.township)));
+            select.innerHTML = `<option value="ALL">ALL TOWNSHIPS</option>` +
+                townships.map(t => `<option value="${t}">${t}</option>`).join('');
+        }
+
+        function switchDeveloperBrand(slug) {
+            selectedDevSlug = slug;
+            const banner = document.getElementById('dev-portal-banner');
+            const nameEl = document.getElementById('dev-portal-name');
+            const descEl = document.getElementById('dev-portal-desc');
+
+            if (slug === 'ALL') {
+                nameEl.textContent = "DEVELOPER TOWNSHIPS";
+                descEl.textContent = "Browse exclusive primary developer inventory, master-planned estates, and direct payment schemes across benchmark Philippine developers.";
+                banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80')`;
+            } else {
+                const dev = developersList.find(d => d.slug === slug) || developersList[0];
+                nameEl.textContent = dev.name;
+                descEl.textContent = dev.description;
+                banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('${resolveDriveImageUrl(dev.bannerUrl)}')`;
+            }
+
+            filterDeveloperProjects();
+        }
+
+        function filterDeveloperProjects() {
+            const searchKw = (document.getElementById('dev-search-input')?.value || '').toLowerCase().trim();
+            const selectedTownship = document.getElementById('dev-township-filter')?.value || 'ALL';
+
+            const filtered = developerProjects.filter(proj => {
+                if (selectedDevSlug !== 'ALL' && proj.devSlug !== selectedDevSlug) return false;
+                if (selectedTownship !== 'ALL' && proj.township !== selectedTownship) return false;
+                if (searchKw) {
+                    const matchName = proj.title.toLowerCase().includes(searchKw);
+                    const matchDev = proj.developer.toLowerCase().includes(searchKw);
+                    const matchTown = proj.township.toLowerCase().includes(searchKw);
+                    if (!matchName && !matchDev && !matchTown) return false;
+                }
+                return true;
+            });
+
+            renderDeveloperProjectsGrid(filtered);
+        }
+
+        function resetDevSearch() {
+            document.getElementById('dev-search-input').value = '';
+            document.getElementById('dev-township-filter').value = 'ALL';
+            document.getElementById('dev-selector-dropdown').value = 'ALL';
+            switchDeveloperBrand('ALL');
+        }
+
         function renderDeveloperProjectsGrid(projects) {
             const grid = document.getElementById('dev-projects-grid');
             document.getElementById('dev-projects-count').textContent = `${projects.length} PROJECTS`;
@@ -1326,63 +1923,79 @@
                 imgEl.src = images[nextIdx];
                 applyWatermarkToContainer(`wm-unit-${unitId}`, imgEl);
             }
-            if (indEl) {
-                indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
-            }
+            if (indEl) indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
+        }
+
+        function openAddDevUnitModal() {
+            const select = document.getElementById('unit-target-project');
+            select.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
+            document.getElementById('unit-form-type').value = '';
+            document.getElementById('unit-form-area').value = '';
+            document.getElementById('unit-form-price').value = '';
+            document.getElementById('unit-form-images').value = '';
+            document.getElementById('add-devunit-modal').classList.remove('hidden');
+        }
+
+        function closeAddDevUnitModal() {
+            document.getElementById('add-devunit-modal').classList.add('hidden');
+        }
+
+        async function handleSaveDevUnitSubmit(e) {
+            e.preventDefault();
+            const projId = document.getElementById('unit-target-project').value;
+            const proj = developerProjects.find(p => p.id === projId);
+            if (!proj) return;
+
+            const rawImgs = document.getElementById('unit-form-images').value;
+            const parsedImages = rawImgs.split(',').map(s => s.trim()).filter(Boolean);
+
+            const newUnit = {
+                id: 'UNIT-' + Date.now(),
+                type: document.getElementById('unit-form-type').value,
+                area: document.getElementById('unit-form-area').value,
+                priceRange: document.getElementById('unit-form-price').value,
+                status: document.getElementById('unit-form-status').value,
+                beds: 3, baths: 3,
+                images: parsedImages.length > 0 ? parsedImages : [proj.image]
+            };
+
+            if (!proj.units) proj.units = [];
+            proj.units.push(newUnit);
+
+            localStorage.setItem('cpr_dev_projects_v3', JSON.stringify(developerProjects));
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet5",
+                        action: "syncDeveloperUnit",
+                        projectId: proj.id,
+                        projectName: proj.title,
+                        developer: proj.developer,
+                        township: proj.township,
+                        turnover: proj.turnover,
+                        unitId: newUnit.id,
+                        unitType: newUnit.type,
+                        area: newUnit.area,
+                        priceRange: newUnit.priceRange,
+                        status: newUnit.status,
+                        beds: newUnit.beds,
+                        baths: newUnit.baths,
+                        images: newUnit.images
+                    })
+                });
+            } catch (err) {}
+
+            closeAddDevUnitModal();
+            renderAdminDashboardTables();
+            showToast(`Added unit to ${proj.title} and auto-synced to Sheet 5!`, "success");
         }
 
         // =========================================================================
-        // LIGHTBOX STUDIO (FULLSCREEN, Z-[9999], WATERMARKED AT 45% WIDTH)
-        // =========================================================================
-        function openLightboxStudio(title, images, startIndex = 0) {
-            lightboxCurrentTitle = title;
-            lightboxCurrentImages = (images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
-            lightboxCurrentIndex = startIndex;
-
-            document.getElementById('lightbox-title').textContent = title;
-            updateLightboxView();
-
-            const thumbsContainer = document.getElementById('lightbox-thumbnails');
-            thumbsContainer.innerHTML = lightboxCurrentImages.map((img, i) => `
-                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lightboxCurrentIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60 hover:opacity-100'} cursor-pointer transition-all">
-            `).join('');
-
-            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
-        }
-
-        function updateLightboxView() {
-            const mainImg = document.getElementById('lightbox-main-img');
-            mainImg.src = lightboxCurrentImages[lightboxCurrentIndex];
-            document.getElementById('lightbox-counter').textContent = `${lightboxCurrentIndex + 1} / ${lightboxCurrentImages.length}`;
-
-            applyWatermarkToContainer('lightbox-watermark', mainImg);
-
-            const thumbs = document.getElementById('lightbox-thumbnails').children;
-            for (let i = 0; i < thumbs.length; i++) {
-                if (i === lightboxCurrentIndex) {
-                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105";
-                } else {
-                    thumbs[i].className = "h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 hover:opacity-100 cursor-pointer";
-                }
-            }
-        }
-
-        function navigateLightbox(dir) {
-            lightboxCurrentIndex = (lightboxCurrentIndex + dir + lightboxCurrentImages.length) % lightboxCurrentImages.length;
-            updateLightboxView();
-        }
-
-        function setLightboxIndex(idx) {
-            lightboxCurrentIndex = idx;
-            updateLightboxView();
-        }
-
-        function closeLightboxStudio() {
-            document.getElementById('lightbox-studio-modal').classList.add('hidden');
-        }
-
-        // =========================================================================
-        // GOOGLE SHEETS SYNC & APPOINTMENTS
+        // GOOGLE SHEETS SYNC
         // =========================================================================
         async function fetchDatabaseFromGoogleSheets() {
             try {
@@ -1413,7 +2026,8 @@
                         baths: Number(item.baths) || 0,
                         parking: Number(item.parking) || 0,
                         area: item.area || "N/A",
-                        developer: item.developer || "Compass Realty",
+                        developer: item.developer || "Compass Realty Exclusive",
+                        agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
                         images: (item.image ? String(item.image).split(',').map(s=>s.trim()) : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl),
                         description: item.description || ""
                     }));
@@ -1532,81 +2146,11 @@
         // =========================================================================
         // VIEW NAVIGATION & SEARCH ROUTINES
         // =========================================================================
-        function showDeveloperPortalView(slug = 'ALL') {
-            document.getElementById('public-view-container').classList.add('hidden');
-            document.getElementById('developer-portal-view').classList.remove('hidden');
-            document.getElementById('careers-view-container').classList.add('hidden');
-
-            renderDeveloperSelectorDropdown();
-            selectedDevSlug = slug;
-            switchDeveloperBrand(selectedDevSlug);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderDeveloperSelectorDropdown() {
-            const select = document.getElementById('dev-selector-dropdown');
-            select.innerHTML = `<option value="ALL">ALL DEVELOPERS & TOWNSHIPS</option>` + 
-                developersList.map(d => `<option value="${d.slug}">${d.name}</option>`).join('');
-            select.value = selectedDevSlug;
-        }
-
-        function populateTownshipFilterOptions() {
-            const select = document.getElementById('dev-township-filter');
-            const townships = Array.from(new Set(developerProjects.map(p => p.township)));
-            select.innerHTML = `<option value="ALL">ALL TOWNSHIPS</option>` +
-                townships.map(t => `<option value="${t}">${t}</option>`).join('');
-        }
-
-        function switchDeveloperBrand(slug) {
-            selectedDevSlug = slug;
-            const banner = document.getElementById('dev-portal-banner');
-            const nameEl = document.getElementById('dev-portal-name');
-            const descEl = document.getElementById('dev-portal-desc');
-
-            if (slug === 'ALL') {
-                nameEl.textContent = "DEVELOPER TOWNSHIPS";
-                descEl.textContent = "Browse exclusive primary developer inventory, master-planned estates, and direct payment schemes across benchmark Philippine developers.";
-                banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80')`;
-            } else {
-                const dev = developersList.find(d => d.slug === slug) || developersList[0];
-                nameEl.textContent = dev.name;
-                descEl.textContent = dev.description;
-                banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('${resolveDriveImageUrl(dev.bannerUrl)}')`;
-            }
-
-            filterDeveloperProjects();
-        }
-
-        function filterDeveloperProjects() {
-            const searchKw = (document.getElementById('dev-search-input')?.value || '').toLowerCase().trim();
-            const selectedTownship = document.getElementById('dev-township-filter')?.value || 'ALL';
-
-            const filtered = developerProjects.filter(proj => {
-                if (selectedDevSlug !== 'ALL' && proj.devSlug !== selectedDevSlug) return false;
-                if (selectedTownship !== 'ALL' && proj.township !== selectedTownship) return false;
-                if (searchKw) {
-                    const matchName = proj.title.toLowerCase().includes(searchKw);
-                    const matchDev = proj.developer.toLowerCase().includes(searchKw);
-                    const matchTown = proj.township.toLowerCase().includes(searchKw);
-                    if (!matchName && !matchDev && !matchTown) return false;
-                }
-                return true;
-            });
-
-            renderDeveloperProjectsGrid(filtered);
-        }
-
-        function resetDevSearch() {
-            document.getElementById('dev-search-input').value = '';
-            document.getElementById('dev-township-filter').value = 'ALL';
-            document.getElementById('dev-selector-dropdown').value = 'ALL';
-            switchDeveloperBrand('ALL');
-        }
-
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1614,6 +2158,7 @@
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
             document.getElementById('careers-view-container').classList.remove('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
