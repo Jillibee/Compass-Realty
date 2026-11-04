@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/z2RzCbA.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/png" href="https://i.imgur.com/zNCE455.png" media="(prefers-color-scheme: light)">
     
     <title>Compass Realty | Guidance. Direction. Trust. | Luxury Real Estate & Prime Estates</title>
-    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations. Browse penthouses, commercial buildings, vacant land, and luxury houses for sale & rent.">
-    <meta name="keywords" content="Compass Realty, Luxury Real Estate Philippines, BGC Condos, Forbes Park Mansions, Makati Real Estate">
+    <meta name="description" content="Compass Realty offers premier luxury real estate advisory in Bonifacio Global City, Makati CBD, Forbes Park, and exclusive destinations.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -57,7 +55,7 @@
             background-size: cover; background-position: center;
         }
 
-        /* WATERMARK OVERLAY: SIZED AT 45% (THRICE ITS PREVIOUS 15% SIZE) */
+        /* WATERMARK OVERLAY: 45% WIDTH */
         .watermark-container {
             position: absolute;
             bottom: 0.85rem;
@@ -127,7 +125,7 @@
                         <i class="fa-solid fa-city mr-1"></i> DEVELOPERS
                     </button>
 
-                    <!-- FOR SALE DROPDOWN (INCLUDES FOR SALE & RENT) -->
+                    <!-- FOR SALE DROPDOWN -->
                     <div class="relative dropdown-container py-6">
                         <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
                             FOR SALE <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
@@ -142,7 +140,7 @@
                         </div>
                     </div>
 
-                    <!-- FOR RENT DROPDOWN (INCLUDES FOR SALE & RENT) -->
+                    <!-- FOR RENT DROPDOWN -->
                     <div class="relative dropdown-container py-6">
                         <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
                             FOR RENT <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
@@ -189,7 +187,6 @@
 
     <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
     <div id="public-view-container">
-        <!-- HERO SECTION -->
         <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
             <div class="max-w-7xl mx-auto">
                 <div class="max-w-3xl">
@@ -366,10 +363,8 @@
         <div class="relative w-full max-w-5xl flex-grow flex items-center justify-center py-4 z-40">
             <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
             
-            <!-- WATERMARKED LIGHTBOX IMAGE WRAPPER -->
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain">
-                <!-- Watermark injected dynamically at 45% width -->
                 <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
 
@@ -377,41 +372,6 @@
         </div>
 
         <div id="lightbox-thumbnails" class="w-full max-w-3xl flex justify-center gap-2 overflow-x-auto py-2 z-50"></div>
-    </div>
-
-    <!-- DEVELOPER PROJECT INQUIRY MODAL -->
-    <div id="dev-inquiry-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white w-full max-w-md border-2 border-black p-6 relative">
-            <button onclick="closeDevInquiryModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
-            <span class="text-[9px] uppercase font-bold text-brand-brown tracking-widest block">DEVELOPER DIRECT DESK</span>
-            <h3 id="dev-inquiry-project-title" class="text-lg font-bold uppercase text-black mb-1">INQUIRE ABOUT UNIT</h3>
-            <p id="dev-inquiry-subtitle" class="text-xs text-neutral-500 mb-4 font-light"></p>
-
-            <form onsubmit="handleDevInquirySubmit(event)" class="space-y-3">
-                <input type="hidden" id="dev-inquiry-devname">
-                <input type="hidden" id="dev-inquiry-projectname">
-                <input type="hidden" id="dev-inquiry-unittype">
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Your Full Name *</label>
-                    <input type="text" id="dev-inquiry-clientname" required placeholder="e.g. Victor Consunji" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Email Address *</label>
-                    <input type="email" id="dev-inquiry-clientemail" required placeholder="client@domain.com" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Phone Number *</label>
-                    <input type="tel" id="dev-inquiry-clientphone" required placeholder="+63 917 000 0000" class="w-full bg-neutral-100 border p-2.5 text-xs">
-                </div>
-                <div>
-                    <label class="block text-[10px] font-semibold uppercase mb-1">Notes / Sample Computation Request</label>
-                    <textarea id="dev-inquiry-notes" rows="3" placeholder="Inquire about payment schedules, floor layouts, turn-over terms..." class="w-full bg-neutral-100 border p-2.5 text-xs"></textarea>
-                </div>
-                <button type="submit" id="dev-inquiry-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
-                    SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)
-                </button>
-            </form>
-        </div>
     </div>
 
     <!-- BROKERAGE PROPERTY DETAILS & APPOINTMENT MODAL -->
@@ -800,9 +760,6 @@
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
-        // =========================================================================
-        // GOOGLE DRIVE LINK TO DIRECT EMBEDDABLE IMAGE RESOLVER
-        // =========================================================================
         function resolveDriveImageUrl(url) {
             if (!url) return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
             url = String(url).trim();
@@ -822,9 +779,6 @@
             return url;
         }
 
-        // =========================================================================
-        // COMPASS REALTY VECTOR EMBEDDED WATERMARKS (WHITE & BLACK)
-        // =========================================================================
         const WATERMARK_WHITE_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
                 <g fill="#FFFFFF">
@@ -909,9 +863,6 @@
             });
         }
 
-        // =========================================================================
-        // STATUS MATCHING HELPER (INCLUDES DUAL "SALE & RENT" / "BOTH")
-        // =========================================================================
         function isStatusMatch(itemStatus, filterStatus) {
             if (!filterStatus || filterStatus === 'ALL') return true;
             const itemNorm = String(itemStatus || '').toLowerCase().trim();
@@ -919,109 +870,55 @@
 
             const isBoth = (itemNorm.includes('sale') && (itemNorm.includes('rent') || itemNorm.includes('lease'))) || itemNorm === 'both' || itemNorm === 'sale & rent' || itemNorm === 'sale/rent';
 
-            if (filterNorm === 'sale') {
-                return itemNorm === 'sale' || isBoth;
-            }
-            if (filterNorm === 'rent' || filterNorm === 'lease') {
-                return itemNorm === 'rent' || itemNorm === 'lease' || isBoth;
-            }
-            if (filterNorm === 'sale & rent' || filterNorm === 'both' || filterNorm === 'sale/rent') {
-                return isBoth;
-            }
-            if (filterNorm === 'sold') {
-                return itemNorm === 'sold';
-            }
+            if (filterNorm === 'sale') return itemNorm === 'sale' || isBoth;
+            if (filterNorm === 'rent' || filterNorm === 'lease') return itemNorm === 'rent' || itemNorm === 'lease' || isBoth;
+            if (filterNorm === 'sale & rent' || filterNorm === 'both' || filterNorm === 'sale/rent') return isBoth;
+            if (filterNorm === 'sold') return itemNorm === 'sold';
             return itemNorm === filterNorm;
         }
 
-        // =========================================================================
-        // LISTINGS DATA REPOSITORY
-        // =========================================================================
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
-                title: "Grand Hyatt Residences",
-                location: "BGC, Taguig",
+                title: "Grand Hyatt Manila Residences",
+                location: "Grand Hyatt Manila Residences, BGC Taguig City",
                 price: 148000000,
                 status: "Sale",
                 category: "CONDOMINIUM",
-                isDeal: true,
-                isFeatured: true,
+                isDeal: false,
+                isFeatured: false,
                 beds: 3,
                 baths: 3,
-                parking: 1,
+                parking: 3,
                 area: "300 sqm",
-                developer: "Federal Land",
+                developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://drive.google.com/thumbnail?id=1Z3MUHInW4CkbWYzWum9ZdtalPlc7VYeB&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=12gqFsxb2BfPxRejpeW5Tr4PEunMUrukT&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1ma-hhsGBs6zme3c9SEHTNY80aY-PWLnk&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=1UbVQPhrrDO9vq5xKF8jpV3Ap1yLUaxVs&sz=w1600"
+                    "https://drive.google.com/thumbnail?id=1Kj3NTqU94MFEOCYYLXTreLV6U0TMxjgZ&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1sQk6aymdhSuEf_4x2VBZPVcUnMIwgF4w&sz=w1600"
                 ],
-                description: "Elevated urban living at its finest. A prestigious address offering five-star hotel-inspired amenities in BGC."
+                description: "Elevated urban living at its finest. High zone corner unit with five-star hotel-inspired amenities."
             },
             {
                 id: 1008,
                 title: "One Rockwell | East Tower",
-                location: "Rockwell Center, Makati City",
+                location: "One Rockwell | East Tower, Makati City",
                 price: 27000000,
-                status: "Sale & Rent", // DUAL STATUS EXAMPLE
+                status: "Sale & Rent",
                 category: "CONDOMINIUM",
-                isDeal: true,
-                isFeatured: true,
+                isDeal: false,
+                isFeatured: false,
                 beds: 2,
                 baths: 2,
                 parking: 1,
                 area: "70 sqm",
-                developer: "Rockwell Land",
+                developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
                     "https://drive.google.com/thumbnail?id=1qUk4ESSNQZzxR9mMHxxLq6aQq9CJbgka&sz=w1600",
                     "https://drive.google.com/thumbnail?id=1eFbAuPbcMWS4e3PqS3jKXccWMlSghq7v&sz=w1600"
                 ],
-                description: "FOR SALE & FOR LEASE. Live in the heart of Rockwell with direct mall access, high zone floor, and signature skyline views. P27,000,000 for sale or P85,000/month."
-            },
-            {
-                id: 1002,
-                title: "Ayala Alabang Village",
-                location: "Alabang, Muntinlupa",
-                price: 125000000,
-                status: "Sale",
-                category: "HOUSE AND LOTS",
-                isDeal: false,
-                isFeatured: false,
-                beds: 5,
-                baths: 5,
-                parking: 4,
-                area: "427 sqm",
-                developer: "Compass Realty Exclusive",
-                agentEmail: "gailamistoso@compassprimerealty.com",
-                images: [
-                    "https://drive.google.com/thumbnail?id=1by-VDTQz9--xXRotLMh68JPUBsERASrw&sz=w1600",
-                    "https://drive.google.com/thumbnail?id=18TdW9vUrJP894O358iXcIWhxmWKuaZ3o&sz=w1600"
-                ],
-                description: "Timeless prestige, privacy, and an exceptional community in the South."
-            },
-            {
-                id: 1006,
-                title: "Ayala Alabang Grand Mansion",
-                location: "Alabang, Muntinlupa",
-                price: 350000,
-                status: "Rent",
-                category: "HOUSE AND LOTS",
-                isDeal: false,
-                isFeatured: false,
-                beds: 4,
-                baths: 4,
-                parking: 4,
-                area: "716 sqm",
-                developer: "Compass Realty Exclusive",
-                agentEmail: "gailamistoso@compassprimerealty.com",
-                images: [
-                    "https://drive.google.com/thumbnail?id=1fdxDjawcW1SOKSe_4nOhWq1ugnzcwEup&sz=w1600"
-                ],
-                description: "Prime expansive residence available for lease with private garden and swimming pool."
+                description: "FOR SALE & FOR LEASE. Live in the heart of Rockwell with direct mall access, high zone floor, and signature skyline views."
             }
         ];
 
@@ -1037,13 +934,6 @@
                 township: 'BGC & Mandaluyong CBD',
                 bannerUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80',
                 description: 'Pioneering benchmark luxury residential developments and high-rise architectural landmarks in Metro Manila.'
-            },
-            {
-                slug: 'ayala-land-premier',
-                name: 'Ayala Land Premier',
-                township: 'Makati CBD, Nuvali, Arca South',
-                bannerUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80',
-                description: 'Exclusive residential estates, master-planned townships, and prime suburban sanctuaries.'
             }
         ];
 
@@ -1057,7 +947,7 @@
                 priceStart: 95000000,
                 turnover: 'Turnover: 2026',
                 image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC. Bespoke Italian finishes with private lift lobbies.',
+                description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC.',
                 units: [
                     {
                         id: 'AUR-U1',
@@ -1067,8 +957,7 @@
                         status: 'Few Units Left',
                         beds: 2, baths: 3,
                         images: [
-                            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80'
+                            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
                         ]
                     }
                 ]
@@ -1091,7 +980,6 @@
             document.getElementById('fav-count-badge').textContent = favorites.length;
         });
 
-        // ROUTING
         function checkDirectURLRouting() {
             const hash = window.location.hash.toLowerCase();
             const urlParams = new URLSearchParams(window.location.search);
@@ -1112,23 +1000,14 @@
             showAdminDashboard();
         }
 
-        // KEYBOARD CONTROLS FOR LIGHTBOX
         window.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightbox-studio-modal');
             if (!lb || lb.classList.contains('hidden')) return;
-
-            if (e.key === 'Escape') {
-                closeLightboxStudio();
-            } else if (e.key === 'ArrowLeft') {
-                navigateLightbox(-1);
-            } else if (e.key === 'ArrowRight') {
-                navigateLightbox(1);
-            }
+            if (e.key === 'Escape') closeLightboxStudio();
+            else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            else if (e.key === 'ArrowRight') navigateLightbox(1);
         });
 
-        // =========================================================================
-        // BROKERAGE GRID & CAROUSEL CARDS
-        // =========================================================================
         function renderPropertyList() {
             const grid = document.getElementById('property-grid');
             const emptyState = document.getElementById('empty-state');
@@ -1136,14 +1015,12 @@
             grid.innerHTML = '';
 
             let filtered = properties.filter(item => {
-                // STATUS FILTER WITH DUAL "SALE & RENT" SUPPORT
                 if (!isStatusMatch(item.status, currentFilters.status)) return false;
-
                 if (currentFilters.category !== 'ALL' && item.category.toLowerCase() !== currentFilters.category.toLowerCase()) return false;
                 if (currentFilters.onlyDeals && !item.isDeal) return false;
                 if (currentFilters.onlyFeatured && !item.isFeatured) return false;
                 if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
-                if (currentFilters.maxPrice !== 'ALL' && item.price > parseInt(currentFilters.maxPrice)) return false;
+                if (currentFilters.maxPrice !== 'ALL' && Number(item.price) > parseInt(currentFilters.maxPrice)) return false;
                 if (currentFilters.keyword.trim()) {
                     const kw = currentFilters.keyword.toLowerCase();
                     if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
@@ -1175,7 +1052,6 @@
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
             const currentImgIndex = cardCarouselIndices[prop.id];
 
-            // Badge Color & Label
             let badgeBg = "bg-black";
             let badgeText = `FOR ${String(prop.status).toUpperCase()}`;
             if (isSold) {
@@ -1191,11 +1067,9 @@
 
             card.innerHTML = `
                 <div>
-                    <!-- CAROUSEL WRAPPER WITH AUTO-WATERMARK & DIRECT LIGHTBOX ON CLICK -->
                     <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
                         <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, cardCarouselIndices[${prop.id}] || 0)">
                         
-                        <!-- Top status badges -->
                         <div class="absolute top-3 left-3 flex flex-col gap-1 z-20 pointer-events-none">
                             <span class="${badgeBg} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
                                 ${badgeText}
@@ -1203,12 +1077,10 @@
                             ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider shadow">TOP 10 DEAL</span>` : ''}
                         </div>
 
-                        <!-- Favorite button -->
                         <button onclick="event.stopPropagation(); toggleFavorite(${prop.id});" class="absolute top-3 right-3 z-20 w-8 h-8 bg-white/90 hover:bg-white text-black flex items-center justify-center transition-colors shadow">
                             <i class="${isFav ? 'fa-solid text-red-600' : 'fa-regular'} fa-heart text-sm"></i>
                         </button>
 
-                        <!-- CAROUSEL NAVIGATION ARROWS & INDICATOR -->
                         ${resolvedImages.length > 1 ? `
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
@@ -1218,7 +1090,6 @@
                             </div>
                         ` : ''}
 
-                        <!-- Bottom-left Embedded Watermark -->
                         <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
@@ -1244,7 +1115,7 @@
                     <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
                         VIEW DETAILS
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, cardCarouselIndices[${prop.id}] || 0)" class="bg-neutral-800 hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="View Full Studio">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, cardCarouselIndices[${prop.id}] || 0)" class="bg-neutral-800 hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
@@ -1280,9 +1151,6 @@
             }
         }
 
-        // =========================================================================
-        // BROKERAGE DETAILS MODAL (WITH CAROUSEL & LIGHTBOX ON CLICK)
-        // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
@@ -1296,8 +1164,6 @@
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-6">
-                        
-                        <!-- DETAILS HERO CAROUSEL -->
                         <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
                             <img id="img-modal-prop" src="${propImages[activeModalCarouselIndex]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)">
                             
@@ -1396,9 +1262,6 @@
             document.getElementById('property-modal').classList.add('hidden');
         }
 
-        // =========================================================================
-        // LIGHTBOX STUDIO (FULLSCREEN, Z-[9999], WATERMARKED AT 45% WIDTH)
-        // =========================================================================
         function openLightboxStudio(title, images, startIndex = 0) {
             lightboxCurrentTitle = title;
             lightboxCurrentImages = (images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
@@ -1476,7 +1339,6 @@
             document.getElementById('admin-stat-dev-units').textContent = totalUnits;
             document.getElementById('admin-stat-devinquiries').textContent = developerInquiries.length;
 
-            // Admin Editable Secondary Listings Table
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => {
                 const isSold = String(p.status).toUpperCase() === 'SOLD';
@@ -1502,7 +1364,6 @@
                 `;
             }).join('');
 
-            // Admin Developer Units Table
             const tbodyUnits = document.getElementById('admin-dev-units-table');
             const unitRows = [];
             developerProjects.forEach(proj => {
@@ -1524,7 +1385,6 @@
             });
             tbodyUnits.innerHTML = unitRows.join('');
 
-            // Admin Developer Inquiries
             const tbodyDevInq = document.getElementById('admin-devinquiries-table');
             tbodyDevInq.innerHTML = developerInquiries.length === 0 ? 
                 `<tr><td colspan="5" class="p-4 text-center text-neutral-500 font-light">No developer inquiries recorded yet.</td></tr>` :
@@ -1539,7 +1399,6 @@
                 `).join('');
         }
 
-        // EDIT LISTING MODAL PRE-FILL & OPEN
         function editListing(id) {
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
@@ -1548,7 +1407,9 @@
             document.getElementById('crud-title').value = prop.title;
             document.getElementById('crud-category').value = prop.category;
             document.getElementById('crud-status').value = prop.status;
-            document.getElementById('crud-price').value = prop.price;
+            
+            // Clean numeric price
+            document.getElementById('crud-price').value = String(prop.price).replace(/[^0-9]/g, '') || 0;
             document.getElementById('crud-area').value = prop.area;
             document.getElementById('crud-beds').value = prop.beds;
             document.getElementById('crud-baths').value = prop.baths;
@@ -1581,7 +1442,7 @@
             e.preventDefault();
             const btn = document.getElementById('crud-submit-btn');
             const originalText = btn.textContent;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & SYNCING TO SHEET 1...`;
 
             const idVal = document.getElementById('crud-id').value;
             const isEdit = Boolean(idVal);
@@ -1592,16 +1453,18 @@
                 "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
             ];
 
+            const cleanPrice = Number(String(document.getElementById('crud-price').value).replace(/[^0-9]/g, '')) || 0;
+
             const payload = {
                 id: listingId,
                 title: document.getElementById('crud-title').value,
                 category: document.getElementById('crud-category').value,
-                status: document.getElementById('crud-status').value, // Supports Sale, Rent, Sale & Rent, Sold
-                price: Number(document.getElementById('crud-price').value),
+                status: document.getElementById('crud-status').value,
+                price: cleanPrice,
                 area: document.getElementById('crud-area').value,
-                beds: Number(document.getElementById('crud-beds').value),
-                baths: Number(document.getElementById('crud-baths').value),
-                parking: Number(document.getElementById('crud-parking').value),
+                beds: Number(document.getElementById('crud-beds').value) || 0,
+                baths: Number(document.getElementById('crud-baths').value) || 0,
+                parking: Number(document.getElementById('crud-parking').value) || 0,
                 location: document.getElementById('crud-location').value,
                 developer: document.getElementById('crud-developer').value,
                 agentEmail: document.getElementById('crud-agentemail').value,
@@ -1611,22 +1474,21 @@
                 images: imagesArr
             };
 
-            // Update in local memory
+            // Update local memory & cache
             if (isEdit) {
                 const idx = properties.findIndex(p => p.id === listingId);
                 if (idx !== -1) properties[idx] = payload;
             } else {
                 properties.unshift(payload);
             }
-
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
-            // Sync to Sheet 1
+            // CRITICAL: Send using text/plain to prevent CORS preflight block
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({
                         sheetTab: "Sheet1",
                         action: isEdit ? "updateListing" : "addListing",
@@ -1642,7 +1504,7 @@
             renderAdminDashboardTables();
             closeAddListingModal();
             btn.textContent = originalText;
-            showToast(`Listing #${listingId} successfully saved and synced to Sheet 1!`, "success");
+            showToast(`Listing #${listingId} successfully saved & synced to Sheet 1!`, "success");
         }
 
         async function toggleSoldStatus(id) {
@@ -1656,12 +1518,12 @@
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({
                         sheetTab: "Sheet1",
                         action: "updateListing",
                         ...prop,
-                        image: prop.images.join(', ')
+                        image: (prop.images || []).join(', ')
                     })
                 });
             } catch (err) {}
@@ -1671,9 +1533,6 @@
             showToast(`Listing #${id} status changed to ${prop.status}!`, "success");
         }
 
-        // =========================================================================
-        // DEVELOPER PROJECT MODALS & UNITS
-        // =========================================================================
         function showDeveloperPortalView(slug = 'ALL') {
             document.getElementById('public-view-container').classList.add('hidden');
             document.getElementById('developer-portal-view').classList.remove('hidden');
@@ -1968,7 +1827,7 @@
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({
                         sheetTab: "Sheet5",
                         action: "syncDeveloperUnit",
@@ -1994,9 +1853,6 @@
             showToast(`Added unit to ${proj.title} and auto-synced to Sheet 5!`, "success");
         }
 
-        // =========================================================================
-        // GOOGLE SHEETS SYNC
-        // =========================================================================
         async function fetchDatabaseFromGoogleSheets() {
             try {
                 const res = await fetch(GOOGLE_SHEETS_API_URL);
@@ -2087,7 +1943,7 @@
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(inquiryObj)
                 });
             } catch (err) {}
@@ -2133,7 +1989,7 @@
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ sheetTab: "Sheet4", action: "addDeveloperInquiry", ...inquiryData })
                 });
             } catch (err) {}
@@ -2143,9 +1999,6 @@
             btn.textContent = "SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)";
         }
 
-        // =========================================================================
-        // VIEW NAVIGATION & SEARCH ROUTINES
-        // =========================================================================
         function showMainApp() {
             document.getElementById('public-view-container').classList.remove('hidden');
             document.getElementById('developer-portal-view').classList.add('hidden');
