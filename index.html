@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,14 +57,14 @@
             background-size: cover; background-position: center;
         }
 
-        /* WATERMARK OVERLAY: REDUCED BY 70% (15% OF CONTAINER WIDTH) */
+        /* WATERMARK OVERLAY: ENLARGED THRICE (45% CONTAINER WIDTH) */
         .watermark-container {
             position: absolute;
-            bottom: 0.65rem;
-            left: 0.65rem;
-            width: 15%;
-            min-width: 65px;
-            max-width: 120px;
+            bottom: 0.85rem;
+            left: 0.85rem;
+            width: 45%;
+            min-width: 195px;
+            max-width: 360px;
             pointer-events: none;
             z-index: 25;
             transition: all 0.3s ease;
@@ -72,10 +73,10 @@
             width: 100%;
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.65));
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.65));
         }
         .watermark-light-drop {
-            filter: drop-shadow(0 1px 4px rgba(255,255,255,0.85)) !important;
+            filter: drop-shadow(0 2px 6px rgba(255,255,255,0.85)) !important;
         }
     </style>
 </head>
@@ -365,7 +366,7 @@
             <!-- WATERMARKED LIGHTBOX IMAGE WRAPPER -->
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" alt="Unit Preview" class="max-h-[70vh] max-w-full object-contain">
-                <!-- Watermark injected dynamically at 15% width (70% smaller) -->
+                <!-- Watermark injected dynamically at 45% width (thrice its previous size) -->
                 <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
 
@@ -509,7 +510,7 @@
 
     <!-- JAVASCRIPT APPLICATION CONTROLLER -->
     <script>
-        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzh6N_yxL6f2DCyKLKXd_aThJvHzeqWTpTpJNPrlzQSMjg6jgkrjsg36f5u-zA3D6cySw/exec";
+        const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
         // =========================================================================
         // GOOGLE DRIVE LINK TO DIRECT EMBEDDABLE IMAGE RESOLVER
@@ -575,7 +576,8 @@
                     offCanvas.width = 64;
                     offCanvas.height = 64;
                     ctx.drawImage(img, 0, 0, 64, 64);
-                    const sampleWidth = Math.floor(64 * 0.40);
+                    // Sample bottom-left 45% x 30% area
+                    const sampleWidth = Math.floor(64 * 0.45);
                     const sampleHeight = Math.floor(64 * 0.30);
                     const sampleY = 64 - sampleHeight;
                     const imgData = ctx.getImageData(0, sampleY, sampleWidth, sampleHeight);
@@ -626,106 +628,135 @@
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
-                title: "Aurelia Residences Sky Penthouse",
-                location: "Bonifacio Global City, Taguig",
-                price: 185000000,
+                title: "Grand Hyatt Residences",
+                location: "BGC, Taguig",
+                price: 148000000,
                 status: "Sale",
                 category: "CONDOMINIUM",
                 isDeal: true,
                 isFeatured: true,
-                beds: 4,
-                baths: 5,
-                parking: 3,
-                area: "420 sqm",
-                developer: "Shang Properties & RLC",
+                beds: 3,
+                baths: 3,
+                parking: 1,
+                area: "300 sqm",
+                developer: "Federal Land",
                 images: [
-                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80"
+                    "https://drive.google.com/thumbnail?id=1Z3MUHInW4CkbWYzWum9ZdtalPlc7VYeB&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=12gqFsxb2BfPxRejpeW5Tr4PEunMUrukT&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1ma-hhsGBs6zme3c9SEHTNY80aY-PWLnk&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1UbVQPhrrDO9vq5xKF8jpV3Ap1yLUaxVs&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1wJtHfX9rONu78Wvhp8bQ4bgdxFPzm80l&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1-dkqyKuhp27iIFBA0Erwpc2kK1RqcpSc&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1ZTompFf3EuLPKe3WLmujk80ipMITtpS2&sz=w1600"
                 ],
-                description: "Panoramic double-height penthouse featuring bespoke finishes, unobstructed views of the Manila Golf Club, and private lift lobbies."
+                description: "Elevated urban living at its finest. A prestigious address offering five-star hotel-inspired amenities, refined residences, and the convenience of being at the heart of Bonifacio Global City."
             },
             {
                 id: 1002,
-                title: "Modern Minimalist Forbes Park Estate",
-                location: "Forbes Park South, Makati City",
-                price: 580000000,
+                title: "Ayala Alabang Village",
+                location: "Alabang, Muntinlupa",
+                price: 125000000,
                 status: "Sale",
                 category: "HOUSE AND LOTS",
                 isDeal: false,
-                isFeatured: true,
-                beds: 6,
-                baths: 7,
-                parking: 8,
-                area: "1,850 sqm lot / 1,200 sqm floor",
-                developer: "Private Architect Portfolio",
+                isFeatured: false,
+                beds: 5,
+                baths: 5,
+                parking: 1,
+                area: "325 sqm",
+                developer: "Compass Realty Exclusive",
                 images: [
-                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"
+                    "https://drive.google.com/thumbnail?id=1by-VDTQz9--xXRotLMh68JPUBsERASrw&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=18TdW9vUrJP894O358iXcIWhxmWKuaZ3o&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1tfw4W8tCEgCTVy6XXbia5dY-ThnsttWP&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1BZKGN6xAKNUNiVYbkM3s0G3D0nTDC3fL&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1TPD7MLMx33b-joj42TOKXc8KwbfShJv8&sz=w1600"
                 ],
-                description: "Master-crafted residence set across an expansive corner parcel within the most prestigious gated sanctuary in the Philippines."
+                description: "Timeless prestige, privacy, and an exceptional community. A coveted address offering spacious living, lush surroundings, and unmatched exclusivity in the South."
             },
             {
                 id: 1003,
-                title: "Prime Commercial Development Land",
-                location: "Chino Roces Avenue, Makati CBD",
-                price: 320000000,
+                title: "One Roxas Triangle",
+                location: "Makati City",
+                price: 125000000,
                 status: "Sale",
-                category: "COMMERCIAL",
+                category: "CONDOMINIUM",
                 isDeal: true,
                 isFeatured: false,
-                beds: 0,
-                baths: 4,
-                parking: 15,
-                area: "1,150 sqm",
-                developer: "Commercial Advisory Desk",
+                beds: 3,
+                baths: 3,
+                parking: 1,
+                area: "313 sqm",
+                developer: "Ayala Land Premier",
                 images: [
-                    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "High-density zoning suitable for headquarters, boutique residential towers, or showroom logistics."
+                description: "A rare opportunity to own a prestigious residence at One Roxas Triangle, Makati. Timeless luxury. Unmatched location."
             },
             {
                 id: 1004,
-                title: "The Suites at One Bonifacio Corner Unit",
-                location: "One Bonifacio High Street, BGC",
-                price: 450000,
-                status: "Rent",
+                title: "Grand Hyatt Residences Executive Suite",
+                location: "BGC, Taguig",
+                price: 65000000,
+                status: "Sale",
                 category: "CONDOMINIUM",
-                isDeal: false,
-                isFeatured: true,
-                beds: 3,
-                baths: 4,
-                parking: 2,
-                area: "277 sqm",
-                developer: "Ayala Land Premier",
+                isDeal: true,
+                isFeatured: false,
+                beds: 2,
+                baths: 2,
+                parking: 1,
+                area: "104 sqm",
+                developer: "Federal Land",
                 images: [
-                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "Corner residential suite perched directly atop BGC's premier luxury dining and shopping promenade."
+                description: "Elevated urban living at its finest. Five-star hotel-inspired amenities in Bonifacio Global City."
             },
             {
                 id: 1005,
-                title: "Dasmariñas Village Contemporary Mansion",
-                location: "Dasmariñas Village, Makati City",
-                price: 490000000,
-                status: "Sale",
+                title: "Ayala Alabang Luxury Villa",
+                location: "Alabang, Muntinlupa",
+                price: 95000000,
+                status: "Sold",
                 category: "HOUSE AND LOTS",
                 isDeal: true,
-                isFeatured: true,
-                beds: 5,
-                baths: 6,
-                parking: 6,
-                area: "980 sqm",
-                developer: "Private Architecture",
+                isFeatured: false,
+                beds: 3,
+                baths: 5,
+                parking: 1,
+                area: "350 sqm",
+                developer: "Compass Realty Exclusive",
                 images: [
                     "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "Bespoke landscaped swimming pool, double-volume ceilings, wine cellar, and chef's kitchen in prime Dasmariñas Village."
+                description: "Timeless prestige, privacy, and an exceptional community in the South."
             },
             {
                 id: 1006,
-                title: "Prime Commercial Vacant Lot",
-                location: "Alabang-Zapote Corridor, Muntinlupa",
-                price: 145000000,
+                title: "Ayala Alabang Grand Mansion",
+                location: "Alabang, Muntinlupa",
+                price: 350000,
+                status: "Rent",
+                category: "HOUSE AND LOTS",
+                isDeal: false,
+                isFeatured: false,
+                beds: 4,
+                baths: 4,
+                parking: 0,
+                area: "716 sqm",
+                developer: "Compass Realty Exclusive",
+                images: [
+                    "https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "Prime expansive residence available for lease with private garden and swimming pool."
+            },
+            {
+                id: 1007,
+                title: "Poblacion Prime Vacant Lot",
+                location: "Poblacion, Makati",
+                price: 50000000,
                 status: "Sale",
                 category: "LOTS",
                 isDeal: false,
@@ -733,17 +764,19 @@
                 beds: 0,
                 baths: 0,
                 parking: 0,
-                area: "2,400 sqm",
-                developer: "Commercial Advisory Desk",
+                area: "210 sqm",
+                developer: "Compass Realty Exclusive",
                 images: [
                     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "Clean title vacant development lot with 40-meter highway frontage ideal for commercial plazas or auto dealerships."
+                description: "Rare prime parcel situated in the vibrant district of Poblacion, ideal for boutique commercial or residential development."
             }
         ];
 
         let properties = JSON.parse(localStorage.getItem('cpr_cached_listings')) || DEFAULT_PROPERTIES;
+        let cardCarouselIndices = {};
         let unitCarouselIndices = {};
+        let activeModalCarouselIndex = 0;
 
         let developersList = JSON.parse(localStorage.getItem('cpr_dev_brands_v3')) || [
             {
@@ -850,7 +883,7 @@
             document.getElementById('fav-count-badge').textContent = favorites.length;
         });
 
-        // ESCAPE & ARROW KEYS KEYBOARD LISTENER FOR LIGHTBOX STUDIO
+        // KEYBOARD CONTROLS FOR LIGHTBOX
         window.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightbox-studio-modal');
             if (!lb || lb.classList.contains('hidden')) return;
@@ -865,7 +898,7 @@
         });
 
         // =========================================================================
-        // BROKERAGE GRID & CARDS WITH AUTO-WATERMARK
+        // BROKERAGE GRID & CAROUSEL CARDS
         // =========================================================================
         function renderPropertyList() {
             const grid = document.getElementById('property-grid');
@@ -903,26 +936,42 @@
             const isSold = String(prop.status).toUpperCase() === 'SOLD';
             const specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE" : "PARKING";
             const watermarkId = `wm-card-${prop.id}`;
-            const primaryImg = resolveDriveImageUrl(prop.images[0]);
+            
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolvedImages = rawImages.map(resolveDriveImageUrl);
+            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
+            const currentImgIndex = cardCarouselIndices[prop.id];
 
             card.innerHTML = `
                 <div>
-                    <!-- IMAGE WRAPPER WITH AUTO-WATERMARK -->
-                    <div class="relative h-64 overflow-hidden bg-neutral-200 cursor-pointer" onclick="openPropertyModal(${prop.id})">
-                        <img id="img-card-${prop.id}" src="${primaryImg}" alt="${prop.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <!-- CAROUSEL WRAPPER WITH AUTO-WATERMARK & DIRECT LIGHTBOX ON CLICK -->
+                    <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
+                        <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, cardCarouselIndices[${prop.id}] || 0)">
                         
-                        <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
-                            <span class="${isSold ? 'bg-red-700' : 'bg-black'} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black">
+                        <!-- Top status badges -->
+                        <div class="absolute top-3 left-3 flex flex-col gap-1 z-20 pointer-events-none">
+                            <span class="${isSold ? 'bg-red-700' : 'bg-black'} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
                                 ${isSold ? 'SOLD' : 'FOR ' + String(prop.status).toUpperCase()}
                             </span>
-                            ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider">TOP 10 DEAL</span>` : ''}
+                            ${prop.isDeal ? `<span class="bg-brand-brown text-white px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider shadow">TOP 10 DEAL</span>` : ''}
                         </div>
 
-                        <button onclick="event.stopPropagation(); toggleFavorite(${prop.id});" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/90 hover:bg-white text-black flex items-center justify-center transition-colors shadow">
+                        <!-- Favorite button -->
+                        <button onclick="event.stopPropagation(); toggleFavorite(${prop.id});" class="absolute top-3 right-3 z-20 w-8 h-8 bg-white/90 hover:bg-white text-black flex items-center justify-center transition-colors shadow">
                             <i class="${isFav ? 'fa-solid text-red-600' : 'fa-regular'} fa-heart text-sm"></i>
                         </button>
 
-                        <!-- Bottom-left Embedded Watermark (Sized 15%, 70% smaller) -->
+                        <!-- CAROUSEL NAVIGATION ARROWS & INDICATOR -->
+                        ${resolvedImages.length > 1 ? `
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                            
+                            <div id="ind-card-${prop.id}" class="absolute top-3 right-12 z-20 bg-black/75 text-[9px] font-mono text-white px-2 py-0.5 border border-neutral-700 pointer-events-none">
+                                ${currentImgIndex + 1} / ${resolvedImages.length}
+                            </div>
+                        ` : ''}
+
+                        <!-- Bottom-left Embedded Watermark (45% Width) -->
                         <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
@@ -948,7 +997,7 @@
                     <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
                         VIEW DETAILS
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(prop.images.map(resolveDriveImageUrl)).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="View Full Studio">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, cardCarouselIndices[${prop.id}] || 0)" class="bg-neutral-800 hover:bg-black text-white px-3 py-2.5 text-xs uppercase font-semibold transition-colors" title="View Full Studio">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
@@ -962,8 +1011,143 @@
             return card;
         }
 
+        function navigateCardCarousel(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop) return;
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolved = rawImages.map(resolveDriveImageUrl);
+            if (resolved.length <= 1) return;
+
+            const currentIdx = cardCarouselIndices[propId] || 0;
+            const nextIdx = (currentIdx + dir + resolved.length) % resolved.length;
+            cardCarouselIndices[propId] = nextIdx;
+
+            const imgEl = document.getElementById(`img-card-${propId}`);
+            const indEl = document.getElementById(`ind-card-${propId}`);
+            if (imgEl) {
+                imgEl.src = resolved[nextIdx];
+                applyWatermarkToContainer(`wm-card-${propId}`, imgEl);
+            }
+            if (indEl) {
+                indEl.textContent = `${nextIdx + 1} / ${resolved.length}`;
+            }
+        }
+
         // =========================================================================
-        // DEVELOPER MASTERPLAN PROJECTS & UNITS WITH AUTO-WATERMARKS
+        // BROKERAGE DETAILS MODAL (WITH EMBEDDED CAROUSEL & LIGHTBOX ON CLICK)
+        // =========================================================================
+        function openPropertyModal(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            activeModalCarouselIndex = cardCarouselIndices[prop.id] || 0;
+            const container = document.getElementById('modal-content-container');
+            const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
+            const specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE SLOTS" : "PARKING SLOTS";
+            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <!-- DETAILS HERO CAROUSEL (CLICK IMAGE TO LAUNCH LIGHTBOX) -->
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
+                            <img id="img-modal-prop" src="${propImages[activeModalCarouselIndex]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)">
+                            
+                            ${propImages.length > 1 ? `
+                                <button onclick="event.stopPropagation(); navigateModalCarousel(${prop.id}, -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow">&lang;</button>
+                                <button onclick="event.stopPropagation(); navigateModalCarousel(${prop.id}, 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow">&rang;</button>
+                                
+                                <div id="ind-modal-prop" class="absolute bottom-3 right-3 z-30 bg-black/85 text-[10px] font-mono text-white px-3 py-1 border border-neutral-700 pointer-events-none">
+                                    IMAGE ${activeModalCarouselIndex + 1} OF ${propImages.length}
+                                </div>
+                            ` : ''}
+
+                            <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow">
+                                <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
+                            </button>
+
+                            <div id="wm-modal-prop" class="watermark-container"></div>
+                        </div>
+
+                        <div>
+                            <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
+                            <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-4 p-4 bg-neutral-100 border border-neutral-300 text-center text-xs">
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">BEDROOMS</span><span class="text-base font-bold">${prop.beds}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">BATHROOMS</span><span class="text-base font-bold">${prop.baths}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">${specLabel}</span><span class="text-base font-bold">${prop.parking}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">AREA</span><span class="text-base font-bold font-mono text-xs">${prop.area}</span></div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-black mb-2">PROPERTY DESCRIPTION</h4>
+                            <p class="text-xs text-neutral-700 font-light leading-relaxed whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black flex flex-col justify-between">
+                        <div>
+                            <div class="bg-black text-white p-4 mb-6">
+                                <span class="text-[9px] uppercase font-bold tracking-widest text-neutral-400 block">TRANSACTION PRICE</span>
+                                <span class="text-2xl font-bold font-mono">${priceFormatted}</span>
+                            </div>
+
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-black flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-calendar-check text-brand-brown"></i> SCHEDULE PRIVATE VIEWING
+                            </h3>
+
+                            <form id="appointment-form" onsubmit="handleAppointmentSubmit(event, '${escapeQuotes(prop.title)}')" class="space-y-3">
+                                <input type="text" id="appt-name" required placeholder="Your Full Name *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="email" id="appt-email" required placeholder="Email Address *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="tel" id="appt-phone" required placeholder="Phone Number *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="datetime-local" id="appt-date" required class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <textarea id="appt-notes" rows="2" placeholder="Specific viewing requests..." class="w-full bg-white border border-neutral-400 p-2.5 text-xs"></textarea>
+
+                                <button type="submit" id="appt-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                                    CONFIRM APPOINTMENT
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-modal').classList.remove('hidden');
+
+            setTimeout(() => {
+                const modalImg = document.getElementById('img-modal-prop');
+                if (modalImg) applyWatermarkToContainer('wm-modal-prop', modalImg);
+            }, 15);
+        }
+
+        function navigateModalCarousel(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop) return;
+            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+            if (propImages.length <= 1) return;
+
+            activeModalCarouselIndex = (activeModalCarouselIndex + dir + propImages.length) % propImages.length;
+            const imgEl = document.getElementById('img-modal-prop');
+            const indEl = document.getElementById('ind-modal-prop');
+
+            if (imgEl) {
+                imgEl.src = propImages[activeModalCarouselIndex];
+                applyWatermarkToContainer('wm-modal-prop', imgEl);
+            }
+            if (indEl) {
+                indEl.textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${propImages.length}`;
+            }
+        }
+
+        function closePropertyModal() {
+            document.getElementById('property-modal').classList.add('hidden');
+        }
+
+        // =========================================================================
+        // DEVELOPER MASTERPLAN PROJECTS & UNITS WITH CAROUSELS
         // =========================================================================
         function renderDeveloperProjectsGrid(projects) {
             const grid = document.getElementById('dev-projects-grid');
@@ -1032,7 +1216,6 @@
             });
         }
 
-        // INDIVIDUAL PROJECT MODAL (UNIT CAROUSELS WITH WATERMARKS)
         function openDevProjectModal(projectId) {
             const proj = developerProjects.find(p => p.id === projectId);
             if (!proj) return;
@@ -1143,11 +1326,13 @@
                 imgEl.src = images[nextIdx];
                 applyWatermarkToContainer(`wm-unit-${unitId}`, imgEl);
             }
-            if (indEl) indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
+            if (indEl) {
+                indEl.textContent = `${nextIdx + 1} / ${images.length} PHOTOS`;
+            }
         }
 
         // =========================================================================
-        // LIGHTBOX STUDIO (FULLSCREEN, Z-[9999], WATERMARKED AT 15% WIDTH)
+        // LIGHTBOX STUDIO (FULLSCREEN, Z-[9999], WATERMARKED AT 45% WIDTH)
         // =========================================================================
         function openLightboxStudio(title, images, startIndex = 0) {
             lightboxCurrentTitle = title;
@@ -1197,86 +1382,6 @@
         }
 
         // =========================================================================
-        // BROKERAGE DETAILS MODAL (WITH WATERMARK)
-        // =========================================================================
-        function openPropertyModal(id) {
-            const prop = properties.find(p => p.id === id);
-            if (!prop) return;
-
-            const container = document.getElementById('modal-content-container');
-            const priceFormatted = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price);
-            const specLabel = prop.category === "HOUSE AND LOTS" ? "GARAGE SLOTS" : "PARKING SLOTS";
-            const propImages = prop.images.map(resolveDriveImageUrl);
-
-            container.innerHTML = `
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    <div class="lg:col-span-7 space-y-6">
-                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, 0)">
-                            <img id="img-modal-prop" src="${propImages[0]}" class="w-full h-full object-cover">
-                            <span class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30">
-                                <i class="fa-solid fa-expand mr-1"></i> FULL PHOTO STUDIO
-                            </span>
-                            <div id="wm-modal-prop" class="watermark-container"></div>
-                        </div>
-
-                        <div>
-                            <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
-                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
-                            <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
-                        </div>
-
-                        <div class="grid grid-cols-4 gap-4 p-4 bg-neutral-100 border border-neutral-300 text-center text-xs">
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">BEDROOMS</span><span class="text-base font-bold">${prop.beds}</span></div>
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">BATHROOMS</span><span class="text-base font-bold">${prop.baths}</span></div>
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">${specLabel}</span><span class="text-base font-bold">${prop.parking}</span></div>
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">AREA</span><span class="text-base font-bold font-mono text-xs">${prop.area}</span></div>
-                        </div>
-
-                        <div>
-                            <h4 class="text-xs font-bold uppercase tracking-widest text-black mb-2">PROPERTY DESCRIPTION</h4>
-                            <p class="text-xs text-neutral-700 font-light leading-relaxed whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black flex flex-col justify-between">
-                        <div>
-                            <div class="bg-black text-white p-4 mb-6">
-                                <span class="text-[9px] uppercase font-bold tracking-widest text-neutral-400 block">TRANSACTION PRICE</span>
-                                <span class="text-2xl font-bold font-mono">${priceFormatted}</span>
-                            </div>
-
-                            <h3 class="text-sm font-bold uppercase tracking-wider text-black flex items-center gap-2 mb-3">
-                                <i class="fa-solid fa-calendar-check text-brand-brown"></i> SCHEDULE PRIVATE VIEWING
-                            </h3>
-
-                            <form id="appointment-form" onsubmit="handleAppointmentSubmit(event, '${escapeQuotes(prop.title)}')" class="space-y-3">
-                                <input type="text" id="appt-name" required placeholder="Your Full Name *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
-                                <input type="email" id="appt-email" required placeholder="Email Address *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
-                                <input type="tel" id="appt-phone" required placeholder="Phone Number *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
-                                <input type="datetime-local" id="appt-date" required class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
-                                <textarea id="appt-notes" rows="2" placeholder="Specific viewing requests..." class="w-full bg-white border border-neutral-400 p-2.5 text-xs"></textarea>
-
-                                <button type="submit" id="appt-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                                    CONFIRM APPOINTMENT
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('property-modal').classList.remove('hidden');
-
-            setTimeout(() => {
-                const modalImg = document.getElementById('img-modal-prop');
-                if (modalImg) applyWatermarkToContainer('wm-modal-prop', modalImg);
-            }, 15);
-        }
-
-        function closePropertyModal() {
-            document.getElementById('property-modal').classList.add('hidden');
-        }
-
-        // =========================================================================
         // GOOGLE SHEETS SYNC & APPOINTMENTS
         // =========================================================================
         async function fetchDatabaseFromGoogleSheets() {
@@ -1299,11 +1404,11 @@
                         id: Number(item.id) || Date.now(),
                         title: item.title || "Luxury Property",
                         location: item.location || "Metro Manila",
-                        price: Number(item.price) || 0,
+                        price: Number(String(item.price).replace(/[^0-9]/g, '')) || 0,
                         status: item.status || "Sale",
                         category: String(item.category || "CONDOMINIUM").toUpperCase(),
-                        isDeal: String(item.isDeal).toUpperCase() === 'TRUE',
-                        isFeatured: String(item.isFeatured).toUpperCase() === 'TRUE',
+                        isDeal: String(item.isdeal || item.isDeal).toUpperCase() === 'TRUE',
+                        isFeatured: String(item.isfeatured || item.isFeatured).toUpperCase() === 'TRUE',
                         beds: Number(item.beds) || 0,
                         baths: Number(item.baths) || 0,
                         parking: Number(item.parking) || 0,
