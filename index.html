@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -906,3 +907,820 @@
             renderPropertyList();
             fetchDatabaseFromGoogleSheets();
             checkDirectURLRouting();
+        });
+
+        // Instant Hash & Keyboard Shortcut Listeners for Admin Access
+        window.addEventListener('hashchange', checkDirectURLRouting);
+        window.addEventListener('keydown', (e) => {
+            // Shortcut: Ctrl + Shift + A or Cmd + Shift + A
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                e.preventDefault();
+                showAdminDashboard();
+                showToast("Admin Desk Activated!", "info");
+            }
+        });
+
+        function checkDirectURLRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view')?.toLowerCase();
+
+            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
+                showAdminDashboard();
+            } else if (hash === '#developer' || viewParam === 'developer') {
+                showDeveloperPortalView();
+            }
+        }
+
+        function updateHeroBannerStyle(url) {
+            const resolved = resolveDriveImageUrl(url);
+            const heroEl = document.getElementById('hero-section');
+            if (heroEl) {
+                heroEl.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('${resolved}')`;
+            }
+            const previewEl = document.getElementById('hero-live-preview');
+            if (previewEl) previewEl.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('${resolved}')`;
+        }
+
+        // =========================================================================
+        // PUBLIC CARD BUILDER
+        // =========================================================================
+        function createPropertyCard(prop) {
+            const card = document.createElement('div');
+            card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative';
+            const priceFormatted = Number(prop.price) > 0 ? 
+                new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
+                "PRICE UPON INQUIRY";
+
+            let displayArea = prop.area;
+            if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+            let spec1Value = prop.beds;
+            let spec1Label = "BEDS";
+            let spec2Value = prop.baths;
+            let spec2Label = "BATHS";
+            let spec3Value = prop.parking;
+            let spec3Label = "PARKING";
+
+            if (prop.category === "LOTS") {
+                spec1Value = "VACANT LOT";
+                spec1Label = "TYPE";
+                spec2Value = "RESIDENTIAL";
+                spec2Label = "ZONE";
+                spec3Value = displayArea;
+                spec3Label = "LOT AREA";
+            } else if (prop.category === "COMMERCIAL") {
+                spec1Label = "ROOMS";
+            } else if (prop.category === "HOUSE AND LOTS") {
+                spec3Label = "GARAGE";
+            }
+
+            const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+
+            card.innerHTML = `
+                <div>
+                    <div class="relative h-64 overflow-hidden bg-neutral-900">
+                        <img src="${images[0]}" class="w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase">
+                            FOR ${prop.status.toUpperCase()}
+                        </div>
+                    </div>
+
+                    <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
+                            <span class="text-[10px] text-neutral-400 font-mono">${displayArea}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
+                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        
+                        <div class="text-lg font-bold text-black font-mono mb-4">${priceFormatted}</div>
+
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
+                            <div><span class="block font-bold text-black">${spec1Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec1Label}</span></div>
+                            <div><span class="block font-bold text-black">${spec2Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec2Label}</span></div>
+                            <div><span class="block font-bold text-black">${spec3Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec3Label}</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 pt-0 flex gap-2">
+                    <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
+                        VIEW DETAILS & INQUIRE
+                    </button>
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                </div>
+            `;
+            return card;
+        }
+
+        function renderPropertyList() {
+            const grid = document.getElementById('property-grid');
+            const emptyState = document.getElementById('empty-state');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            let filtered = properties.filter(item => {
+                if (currentFilters.status !== 'ALL' && item.status.toLowerCase() !== currentFilters.status.toLowerCase()) return false;
+                if (currentFilters.category !== 'ALL' && item.category !== currentFilters.category) return false;
+                if (currentFilters.onlyDeals && !item.isDeal) return false;
+                if (currentFilters.onlyFeatured && !item.isFeatured) return false;
+                if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
+                if (currentFilters.maxPrice !== 'ALL' && Number(item.price) > parseInt(currentFilters.maxPrice)) return false;
+                if (currentFilters.keyword.trim()) {
+                    const kw = currentFilters.keyword.toLowerCase();
+                    if (!item.title.toLowerCase().includes(kw) && !item.location.toLowerCase().includes(kw)) return false;
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) emptyState?.classList.remove('hidden');
+            else {
+                emptyState?.classList.add('hidden');
+                filtered.forEach(prop => grid.appendChild(createPropertyCard(prop)));
+            }
+        }
+
+        // =========================================================================
+        // VIEW DETAILS & INQUIRY MODAL (DISPATCHES TO SHEET 2)
+        // =========================================================================
+        function openPropertyModal(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!prop) return;
+
+            const container = document.getElementById('modal-content-container');
+            const priceFormatted = Number(prop.price) > 0 ? 
+                new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
+                "PRICE UPON INQUIRY";
+
+            let displayArea = prop.area;
+            if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="relative h-80 bg-black">
+                            <img src="${prop.images[0]}" class="w-full h-full object-cover">
+                        </div>
+                        <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
+                        <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                    </div>
+                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black space-y-4">
+                        <div class="bg-black text-white p-4">
+                            <span class="text-xs text-neutral-400 uppercase">TRANSACTION PRICE</span>
+                            <div class="text-2xl font-bold font-mono">${priceFormatted}</div>
+                        </div>
+
+                        <form onsubmit="handleInquirySubmit(event, '${escapeQuotes(prop.title)}')" class="space-y-3">
+                            <label class="block text-xs font-bold uppercase">TRANSMIT INQUIRY / SCHEDULE (SHEET 2)</label>
+                            
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-neutral-500 mb-1">Inquiry Type *</label>
+                                <select id="client-inquiry-type" class="w-full bg-white border p-2 text-xs font-bold uppercase">
+                                    <option value="Viewing Appointment">SCHEDULE VIEWING APPOINTMENT</option>
+                                    <option value="Property Inquiry">GENERAL PROPERTY INQUIRY</option>
+                                </select>
+                            </div>
+
+                            <input type="text" id="client-name" required placeholder="Your Full Name *" class="w-full bg-white border p-2 text-xs">
+                            <input type="email" id="client-email" required placeholder="Email Address *" class="w-full bg-white border p-2 text-xs">
+                            <input type="tel" id="client-phone" required placeholder="Phone Number *" class="w-full bg-white border p-2 text-xs">
+                            <input type="datetime-local" id="client-date" class="w-full bg-white border p-2 text-xs">
+                            <textarea id="client-notes" rows="2" placeholder="Specific viewing requests or offers..." class="w-full bg-white border p-2 text-xs"></textarea>
+
+                            <button type="submit" id="client-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-bold tracking-widest transition-colors">
+                                TRANSMIT TO SHEET 2
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
+        function closePropertyModal() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        async function handleInquirySubmit(e, propTitle) {
+            e.preventDefault();
+            const btn = document.getElementById('client-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            const payload = {
+                sheetTab: "Sheet2",
+                action: "addAppointment",
+                propertyTitle: propTitle,
+                inquiryType: document.getElementById('client-inquiry-type').value,
+                name: document.getElementById('client-name').value,
+                email: document.getElementById('client-email').value,
+                phone: document.getElementById('client-phone').value,
+                date: document.getElementById('client-date').value || "N/A",
+                notes: document.getElementById('client-notes').value || ""
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(err) {}
+
+            closePropertyModal();
+            showToast("Logged to Sheet 2! An advisor will reach out.", "success");
+        }
+
+        // =========================================================================
+        // ENLIST SUBMIT (DISPATCHES TO SHEET 4)
+        // =========================================================================
+        function openEnlistModal() { document.getElementById('enlist-modal').classList.remove('hidden'); }
+        function closeEnlistModal() { document.getElementById('enlist-modal').classList.add('hidden'); }
+
+        async function handleEnlistSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('enlist-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            const payload = {
+                sheetTab: "Sheet4",
+                action: "addEnlistment",
+                name: document.getElementById('enlist-name').value,
+                email: document.getElementById('enlist-email').value,
+                phone: document.getElementById('enlist-phone').value,
+                type: document.getElementById('enlist-type').value,
+                location: document.getElementById('enlist-loc').value || "N/A"
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(err) {}
+
+            closeEnlistModal();
+            showToast("Property enlisted! Logged to Sheet 4.", "success");
+        }
+
+        // =========================================================================
+        // ADMIN DASHBOARD ENGINE (SHEET 1, SHEET 2, SHEET 4, SHEET 5 & HERO ASSETS)
+        // =========================================================================
+        function showAdminDashboard() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.remove('hidden');
+            renderAdminDashboard();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showMainApp() {
+            document.getElementById('public-view-container').classList.remove('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDeveloperPortalView() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.remove('hidden');
+            renderDeveloperSelectorDropdown();
+            filterDeveloperProjects();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAdminTab(tabKey) {
+            ['listings', 'devunits', 'inquiries', 'enlistments', 'herobanner'].forEach(t => {
+                document.getElementById('admin-panel-' + t)?.classList.add('hidden');
+                document.getElementById('tab-btn-' + t).className = "p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap";
+            });
+            document.getElementById('admin-panel-' + tabKey)?.classList.remove('hidden');
+            document.getElementById('tab-btn-' + tabKey).className = "p-4 border-b-2 border-brand-brown text-black whitespace-nowrap";
+        }
+
+        function renderAdminDashboard() {
+            document.getElementById('admin-stat-listings').textContent = properties.length;
+            document.getElementById('admin-stat-inquiries').textContent = adminInquiries.length;
+            document.getElementById('admin-stat-enlistments').textContent = adminEnlistments.length;
+
+            let totalUnits = 0;
+            developerProjects.forEach(p => totalUnits += (p.units || []).length);
+            document.getElementById('admin-stat-devunits').textContent = totalUnits;
+
+            // 1. Render Listings (Sheet 1)
+            const tbodyListings = document.getElementById('admin-listings-table');
+            tbodyListings.innerHTML = properties.map(p => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono font-bold">${p.id}</td>
+                    <td class="p-3 font-bold">${p.title}</td>
+                    <td class="p-3 uppercase font-semibold">${p.category}</td>
+                    <td class="p-3 text-neutral-600">${p.location}</td>
+                    <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
+                    <td class="p-3 font-mono">${p.area}</td>
+                    <td class="p-3 text-right space-x-2 whitespace-nowrap">
+                        <button onclick="editListing('${p.id}')" class="bg-brand-brown text-white px-2.5 py-1 text-[10px] uppercase font-bold">EDIT</button>
+                        <button onclick="deleteListing('${p.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] uppercase font-bold">DELETE</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // 2. Render Developer Units (Sheet 5)
+            const tbodyUnits = document.getElementById('admin-devunits-table');
+            const unitRows = [];
+            developerProjects.forEach(proj => {
+                (proj.units || []).forEach(u => {
+                    unitRows.push(`
+                        <tr class="hover:bg-neutral-50">
+                            <td class="p-3 font-bold">${proj.title}</td>
+                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
+                            <td class="p-3 font-semibold">${u.type}</td>
+                            <td class="p-3 font-mono">${u.area}</td>
+                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
+                            <td class="p-3"><span class="px-2 py-0.5 text-[9px] font-bold bg-black text-white">${u.status}</span></td>
+                            <td class="p-3 text-right">
+                                <button onclick="deleteDevUnit('${u.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] font-bold">DELETE</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+            tbodyUnits.innerHTML = unitRows.length ? unitRows.join('') : `<tr><td colspan="7" class="p-4 text-center text-neutral-400">No developer units synced yet.</td></tr>`;
+
+            // 3. Render Inquiries (Sheet 2)
+            filterAdminInquiries(document.getElementById('inquiry-type-filter')?.value || 'ALL');
+
+            // 4. Render Enlistments (Sheet 4)
+            const tbodyEn = document.getElementById('admin-enlistments-table');
+            tbodyEn.innerHTML = adminEnlistments.length ? adminEnlistments.map(e => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono text-[10px]">${e.timestamp ? new Date(e.timestamp).toLocaleDateString() : 'N/A'}</td>
+                    <td class="p-3 font-bold">${e.name}</td>
+                    <td class="p-3 font-mono">${e.email}<br>${e.phone}</td>
+                    <td class="p-3 font-semibold uppercase">${e.propertyType}</td>
+                    <td class="p-3">${e.location}</td>
+                </tr>
+            `).join('') : `<tr><td colspan="5" class="p-4 text-center text-neutral-400">No owner enlistments recorded yet.</td></tr>`;
+        }
+
+        function filterAdminInquiries(type) {
+            const tbody = document.getElementById('admin-inquiries-table');
+            const filtered = adminInquiries.filter(i => {
+                if (type === 'ALL') return true;
+                return (i.inquiryType || '').toLowerCase() === type.toLowerCase();
+            });
+            tbody.innerHTML = filtered.length ? filtered.map(i => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${i.inquiryType === 'Viewing Appointment' ? 'bg-brand-brown text-white' : 'bg-black text-white'}">${i.inquiryType || 'Inquiry'}</span></td>
+                    <td class="p-3 font-bold">${i.propertyTitle}</td>
+                    <td class="p-3">${i.name}</td>
+                    <td class="p-3 font-mono">${i.email}<br>${i.phone}</td>
+                    <td class="p-3 font-mono text-xs">${i.date || 'N/A'}</td>
+                    <td class="p-3 text-neutral-600">${i.notes || ''}</td>
+                </tr>
+            `).join('') : `<tr><td colspan="6" class="p-4 text-center text-neutral-400">No records found.</td></tr>`;
+        }
+
+        // =========================================================================
+        // HERO BANNER UPLOADER (DRIVE FOLDER: 1U6PYIn8vwWL1-e4oWvqyjtLFV7qjBEDQ)
+        // =========================================================================
+        async function handleHeroBannerUpload() {
+            const input = document.getElementById('hero-banner-input');
+            if (!input.files || input.files.length === 0) {
+                alert("Please select a local image file first.");
+                return;
+            }
+
+            const btn = document.getElementById('hero-upload-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> UPLOADING TO GOOGLE DRIVE...`;
+
+            const file = input.files[0];
+            const base64 = await new Promise((res, rej) => {
+                const r = new FileReader();
+                r.onload = () => res(r.result.split(',')[1]);
+                r.onerror = rej;
+                r.readAsDataURL(file);
+            });
+
+            try {
+                const resp = await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: "uploadHeroBanner",
+                        files: [{ name: file.name, type: file.type, base64: base64 }]
+                    })
+                });
+                const resData = await resp.json();
+                if (resData.bannerUrl) {
+                    localStorage.setItem('cpr_custom_hero_banner', resData.bannerUrl);
+                    updateHeroBannerStyle(resData.bannerUrl);
+                    showToast("Hero Banner uploaded to Drive & updated live!", "success");
+                }
+            } catch(e) {
+                const localUrl = URL.createObjectURL(file);
+                localStorage.setItem('cpr_custom_hero_banner', localUrl);
+                updateHeroBannerStyle(localUrl);
+                showToast("Hero banner updated!", "success");
+            }
+            btn.textContent = "UPLOAD TO GOOGLE DRIVE & UPDATE HERO";
+        }
+
+        // =========================================================================
+        // REALTOR LISTING EDIT / ADD / DELETE
+        // =========================================================================
+        function editListing(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!prop) return;
+
+            document.getElementById('crud-id').value = prop.id;
+            document.getElementById('crud-title').value = prop.title;
+            document.getElementById('crud-category').value = prop.category;
+            document.getElementById('crud-status').value = prop.status;
+            document.getElementById('crud-price').value = prop.price;
+            document.getElementById('crud-area').value = prop.area;
+            document.getElementById('crud-beds').value = prop.beds;
+            document.getElementById('crud-baths').value = prop.baths;
+            document.getElementById('crud-parking').value = prop.parking;
+            document.getElementById('crud-location').value = prop.location;
+            document.getElementById('crud-developer').value = prop.developer;
+            document.getElementById('crud-images').value = (prop.images || []).join(', ');
+            document.getElementById('crud-description').value = prop.description;
+            document.getElementById('crud-isdeal').checked = Boolean(prop.isDeal);
+            document.getElementById('crud-isfeatured').checked = Boolean(prop.isFeatured);
+            document.getElementById('crud-local-files').value = '';
+
+            document.getElementById('add-listing-modal-title').textContent = `EDIT LISTING #${prop.id}`;
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function openAddListingModal() {
+            document.getElementById('listing-crud-form').reset();
+            document.getElementById('crud-id').value = '';
+            document.getElementById('crud-local-files').value = '';
+            document.getElementById('add-listing-modal-title').textContent = "ADD NEW LUXURY LISTING";
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+        function closeAddListingModal() { document.getElementById('add-listing-modal').classList.add('hidden'); }
+
+        async function handleListingCrudSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('crud-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & OVERWRITING SHEET 1...`;
+
+            const idVal = document.getElementById('crud-id').value;
+            const isEdit = Boolean(idVal);
+            const listingId = isEdit ? idVal : String(Date.now());
+            const propTitle = document.getElementById('crud-title').value.trim();
+
+            const fileInput = document.getElementById('crud-local-files');
+            let localFilesData = [];
+            if (fileInput.files && fileInput.files.length > 0) {
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const f = fileInput.files[i];
+                    const b64 = await new Promise((res, rej) => {
+                        const r = new FileReader();
+                        r.onload = () => res(r.result.split(',')[1]);
+                        r.onerror = rej;
+                        r.readAsDataURL(f);
+                    });
+                    localFilesData.push({ name: f.name, type: f.type, base64: b64 });
+                }
+            }
+
+            const rawImages = document.getElementById('crud-images').value;
+            const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+            const payload = {
+                sheetTab: "Sheet1",
+                action: isEdit ? "updateListing" : "addListing",
+                id: listingId,
+                title: propTitle,
+                category: document.getElementById('crud-category').value.trim(),
+                status: document.getElementById('crud-status').value.trim(),
+                price: Number(document.getElementById('crud-price').value) || 0,
+                area: document.getElementById('crud-area').value.trim(),
+                beds: Number(document.getElementById('crud-beds').value) || 0,
+                baths: Number(document.getElementById('crud-baths').value) || 0,
+                parking: Number(document.getElementById('crud-parking').value) || 0,
+                location: document.getElementById('crud-location').value.trim(),
+                developer: document.getElementById('crud-developer').value.trim() || "Compass Realty Exclusive",
+                description: document.getElementById('crud-description').value.trim(),
+                isDeal: document.getElementById('crud-isdeal').checked,
+                isFeatured: document.getElementById('crud-isfeatured').checked,
+                images: imagesArr,
+                localImages: localFilesData
+            };
+
+            const sanitized = sanitizeListingRecord(payload);
+            if (isEdit) {
+                const idx = properties.findIndex(p => String(p.id) === String(listingId));
+                if (idx !== -1) properties[idx] = sanitized;
+            } else {
+                properties.unshift(sanitized);
+            }
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(e) {}
+
+            closeAddListingModal();
+            btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
+            showToast(`Listing #${listingId} overwritten in Sheet 1!`, "success");
+        }
+
+        async function deleteListing(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Sheet 1.`)) return;
+            properties = properties.filter(p => String(p.id) !== String(id));
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ sheetTab: "Sheet1", action: "deleteListing", id: id, title: prop ? prop.title : "" })
+                });
+            } catch(e) {}
+            showToast(`Listing #${id} deleted!`, "info");
+        }
+
+        // =========================================================================
+        // DEVELOPER UNITS CRUD & FOLDER CREATION (DRIVE: 10jvOCl_FtQkWh_FNjdbijrWySKIOO5MJ)
+        // =========================================================================
+        function openAddDevUnitModal() {
+            const sel = document.getElementById('unit-target-project');
+            sel.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
+            document.getElementById('unit-local-files').value = '';
+            document.getElementById('add-devunit-modal').classList.remove('hidden');
+        }
+        function closeAddDevUnitModal() { document.getElementById('add-devunit-modal').classList.add('hidden'); }
+
+        async function handleSaveDevUnitSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('devunit-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> UPLOADING ASSETS & SAVING TO SHEET 5...`;
+
+            const projId = document.getElementById('unit-target-project').value;
+            const proj = developerProjects.find(p => p.id === projId) || developerProjects[0];
+            const unitType = document.getElementById('unit-form-type').value.trim();
+
+            const fileInput = document.getElementById('unit-local-files');
+            let localFiles = [];
+            if (fileInput.files && fileInput.files.length > 0) {
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const f = fileInput.files[i];
+                    const b64 = await new Promise((res, rej) => {
+                        const r = new FileReader();
+                        r.onload = () => res(r.result.split(',')[1]);
+                        r.onerror = rej;
+                        r.readAsDataURL(f);
+                    });
+                    localFiles.push({ name: f.name, type: f.type, base64: b64 });
+                }
+            }
+
+            const rawImgs = document.getElementById('unit-form-images').value;
+            const parsed = rawImgs.split(',').map(s => s.trim()).filter(Boolean);
+
+            const newUnit = {
+                id: 'UNIT-' + Date.now(),
+                type: unitType,
+                area: document.getElementById('unit-form-area').value.trim(),
+                priceRange: document.getElementById('unit-form-price').value.trim(),
+                status: document.getElementById('unit-form-status').value,
+                beds: 2, baths: 2,
+                images: parsed.length ? parsed : [proj.image]
+            };
+
+            proj.units = proj.units || [];
+            proj.units.push(newUnit);
+            localStorage.setItem('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet5",
+                        action: "syncDeveloperUnit",
+                        projectId: proj.id,
+                        projectName: proj.title,
+                        developer: proj.developer,
+                        township: proj.township,
+                        turnover: proj.turnover,
+                        unitId: newUnit.id,
+                        unitType: newUnit.type,
+                        area: newUnit.area,
+                        priceRange: newUnit.priceRange,
+                        status: newUnit.status,
+                        beds: newUnit.beds,
+                        baths: newUnit.baths,
+                        images: newUnit.images,
+                        localImages: localFiles
+                    })
+                });
+            } catch(e) {}
+
+            closeAddDevUnitModal();
+            renderAdminDashboard();
+            btn.textContent = "SAVE UNIT & SYNC TO SHEET 5";
+            showToast(`Added unit to ${proj.title} and created Drive folder!`, "success");
+        }
+
+        async function deleteDevUnit(unitId) {
+            if (!confirm(`Delete this unit? This will update Sheet 5.`)) return;
+            developerProjects.forEach(p => {
+                p.units = (p.units || []).filter(u => u.id !== unitId);
+            });
+            localStorage.setItem('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ sheetTab: "Sheet5", action: "deleteDeveloperUnit", unitId: unitId })
+                });
+            } catch(e) {}
+            showToast("Unit removed from Sheet 5!", "info");
+        }
+
+        // =========================================================================
+        // FETCH ALL SHEETS (SHEET 1, SHEET 2, SHEET 4, SHEET 5)
+        // =========================================================================
+        async function fetchDatabaseFromGoogleSheets() {
+            try {
+                const res = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await res.json();
+
+                if (data.secondaryListings && data.secondaryListings.length) {
+                    properties = data.secondaryListings.map(item => {
+                        const sanitized = sanitizeListingRecord(item);
+                        const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
+                        if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
+                            sanitized.price = existing.price;
+                        }
+                        return sanitized;
+                    });
+                    localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+                    renderPropertyList();
+                }
+
+                if (data.developerUnits && data.developerUnits.length) {
+                    data.developerUnits.forEach(du => {
+                        let proj = developerProjects.find(p => p.id === du.projectId || p.title.toLowerCase() === (du.projectName || '').toLowerCase());
+                        if (proj) {
+                            proj.units = proj.units || [];
+                            const existUIdx = proj.units.findIndex(u => u.id === du.unitId);
+                            const uObj = {
+                                id: du.unitId,
+                                type: du.unitType,
+                                area: du.area,
+                                priceRange: du.priceRange,
+                                status: du.status,
+                                beds: Number(du.beds) || 2,
+                                baths: Number(du.baths) || 2,
+                                images: (du.images ? String(du.images).split(',').map(s=>s.trim()) : [proj.image]).map(resolveDriveImageUrl)
+                            };
+                            if (existUIdx !== -1) proj.units[existUIdx] = uObj;
+                            else proj.units.push(uObj);
+                        }
+                    });
+                    localStorage.setItem('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+                }
+
+                if (data.appointments) adminInquiries = data.appointments;
+                if (data.enlistments) adminEnlistments = data.enlistments;
+
+                renderAdminDashboard();
+            } catch(e) {
+                console.warn("Using local cache:", e);
+            }
+        }
+
+        // NAVIGATION & FILTERS
+        function setFilterCategory(cat) {
+            currentFilters.category = cat;
+            ['ALL', 'LOTS', 'COMMERCIAL', 'CONDOMINIUM', 'HOUSE AND LOTS'].forEach(c => {
+                const btn = document.getElementById('cat-btn-' + c);
+                if (btn) btn.className = c === cat ? 'px-3 py-1.5 text-xs font-semibold uppercase border border-black transition-all bg-black text-white' : 'px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black';
+            });
+            renderPropertyList();
+        }
+
+        function filterProperties(status, cat) {
+            currentFilters.status = status;
+            currentFilters.category = cat;
+            document.getElementById('current-view-title').textContent = `${status === 'ALL' ? 'ALL' : 'FOR ' + status.toUpperCase()} ${cat === 'ALL' ? 'PROPERTIES' : cat}`;
+            renderPropertyList();
+        }
+
+        function filterBySection(sec) {
+            currentFilters.status = 'ALL';
+            currentFilters.category = 'ALL';
+            currentFilters.onlyDeals = (sec === 'deals');
+            currentFilters.onlyFeatured = (sec === 'featured');
+            document.getElementById('current-view-title').textContent = sec === 'deals' ? 'TOP 10 DEALS' : 'FEATURED PROPERTIES';
+            renderPropertyList();
+        }
+
+        function handleSearchSubmit(e) {
+            e.preventDefault();
+            currentFilters.keyword = document.getElementById('filter-keyword').value;
+            currentFilters.status = document.getElementById('filter-status').value;
+            currentFilters.category = document.getElementById('filter-category').value;
+            currentFilters.maxPrice = document.getElementById('filter-maxprice').value;
+            renderPropertyList();
+        }
+
+        function resetFilters() {
+            currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+            document.getElementById('search-form')?.reset();
+            setFilterCategory('ALL');
+        }
+
+        function toggleFavoritesView() {
+            currentFilters.onlyFavs = !currentFilters.onlyFavs;
+            renderPropertyList();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function escapeQuotes(str) { return String(str).replace(/'/g, "\\'"); }
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-black text-white border border-brand-brown px-4 py-3 text-xs uppercase font-semibold shadow-2xl';
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        // LIGHTBOX
+        let lbImgs = [];
+        let lbIdx = 0;
+        function openLightboxStudio(title, images, startIdx = 0) {
+            lbImgs = images;
+            lbIdx = startIdx;
+            document.getElementById('lightbox-title').textContent = title;
+            updateLb();
+            const thumbs = document.getElementById('lightbox-thumbnails');
+            thumbs.innerHTML = lbImgs.map((img, i) => `
+                <img src="${img}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer">
+            `).join('');
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+        function updateLb() {
+            document.getElementById('lightbox-main-img').src = lbImgs[lbIdx];
+            document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+        }
+        function navigateLightbox(dir) { lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length; updateLb(); }
+        function setLb(idx) { lbIdx = idx; updateLb(); }
+        function closeLightboxStudio() { document.getElementById('lightbox-studio-modal').classList.add('hidden'); }
+
+        // DEVELOPER TOWNSHIP LOGIC
+        function renderDeveloperSelectorDropdown() {
+            const sel = document.getElementById('dev-selector-dropdown');
+            sel.innerHTML = `<option value="ALL">ALL DEVELOPERS & TOWNSHIPS</option><option value="shang-properties">Shang Properties</option>`;
+        }
+        function filterDeveloperProjects() {
+            const grid = document.getElementById('dev-projects-grid');
+            document.getElementById('dev-projects-count').textContent = `${developerProjects.length} PROJECTS`;
+            grid.innerHTML = developerProjects.map(p => `
+                <div class="bg-white border-2 border-black p-6 space-y-4">
+                    <div class="h-56 bg-neutral-900 overflow-hidden">
+                        <img src="${p.image}" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-brand-brown uppercase font-bold">${p.developer}</span>
+                        <h3 class="text-lg font-bold uppercase">${p.title}</h3>
+                        <p class="text-xs text-neutral-600">${p.township}</p>
+                    </div>
+                    <div class="bg-neutral-50 p-2.5 text-xs font-mono border">
+                        Available Layouts: ${(p.units || []).length} Units
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
