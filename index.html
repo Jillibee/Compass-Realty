@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -692,7 +695,7 @@
         }
 
         // =========================================================================
-        // UNIVERSAL DATA SANITIZER (Dynamic for all listings across the entire catalog)
+        // UNIVERSAL FIELD SEPARATION ENGINE (Protects all listings dynamically)
         // =========================================================================
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
@@ -703,66 +706,80 @@
             let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. Universal Price / Status Swap Protection
+            // 1. Separate long descriptive text from Developer field
+            if (dev.length > 40 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•') || dev.includes('#')) {
+                if (!desc || desc.length < dev.length) desc = dev;
+                dev = "Compass Realty Exclusive";
+            }
+            if (!dev) dev = "Compass Realty Exclusive";
+
+            // 2. Detect swapped area in bedrooms (e.g. 832 sqm in beds)
+            let beds = Number(item.beds) || 0;
+            if (beds > 150 && (!area || area === "N/A" || area === "0")) {
+                area = beds + " sqm";
+                beds = 0;
+            }
+
+            // Extract room count from description if available
+            if (beds === 0 && desc) {
+                const roomMatch = desc.match(/(\d+)\s+(?:REGULAR\s+)?ROOMS/i);
+                if (roomMatch && roomMatch[1]) beds = parseInt(roomMatch[1], 10);
+            }
+
+            // 3. Extract parking if missing from description
+            let parking = Number(item.parking) || 0;
+            if (parking === 0 && desc) {
+                const parkMatch = desc.match(/(\d+)\s+PARKING/i);
+                if (parkMatch && parkMatch[1]) parking = parseInt(parkMatch[1], 10);
+            }
+
+            // 4. Area vs image link cleanup
+            if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
+                if (!rawImg) rawImg = area;
+                area = "N/A";
+            }
+
+            // 5. Price vs Status swap cleanup
             let rawStatus = String(item.status || "Sale").trim();
             let rawPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
 
-            // If status is a large number (e.g. 150000000, 25000000), it's the price
             if (/^\d{5,}$/.test(rawStatus) || (!isNaN(Number(rawStatus)) && Number(rawStatus) > 10000)) {
                 rawPrice = Number(rawStatus);
                 rawStatus = "Sale";
             }
-            if (rawStatus.length > 25 || rawStatus === "0") {
-                rawStatus = "Sale";
-            }
+            if (rawStatus.length > 25 || rawStatus === "0") rawStatus = "Sale";
 
-            // 2. Universal Developer vs. Description Protection
-            if ((dev.length > 70 || dev.includes('\n') || dev.includes('•')) && desc.length < 30) {
-                desc = dev;
-                dev = "Compass Realty Exclusive";
-            }
-            if (!dev) {
-                dev = "Compass Realty Exclusive";
-            }
-
-            // 3. Universal Area vs. Image URL Protection
-            if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
-                if (!rawImg) rawImg = area;
-                area = "";
-            }
-
-            // 4. Universal Category vs. Location Protection
+            // 6. Location cleanup
             const validCategories = ['CONDOMINIUM', 'HOUSE AND LOTS', 'LOTS', 'COMMERCIAL'];
             if (validCategories.includes(loc.toUpperCase())) {
                 cat = loc.toUpperCase();
                 loc = "Metro Manila";
             }
-            if (!validCategories.includes(cat)) {
-                cat = "CONDOMINIUM";
+            if (loc === "Metro Manila" || !loc) {
+                if (desc.toUpperCase().includes('MALATE')) loc = "Malate, Manila";
+                else if (desc.toUpperCase().includes('BGC')) loc = "BGC, Taguig City";
+                else if (desc.toUpperCase().includes('MAKATI')) loc = "Makati City";
             }
 
-            // 5. Universal Image Gallery Parser
+            if (title.toUpperCase().includes('HOTEL')) cat = 'COMMERCIAL';
+
+            // 7. Image gallery parser
             let imgList = [];
-            if (Array.isArray(rawImg)) {
-                imgList = rawImg;
-            } else if (typeof rawImg === 'string' && rawImg.trim()) {
-                imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
-            }
-            if (imgList.length === 0) {
-                imgList = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
-            }
+            if (Array.isArray(rawImg)) imgList = rawImg;
+            else if (typeof rawImg === 'string' && rawImg.trim()) imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
+            if (imgList.length === 0) imgList = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
 
             return {
                 id: item.id || Date.now(),
-                title: title || "Exclusive Property",
+                title: title || "Luxury Property",
                 location: loc || "Metro Manila",
                 price: rawPrice,
                 status: rawStatus,
                 category: cat,
                 area: area || "N/A",
-                beds: Number(item.beds) || 0,
+                beds: beds,
                 baths: Number(item.baths) || 0,
-                parking: Number(item.parking) || 0,
+                parking: parking,
                 developer: dev,
                 agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
                 images: imgList.map(resolveDriveImageUrl),
@@ -862,7 +879,7 @@
         }
 
         // =========================================================================
-        // UNIVERSAL CARD BUILDER (Formats each property dynamically)
+        // UNIVERSAL CARD BUILDER (Clean Badges, Titles, Specs & Buttons)
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
@@ -906,7 +923,7 @@
 
                     <div class="p-6 cursor-pointer" onclick="openPropertyModal(${prop.id})">
                         <div class="flex justify-between items-center mb-1">
-                            <span class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown">${prop.developer}</span>
+                            <span class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
                             <span class="text-[10px] text-neutral-400 font-mono">${prop.area}</span>
                         </div>
                         <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
@@ -1165,7 +1182,7 @@
         }
 
         // =========================================================================
-        // UNIVERSAL OVERWRITE ENGINE (Syncs any listing to Google Sheets)
+        // PRE-VALIDATED OVERWRITE ENGINE (Sanitizes fields before sending to Sheets)
         // =========================================================================
         async function handleListingCrudSubmit(e) {
             e.preventDefault();
@@ -1175,6 +1192,23 @@
             const idVal = document.getElementById('crud-id').value;
             const isEdit = Boolean(idVal);
             const listingId = isEdit ? idVal : String(Math.max(...properties.map(p => Number(p.id) || 1000), 1000) + 1);
+
+            let devVal = document.getElementById('crud-developer').value.trim();
+            let descVal = document.getElementById('crud-description').value.trim();
+            let areaVal = document.getElementById('crud-area').value.trim();
+            let bedsVal = Number(document.getElementById('crud-beds').value) || 0;
+
+            // Auto-detect and prevent description leakage into developer field
+            if (devVal.length > 50 || devVal.includes('\n') || devVal.toUpperCase().includes('FOR SALE')) {
+                if (!descVal || descVal.length < devVal.length) descVal = devVal;
+                devVal = "Compass Realty Exclusive";
+            }
+
+            // Auto-detect lot area placed in bedrooms
+            if (bedsVal > 150 && (!areaVal || areaVal === "N/A")) {
+                areaVal = bedsVal + " sqm";
+                bedsVal = 0;
+            }
 
             const rawImages = document.getElementById('crud-images').value;
             const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [
@@ -1187,20 +1221,20 @@
                 category: document.getElementById('crud-category').value,
                 status: document.getElementById('crud-status').value,
                 price: Number(document.getElementById('crud-price').value) || 0,
-                area: document.getElementById('crud-area').value.trim(),
-                beds: Number(document.getElementById('crud-beds').value) || 0,
+                area: areaVal,
+                beds: bedsVal,
                 baths: Number(document.getElementById('crud-baths').value) || 0,
                 parking: Number(document.getElementById('crud-parking').value) || 0,
                 location: document.getElementById('crud-location').value.trim(),
-                developer: document.getElementById('crud-developer').value.trim(),
+                developer: devVal,
                 agentEmail: document.getElementById('crud-agentemail').value.trim(),
-                description: document.getElementById('crud-description').value.trim(),
+                description: descVal,
                 isDeal: document.getElementById('crud-isdeal').checked,
                 isFeatured: document.getElementById('crud-isfeatured').checked,
                 images: imagesArr
             };
 
-            // Update local state immediately
+            // 1. Update session locally
             if (isEdit) {
                 const idx = properties.findIndex(p => String(p.id) === String(listingId));
                 if (idx !== -1) properties[idx] = payload;
@@ -1209,7 +1243,7 @@
             }
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
-            // Transmit update directly to Google Sheets
+            // 2. Overwrite directly in Google Sheet 1
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1267,7 +1301,6 @@
                 if (incoming.length > 0) {
                     properties = incoming.map(item => {
                         const sanitized = sanitizeListingRecord(item);
-                        // Smart merge preserves locally edited prices if sheet sync is in-flight
                         const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
                         if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
                             sanitized.price = existing.price;
