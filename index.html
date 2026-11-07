@@ -541,13 +541,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Property Title *</label>
-                        <input type="text" id="crud-title" required placeholder="e.g. Armada Hotel" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="text" id="crud-title" required placeholder="e.g. Grand Hyatt Manila Residences" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Category *</label>
                         <select id="crud-category" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
-                            <option value="COMMERCIAL">COMMERCIAL</option>
                             <option value="CONDOMINIUM">CONDOMINIUM</option>
+                            <option value="COMMERCIAL">COMMERCIAL</option>
                             <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
                             <option value="LOTS">LOTS</option>
                         </select>
@@ -566,18 +566,18 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Price (PHP) *</label>
-                        <input type="number" id="crud-price" required placeholder="150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-price" required placeholder="e.g. 150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Floor / Lot Area *</label>
-                        <input type="text" id="crud-area" required placeholder="e.g. 13-Storey / 420 sqm" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="text" id="crud-area" required placeholder="e.g. 300 sqm" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bedrooms / Rooms</label>
-                        <input type="number" id="crud-beds" value="95" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-beds" value="0" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bathrooms</label>
@@ -585,14 +585,14 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Parking / Garage Slots</label>
-                        <input type="number" id="crud-parking" value="14" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-parking" value="0" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Location / Address *</label>
-                        <input type="text" id="crud-location" required placeholder="e.g. Malate, Manila" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="text" id="crud-location" required placeholder="e.g. BGC, Taguig City" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Developer / Brand</label>
@@ -674,7 +674,7 @@
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
         function resolveDriveImageUrl(url) {
-            if (!url) return "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80";
+            if (!url) return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
             url = String(url).trim();
 
             if (url.includes('drive.google.com')) {
@@ -692,7 +692,7 @@
         }
 
         // =========================================================================
-        // ROBUST DATA SANITIZER (Auto-Detects Swapped Price/Status, Description & Area)
+        // UNIVERSAL DATA SANITIZER (Dynamic for all listings across the entire catalog)
         // =========================================================================
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
@@ -700,59 +700,48 @@
             let dev = String(item.developer || "").trim();
             let area = String(item.area || "").trim();
             let loc = String(item.location || "").trim();
-            let cat = String(item.category || "COMMERCIAL").toUpperCase().trim();
+            let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. PRICE VS STATUS SWAP DETECTOR (Fixes "FOR 150000000" badge bug)
-            let rawStatus = String(item.status || "").trim();
+            // 1. Universal Price / Status Swap Protection
+            let rawStatus = String(item.status || "Sale").trim();
             let rawPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
 
-            // If status is a number (like 150000000), it is actually the price!
-            if (/^\d{4,}$/.test(rawStatus) || (!isNaN(Number(rawStatus)) && Number(rawStatus) > 1000)) {
+            // If status is a large number (e.g. 150000000, 25000000), it's the price
+            if (/^\d{5,}$/.test(rawStatus) || (!isNaN(Number(rawStatus)) && Number(rawStatus) > 10000)) {
                 rawPrice = Number(rawStatus);
                 rawStatus = "Sale";
             }
-            if (rawStatus.toLowerCase().includes('150000000')) {
-                rawPrice = 150000000;
-                rawStatus = "Sale";
-            }
-            if (rawStatus.length > 20 || rawStatus === "0") {
+            if (rawStatus.length > 25 || rawStatus === "0") {
                 rawStatus = "Sale";
             }
 
-            // 2. If developer contains long description text
-            if (dev.length > 40 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•') || dev.includes('#')) {
-                if (desc.length < 50) desc = dev;
+            // 2. Universal Developer vs. Description Protection
+            if ((dev.length > 70 || dev.includes('\n') || dev.includes('•')) && desc.length < 30) {
+                desc = dev;
+                dev = "Compass Realty Exclusive";
+            }
+            if (!dev) {
                 dev = "Compass Realty Exclusive";
             }
 
-            // 3. If area contains an image link
+            // 3. Universal Area vs. Image URL Protection
             if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
-                if (!rawImg || String(rawImg).length < 10) rawImg = area;
-                area = "13-Storey Hotel";
-            }
-            if (!area || area === "N/A") {
-                area = "13-Storey Hotel";
+                if (!rawImg) rawImg = area;
+                area = "";
             }
 
-            // 4. Location fix
+            // 4. Universal Category vs. Location Protection
             const validCategories = ['CONDOMINIUM', 'HOUSE AND LOTS', 'LOTS', 'COMMERCIAL'];
             if (validCategories.includes(loc.toUpperCase())) {
                 cat = loc.toUpperCase();
-                loc = "Malate, Manila";
+                loc = "Metro Manila";
             }
-            if (!loc || loc === "Metro Manila") {
-                if (desc.toUpperCase().includes('MALATE') || title.toUpperCase().includes('MALATE')) loc = "Malate, Manila";
-                else if (desc.toUpperCase().includes('BGC')) loc = "BGC, Taguig City";
-                else if (desc.toUpperCase().includes('MAKATI')) loc = "Makati City";
+            if (!validCategories.includes(cat)) {
+                cat = "CONDOMINIUM";
             }
 
-            // 5. Category fix: Hotels are always Commercial
-            if (title.toUpperCase().includes('HOTEL') || desc.toUpperCase().includes('HOTEL')) {
-                cat = 'COMMERCIAL';
-            }
-
-            // 6. Clean image parsing
+            // 5. Universal Image Gallery Parser
             let imgList = [];
             if (Array.isArray(rawImg)) {
                 imgList = rawImg;
@@ -760,35 +749,24 @@
                 imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
             }
             if (imgList.length === 0) {
-                imgList = ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
-            }
-
-            // 7. Calculate exact rooms & parking
-            let beds = Number(item.beds) || 0;
-            if (beds === 0 || beds > 500) {
-                beds = 95; // 70 regular + 24 deluxe + 1 presidential suite
-            }
-
-            let parking = Number(item.parking) || 0;
-            if (parking === 0) {
-                parking = 14;
+                imgList = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
             }
 
             return {
-                id: Number(item.id) || Date.now(),
-                title: title || "Armada Hotel",
-                location: loc || "Malate, Manila",
+                id: item.id || Date.now(),
+                title: title || "Exclusive Property",
+                location: loc || "Metro Manila",
                 price: rawPrice,
-                status: rawStatus || "Sale",
+                status: rawStatus,
                 category: cat,
-                area: area,
-                beds: beds,
+                area: area || "N/A",
+                beds: Number(item.beds) || 0,
                 baths: Number(item.baths) || 0,
-                parking: parking,
-                developer: dev || "Compass Realty Exclusive",
+                parking: Number(item.parking) || 0,
+                developer: dev,
                 agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
                 images: imgList.map(resolveDriveImageUrl),
-                description: desc || "Exclusive prime commercial property.",
+                description: desc || "Curated luxury real estate portfolio listing.",
                 isDeal: String(item.isdeal || item.isDeal).toUpperCase() === 'TRUE',
                 isFeatured: String(item.isfeatured || item.isFeatured).toUpperCase() === 'TRUE'
             };
@@ -797,23 +775,23 @@
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
-                title: "Armada Hotel",
-                location: "Malate, Manila",
-                price: 150000000,
+                title: "Grand Hyatt Manila Residences",
+                location: "Grand Hyatt Manila Residences, BGC Taguig City",
+                price: 148000000,
                 status: "Sale",
-                category: "COMMERCIAL",
+                category: "CONDOMINIUM",
                 isDeal: true,
                 isFeatured: true,
-                beds: 95,
-                baths: 95,
-                parking: 14,
-                area: "13-Storey Hotel",
+                beds: 3,
+                baths: 3,
+                parking: 3,
+                area: "300 sqm",
                 developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\n\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts.\n• 13-STOREY HOTEL\n• 70 REGULAR ROOMS • 24 DELUXE ROOMS • 1 PRESIDENTIAL SUITE\n• GROUND FLOOR: LOBBY & RESTAURANT\n• 2ND FLOOR: GYM & SPA\n• 3RD FLOOR: FUNCTION ROOM & ADMIN OFFICE\n• ROOFTOP: SWIMMING POOL & FUNCTION AREA\n• BASEMENT: 14 PARKING SLOTS\n\n✓ Hospitality Operations\n✓ Redevelopment Potential\n✓ Long-term Capital Appreciation"
+                description: "Elevated urban living at its finest. High zone corner unit with hotel-inspired amenities."
             }
         ];
 
@@ -884,24 +862,27 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD COMPONENT: PROPER BADGE & BUTTONS
+        // UNIVERSAL CARD BUILDER (Formats each property dynamically)
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
             card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative';
             
-            // Format Price Correctly
             const priceFormatted = Number(prop.price) > 0 ? 
                 new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
                 "PRICE UPON INQUIRY";
 
-            // Clean Status Badge (Always 'FOR SALE', 'FOR RENT', etc.)
             let badgeText = "FOR SALE";
             if (String(prop.status).toUpperCase() === "RENT") badgeText = "FOR RENT";
             else if (String(prop.status).toUpperCase() === "SOLD") badgeText = "SOLD";
             else if (isStatusMatch(prop.status, 'Sale & Rent')) badgeText = "FOR SALE & RENT";
 
-            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
+            let spec1Label = "BEDS";
+            let spec3Label = "PARKING";
+            if (prop.category === "COMMERCIAL") spec1Label = "ROOMS";
+            if (prop.category === "HOUSE AND LOTS") spec3Label = "GARAGE";
+
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
             const resolvedImages = rawImages.map(resolveDriveImageUrl);
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
             const currentImgIndex = cardCarouselIndices[prop.id];
@@ -934,9 +915,9 @@
                         <div class="text-lg font-bold text-black font-mono mb-4">${priceFormatted}</div>
 
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
-                            <div><span class="block font-bold text-black">${prop.beds}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">${prop.category === 'COMMERCIAL' ? 'ROOMS' : 'BEDS'}</span></div>
+                            <div><span class="block font-bold text-black">${prop.beds}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">${spec1Label}</span></div>
                             <div><span class="block font-bold text-black">${prop.baths}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">BATHS</span></div>
-                            <div><span class="block font-bold text-black">${prop.parking}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">PARKING</span></div>
+                            <div><span class="block font-bold text-black">${prop.parking}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">${spec3Label}</span></div>
                         </div>
                     </div>
                 </div>
@@ -957,7 +938,7 @@
         function navigateCardCarousel(propId, dir) {
             const prop = properties.find(p => p.id === propId);
             if (!prop) return;
-            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
             const resolved = rawImages.map(resolveDriveImageUrl);
             if (resolved.length <= 1) return;
 
@@ -966,7 +947,7 @@
         }
 
         // =========================================================================
-        // VIEW DETAILS & INQUIRY MODAL (Full Specs & Appointment Form)
+        // PROPERTY DETAILS & INQUIRY MODAL (Full Specs & Viewing Form)
         // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => p.id === id);
@@ -978,7 +959,10 @@
                 new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
                 "PRICE UPON INQUIRY";
 
-            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+
+            let spec1Label = prop.category === "COMMERCIAL" ? "ROOMS" : "BEDROOMS";
+            let spec3Label = prop.category === "HOUSE AND LOTS" ? "GARAGE" : "PARKING";
 
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -1006,9 +990,9 @@
                         </div>
 
                         <div class="grid grid-cols-4 gap-4 p-4 bg-neutral-100 border border-neutral-300 text-center text-xs">
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">ROOMS</span><span class="text-base font-bold">${prop.beds}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">${spec1Label}</span><span class="text-base font-bold">${prop.beds}</span></div>
                             <div><span class="text-[9px] text-neutral-500 block uppercase">BATHROOMS</span><span class="text-base font-bold">${prop.baths}</span></div>
-                            <div><span class="text-[9px] text-neutral-500 block uppercase">PARKING</span><span class="text-base font-bold">${prop.parking}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">${spec3Label}</span><span class="text-base font-bold">${prop.parking}</span></div>
                             <div><span class="text-[9px] text-neutral-500 block uppercase">AREA</span><span class="text-base font-bold font-mono text-xs">${prop.area}</span></div>
                         </div>
 
@@ -1145,7 +1129,7 @@
         }
 
         function editListing(id) {
-            const prop = properties.find(p => p.id === id);
+            const prop = properties.find(p => String(p.id) === String(id));
             if (!prop) return;
 
             document.getElementById('crud-id').value = prop.id;
@@ -1180,6 +1164,9 @@
             document.getElementById('add-listing-modal').classList.add('hidden');
         }
 
+        // =========================================================================
+        // UNIVERSAL OVERWRITE ENGINE (Syncs any listing to Google Sheets)
+        // =========================================================================
         async function handleListingCrudSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('crud-submit-btn');
@@ -1191,7 +1178,7 @@
 
             const rawImages = document.getElementById('crud-images').value;
             const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [
-                "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
             ];
 
             const payload = {
@@ -1213,7 +1200,7 @@
                 images: imagesArr
             };
 
-            // Update local memory
+            // Update local state immediately
             if (isEdit) {
                 const idx = properties.findIndex(p => String(p.id) === String(listingId));
                 if (idx !== -1) properties[idx] = payload;
@@ -1222,6 +1209,7 @@
             }
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
+            // Transmit update directly to Google Sheets
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1242,7 +1230,7 @@
             renderAdminDashboardTables();
             closeAddListingModal();
             btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
-            showToast(`Listing #${listingId} successfully overwritten in Google Sheets!`, "success");
+            showToast(`Listing #${listingId} updated in Google Sheets!`, "success");
         }
 
         async function deleteListing(id) {
@@ -1279,7 +1267,7 @@
                 if (incoming.length > 0) {
                     properties = incoming.map(item => {
                         const sanitized = sanitizeListingRecord(item);
-                        // Smart merge: If Google Sheet returns 0 but your local session has a valid price, keep your price!
+                        // Smart merge preserves locally edited prices if sheet sync is in-flight
                         const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
                         if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
                             sanitized.price = existing.price;
