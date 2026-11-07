@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +80,7 @@
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased selection:bg-brand-brown selection:text-white">
 
-    <!-- TOP ANNOUNCEMENT BAR (Zero Admin Buttons, Zero Careers) -->
+    <!-- TOP ANNOUNCEMENT BAR (Clean: Zero Admin Buttons, Zero Careers) -->
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
             <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO & DEVELOPER TOWNSHIPS</span>
@@ -146,6 +147,7 @@
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
 
@@ -331,11 +333,11 @@
         </div>
 
         <div class="relative w-full max-w-5xl flex-grow flex items-center justify-center py-4 z-40">
-            <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
+            <button type="button" onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" class="max-h-[70vh] max-w-full object-contain">
             </div>
-            <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
+            <button type="button" onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
         </div>
 
         <div id="lightbox-thumbnails" class="w-full max-w-3xl flex justify-center gap-2 overflow-x-auto py-2 z-50"></div>
@@ -743,7 +745,7 @@
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
 
-    <!-- FOOTER (Clean: Zero Admin Links) -->
+    <!-- FOOTER (Zero Admin Links) -->
     <footer class="bg-black text-white border-t-4 border-brand-brown pt-16 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-neutral-800">
@@ -796,7 +798,7 @@
             return url;
         }
 
-        // STRICT STATUS NORMALIZER: Never permits raw numbers like 200000000 on status badge
+        // STRICT STATUS NORMALIZER
         function normalizeStatus(val) {
             if (!val) return "Sale";
             let s = String(val).toLowerCase().trim();
@@ -807,7 +809,7 @@
             return "Sale";
         }
 
-        // UNIVERSAL DATA SANITIZER (Guarantees fields never mix across all listings)
+        // UNIVERSAL DATA SANITIZER
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
             let desc = String(item.description || "").trim();
@@ -817,13 +819,13 @@
             let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. Guard against Image URL in Area
+            // Guard against Image URL in Area
             if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
                 if (!rawImg) rawImg = area;
                 area = "";
             }
 
-            // 2. Guard against Category in Location
+            // Guard against Category in Location
             const validCats = ['CONDOMINIUM', 'COMMERCIAL', 'LOTS', 'HOUSE AND LOTS'];
             if (validCats.includes(loc.toUpperCase()) && !validCats.includes(cat.toUpperCase())) {
                 const swap = cat;
@@ -834,7 +836,6 @@
                 loc = "Metro Manila";
             }
 
-            // Fallback for location from description
             if (loc === "Metro Manila" || !loc) {
                 const pinMatch = desc.match(/📍\s*([A-Za-z0-9\s,.-]+?)(?:\n|$|\.|\bWake\b|\bAn\b)/);
                 if (pinMatch && pinMatch[1] && pinMatch[1].trim().length > 3) loc = pinMatch[1].trim();
@@ -843,14 +844,12 @@
             if (/\b(?:lot|lots|land)\b/i.test(title)) cat = 'LOTS';
             else if (/\b(?:commercial|hotel|building)\b/i.test(title)) cat = 'COMMERCIAL';
 
-            // 3. Developer cleanup
             if (dev.length > 50 || dev.includes('\n')) {
                 if (!desc || desc.length < dev.length) desc = dev;
                 dev = "Compass Realty Exclusive";
             }
             if (!dev) dev = "Compass Realty Exclusive";
 
-            // 4. Area vs Beds cleanup
             let beds = Number(item.beds) || 0;
             if (cat === 'LOTS') {
                 if (beds > 0 && (!area || area === 'N/A')) area = beds + " sqm";
@@ -860,7 +859,6 @@
                 beds = 0;
             }
 
-            // 5. Price cleanup & Strict Status Normalization
             let cleanPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
             let cleanStatus = normalizeStatus(item.status);
 
@@ -895,7 +893,7 @@
             };
         }
 
-        // COMPLETE BASELINE PORTFOLIO: LISTINGS WILL NEVER DISAPPEAR
+        // PERMANENT BASELINE PORTFOLIO
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
@@ -1001,7 +999,6 @@
             }
         ];
 
-        // Safe Cache Loader: Never defaults to empty array
         let cached = null;
         try {
             cached = JSON.parse(localStorage.getItem('cpr_cached_listings'));
@@ -1042,11 +1039,17 @@
         // Instant Hash & Keyboard Shortcut Listeners for Admin Access
         window.addEventListener('hashchange', checkDirectURLRouting);
         window.addEventListener('keydown', (e) => {
-            // Secret Shortcut: Ctrl + Shift + A or Cmd + Shift + A
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
                 e.preventDefault();
                 showAdminDashboard();
                 showToast("Admin Desk Activated!", "info");
+            }
+            // Lightbox shortcuts
+            const lb = document.getElementById('lightbox-studio-modal');
+            if (lb && !lb.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightboxStudio();
+                else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                else if (e.key === 'ArrowRight') navigateLightbox(1);
             }
         });
 
@@ -1074,7 +1077,7 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD BUILDER (Clean Status Badges & Universal Specs)
+        // PUBLIC CARD BUILDER
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
@@ -1086,7 +1089,6 @@
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
 
-            // STRICT BADGE LOGIC: Never allows numbers like 200000000
             const cleanStatus = normalizeStatus(prop.status);
             let badgeBg = "bg-black";
             let badgeText = "FOR " + cleanStatus.toUpperCase();
@@ -1162,7 +1164,7 @@
                     <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
                         VIEW DETAILS & INQUIRE
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
@@ -1224,12 +1226,13 @@
         }
 
         // =========================================================================
-        // VIEW DETAILS & INQUIRY MODAL (DISPATCHES TO SHEET 2)
+        // VIEW DETAILS & INQUIRY MODAL (WITH DIRECT LIGHTBOX INTEGRATION)
         // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => String(p.id) === String(id));
             if (!prop) return;
 
+            activeModalCarouselIndex = 0;
             const container = document.getElementById('modal-content-container');
             const priceFormatted = Number(prop.price) > 0 ? 
                 new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
@@ -1238,16 +1241,43 @@
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
 
+            const propImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-4">
-                        <div class="relative h-80 bg-black">
-                            <img src="${prop.images[0]}" class="w-full h-full object-cover">
+                        <!-- MAIN MODAL PHOTO WITH DIRECT LIGHTBOX TRIGGER -->
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
+                            <img id="img-modal-prop" src="${propImages[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" title="Click to view full screen Photo Studio">
+                            
+                            ${propImages.length > 1 ? `
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&lang;</button>
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&rang;</button>
+                                
+                                <div id="ind-modal-prop" class="absolute bottom-3 right-3 z-30 bg-black/85 text-[10px] font-mono text-white px-3 py-1 border border-neutral-700 pointer-events-none">
+                                    IMAGE 1 OF ${propImages.length}
+                                </div>
+                            ` : ''}
+
+                            <button type="button" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/85 hover:bg-brand-brown text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow transition-colors">
+                                <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
+                            </button>
                         </div>
+
+                        <!-- THUMBNAILS STRIP IN MODAL (CLICK TO PREVIEW OR OPEN LIGHTBOX) -->
+                        ${propImages.length > 1 ? `
+                            <div class="flex gap-2 overflow-x-auto py-1">
+                                ${propImages.map((img, idx) => `
+                                    <img src="${img}" onclick="setModalCarouselIndex('${prop.id}', ${idx})" class="modal-thumb-btn h-14 w-20 object-cover cursor-pointer border-2 ${idx === 0 ? 'border-brand-brown opacity-100' : 'border-transparent opacity-60 hover:opacity-100'} transition-all flex-shrink-0">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
                         <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
                         <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
                         <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
                     </div>
+
                     <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black space-y-4">
                         <div class="bg-black text-white p-4">
                             <span class="text-xs text-neutral-400 uppercase">TRANSACTION PRICE</span>
@@ -1281,6 +1311,54 @@
             document.getElementById('property-modal').classList.remove('hidden');
         }
         function closePropertyModal() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        function navigateModalCarousel(propId, dir) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const images = (prop.images && prop.images.length > 0) ? prop.images : [];
+            if (images.length <= 1) return;
+
+            activeModalCarouselIndex = (activeModalCarouselIndex + dir + images.length) % images.length;
+            const imgEl = document.getElementById('img-modal-prop');
+            const indEl = document.getElementById('ind-modal-prop');
+            if (imgEl) imgEl.src = images[activeModalCarouselIndex];
+            if (indEl) indEl.textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${images.length}`;
+
+            const thumbs = document.querySelectorAll('.modal-thumb-btn');
+            thumbs.forEach((tb, i) => {
+                if (i === activeModalCarouselIndex) {
+                    tb.classList.add('border-brand-brown', 'opacity-100');
+                    tb.classList.remove('border-transparent', 'opacity-60');
+                } else {
+                    tb.classList.remove('border-brand-brown', 'opacity-100');
+                    tb.classList.add('border-transparent', 'opacity-60');
+                }
+            });
+        }
+
+        function setModalCarouselIndex(propId, idx) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const images = prop.images || [];
+            if (!images[idx]) return;
+
+            activeModalCarouselIndex = idx;
+            const imgEl = document.getElementById('img-modal-prop');
+            const indEl = document.getElementById('ind-modal-prop');
+            if (imgEl) imgEl.src = images[idx];
+            if (indEl) indEl.textContent = `IMAGE ${idx + 1} OF ${images.length}`;
+
+            const thumbs = document.querySelectorAll('.modal-thumb-btn');
+            thumbs.forEach((tb, i) => {
+                if (i === activeModalCarouselIndex) {
+                    tb.classList.add('border-brand-brown', 'opacity-100');
+                    tb.classList.remove('border-transparent', 'opacity-60');
+                } else {
+                    tb.classList.remove('border-brand-brown', 'opacity-100');
+                    tb.classList.add('border-transparent', 'opacity-60');
+                }
+            });
+        }
 
         async function handleInquirySubmit(e, propTitle) {
             e.preventDefault();
@@ -1391,7 +1469,6 @@
             developerProjects.forEach(p => totalUnits += (p.units || []).length);
             document.getElementById('admin-stat-devunits').textContent = totalUnits;
 
-            // 1. Render Listings (Sheet 1)
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
@@ -1409,7 +1486,6 @@
                 </tr>
             `).join('');
 
-            // 2. Render Developer Units (Sheet 5)
             const tbodyUnits = document.getElementById('admin-devunits-table');
             const unitRows = [];
             developerProjects.forEach(proj => {
@@ -1431,10 +1507,8 @@
             });
             tbodyUnits.innerHTML = unitRows.length ? unitRows.join('') : `<tr><td colspan="7" class="p-4 text-center text-neutral-400">No developer units synced yet.</td></tr>`;
 
-            // 3. Render Inquiries (Sheet 2)
             filterAdminInquiries(document.getElementById('inquiry-type-filter')?.value || 'ALL');
 
-            // 4. Render Enlistments (Sheet 4)
             const tbodyEn = document.getElementById('admin-enlistments-table');
             tbodyEn.innerHTML = adminEnlistments.length ? adminEnlistments.map(e => `
                 <tr class="hover:bg-neutral-50">
@@ -1774,7 +1848,7 @@
                         const sanitized = sanitizeListingRecord(item);
                         const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
                         
-                        // Keep images up to date if sheet has new images
+                        // Keep images updated if sheet has newer images
                         if (existing && existing._locallyEdited) {
                             if (sanitized.images && sanitized.images.length > 0 && !sanitized.images[0].includes('unsplash')) {
                                 existing.images = sanitized.images;
@@ -1882,27 +1956,41 @@
             setTimeout(() => toast.remove(), 3500);
         }
 
-        // LIGHTBOX
+        // LIGHTBOX ENGINE (Works universally across both cards and listing modal)
         let lbImgs = [];
         let lbIdx = 0;
         function openLightboxStudio(title, images, startIdx = 0) {
-            lbImgs = images;
-            lbIdx = startIdx;
-            document.getElementById('lightbox-title').textContent = title;
+            lbImgs = (images && images.length > 0) ? images : [];
+            lbIdx = startIdx || 0;
+            document.getElementById('lightbox-title').textContent = title || "PROPERTY STUDIO";
             updateLb();
             const thumbs = document.getElementById('lightbox-thumbnails');
             thumbs.innerHTML = lbImgs.map((img, i) => `
-                <img src="${img}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer">
+                <img src="${img}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer transition-all">
             `).join('');
             document.getElementById('lightbox-studio-modal').classList.remove('hidden');
         }
         function updateLb() {
+            if (!lbImgs[lbIdx]) return;
             document.getElementById('lightbox-main-img').src = lbImgs[lbIdx];
             document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].className = i === lbIdx ? 'h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105' : 'h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 cursor-pointer';
+            }
         }
-        function navigateLightbox(dir) { lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length; updateLb(); }
-        function setLb(idx) { lbIdx = idx; updateLb(); }
-        function closeLightboxStudio() { document.getElementById('lightbox-studio-modal').classList.add('hidden'); }
+        function navigateLightbox(dir) {
+            if (lbImgs.length <= 1) return;
+            lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
+            updateLb();
+        }
+        function setLb(idx) {
+            lbIdx = idx;
+            updateLb();
+        }
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
 
         // DEVELOPER TOWNSHIP LOGIC
         function renderDeveloperSelectorDropdown() {
@@ -1931,3 +2019,4 @@
     </script>
 </body>
 </html>
+
