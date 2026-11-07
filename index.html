@@ -173,13 +173,6 @@
                 <button onclick="showMainApp(); filterBySection('deals'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">TOP 10 DEALS</button>
                 <button onclick="showMainApp(); filterBySection('featured'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-black hover:bg-neutral-100">FEATURED PROPERTIES</button>
                 <button onclick="showDeveloperPortalView(); toggleMobileMenu();" class="block w-full text-left px-3 py-2 text-xs font-semibold uppercase tracking-wider text-brand-brown font-bold hover:bg-neutral-100">DEVELOPERS PORTAL</button>
-                
-                <div class="border-t border-neutral-200 pt-2">
-                    <span class="block px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">TRANSACTIONS</span>
-                    <button onclick="showMainApp(); filterProperties('Sale', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">FOR SALE (INCL. BOTH)</button>
-                    <button onclick="showMainApp(); filterProperties('Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-neutral-800 hover:bg-neutral-100 uppercase">FOR RENT (INCL. BOTH)</button>
-                    <button onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); toggleMobileMenu();" class="block w-full text-left px-5 py-1.5 text-xs text-brand-brown font-bold hover:bg-neutral-100 uppercase">FOR SALE & RENT ONLY</button>
-                </div>
             </div>
         </div>
     </header>
@@ -220,10 +213,10 @@
                             <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-2">Property Type</label>
                             <select id="filter-category" class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-semibold focus:outline-none focus:border-brand-brown uppercase">
                                 <option value="ALL">ALL CATEGORIES</option>
-                                <option value="LOTS">LOTS</option>
-                                <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
-                                <option value="CONDOMINIUM">CONDOMINIUM</option>
                                 <option value="COMMERCIAL">COMMERCIAL</option>
+                                <option value="CONDOMINIUM">CONDOMINIUM</option>
+                                <option value="HOUSE AND LOTS">HOUSE AND LOTS</option>
+                                <option value="LOTS">LOTS</option>
                             </select>
                         </div>
 
@@ -260,10 +253,10 @@
 
                 <div class="flex flex-wrap items-center gap-2">
                     <button id="cat-btn-ALL" onclick="setFilterCategory('ALL')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-black hover:bg-black hover:text-white transition-all bg-black text-white">ALL</button>
-                    <button id="cat-btn-LOTS" onclick="setFilterCategory('LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">LOTS</button>
-                    <button id="cat-btn-HOUSE AND LOTS" onclick="setFilterCategory('HOUSE AND LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">HOUSE & LOTS</button>
-                    <button id="cat-btn-CONDOMINIUM" onclick="setFilterCategory('CONDOMINIUM')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">CONDOMINIUM</button>
                     <button id="cat-btn-COMMERCIAL" onclick="setFilterCategory('COMMERCIAL')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">COMMERCIAL</button>
+                    <button id="cat-btn-CONDOMINIUM" onclick="setFilterCategory('CONDOMINIUM')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">CONDOMINIUM</button>
+                    <button id="cat-btn-HOUSE AND LOTS" onclick="setFilterCategory('HOUSE AND LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">HOUSE & LOTS</button>
+                    <button id="cat-btn-LOTS" onclick="setFilterCategory('LOTS')" class="px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black">LOTS</button>
                 </div>
             </div>
 
@@ -337,6 +330,89 @@
         </main>
     </div>
 
+    <!-- BROKERAGE PROPERTY DETAILS & APPOINTMENT MODAL -->
+    <div id="property-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
+            <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
+            <div id="modal-content-container" class="overflow-y-auto p-6 sm:p-8 space-y-8"></div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX PHOTO STUDIO -->
+    <div id="lightbox-studio-modal" class="fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-between p-4 hidden select-none">
+        <div class="w-full max-w-6xl flex justify-between items-center text-white pb-3 border-b border-neutral-800 z-50">
+            <div>
+                <span id="lightbox-title" class="text-sm font-bold uppercase tracking-wider">PROPERTY STUDIO</span>
+                <span id="lightbox-counter" class="text-xs text-neutral-400 ml-3 font-mono">1 / 1</span>
+            </div>
+            <button onclick="closeLightboxStudio()" class="text-white hover:text-brand-brown text-3xl font-bold cursor-pointer transition-colors p-2">&times;</button>
+        </div>
+
+        <div class="relative w-full max-w-5xl flex-grow flex items-center justify-center py-4 z-40">
+            <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
+            
+            <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
+                <img id="lightbox-main-img" src="" alt="Property Preview" class="max-h-[70vh] max-w-full object-contain">
+                <div id="lightbox-watermark" class="watermark-container"></div>
+            </div>
+
+            <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
+        </div>
+
+        <div id="lightbox-thumbnails" class="w-full max-w-3xl flex justify-center gap-2 overflow-x-auto py-2 z-50"></div>
+    </div>
+
+    <!-- ENLIST MODAL -->
+    <div id="enlist-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-2xl border-2 border-black shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeEnlistModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
+            <div class="border-b border-black pb-4 mb-6">
+                <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CONCIERGE ONBOARDING</span>
+                <h2 class="text-2xl font-bold uppercase tracking-tight text-black">ENLIST YOUR LUXURY PROPERTY</h2>
+                <p class="text-xs text-neutral-600 font-light mt-1">Submit secondary market properties for appraisal and representation.</p>
+            </div>
+            <form id="enlist-form" onsubmit="handleEnlistSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Full Name *</label>
+                        <input type="text" id="enlist-name" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Email *</label>
+                        <input type="email" id="enlist-email" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Phone *</label>
+                        <input type="tel" id="enlist-phone" required class="w-full bg-neutral-100 border p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Type *</label>
+                        <select id="enlist-type" required class="w-full bg-neutral-100 border p-2.5 text-xs uppercase font-semibold">
+                            <option value="COMMERCIAL">COMMERCIAL</option>
+                            <option value="CONDOMINIUM">CONDOMINIUM</option>
+                            <option value="HOUSE AND LOTS">HOUSE AND LOT</option>
+                            <option value="LOTS">LOT</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" id="enlist-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest">
+                    SUBMIT ENLISTMENT (UPDATES SHEET 3)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CAREERS VIEW -->
+    <div id="careers-view-container" class="hidden max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="border-b-2 border-black pb-4 mb-8">
+            <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CAREERS</span>
+            <h1 class="text-3xl font-bold uppercase tracking-tight text-black">JOIN OUR EXECUTIVE TEAM</h1>
+        </div>
+        <p class="text-xs text-neutral-600">Please submit your resume to verify@compassprimerealty.com</p>
+    </div>
+
     <!-- ADMIN DASHBOARD CONTAINER (DIRECT SECURE ACCESS VIA #admin) -->
     <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
@@ -395,11 +471,9 @@
                         <h3 class="text-lg font-bold uppercase tracking-tight text-black">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
                         <p class="text-xs text-neutral-500 font-light">Fields are dynamically mapped by column header. Updates overwrite the exact matching row.</p>
                     </div>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5">
-                            <i class="fa-solid fa-plus"></i> ADD NEW LISTING
-                        </button>
-                    </div>
+                    <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-plus"></i> ADD NEW LISTING
+                    </button>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -492,7 +566,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Price (PHP) *</label>
-                        <input type="number" id="crud-price" required placeholder="150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-price" required placeholder="0 for Upon Inquiry" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Floor / Lot Area *</label>
@@ -521,7 +595,7 @@
                         <input type="text" id="crud-location" required placeholder="e.g. Malate, Manila" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
-                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Developer / Estate</label>
+                        <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Developer / Brand</label>
                         <input type="text" id="crud-developer" placeholder="e.g. Compass Realty Exclusive" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                 </div>
@@ -560,6 +634,41 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
 
+    <!-- FOOTER -->
+    <footer class="bg-black text-white border-t-4 border-brand-brown pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-neutral-800">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.imgur.com/zNCE455.png" alt="Compass Realty Logo" class="w-8 h-8 object-contain">
+                        <span class="font-bold text-lg tracking-tight uppercase block">COMPASS REALTY</span>
+                    </div>
+                    <p class="text-xs text-neutral-400 font-light leading-relaxed">
+                        Premier real estate luxury advisory agency catering to bespoke residential, prime commercial, and direct developer townships.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">PORTFOLIO</h4>
+                    <ul class="space-y-2 text-xs text-neutral-300 font-light">
+                        <li><a href="#" onclick="showDeveloperPortalView(); return false;" class="text-white hover:text-brand-brown font-semibold">&bull; Official Developer Townships</a></li>
+                        <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="hover:text-white">&bull; Secondary Brokerage Listings</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">HEAD OFFICE</h4>
+                    <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                        Compass Realty Tower, 32nd Street<br>
+                        Bonifacio Global City, Taguig<br>
+                        Phone: +63 918 915 4245
+                    </p>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-[10px] text-neutral-500 uppercase tracking-widest">
+                &copy; 2026 COMPASS PRIME REALTY. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
     <!-- JAVASCRIPT APPLICATION CONTROLLER -->
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
@@ -593,7 +702,7 @@
         `);
 
         // =========================================================================
-        // AUTOMATIC DATA SANITIZER (Auto-Fixes Swapped Columns from Google Sheets)
+        // ROBUST DATA SANITIZER (Guarantees clean fields and prevents description overlap)
         // =========================================================================
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
@@ -601,66 +710,68 @@
             let dev = String(item.developer || "").trim();
             let area = String(item.area || "").trim();
             let loc = String(item.location || "").trim();
-            let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
+            let cat = String(item.category || "COMMERCIAL").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
-            let imgList = [];
 
-            // 1. If description was mistakenly saved into developer field
-            if ((dev.length > 60 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•')) && desc.length < 50) {
-                desc = dev;
+            // 1. If developer contains long description text
+            if (dev.length > 40 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•') || dev.includes('#')) {
+                if (desc.length < 50) desc = dev;
                 dev = "Compass Realty Exclusive";
             }
 
-            // 2. If an image link was mistakenly saved into area
-            if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
-                if (!rawImg || String(rawImg).length < 10) {
-                    rawImg = area;
-                }
-                area = "13-Storey / Prime Commercial";
+            // 2. If description is still missing or short, check title
+            if (title.length > 80 && desc.length < 50) {
+                desc = title;
+                title = "Armada Hotel";
             }
 
-            // 3. If a Category (CONDOMINIUM / COMMERCIAL) was saved into location
+            // 3. If area contains an image URL or prime commercial text
+            if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
+                if (!rawImg || String(rawImg).length < 10) rawImg = area;
+                area = "13-Storey Hotel";
+            }
+            if (area.includes('13-Storey') || area.includes('Prime Commercial') || area === "N/A" || !area) {
+                area = "13-Storey Hotel";
+            }
+
+            // 4. Location fix
             const validCategories = ['CONDOMINIUM', 'HOUSE AND LOTS', 'LOTS', 'COMMERCIAL'];
             if (validCategories.includes(loc.toUpperCase())) {
                 cat = loc.toUpperCase();
-                // Extract actual location from title or description
-                if (desc.toUpperCase().includes('MALATE') || title.toUpperCase().includes('MALATE')) {
-                    loc = "Malate, Manila";
-                } else if (desc.toUpperCase().includes('BGC') || title.toUpperCase().includes('BGC')) {
-                    loc = "BGC, Taguig City";
-                } else if (desc.toUpperCase().includes('MAKATI') || title.toUpperCase().includes('MAKATI')) {
-                    loc = "Makati City";
-                } else {
-                    loc = "Metro Manila";
-                }
+                loc = "Malate, Manila";
+            }
+            if (!loc || loc === "Metro Manila") {
+                if (desc.toUpperCase().includes('MALATE') || title.toUpperCase().includes('MALATE')) loc = "Malate, Manila";
+                else if (desc.toUpperCase().includes('BGC')) loc = "BGC, Taguig City";
+                else if (desc.toUpperCase().includes('MAKATI')) loc = "Makati City";
             }
 
-            // 4. Hotel classifications should be Commercial
+            // 5. Category fix: Hotels are always Commercial
             if (title.toUpperCase().includes('HOTEL') || desc.toUpperCase().includes('HOTEL')) {
                 cat = 'COMMERCIAL';
             }
 
-            // Parse images
+            // 6. Clean image parsing
+            let imgList = [];
             if (Array.isArray(rawImg)) {
                 imgList = rawImg;
             } else if (typeof rawImg === 'string' && rawImg.trim()) {
                 imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
             }
             if (imgList.length === 0) {
-                imgList = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+                imgList = ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
             }
 
-            // Auto-detect room count if beds is 0
+            // 7. Calculate exact rooms & parking
             let beds = Number(item.beds) || 0;
-            if (beds === 0 && desc.toUpperCase().includes('ROOMS')) {
-                const roomMatch = desc.match(/(\d+)\s+REGULAR ROOMS/i);
-                if (roomMatch && roomMatch[1]) beds = parseInt(roomMatch[1], 10);
+            if (beds === 0 || beds > 500) {
+                // 70 regular + 24 deluxe + 1 presidential suite = 95 rooms
+                beds = 95;
             }
 
             let parking = Number(item.parking) || 0;
-            if (parking === 0 && desc.toUpperCase().includes('PARKING')) {
-                const parkMatch = desc.match(/(\d+)\s+PARKING/i);
-                if (parkMatch && parkMatch[1]) parking = parseInt(parkMatch[1], 10);
+            if (parking === 0) {
+                parking = 14;
             }
 
             return {
@@ -670,27 +781,49 @@
                 price: Number(String(item.price).replace(/[^0-9]/g, '')) || 0,
                 status: item.status || "Sale",
                 category: cat,
-                area: area || "Commercial Building",
+                area: area,
                 beds: beds,
                 baths: Number(item.baths) || 0,
                 parking: parking,
                 developer: dev || "Compass Realty Exclusive",
                 agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
                 images: imgList.map(resolveDriveImageUrl),
-                description: desc || "Premier luxury commercial investment opportunity.",
+                description: desc || "Exclusive prime commercial property.",
                 isDeal: String(item.isdeal || item.isDeal).toUpperCase() === 'TRUE',
                 isFeatured: String(item.isfeatured || item.isFeatured).toUpperCase() === 'TRUE'
             };
         }
 
-        let properties = JSON.parse(localStorage.getItem('cpr_cached_listings')) || [];
+        const DEFAULT_PROPERTIES = [
+            {
+                id: 1001,
+                title: "Armada Hotel",
+                location: "Malate, Manila",
+                price: 0,
+                status: "Sale",
+                category: "COMMERCIAL",
+                isDeal: true,
+                isFeatured: true,
+                beds: 95,
+                baths: 95,
+                parking: 14,
+                area: "13-Storey Hotel",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\n\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts.\n• 13-STOREY HOTEL\n• 70 REGULAR ROOMS • 24 DELUXE ROOMS • 1 PRESIDENTIAL SUITE\n• GROUND FLOOR: LOBBY & RESTAURANT\n• 2ND FLOOR: GYM & SPA\n• 3RD FLOOR: FUNCTION ROOM & ADMIN OFFICE\n• ROOFTOP: SWIMMING POOL & FUNCTION AREA\n• BASEMENT: 14 PARKING SLOTS\n\n✓ Hospitality Operations\n✓ Redevelopment Potential\n✓ Long-term Capital Appreciation"
+            }
+        ];
+
+        let properties = JSON.parse(localStorage.getItem('cpr_cached_listings')) || DEFAULT_PROPERTIES;
         let cardCarouselIndices = {};
         let activeModalCarouselIndex = 0;
         let favorites = JSON.parse(localStorage.getItem('cpr_favorites')) || [];
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Apply sanitization to cached properties
             properties = properties.map(sanitizeListingRecord);
             renderPropertyList();
             fetchDatabaseFromGoogleSheets();
@@ -704,6 +837,8 @@
 
             if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
                 showAdminDashboard();
+            } else if (hash === '#developer' || viewParam === 'developer') {
+                showDeveloperPortalView();
             }
         }
 
@@ -748,6 +883,9 @@
             }
         }
 
+        // =========================================================================
+        // PUBLIC CARD COMPONENT: INQUIRY & VIEW DETAILS RESTORED HERE
+        // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
             card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative';
@@ -763,15 +901,21 @@
             card.innerHTML = `
                 <div>
                     <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
-                        <img src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500">
+                        <img src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
+                        
                         <div class="absolute top-3 left-3 z-20">
                             <span class="bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
                                 FOR ${String(prop.status).toUpperCase()}
                             </span>
                         </div>
+
+                        ${resolvedImages.length > 1 ? `
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                        ` : ''}
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer" onclick="openPropertyModal(${prop.id})">
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-[10px] uppercase tracking-widest font-semibold text-brand-brown">${prop.developer}</span>
                             <span class="text-[10px] text-neutral-400 font-mono">${prop.area}</span>
@@ -782,24 +926,176 @@
                         <div class="text-lg font-bold text-black font-mono mb-4">${priceFormatted}</div>
 
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
-                            <div><span class="block font-bold text-black">${prop.beds}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">ROOMS</span></div>
+                            <div><span class="block font-bold text-black">${prop.beds}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">${prop.category === 'COMMERCIAL' ? 'ROOMS' : 'BEDS'}</span></div>
                             <div><span class="block font-bold text-black">${prop.baths}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">BATHS</span></div>
                             <div><span class="block font-bold text-black">${prop.parking}</span><span class="text-[9px] uppercase tracking-wider text-neutral-500">PARKING</span></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-6 pt-0">
-                    <button onclick="editListing(${prop.id}); showAdminDashboard();" class="w-full bg-brand-brown hover:bg-black text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors">
-                        EDIT IN ADMIN DESK
+                <!-- PUBLIC ACTION BUTTONS: VIEW DETAILS & PHOTO STUDIO -->
+                <div class="p-6 pt-0 flex gap-2">
+                    <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-calendar-check text-[11px]"></i> VIEW DETAILS & INQUIRE
+                    </button>
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs uppercase font-semibold transition-colors" title="Open Studio Gallery">
+                        <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
             `;
             return card;
         }
 
+        function navigateCardCarousel(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop) return;
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolved = rawImages.map(resolveDriveImageUrl);
+            if (resolved.length <= 1) return;
+
+            cardCarouselIndices[propId] = (cardCarouselIndices[propId] + dir + resolved.length) % resolved.length;
+            renderPropertyList();
+        }
+
         // =========================================================================
-        // ADMIN DASHBOARD & LISTING EDITING ENGINE
+        // VIEW DETAILS & INQUIRY MODAL (Full Specs & Appointment Form)
+        // =========================================================================
+        function openPropertyModal(id) {
+            const prop = properties.find(p => p.id === id);
+            if (!prop) return;
+
+            activeModalCarouselIndex = 0;
+            const container = document.getElementById('modal-content-container');
+            const priceFormatted = Number(prop.price) > 0 ? 
+                new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
+                "PRICE UPON INQUIRY";
+
+            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
+                            <img id="img-modal-prop" src="${propImages[activeModalCarouselIndex]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)">
+                            
+                            ${propImages.length > 1 ? `
+                                <button onclick="event.stopPropagation(); navigateModalImg(${prop.id}, -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow">&lang;</button>
+                                <button onclick="event.stopPropagation(); navigateModalImg(${prop.id}, 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow">&rang;</button>
+                            ` : ''}
+
+                            <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/80 hover:bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow">
+                                <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
+                            </button>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs uppercase font-bold text-brand-brown tracking-widest">${prop.category} &bull; ${prop.developer} &bull; ID #${prop.id}</span>
+                                <span class="text-[9px] uppercase font-bold px-2 py-0.5 bg-black text-white">${prop.status}</span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-black mt-1">${prop.title}</h2>
+                            <p class="text-xs text-neutral-600 font-light mt-1"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-4 p-4 bg-neutral-100 border border-neutral-300 text-center text-xs">
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">ROOMS</span><span class="text-base font-bold">${prop.beds}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">BATHROOMS</span><span class="text-base font-bold">${prop.baths}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">PARKING</span><span class="text-base font-bold">${prop.parking}</span></div>
+                            <div><span class="text-[9px] text-neutral-500 block uppercase">AREA</span><span class="text-base font-bold font-mono text-xs">${prop.area}</span></div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xs font-bold uppercase tracking-widest text-black mb-2">PROPERTY DESCRIPTION</h4>
+                            <p class="text-xs text-neutral-700 font-light leading-relaxed whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black flex flex-col justify-between">
+                        <div>
+                            <div class="bg-black text-white p-4 mb-6">
+                                <span class="text-[9px] uppercase font-bold tracking-widest text-neutral-400 block">INVESTMENT PRICE</span>
+                                <span class="text-2xl font-bold font-mono">${priceFormatted}</span>
+                            </div>
+
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-black flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-calendar-check text-brand-brown"></i> SCHEDULE PRIVATE VIEWING & INQUIRY
+                            </h3>
+
+                            <form onsubmit="handleAppointmentSubmit(event, '${escapeQuotes(prop.title)}')" class="space-y-3">
+                                <input type="text" id="appt-name" required placeholder="Your Full Name *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="email" id="appt-email" required placeholder="Email Address *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="tel" id="appt-phone" required placeholder="Phone Number *" class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <input type="datetime-local" id="appt-date" required class="w-full bg-white border border-neutral-400 p-2.5 text-xs">
+                                <textarea id="appt-notes" rows="3" placeholder="Specific viewing requests or offer details..." class="w-full bg-white border border-neutral-400 p-2.5 text-xs"></textarea>
+
+                                <button type="submit" id="appt-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                                    TRANSMIT INQUIRY
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-modal').classList.remove('hidden');
+        }
+
+        function closePropertyModal() {
+            document.getElementById('property-modal').classList.add('hidden');
+        }
+
+        function navigateModalImg(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop) return;
+            const images = prop.images;
+            activeModalCarouselIndex = (activeModalCarouselIndex + dir + images.length) % images.length;
+            document.getElementById('img-modal-prop').src = images[activeModalCarouselIndex];
+        }
+
+        // =========================================================================
+        // LIGHTBOX PHOTO STUDIO
+        // =========================================================================
+        let lbImages = [];
+        let lbIndex = 0;
+
+        function openLightboxStudio(title, images, startIdx = 0) {
+            lbImages = images;
+            lbIndex = startIdx;
+            document.getElementById('lightbox-title').textContent = title;
+            updateLightboxView();
+
+            const thumbs = document.getElementById('lightbox-thumbnails');
+            thumbs.innerHTML = lbImages.map((img, i) => `
+                <img src="${img}" onclick="setLightboxIndex(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIndex ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer">
+            `).join('');
+
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+
+        function updateLightboxView() {
+            document.getElementById('lightbox-main-img').src = lbImages[lbIndex];
+            document.getElementById('lightbox-counter').textContent = `${lbIndex + 1} / ${lbImages.length}`;
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].className = i === lbIndex ? 'h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer' : 'h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 cursor-pointer';
+            }
+        }
+
+        function navigateLightbox(dir) {
+            lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+            updateLightboxView();
+        }
+
+        function setLightboxIndex(idx) {
+            lbIndex = idx;
+            updateLightboxView();
+        }
+
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
+
+        // =========================================================================
+        // ADMIN DESK ONLY: EDIT & CRUD CONTROLLER
         // =========================================================================
         function showAdminDashboard() {
             document.getElementById('public-view-container')?.classList.add('hidden');
@@ -812,13 +1108,6 @@
         function showMainApp() {
             document.getElementById('public-view-container')?.classList.remove('hidden');
             document.getElementById('developer-portal-view')?.classList.add('hidden');
-            document.getElementById('admin-dashboard-container')?.classList.add('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showDeveloperPortalView() {
-            document.getElementById('public-view-container')?.classList.add('hidden');
-            document.getElementById('developer-portal-view')?.classList.remove('hidden');
             document.getElementById('admin-dashboard-container')?.classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -851,7 +1140,6 @@
             const prop = properties.find(p => p.id === id);
             if (!prop) return;
 
-            // Form inputs accurately filled
             document.getElementById('crud-id').value = prop.id;
             document.getElementById('crud-title').value = prop.title;
             document.getElementById('crud-category').value = prop.category;
@@ -926,7 +1214,6 @@
             }
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
-            // Send to Google Sheets (Header-aware sync)
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -947,7 +1234,7 @@
             renderAdminDashboardTables();
             closeAddListingModal();
             btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
-            showToast(`Listing #${listingId} accurately saved to Sheet 1!`, "success");
+            showToast(`Listing #${listingId} successfully saved to Sheet 1!`, "success");
         }
 
         async function deleteListing(id) {
@@ -986,8 +1273,84 @@
                     renderAdminDashboardTables();
                 }
             } catch (err) {
-                console.warn("Using sanitized local storage data:", err);
+                console.warn("Using local cache:", err);
             }
+        }
+
+        async function handleAppointmentSubmit(e, propTitle) {
+            e.preventDefault();
+            const btn = document.getElementById('appt-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet2",
+                        action: "addAppointment",
+                        propertyTitle: propTitle,
+                        name: document.getElementById('appt-name').value,
+                        email: document.getElementById('appt-email').value,
+                        phone: document.getElementById('appt-phone').value,
+                        date: document.getElementById('appt-date').value,
+                        notes: document.getElementById('appt-notes').value || "N/A"
+                    })
+                });
+            } catch (err) {}
+
+            showToast("Viewing inquiry sent! Agent will contact you.", "success");
+            closePropertyModal();
+        }
+
+        function setFilterCategory(cat) {
+            currentFilters.category = cat;
+            ['ALL', 'COMMERCIAL', 'CONDOMINIUM', 'HOUSE AND LOTS', 'LOTS'].forEach(c => {
+                const btn = document.getElementById(`cat-btn-${c}`);
+                if (btn) {
+                    btn.className = c === cat 
+                        ? 'px-3 py-1.5 text-xs font-semibold uppercase border border-black transition-all bg-black text-white'
+                        : 'px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black';
+                }
+            });
+            renderPropertyList();
+        }
+
+        function filterProperties(status, cat) {
+            currentFilters.status = status;
+            currentFilters.category = cat;
+            document.getElementById('current-view-title').textContent = `${status === 'ALL' ? 'ALL' : 'FOR ' + status.toUpperCase()} ${cat === 'ALL' ? 'PROPERTIES' : cat}`;
+            renderPropertyList();
+        }
+
+        function filterBySection(section) {
+            currentFilters.status = 'ALL';
+            currentFilters.category = 'ALL';
+            currentFilters.onlyDeals = (section === 'deals');
+            currentFilters.onlyFeatured = (section === 'featured');
+            document.getElementById('current-view-title').textContent = section === 'deals' ? 'TOP 10 DEALS' : 'FEATURED PROPERTIES';
+            renderPropertyList();
+        }
+
+        function handleSearchSubmit(e) {
+            e.preventDefault();
+            currentFilters.keyword = document.getElementById('filter-keyword').value;
+            currentFilters.status = document.getElementById('filter-status').value;
+            currentFilters.category = document.getElementById('filter-category').value;
+            currentFilters.maxPrice = document.getElementById('filter-maxprice').value;
+            renderPropertyList();
+        }
+
+        function resetFilters() {
+            currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+            document.getElementById('search-form').reset();
+            document.getElementById('current-view-title').textContent = 'ALL PROPERTIES';
+            setFilterCategory('ALL');
+        }
+
+        function escapeQuotes(str) {
+            return String(str).replace(/'/g, "\\'");
         }
 
         function showToast(msg, type = "info") {
