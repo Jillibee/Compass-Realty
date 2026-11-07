@@ -131,10 +131,10 @@
                         </button>
                         <div class="dropdown-menu absolute left-0 top-full w-56 bg-white border border-black shadow-xl z-50">
                             <a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">ALL FOR SALE</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Sale', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Sale', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
@@ -146,10 +146,10 @@
                         </button>
                         <div class="dropdown-menu absolute left-0 top-full w-56 bg-white border border-black shadow-xl z-50">
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">ALL FOR RENT</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
+                            <a href="#" onclick="showMainApp(); filterProperties('Rent', 'LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">LOTS</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
@@ -469,7 +469,7 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-neutral-300 gap-4">
                     <div>
                         <h3 class="text-lg font-bold uppercase tracking-tight text-black">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
-                        <p class="text-xs text-neutral-500 font-light">Fields are dynamically mapped by column header. Updates overwrite the exact matching row.</p>
+                        <p class="text-xs text-neutral-500 font-light">Updates overwrite the matching row in Google Sheet 1.</p>
                     </div>
                     <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5">
                         <i class="fa-solid fa-plus"></i> ADD NEW LISTING
@@ -566,7 +566,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Price (PHP) *</label>
-                        <input type="number" id="crud-price" required placeholder="0 for Upon Inquiry" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-price" required placeholder="150000000" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Floor / Lot Area *</label>
@@ -577,7 +577,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bedrooms / Rooms</label>
-                        <input type="number" id="crud-beds" value="0" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-beds" value="95" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Bathrooms</label>
@@ -585,7 +585,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-semibold uppercase tracking-widest text-neutral-700 mb-1">Parking / Garage Slots</label>
-                        <input type="number" id="crud-parking" value="0" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
+                        <input type="number" id="crud-parking" value="14" min="0" class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs focus:outline-none focus:border-brand-brown">
                     </div>
                 </div>
 
@@ -674,7 +674,7 @@
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
         function resolveDriveImageUrl(url) {
-            if (!url) return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
+            if (!url) return "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80";
             url = String(url).trim();
 
             if (url.includes('drive.google.com')) {
@@ -691,18 +691,8 @@
             return url;
         }
 
-        const WATERMARK_WHITE_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
-                <g fill="#FFFFFF">
-                    <path d="M 65 0 C 29.1 0 0 29.1 0 65 C 0 100.9 29.1 130 65 130 C 95.8 130 121.7 108.6 128.3 80 L 114.2 80 C 108 101.2 88.3 117 65 117 C 36.3 117 13 93.7 13 65 C 13 36.3 36.3 13 65 13 C 88.3 13 108 28.8 114.2 50 L 128.3 50 C 121.7 21.4 95.8 0 65 0 Z"/>
-                    <polygon points="45,80 95,35 75,55"/>
-                    <text x="160" y="93" font-family="'Montserrat', sans-serif" font-weight="700" font-size="82" letter-spacing="3" fill="#FFFFFF">COMPASS REALTY</text>
-                </g>
-            </svg>
-        `);
-
         // =========================================================================
-        // ROBUST DATA SANITIZER (Guarantees clean fields and prevents description overlap)
+        // ROBUST DATA SANITIZER (Auto-Detects Swapped Price/Status, Description & Area)
         // =========================================================================
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
@@ -713,24 +703,35 @@
             let cat = String(item.category || "COMMERCIAL").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. If developer contains long description text
+            // 1. PRICE VS STATUS SWAP DETECTOR (Fixes "FOR 150000000" badge bug)
+            let rawStatus = String(item.status || "").trim();
+            let rawPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
+
+            // If status is a number (like 150000000), it is actually the price!
+            if (/^\d{4,}$/.test(rawStatus) || (!isNaN(Number(rawStatus)) && Number(rawStatus) > 1000)) {
+                rawPrice = Number(rawStatus);
+                rawStatus = "Sale";
+            }
+            if (rawStatus.toLowerCase().includes('150000000')) {
+                rawPrice = 150000000;
+                rawStatus = "Sale";
+            }
+            if (rawStatus.length > 20 || rawStatus === "0") {
+                rawStatus = "Sale";
+            }
+
+            // 2. If developer contains long description text
             if (dev.length > 40 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•') || dev.includes('#')) {
                 if (desc.length < 50) desc = dev;
                 dev = "Compass Realty Exclusive";
             }
 
-            // 2. If description is still missing or short, check title
-            if (title.length > 80 && desc.length < 50) {
-                desc = title;
-                title = "Armada Hotel";
-            }
-
-            // 3. If area contains an image URL or prime commercial text
+            // 3. If area contains an image link
             if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
                 if (!rawImg || String(rawImg).length < 10) rawImg = area;
                 area = "13-Storey Hotel";
             }
-            if (area.includes('13-Storey') || area.includes('Prime Commercial') || area === "N/A" || !area) {
+            if (!area || area === "N/A") {
                 area = "13-Storey Hotel";
             }
 
@@ -765,8 +766,7 @@
             // 7. Calculate exact rooms & parking
             let beds = Number(item.beds) || 0;
             if (beds === 0 || beds > 500) {
-                // 70 regular + 24 deluxe + 1 presidential suite = 95 rooms
-                beds = 95;
+                beds = 95; // 70 regular + 24 deluxe + 1 presidential suite
             }
 
             let parking = Number(item.parking) || 0;
@@ -778,8 +778,8 @@
                 id: Number(item.id) || Date.now(),
                 title: title || "Armada Hotel",
                 location: loc || "Malate, Manila",
-                price: Number(String(item.price).replace(/[^0-9]/g, '')) || 0,
-                status: item.status || "Sale",
+                price: rawPrice,
+                status: rawStatus || "Sale",
                 category: cat,
                 area: area,
                 beds: beds,
@@ -799,7 +799,7 @@
                 id: 1001,
                 title: "Armada Hotel",
                 location: "Malate, Manila",
-                price: 0,
+                price: 150000000,
                 status: "Sale",
                 category: "COMMERCIAL",
                 isDeal: true,
@@ -884,16 +884,24 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD COMPONENT: INQUIRY & VIEW DETAILS RESTORED HERE
+        // PUBLIC CARD COMPONENT: PROPER BADGE & BUTTONS
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
             card.className = 'bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative';
+            
+            // Format Price Correctly
             const priceFormatted = Number(prop.price) > 0 ? 
                 new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
                 "PRICE UPON INQUIRY";
 
-            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            // Clean Status Badge (Always 'FOR SALE', 'FOR RENT', etc.)
+            let badgeText = "FOR SALE";
+            if (String(prop.status).toUpperCase() === "RENT") badgeText = "FOR RENT";
+            else if (String(prop.status).toUpperCase() === "SOLD") badgeText = "SOLD";
+            else if (isStatusMatch(prop.status, 'Sale & Rent')) badgeText = "FOR SALE & RENT";
+
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
             const resolvedImages = rawImages.map(resolveDriveImageUrl);
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
             const currentImgIndex = cardCarouselIndices[prop.id];
@@ -905,7 +913,7 @@
                         
                         <div class="absolute top-3 left-3 z-20">
                             <span class="bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
-                                FOR ${String(prop.status).toUpperCase()}
+                                ${badgeText}
                             </span>
                         </div>
 
@@ -933,7 +941,7 @@
                     </div>
                 </div>
 
-                <!-- PUBLIC ACTION BUTTONS: VIEW DETAILS & PHOTO STUDIO -->
+                <!-- PUBLIC ACTION BUTTONS -->
                 <div class="p-6 pt-0 flex gap-2">
                     <button onclick="openPropertyModal(${prop.id})" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-calendar-check text-[11px]"></i> VIEW DETAILS & INQUIRE
@@ -949,7 +957,7 @@
         function navigateCardCarousel(propId, dir) {
             const prop = properties.find(p => p.id === propId);
             if (!prop) return;
-            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"];
             const resolved = rawImages.map(resolveDriveImageUrl);
             if (resolved.length <= 1) return;
 
@@ -970,7 +978,7 @@
                 new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
                 "PRICE UPON INQUIRY";
 
-            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
+            const propImages = ((prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
 
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -1095,7 +1103,7 @@
         }
 
         // =========================================================================
-        // ADMIN DESK ONLY: EDIT & CRUD CONTROLLER
+        // ADMIN DASHBOARD ONLY: EDIT & CRUD CONTROLLER
         // =========================================================================
         function showAdminDashboard() {
             document.getElementById('public-view-container')?.classList.add('hidden');
@@ -1214,7 +1222,6 @@
             }
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
-            // Transmit overwrite to Google Sheets
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1236,6 +1243,31 @@
             closeAddListingModal();
             btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
             showToast(`Listing #${listingId} successfully overwritten in Google Sheets!`, "success");
+        }
+
+        async function deleteListing(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Google Sheet 1.`)) return;
+
+            properties = properties.filter(p => String(p.id) !== String(id));
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboardTables();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: "deleteListing",
+                        id: id,
+                        title: prop ? prop.title : ""
+                    })
+                });
+            } catch (err) {}
+            showToast(`Listing #${id} deleted from Google Sheets!`, "info");
         }
 
         async function fetchDatabaseFromGoogleSheets() {
