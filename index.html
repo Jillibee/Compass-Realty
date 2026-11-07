@@ -1179,11 +1179,11 @@
 
             const idVal = document.getElementById('crud-id').value;
             const isEdit = Boolean(idVal);
-            const listingId = isEdit ? parseInt(idVal, 10) : (Math.max(...properties.map(p => Number(p.id) || 1000), 1000) + 1);
+            const listingId = isEdit ? idVal : String(Math.max(...properties.map(p => Number(p.id) || 1000), 1000) + 1);
 
             const rawImages = document.getElementById('crud-images').value;
             const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [
-                "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
             ];
 
             const payload = {
@@ -1207,13 +1207,14 @@
 
             // Update local memory
             if (isEdit) {
-                const idx = properties.findIndex(p => p.id === listingId);
+                const idx = properties.findIndex(p => String(p.id) === String(listingId));
                 if (idx !== -1) properties[idx] = payload;
             } else {
                 properties.unshift(payload);
             }
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
+            // Transmit overwrite to Google Sheets
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1234,30 +1235,7 @@
             renderAdminDashboardTables();
             closeAddListingModal();
             btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
-            showToast(`Listing #${listingId} successfully saved to Sheet 1!`, "success");
-        }
-
-        async function deleteListing(id) {
-            if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Google Sheet 1.`)) return;
-
-            properties = properties.filter(p => p.id !== id);
-            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
-            renderPropertyList();
-            renderAdminDashboardTables();
-
-            try {
-                await fetch(GOOGLE_SHEETS_API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({
-                        sheetTab: "Sheet1",
-                        action: "deleteListing",
-                        id: id
-                    })
-                });
-            } catch (err) {}
-            showToast(`Listing #${id} deleted from Google Sheets!`, "info");
+            showToast(`Listing #${listingId} successfully overwritten in Google Sheets!`, "success");
         }
 
         async function fetchDatabaseFromGoogleSheets() {
