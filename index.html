@@ -1,5 +1,5 @@
 
-
+<!-- START OF FILE index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -351,7 +351,45 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX STUDIO (WITH HIGHEST Z-INDEX SO IT OVERLAYS EVERY MODAL & DESCRIPTION) -->
+    <!-- DEVELOPER INQUIRY MODAL -->
+    <div id="dev-inquiry-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeDevInquiryModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
+            <div class="border-b border-black pb-3 mb-4">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown block">DIRECT DEVELOPER DESK</span>
+                <h3 id="dev-inquiry-project-title" class="text-xl font-bold uppercase tracking-tight text-black">INQUIRE PROJECT</h3>
+                <p id="dev-inquiry-subtitle" class="text-xs text-neutral-500 font-light mt-0.5"></p>
+            </div>
+            <form onsubmit="handleDevInquirySubmit(event)" class="space-y-3">
+                <input type="hidden" id="dev-inquiry-devname">
+                <input type="hidden" id="dev-inquiry-projectname">
+                <input type="hidden" id="dev-inquiry-unittype">
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Your Full Name *</label>
+                    <input type="text" id="dev-inquiry-clientname" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Email Address *</label>
+                        <input type="email" id="dev-inquiry-clientemail" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-semibold uppercase mb-1">Phone Number *</label>
+                        <input type="tel" id="dev-inquiry-clientphone" required class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Notes / Specific Inquiries</label>
+                    <textarea id="dev-inquiry-notes" rows="3" placeholder="Financing terms, floor preferences, target turnover..." class="w-full bg-neutral-100 border border-neutral-400 p-2.5 text-xs"></textarea>
+                </div>
+                <button type="submit" id="dev-inquiry-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors mt-2">
+                    SUBMIT INQUIRY (AUTO-LOGS TO SHEET 4)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX STUDIO -->
     <div id="lightbox-studio-modal" class="fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-between p-4 hidden select-none">
         <div class="w-full max-w-6xl flex justify-between items-center text-white pb-3 border-b border-neutral-800 z-50">
             <div>
@@ -485,16 +523,21 @@
                 <button onclick="switchAdminSubTab('devinquiries')" id="admin-subtab-btn-devinquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">DEVELOPER PROJECT INQUIRIES (SHEET 4)</button>
             </div>
 
-            <!-- ADMIN SUBTAB 1: LISTINGS MANAGEMENT (FULLY EDITABLE) -->
+            <!-- ADMIN SUBTAB 1: LISTINGS MANAGEMENT (FULLY EDITABLE + DELETE + NOTEPAD IMPORT) -->
             <div id="admin-subtab-listings" class="bg-white border border-neutral-300 p-6 space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-neutral-300 gap-4">
                     <div>
                         <h3 class="text-lg font-bold uppercase tracking-tight text-black">REALTOR SECONDARY LISTINGS (SHEET 1)</h3>
-                        <p class="text-xs text-neutral-500 font-light">All changes save instantly to Google Sheet 1 and cannot be overwritten by Drive text files.</p>
+                        <p class="text-xs text-neutral-500 font-light">Updates and deletions overwrite Google Sheet 1. Additional files imported from notepad append as new entries.</p>
                     </div>
-                    <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors">
-                        <i class="fa-solid fa-plus mr-1"></i> ADD NEW LISTING
-                    </button>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="openNotepadImportModal()" class="bg-neutral-800 hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-import"></i> IMPORT FROM NOTEPAD
+                        </button>
+                        <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2.5 font-semibold uppercase tracking-wider transition-colors flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> ADD NEW LISTING
+                        </button>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -566,7 +609,7 @@
         </div>
     </div>
 
-    <!-- MODAL: ADD / EDIT SECONDARY LISTING (ADMIN FULL EDITING) -->
+    <!-- MODAL: ADD / EDIT SECONDARY LISTING -->
     <div id="add-listing-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-3xl my-8 border-2 border-black p-6 sm:p-8 relative">
             <button onclick="closeAddListingModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
@@ -668,6 +711,46 @@
                     SAVE PROPERTY LISTING & SYNC TO SHEET 1
                 </button>
             </form>
+        </div>
+    </div>
+
+    <!-- MODAL: NOTEPAD / TEXT FILE BATCH IMPORTER -->
+    <div id="notepad-import-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
+        <div class="bg-white w-full max-w-3xl my-8 border-2 border-black p-6 sm:p-8 relative">
+            <button onclick="closeNotepadImportModal()" class="absolute top-4 right-4 text-xl font-bold hover:text-brand-brown">&times;</button>
+            <div class="border-b border-black pb-3 mb-4">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-brand-brown block">BATCH IMPORT ENGINE</span>
+                <h3 class="text-xl font-bold uppercase tracking-tight text-black">IMPORT LISTINGS FROM NOTEPAD (.TXT)</h3>
+                <p class="text-xs text-neutral-600 font-light mt-1">
+                    These listings will <strong>generate new entries</strong> and append to Google Sheets. They will <strong>never overwrite</strong> your existing data.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <input type="file" id="notepad-file-input" accept=".txt,.csv" onchange="handleNotepadFileUpload(event)" class="text-xs text-neutral-600 file:mr-3 file:py-2 file:px-4 file:border-0 file:text-xs file:font-semibold file:bg-neutral-900 file:text-white hover:file:bg-brand-brown cursor-pointer">
+                    <span class="text-xs text-neutral-400">or paste text directly below:</span>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-semibold uppercase mb-1">Paste Notepad Content (One Listing Per Line or Key-Value format)</label>
+                    <textarea id="notepad-content-area" rows="8" placeholder="Format Example (Pipe separated):&#10;Grand Hyatt Residences | BGC Taguig | 148000000 | CONDOMINIUM | 300 sqm | 3 | 3 | 2 | Sale | https://... | Prime Corner Unit&#10;&#10;Or paste JSON array from file." class="w-full bg-neutral-100 border border-neutral-400 p-3 text-xs font-mono"></textarea>
+                </div>
+
+                <div class="bg-neutral-50 p-3 border border-neutral-300 text-xs text-neutral-700">
+                    <p class="font-semibold mb-1 text-[10px] uppercase tracking-wider text-black"><i class="fa-solid fa-circle-info mr-1 text-brand-brown"></i> SAFE IMPORT GUARANTEE</p>
+                    <p class="font-light">Every imported entry gets a freshly assigned unique ID and appends to Sheet 1. Existing listing IDs remain 100% untouched.</p>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="processNotepadImport()" id="notepad-import-btn" class="flex-1 bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
+                        IMPORT & GENERATE NEW LISTINGS IN SHEET 1
+                    </button>
+                    <button onclick="closeNotepadImportModal()" class="bg-neutral-200 hover:bg-neutral-300 text-neutral-800 px-6 py-3 text-xs uppercase font-semibold">
+                        CANCEL
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -996,11 +1079,6 @@
             }
         }
 
-        function accessDirectAdminDashboard() {
-            window.history.pushState({}, '', '?view=admin#admin');
-            showAdminDashboard();
-        }
-
         window.addEventListener('keydown', (e) => {
             const lb = document.getElementById('lightbox-studio-modal');
             if (!lb || lb.classList.contains('hidden')) return;
@@ -1264,7 +1342,6 @@
         }
 
         function openLightboxStudio(title, images, startIndex = 0) {
-            lightboxCurrentTitle = title;
             lightboxCurrentImages = (images && images.length > 0 ? images : ["https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"]).map(resolveDriveImageUrl);
             lightboxCurrentIndex = startIndex;
 
@@ -1311,7 +1388,7 @@
         }
 
         // =========================================================================
-        // ADMIN DASHBOARD & LISTING EDITING ENGINE
+        // ADMIN DASHBOARD & LISTING MANAGEMENT ENGINE
         // =========================================================================
         function showAdminDashboard() {
             document.getElementById('public-view-container').classList.add('hidden');
@@ -1353,12 +1430,15 @@
                         <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${badgeClass}">${p.status}</span></td>
                         <td class="p-3 uppercase text-[10px] font-semibold">${p.category}</td>
                         <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
-                        <td class="p-3 text-right space-x-2 whitespace-nowrap">
+                        <td class="p-3 text-right space-x-1.5 whitespace-nowrap">
                             <button onclick="editListing(${p.id})" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] uppercase font-bold transition-colors">
                                 <i class="fa-solid fa-pen-to-square mr-1"></i> EDIT
                             </button>
                             <button onclick="toggleSoldStatus(${p.id})" class="bg-neutral-200 hover:bg-neutral-300 text-neutral-800 px-2 py-1 text-[10px] uppercase font-bold transition-colors">
                                 TOGGLE SOLD
+                            </button>
+                            <button onclick="deleteListing(${p.id})" class="bg-red-700 hover:bg-red-900 text-white px-2.5 py-1 text-[10px] uppercase font-bold transition-colors">
+                                <i class="fa-solid fa-trash-can mr-1"></i> DELETE
                             </button>
                         </td>
                     </tr>
@@ -1409,7 +1489,6 @@
             document.getElementById('crud-category').value = prop.category;
             document.getElementById('crud-status').value = prop.status;
             
-            // Clean numeric price
             document.getElementById('crud-price').value = String(prop.price).replace(/[^0-9]/g, '') || 0;
             document.getElementById('crud-area').value = prop.area;
             document.getElementById('crud-beds').value = prop.beds;
@@ -1447,7 +1526,7 @@
 
             const idVal = document.getElementById('crud-id').value;
             const isEdit = Boolean(idVal);
-            const listingId = isEdit ? parseInt(idVal, 10) : (Math.max(...properties.map(p => Number(p.id) || 1000)) + 1);
+            const listingId = isEdit ? parseInt(idVal, 10) : (Math.max(...properties.map(p => Number(p.id) || 1000), 1000) + 1);
 
             const rawImages = document.getElementById('crud-images').value;
             const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [
@@ -1475,7 +1554,7 @@
                 images: imagesArr
             };
 
-            // Update local memory & cache
+            // Update local state
             if (isEdit) {
                 const idx = properties.findIndex(p => p.id === listingId);
                 if (idx !== -1) properties[idx] = payload;
@@ -1485,6 +1564,7 @@
             localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
 
             // CRITICAL: Send using text/plain to prevent CORS preflight block
+            // isEdit tells Google Apps Script to OVERWRITE the existing row matching data.id
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -1493,6 +1573,8 @@
                     body: JSON.stringify({
                         sheetTab: "Sheet1",
                         action: isEdit ? "updateListing" : "addListing",
+                        mode: isEdit ? "overwrite" : "append",
+                        overwrite: isEdit,
                         ...payload,
                         image: payload.images.join(', ')
                     })
@@ -1505,7 +1587,45 @@
             renderAdminDashboardTables();
             closeAddListingModal();
             btn.textContent = originalText;
-            showToast(`Listing #${listingId} successfully saved & synced to Sheet 1!`, "success");
+            showToast(isEdit ? `Listing #${listingId} overwritten in Sheet 1!` : `Listing #${listingId} generated & appended!`, "success");
+        }
+
+        // =========================================================================
+        // DELETE LISTING ENGINE (SYNCED TO GOOGLE SHEETS)
+        // =========================================================================
+        async function deleteListing(id) {
+            const prop = properties.find(p => p.id === id);
+            const propTitle = prop ? prop.title : `Listing #${id}`;
+
+            const confirmed = window.confirm(`PERMANENT DELETION WARNING:\n\nAre you sure you want to delete "${propTitle}" (ID #${id})?\n\nThis deletion will overwrite and remove the listing from Google Sheet 1.`);
+            if (!confirmed) return;
+
+            // Remove from local memory
+            properties = properties.filter(p => p.id !== id);
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+
+            // Refresh UI tables immediately
+            renderPropertyList();
+            renderAdminDashboardTables();
+            showToast(`Deleting Listing #${id} from Google Sheets...`, "info");
+
+            // Dispatch delete action to Google Apps Script
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet1",
+                        action: "deleteListing",
+                        id: id
+                    })
+                });
+                showToast(`Listing #${id} successfully removed from Sheet 1!`, "success");
+            } catch (err) {
+                console.error("Error during deletion sync:", err);
+                showToast(`Listing #${id} deleted locally.`, "info");
+            }
         }
 
         async function toggleSoldStatus(id) {
@@ -1523,6 +1643,8 @@
                     body: JSON.stringify({
                         sheetTab: "Sheet1",
                         action: "updateListing",
+                        mode: "overwrite",
+                        overwrite: true,
                         ...prop,
                         image: (prop.images || []).join(', ')
                     })
@@ -1532,6 +1654,157 @@
             renderPropertyList();
             renderAdminDashboardTables();
             showToast(`Listing #${id} status changed to ${prop.status}!`, "success");
+        }
+
+        // =========================================================================
+        // NOTEPAD / TEXT FILE BATCH IMPORTER ENGINE
+        // (Appends new entries, never overwriting existing Google Sheet entries)
+        // =========================================================================
+        function openNotepadImportModal() {
+            document.getElementById('notepad-content-area').value = '';
+            document.getElementById('notepad-file-input').value = '';
+            document.getElementById('notepad-import-modal').classList.remove('hidden');
+        }
+
+        function closeNotepadImportModal() {
+            document.getElementById('notepad-import-modal').classList.add('hidden');
+        }
+
+        function handleNotepadFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                document.getElementById('notepad-content-area').value = evt.target.result;
+            };
+            reader.readAsText(file);
+        }
+
+        async function processNotepadImport() {
+            const rawText = document.getElementById('notepad-content-area').value.trim();
+            if (!rawText) {
+                alert("Please paste text from your notepad or select a .txt file first.");
+                return;
+            }
+
+            const btn = document.getElementById('notepad-import-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> GENERATING NEW LISTINGS IN SHEET 1...`;
+
+            let importedListings = [];
+
+            // Attempt JSON parse first (if notepad contains JSON array)
+            if (rawText.startsWith('[') && rawText.endsWith(']')) {
+                try {
+                    const parsed = JSON.parse(rawText);
+                    if (Array.isArray(parsed)) {
+                        importedListings = parsed;
+                    }
+                } catch(e) {}
+            }
+
+            // Otherwise, line-by-line parsing
+            if (importedListings.length === 0) {
+                const lines = rawText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                
+                lines.forEach((line) => {
+                    // Skip comments or header lines
+                    if (line.startsWith('#') || line.toLowerCase().startsWith('title|') || line.toLowerCase().startsWith('id|')) return;
+
+                    // Support pipe (|), tab (\t), or comma (,) separated lines
+                    let parts = [];
+                    if (line.includes('|')) parts = line.split('|').map(p => p.trim());
+                    else if (line.includes('\t')) parts = line.split('\t').map(p => p.trim());
+                    else parts = line.split(',').map(p => p.trim());
+
+                    if (parts.length >= 2) {
+                        const title = parts[0] || "Luxury Estate";
+                        const location = parts[1] || "Metro Manila";
+                        const price = Number(String(parts[2] || "0").replace(/[^0-9]/g, '')) || 50000000;
+                        const category = (parts[3] || "CONDOMINIUM").toUpperCase();
+                        const area = parts[4] || "150 sqm";
+                        const beds = Number(parts[5]) || 2;
+                        const baths = Number(parts[6]) || 2;
+                        const parking = Number(parts[7]) || 1;
+                        const status = parts[8] || "Sale";
+                        const image = parts[9] || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
+                        const description = parts[10] || "Exclusive luxury listing curated for prime living.";
+
+                        importedListings.push({
+                            title, location, price, category, area, beds, baths, parking, status,
+                            developer: "Compass Realty Exclusive",
+                            agentEmail: "gailamistoso@compassprimerealty.com",
+                            images: [image],
+                            description,
+                            isDeal: false,
+                            isFeatured: false
+                        });
+                    }
+                });
+            }
+
+            if (importedListings.length === 0) {
+                alert("No valid listing formats detected in your notepad text. Please verify formatting.");
+                btn.innerHTML = `IMPORT & GENERATE NEW LISTINGS IN SHEET 1`;
+                return;
+            }
+
+            // Calculate next safe unique ID so it never collides with or overwrites any existing row
+            let maxCurrentId = Math.max(...properties.map(p => Number(p.id) || 1000), 1000);
+
+            const newlyCreated = [];
+
+            for (let i = 0; i < importedListings.length; i++) {
+                maxCurrentId++;
+                const item = importedListings[i];
+                const newListing = {
+                    id: maxCurrentId,
+                    title: item.title || `Prime Property ${maxCurrentId}`,
+                    location: item.location || "Metro Manila",
+                    price: Number(String(item.price).replace(/[^0-9]/g, '')) || 0,
+                    category: String(item.category || "CONDOMINIUM").toUpperCase(),
+                    status: item.status || "Sale",
+                    area: item.area || "N/A",
+                    beds: Number(item.beds) || 0,
+                    baths: Number(item.baths) || 0,
+                    parking: Number(item.parking) || 0,
+                    developer: item.developer || "Compass Realty Exclusive",
+                    agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
+                    images: Array.isArray(item.images) ? item.images : (item.image ? [item.image] : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"]),
+                    description: item.description || "Curated secondary luxury portfolio listing.",
+                    isDeal: Boolean(item.isDeal),
+                    isFeatured: Boolean(item.isFeatured)
+                };
+
+                properties.unshift(newListing);
+                newlyCreated.push(newListing);
+
+                // Send each new entry to Google Sheets with mode: "append" (ensures no existing rows are overwritten)
+                try {
+                    await fetch(GOOGLE_SHEETS_API_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({
+                            sheetTab: "Sheet1",
+                            action: "addListing",
+                            mode: "append",
+                            isNotepadBatch: true,
+                            ...newListing,
+                            image: newListing.images.join(', ')
+                        })
+                    });
+                } catch(err) {
+                    console.error("Batch sheet sync error:", err);
+                }
+            }
+
+            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboardTables();
+            closeNotepadImportModal();
+            btn.innerHTML = `IMPORT & GENERATE NEW LISTINGS IN SHEET 1`;
+            showToast(`Success! Generated ${newlyCreated.length} brand new listings in Google Sheets without overwriting existing data.`, "success");
         }
 
         function showDeveloperPortalView(slug = 'ALL') {
@@ -2105,3 +2378,4 @@
     </script>
 </body>
 </html>
+<!-- END OF FILE index.html -->
