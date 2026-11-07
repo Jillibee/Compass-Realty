@@ -1277,7 +1277,15 @@
                 let incoming = Array.isArray(data) ? data : (data.secondaryListings || []);
 
                 if (incoming.length > 0) {
-                    properties = incoming.map(sanitizeListingRecord);
+                    properties = incoming.map(item => {
+                        const sanitized = sanitizeListingRecord(item);
+                        // Smart merge: If Google Sheet returns 0 but your local session has a valid price, keep your price!
+                        const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
+                        if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
+                            sanitized.price = existing.price;
+                        }
+                        return sanitized;
+                    });
                     localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
                     renderPropertyList();
                     renderAdminDashboardTables();
