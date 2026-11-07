@@ -706,64 +706,54 @@
             let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. Separate long descriptive text from Developer field
-            if (dev.length > 40 || dev.includes('\n') || dev.toUpperCase().includes('FOR SALE') || dev.includes('•') || dev.includes('#')) {
+            // Universal Category Detection from title
+            if (/\b(?:lot|lots|land)\b/i.test(title)) {
+                cat = 'LOTS';
+            } else if (/\b(?:commercial|hotel|building)\b/i.test(title)) {
+                cat = 'COMMERCIAL';
+            }
+
+            // Developer field cleanup (prevents multi-line posts from acting as the developer name)
+            if (dev.length > 50 || dev.includes('\n')) {
                 if (!desc || desc.length < dev.length) desc = dev;
                 dev = "Compass Realty Exclusive";
             }
             if (!dev) dev = "Compass Realty Exclusive";
 
-            // 2. Detect swapped area in bedrooms (e.g. 832 sqm in beds)
             let beds = Number(item.beds) || 0;
-            if (beds > 150 && (!area || area === "N/A" || area === "0")) {
+            let baths = Number(item.baths) || 0;
+            let parking = Number(item.parking) || 0;
+
+            // Universal Lot Rule: A lot NEVER has bedrooms
+            if (cat === 'LOTS') {
+                if (beds > 0 && (!area || area === 'N/A' || area === '0')) {
+                    area = beds + " sqm";
+                }
+                beds = 0;
+                baths = 0;
+            } else if (beds > 20 && (!area || area === 'N/A' || area === '0')) {
+                // If any residential listing has an impossible bedroom count (>20), it's the square meter area
                 area = beds + " sqm";
                 beds = 0;
             }
 
-            // Extract room count from description if available
-            if (beds === 0 && desc) {
-                const roomMatch = desc.match(/(\d+)\s+(?:REGULAR\s+)?ROOMS/i);
-                if (roomMatch && roomMatch[1]) beds = parseInt(roomMatch[1], 10);
-            }
-
-            // 3. Extract parking if missing from description
-            let parking = Number(item.parking) || 0;
-            if (parking === 0 && desc) {
-                const parkMatch = desc.match(/(\d+)\s+PARKING/i);
-                if (parkMatch && parkMatch[1]) parking = parseInt(parkMatch[1], 10);
-            }
-
-            // 4. Area vs image link cleanup
-            if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
-                if (!rawImg) rawImg = area;
-                area = "N/A";
-            }
-
-            // 5. Price vs Status swap cleanup
+            // Price / Status swap detection
             let rawStatus = String(item.status || "Sale").trim();
             let rawPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
-
-            if (/^\d{5,}$/.test(rawStatus) || (!isNaN(Number(rawStatus)) && Number(rawStatus) > 10000)) {
+            if (/^\d{5,}$/.test(rawStatus)) {
                 rawPrice = Number(rawStatus);
                 rawStatus = "Sale";
             }
-            if (rawStatus.length > 25 || rawStatus === "0") rawStatus = "Sale";
 
-            // 6. Location cleanup
-            const validCategories = ['CONDOMINIUM', 'HOUSE AND LOTS', 'LOTS', 'COMMERCIAL'];
-            if (validCategories.includes(loc.toUpperCase())) {
-                cat = loc.toUpperCase();
-                loc = "Metro Manila";
-            }
-            if (loc === "Metro Manila" || !loc) {
-                if (desc.toUpperCase().includes('MALATE')) loc = "Malate, Manila";
-                else if (desc.toUpperCase().includes('BGC')) loc = "BGC, Taguig City";
-                else if (desc.toUpperCase().includes('MAKATI')) loc = "Makati City";
+            // Universal Location fallback: extracts whatever follows 📍 if location was blank
+            if (!loc || loc === "Metro Manila") {
+                var pinMatch = desc.match(/📍\s*([A-Za-z0-9\s,.-]+?)(?:\n|$|\.|\bWake\b|\bAn\b)/);
+                if (pinMatch && pinMatch[1] && pinMatch[1].trim().length > 3) {
+                    loc = pinMatch[1].trim();
+                }
             }
 
-            if (title.toUpperCase().includes('HOTEL')) cat = 'COMMERCIAL';
-
-            // 7. Image gallery parser
+            // Image gallery parser
             let imgList = [];
             if (Array.isArray(rawImg)) imgList = rawImg;
             else if (typeof rawImg === 'string' && rawImg.trim()) imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
@@ -771,14 +761,14 @@
 
             return {
                 id: item.id || Date.now(),
-                title: title || "Luxury Property",
+                title: title || "Exclusive Property",
                 location: loc || "Metro Manila",
                 price: rawPrice,
                 status: rawStatus,
                 category: cat,
                 area: area || "N/A",
                 beds: beds,
-                baths: Number(item.baths) || 0,
+                baths: baths,
                 parking: parking,
                 developer: dev,
                 agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
