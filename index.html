@@ -82,7 +82,7 @@
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased selection:bg-brand-brown selection:text-white">
 
-    <!-- TOP ANNOUNCEMENT BAR (Public: No Admin Button, No Careers) -->
+    <!-- TOP ANNOUNCEMENT BAR (Zero Admin Buttons, Zero Careers) -->
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
             <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO & DEVELOPER TOWNSHIPS</span>
@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <!-- MAIN HEADER & NAVIGATION -->
+    <!-- MAIN HEADER & NAVIGATION (Zero Admin Buttons) -->
     <header class="sticky top-0 z-40 bg-white border-b border-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
@@ -181,7 +181,7 @@
 
     <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
     <div id="public-view-container">
-        <!-- HERO BANNER SECTION -->
+        <!-- HERO BANNER SECTION (WITH RESTORED LUXURY MANSION IMAGE) -->
         <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
             <div class="max-w-7xl mx-auto">
                 <div class="max-w-3xl">
@@ -338,7 +338,6 @@
             <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" class="max-h-[70vh] max-w-full object-contain">
-                <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
             <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
         </div>
@@ -393,7 +392,8 @@
     </div>
 
     <!-- ========================================================================= -->
-    <!-- COMPLETE ADMIN DASHBOARD (Direct access via #admin or ?view=admin)        -->
+    <!-- UNIQUE URL ONLY ADMIN DASHBOARD (Direct access via #admin or ?admin)     -->
+    <!-- ZERO buttons or links on public page                                      -->
     <!-- ========================================================================= -->
     <div id="admin-dashboard-container" class="hidden bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto space-y-6">
@@ -747,7 +747,7 @@
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toast-container" class="fixed bottom-6 left-6 z-50 space-y-2"></div>
 
-    <!-- FOOTER WITH SUBTLE ADMIN DESK LINK -->
+    <!-- FOOTER (Clean: Zero Admin Links) -->
     <footer class="bg-black text-white border-t-4 border-brand-brown pt-16 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-neutral-800">
@@ -776,11 +776,8 @@
                     </p>
                 </div>
             </div>
-            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] text-neutral-500 uppercase tracking-widest gap-2">
-                <div>&copy; 2026 COMPASS PRIME REALTY. ALL RIGHTS RESERVED.</div>
-                <div>
-                    <a href="#admin" onclick="showAdminDashboard(); return false;" class="text-neutral-700 hover:text-neutral-400 transition-colors" title="Direct Admin Access">[Admin Portal]</a>
-                </div>
+            <div class="pt-8 text-center text-[10px] text-neutral-500 uppercase tracking-widest">
+                &copy; 2026 COMPASS PRIME REALTY. ALL RIGHTS RESERVED.
             </div>
         </div>
     </footer>
@@ -801,6 +798,17 @@
                 if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
             }
             return url;
+        }
+
+        // STRICT STATUS NORMALIZER (Never allows a number like 200000000 on a status badge)
+        function normalizeStatus(val) {
+            if (!val) return "Sale";
+            let s = String(val).toLowerCase().trim();
+            if ((s.includes('sale') && s.includes('rent')) || s.includes('dual')) return "Sale & Rent";
+            if (s === 'sold') return "Sold";
+            if (s.includes('rent') || s.includes('lease')) return "Rent";
+            if (s.includes('sale')) return "Sale";
+            return "Sale"; // Defaults strictly to 'Sale' if numbers or corrupted values are encountered
         }
 
         // UNIVERSAL DATA SANITIZER (Guarantees fields never mix across all listings)
@@ -856,6 +864,16 @@
                 beds = 0;
             }
 
+            // 5. Price cleanup & Strict Status Normalization
+            let cleanPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
+            let cleanStatus = normalizeStatus(item.status);
+
+            // If status field had a raw price string like 200000000
+            if (/^\d{5,}$/.test(String(item.status || "").trim())) {
+                cleanPrice = Number(String(item.status).replace(/[^0-9]/g, '')) || cleanPrice;
+                cleanStatus = "Sale";
+            }
+
             let imgList = [];
             if (Array.isArray(rawImg)) imgList = rawImg;
             else if (typeof rawImg === 'string' && rawImg.trim()) imgList = rawImg.split(',').map(s => s.trim()).filter(Boolean);
@@ -866,8 +884,8 @@
                 title: title || "Exclusive Property",
                 category: cat,
                 location: loc || "Metro Manila",
-                price: Number(item.price) || 0,
-                status: item.status || "Sale",
+                price: cleanPrice,
+                status: cleanStatus,
                 area: area || "N/A",
                 beds: beds,
                 baths: Number(item.baths) || 0,
@@ -881,7 +899,7 @@
             };
         }
 
-        // FULL DEFAULT PROPERTIES: LISTINGS WILL NEVER BE LOST OR BLANK
+        // PERMANENT BASELINE PORTFOLIO (Listings will never vanish)
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
@@ -943,7 +961,7 @@
                 images: [
                     "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts.\n• 13-STOREY HOTEL\n• 70 REGULAR ROOMS • 24 DELUXE ROOMS • 1 PRESIDENTIAL SUITE\n• GROUND FLOOR: LOBBY & RESTAURANT • 2ND FLOOR: GYM & SPA\n• 3RD FLOOR: FUNCTION ROOM & ADMIN OFFICE • ROOFTOP: POOL & FUNCTION AREA\n• BASEMENT: 14 PARKING SLOTS\n\n✓ Hospitality Operations ✓ Redevelopment Potential ✓ Long-term Capital Appreciation"
+                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts.\n• 13-STOREY HOTEL\n• 70 REGULAR ROOMS • 24 DELUXE ROOMS • 1 PRESIDENTIAL SUITE\n• GROUND FLOOR: LOBBY & RESTAURANT • 2ND FLOOR: GYM & SPA\n• 3RD FLOOR: FUNCTION ROOM & ADMIN OFFICE • ROOFTOP: POOL & FUNCTION AREA\n• BASEMENT: 14 PARKING SLOTS"
             },
             {
                 id: 1024,
@@ -963,7 +981,27 @@
                 images: [
                     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
                 ],
-                description: "📍 Orchard Residential Estates, Dasmariñas Cavite\nWake up to serene mornings and panoramic golf course views in this peaceful paradise.\nPerfect for building your dream home in an exclusive, prestigious enclave.\n• Lot Area: 714 sqm\n• Championship Golf Course Views\n• Complete Clubhouse & Security Amenities"
+                description: "📍 Orchard Residential Estates, Dasmariñas Cavite\nWake up to serene mornings and panoramic golf course views in this peaceful paradise.\n• Lot Area: 714 sqm\n• Championship Golf Course Views\n• Complete Clubhouse & Security Amenities"
+            },
+            {
+                id: 1030,
+                title: "Prime Land in Alaminos",
+                location: "Alaminos, Laguna",
+                price: 200000000,
+                status: "Sale",
+                category: "LOTS",
+                isDeal: true,
+                isFeatured: true,
+                beds: 0,
+                baths: 0,
+                parking: 0,
+                area: "100000 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "📍 Prime Land in Alaminos, Laguna\nExpansive 10-hectare prime property ideal for mixed-use residential development, agro-tourism, or institutional investment.\n• Total Lot Area: 100,000 sqm (10 Hectares)\n• Highway accessibility and scenic mountain ridge views"
             }
         ];
 
@@ -1020,8 +1058,9 @@
             const hash = window.location.hash.toLowerCase();
             const urlParams = new URLSearchParams(window.location.search);
             const viewParam = urlParams.get('view')?.toLowerCase();
+            const hasAdminParam = urlParams.has('admin');
 
-            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin') {
+            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin' || hasAdminParam) {
                 showAdminDashboard();
             } else if (hash === '#developer' || viewParam === 'developer') {
                 showDeveloperPortalView();
@@ -1039,7 +1078,7 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD BUILDER
+        // PUBLIC CARD BUILDER (Clean Status Badges & Universal Specs)
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
@@ -1050,6 +1089,21 @@
 
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+            // STRICT BADGE LOGIC: Never allows numbers like 200000000
+            const cleanStatus = normalizeStatus(prop.status);
+            let badgeBg = "bg-black";
+            let badgeText = "FOR " + cleanStatus.toUpperCase();
+            if (cleanStatus === "Sold") {
+                badgeBg = "bg-red-700";
+                badgeText = "SOLD";
+            } else if (cleanStatus === "Sale & Rent") {
+                badgeBg = "bg-brand-brown";
+                badgeText = "FOR SALE & RENT";
+            } else if (cleanStatus === "Rent") {
+                badgeBg = "bg-neutral-800";
+                badgeText = "FOR RENT";
+            }
 
             let spec1Value = prop.beds;
             let spec1Label = "BEDS";
@@ -1071,23 +1125,20 @@
                 spec3Label = "GARAGE";
             }
 
-            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
-            const resolvedImages = rawImages.map(resolveDriveImageUrl);
-            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
-            const currentImgIndex = cardCarouselIndices[prop.id];
+            const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
 
             card.innerHTML = `
                 <div>
                     <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
-                        <img src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
+                        <img src="${images[0]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)">
                         
                         <div class="absolute top-3 left-3 z-20">
-                            <span class="bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
-                                FOR ${String(prop.status).toUpperCase()}
+                            <span class="${badgeBg} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                                ${badgeText}
                             </span>
                         </div>
 
-                        ${resolvedImages.length > 1 ? `
+                        ${images.length > 1 ? `
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
                         ` : ''}
@@ -1115,7 +1166,7 @@
                     <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
                         VIEW DETAILS & INQUIRE
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
@@ -1139,15 +1190,14 @@
         // =========================================================================
         function isStatusMatch(itemStatus, filterStatus) {
             if (!filterStatus || filterStatus === 'ALL') return true;
-            const itemNorm = String(itemStatus || '').toLowerCase().trim();
+            const cleanItem = normalizeStatus(itemStatus).toLowerCase();
             const filterNorm = String(filterStatus || '').toLowerCase().trim();
-            const isBoth = (itemNorm.includes('sale') && itemNorm.includes('rent')) || itemNorm === 'both' || itemNorm === 'sale & rent';
 
-            if (filterNorm === 'sale') return itemNorm.includes('sale') || isBoth;
-            if (filterNorm === 'rent') return itemNorm.includes('rent') || isBoth;
-            if (filterNorm === 'sale & rent') return isBoth;
-            if (filterNorm === 'sold') return itemNorm.includes('sold');
-            return itemNorm === filterNorm;
+            if (filterNorm === 'sale') return cleanItem === 'sale' || cleanItem === 'sale & rent';
+            if (filterNorm === 'rent') return cleanItem === 'rent' || cleanItem === 'sale & rent';
+            if (filterNorm === 'sale & rent') return cleanItem === 'sale & rent';
+            if (filterNorm === 'sold') return cleanItem === 'sold';
+            return cleanItem === filterNorm;
         }
 
         function renderPropertyList() {
@@ -1353,7 +1403,7 @@
                     <td class="p-3 font-bold">${p.title}</td>
                     <td class="p-3 uppercase font-semibold">${p.category}</td>
                     <td class="p-3 text-neutral-600">${p.location}</td>
-                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold bg-black text-white">${p.status}</span></td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold bg-black text-white">${normalizeStatus(p.status)}</span></td>
                     <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
                     <td class="p-3 font-mono">${p.area}</td>
                     <td class="p-3 text-right space-x-2 whitespace-nowrap">
@@ -1474,7 +1524,7 @@
             document.getElementById('crud-id').value = prop.id;
             document.getElementById('crud-title').value = prop.title;
             document.getElementById('crud-category').value = prop.category;
-            document.getElementById('crud-status').value = prop.status;
+            document.getElementById('crud-status').value = normalizeStatus(prop.status);
             document.getElementById('crud-price').value = prop.price;
             document.getElementById('crud-area').value = prop.area;
             document.getElementById('crud-beds').value = prop.beds;
@@ -1535,7 +1585,7 @@
                 id: listingId,
                 title: propTitle,
                 category: document.getElementById('crud-category').value.trim(),
-                status: document.getElementById('crud-status').value.trim(),
+                status: normalizeStatus(document.getElementById('crud-status').value.trim()),
                 price: Number(document.getElementById('crud-price').value) || 0,
                 area: document.getElementById('crud-area').value.trim(),
                 beds: Number(document.getElementById('crud-beds').value) || 0,
@@ -1698,7 +1748,7 @@
         }
 
         // =========================================================================
-        // ROBUST FETCH (SUPPORTS BOTH ARRAY AND OBJECT FORMATS)
+        // ROBUST FETCH (ACCEPTS BOTH ARRAY AND OBJECT API RESPONSES)
         // =========================================================================
         async function fetchDatabaseFromGoogleSheets() {
             try {
@@ -1874,3 +1924,11 @@
     </script>
 </body>
 </html>
+
+Verification:
+
+1.  Load your site normally: all 5 properties will immediately display on the
+    screen with their correct images, prices, locations, and clean FOR SALE
+    badges.
+2.  To access your Admin Control Center, add #admin to the end of your URL (e.g.
+    yourwebsite.com/#admin or index.html#admin), or press Ctrl + Shift + A.
