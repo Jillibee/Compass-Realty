@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +51,7 @@
         .dropdown-menu { display: none; }
         .dropdown-container:hover .dropdown-menu { display: block; }
         
-        /* HERO BANNER WITH DEFAULT LUXURY MANSION IMAGE */
+        /* RESTORED DEFAULT HERO BANNER */
         .hero-bg {
             background-color: #483929;
             background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');
@@ -81,7 +82,7 @@
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col justify-between antialiased selection:bg-brand-brown selection:text-white">
 
-    <!-- TOP ANNOUNCEMENT BAR (Clean: No Admin Button, No Careers) -->
+    <!-- TOP ANNOUNCEMENT BAR (Public: No Admin Button, No Careers) -->
     <div class="bg-brand-black text-white text-xs py-2 px-4 sm:px-8 flex justify-between items-center border-b border-neutral-800">
         <div class="flex items-center space-x-6">
             <span class="tracking-widest uppercase text-[10px] text-neutral-400">LUXURY REAL ESTATE PORTFOLIO & DEVELOPER TOWNSHIPS</span>
@@ -180,7 +181,7 @@
 
     <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
     <div id="public-view-container">
-        <!-- HERO BANNER SECTION (WITH IMAGE RESTORED) -->
+        <!-- HERO BANNER SECTION -->
         <div id="hero-section" class="hero-bg py-20 lg:py-28 px-4 sm:px-6 lg:px-8 text-white relative">
             <div class="max-w-7xl mx-auto">
                 <div class="max-w-3xl">
@@ -337,6 +338,7 @@
             <button onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" class="max-h-[70vh] max-w-full object-contain">
+                <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
             <button onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
         </div>
@@ -777,7 +779,7 @@
             <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] text-neutral-500 uppercase tracking-widest gap-2">
                 <div>&copy; 2026 COMPASS PRIME REALTY. ALL RIGHTS RESERVED.</div>
                 <div>
-                    <a href="#admin" onclick="showAdminDashboard(); return false;" class="text-neutral-700 hover:text-neutral-400 transition-colors" title="Direct Admin Access">[Admin Desk]</a>
+                    <a href="#admin" onclick="showAdminDashboard(); return false;" class="text-neutral-700 hover:text-neutral-400 transition-colors" title="Direct Admin Access">[Admin Portal]</a>
                 </div>
             </div>
         </div>
@@ -879,7 +881,104 @@
             };
         }
 
-        let properties = JSON.parse(localStorage.getItem('cpr_cached_listings')) || [];
+        // FULL DEFAULT PROPERTIES: LISTINGS WILL NEVER BE LOST OR BLANK
+        const DEFAULT_PROPERTIES = [
+            {
+                id: 1001,
+                title: "Grand Hyatt Manila Residences",
+                location: "Grand Hyatt Manila Residences, BGC Taguig City",
+                price: 148000000,
+                status: "Sale",
+                category: "CONDOMINIUM",
+                isDeal: true,
+                isFeatured: true,
+                beds: 3,
+                baths: 3,
+                parking: 3,
+                area: "300 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://drive.google.com/thumbnail?id=1Kj3NTqU94MFEOCYYLXTreLV6U0TMxjgZ&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1sQk6aymdhSuEf_4x2VBZPVcUnMIwgF4w&sz=w1600"
+                ],
+                description: "Elevated urban living at its finest. High zone corner unit with hotel-inspired amenities."
+            },
+            {
+                id: 1008,
+                title: "One Rockwell | East Tower",
+                location: "One Rockwell | East Tower, Makati City",
+                price: 27000000,
+                status: "Sale & Rent",
+                category: "CONDOMINIUM",
+                isDeal: false,
+                isFeatured: false,
+                beds: 2,
+                baths: 2,
+                parking: 1,
+                area: "70 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://drive.google.com/thumbnail?id=1qUk4ESSNQZzxR9mMHxxLq6aQq9CJbgka&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1eFbAuPbcMWS4e3PqS3jKXccWMlSghq7v&sz=w1600"
+                ],
+                description: "FOR SALE & FOR LEASE. Live in the heart of Rockwell with direct mall access, high zone floor, and signature skyline views."
+            },
+            {
+                id: 1015,
+                title: "Armada Hotel",
+                location: "Malate, Manila",
+                price: 1500000000,
+                status: "Sale",
+                category: "COMMERCIAL",
+                isDeal: true,
+                isFeatured: true,
+                beds: 95,
+                baths: 95,
+                parking: 14,
+                area: "832 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts.\n• 13-STOREY HOTEL\n• 70 REGULAR ROOMS • 24 DELUXE ROOMS • 1 PRESIDENTIAL SUITE\n• GROUND FLOOR: LOBBY & RESTAURANT • 2ND FLOOR: GYM & SPA\n• 3RD FLOOR: FUNCTION ROOM & ADMIN OFFICE • ROOFTOP: POOL & FUNCTION AREA\n• BASEMENT: 14 PARKING SLOTS\n\n✓ Hospitality Operations ✓ Redevelopment Potential ✓ Long-term Capital Appreciation"
+            },
+            {
+                id: 1024,
+                title: "Orchard Residential Estates Prime Lot",
+                location: "Dasmariñas, Cavite",
+                price: 13500000,
+                status: "Sale",
+                category: "LOTS",
+                isDeal: true,
+                isFeatured: true,
+                beds: 0,
+                baths: 0,
+                parking: 0,
+                area: "714 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
+                ],
+                description: "📍 Orchard Residential Estates, Dasmariñas Cavite\nWake up to serene mornings and panoramic golf course views in this peaceful paradise.\nPerfect for building your dream home in an exclusive, prestigious enclave.\n• Lot Area: 714 sqm\n• Championship Golf Course Views\n• Complete Clubhouse & Security Amenities"
+            }
+        ];
+
+        // Safe Cache Loader: Never sets an empty array
+        let cached = null;
+        try {
+            cached = JSON.parse(localStorage.getItem('cpr_cached_listings'));
+        } catch(e) {}
+        let properties = (cached && Array.isArray(cached) && cached.length > 0) ? cached : DEFAULT_PROPERTIES;
+
+        let cardCarouselIndices = {};
+        let activeModalCarouselIndex = 0;
+        let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+        let favorites = JSON.parse(localStorage.getItem('cpr_favorites')) || [];
+
         let developerProjects = JSON.parse(localStorage.getItem('cpr_dev_projects_v4')) || [
             {
                 id: 'DEV-101',
@@ -895,11 +994,8 @@
         ];
         let adminInquiries = [];
         let adminEnlistments = [];
-        let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
-        let favorites = JSON.parse(localStorage.getItem('cpr_favorites')) || [];
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Apply custom hero banner if stored
             const savedBanner = localStorage.getItem('cpr_custom_hero_banner');
             if (savedBanner) updateHeroBannerStyle(savedBanner);
 
@@ -912,7 +1008,7 @@
         // Instant Hash & Keyboard Shortcut Listeners for Admin Access
         window.addEventListener('hashchange', checkDirectURLRouting);
         window.addEventListener('keydown', (e) => {
-            // Shortcut: Ctrl + Shift + A or Cmd + Shift + A
+            // Secret Shortcut: Ctrl + Shift + A or Cmd + Shift + A
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
                 e.preventDefault();
                 showAdminDashboard();
@@ -975,15 +1071,26 @@
                 spec3Label = "GARAGE";
             }
 
-            const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolvedImages = rawImages.map(resolveDriveImageUrl);
+            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
+            const currentImgIndex = cardCarouselIndices[prop.id];
 
             card.innerHTML = `
                 <div>
-                    <div class="relative h-64 overflow-hidden bg-neutral-900">
-                        <img src="${images[0]}" class="w-full h-full object-cover">
-                        <div class="absolute top-3 left-3 bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase">
-                            FOR ${prop.status.toUpperCase()}
+                    <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
+                        <img src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
+                        
+                        <div class="absolute top-3 left-3 z-20">
+                            <span class="bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                                FOR ${String(prop.status).toUpperCase()}
+                            </span>
                         </div>
+
+                        ${resolvedImages.length > 1 ? `
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                        ` : ''}
                     </div>
 
                     <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
@@ -1008,12 +1115,39 @@
                     <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
                         VIEW DETAILS & INQUIRE
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
             `;
             return card;
+        }
+
+        function navigateCardCarousel(propId, dir) {
+            const prop = properties.find(p => p.id === propId);
+            if (!prop) return;
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolved = rawImages.map(resolveDriveImageUrl);
+            if (resolved.length <= 1) return;
+
+            cardCarouselIndices[propId] = (cardCarouselIndices[propId] + dir + resolved.length) % resolved.length;
+            renderPropertyList();
+        }
+
+        // =========================================================================
+        // FILTERING & PUBLIC CATALOG RENDERER
+        // =========================================================================
+        function isStatusMatch(itemStatus, filterStatus) {
+            if (!filterStatus || filterStatus === 'ALL') return true;
+            const itemNorm = String(itemStatus || '').toLowerCase().trim();
+            const filterNorm = String(filterStatus || '').toLowerCase().trim();
+            const isBoth = (itemNorm.includes('sale') && itemNorm.includes('rent')) || itemNorm === 'both' || itemNorm === 'sale & rent';
+
+            if (filterNorm === 'sale') return itemNorm.includes('sale') || isBoth;
+            if (filterNorm === 'rent') return itemNorm.includes('rent') || isBoth;
+            if (filterNorm === 'sale & rent') return isBoth;
+            if (filterNorm === 'sold') return itemNorm.includes('sold');
+            return itemNorm === filterNorm;
         }
 
         function renderPropertyList() {
@@ -1023,8 +1157,8 @@
             grid.innerHTML = '';
 
             let filtered = properties.filter(item => {
-                if (currentFilters.status !== 'ALL' && item.status.toLowerCase() !== currentFilters.status.toLowerCase()) return false;
-                if (currentFilters.category !== 'ALL' && item.category !== currentFilters.category) return false;
+                if (!isStatusMatch(item.status, currentFilters.status)) return false;
+                if (currentFilters.category !== 'ALL' && item.category.toLowerCase() !== currentFilters.category.toLowerCase()) return false;
                 if (currentFilters.onlyDeals && !item.isDeal) return false;
                 if (currentFilters.onlyFeatured && !item.isFeatured) return false;
                 if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
@@ -1219,6 +1353,7 @@
                     <td class="p-3 font-bold">${p.title}</td>
                     <td class="p-3 uppercase font-semibold">${p.category}</td>
                     <td class="p-3 text-neutral-600">${p.location}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold bg-black text-white">${p.status}</span></td>
                     <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
                     <td class="p-3 font-mono">${p.area}</td>
                     <td class="p-3 text-right space-x-2 whitespace-nowrap">
@@ -1563,15 +1698,30 @@
         }
 
         // =========================================================================
-        // FETCH ALL SHEETS (SHEET 1, SHEET 2, SHEET 4, SHEET 5)
+        // ROBUST FETCH (SUPPORTS BOTH ARRAY AND OBJECT FORMATS)
         // =========================================================================
         async function fetchDatabaseFromGoogleSheets() {
             try {
                 const res = await fetch(GOOGLE_SHEETS_API_URL);
                 const data = await res.json();
 
-                if (data.secondaryListings && data.secondaryListings.length) {
-                    properties = data.secondaryListings.map(item => {
+                let incomingListings = [];
+                let incomingDevUnits = [];
+                let incomingAppts = [];
+                let incomingEnlistments = [];
+
+                if (Array.isArray(data)) {
+                    incomingListings = data;
+                } else if (data && typeof data === 'object') {
+                    if (Array.isArray(data.secondaryListings)) incomingListings = data.secondaryListings;
+                    else if (Array.isArray(data.listings)) incomingListings = data.listings;
+                    if (Array.isArray(data.developerUnits)) incomingDevUnits = data.developerUnits;
+                    if (Array.isArray(data.appointments)) incomingAppts = data.appointments;
+                    if (Array.isArray(data.enlistments)) incomingEnlistments = data.enlistments;
+                }
+
+                if (incomingListings && incomingListings.length > 0) {
+                    properties = incomingListings.map(item => {
                         const sanitized = sanitizeListingRecord(item);
                         const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
                         if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
@@ -1583,8 +1733,8 @@
                     renderPropertyList();
                 }
 
-                if (data.developerUnits && data.developerUnits.length) {
-                    data.developerUnits.forEach(du => {
+                if (incomingDevUnits && incomingDevUnits.length > 0) {
+                    incomingDevUnits.forEach(du => {
                         let proj = developerProjects.find(p => p.id === du.projectId || p.title.toLowerCase() === (du.projectName || '').toLowerCase());
                         if (proj) {
                             proj.units = proj.units || [];
@@ -1606,8 +1756,8 @@
                     localStorage.setItem('cpr_dev_projects_v4', JSON.stringify(developerProjects));
                 }
 
-                if (data.appointments) adminInquiries = data.appointments;
-                if (data.enlistments) adminEnlistments = data.enlistments;
+                if (incomingAppts.length > 0) adminInquiries = incomingAppts;
+                if (incomingEnlistments.length > 0) adminEnlistments = incomingEnlistments;
 
                 renderAdminDashboard();
             } catch(e) {
