@@ -245,167 +245,146 @@
             </div>
         </div>
 
-        <!-- HERO BANNER SECTION (Place between Search Bar and Listings Grid) -->
-<section class="cr-hero-wrapper">
-  <div class="cr-hero-banner">
-    <!-- Dark Gradient Overlay -->
+<!-- ========================================== -->
+<!-- COMPASS REALTY HERO BANNER                 -->
+<!-- (Place between Search Bar & Listings Grid) -->
+<!-- ========================================== -->
+<section class="cr-hero-container">
+  <div class="cr-hero-card" id="crHeroCard">
     <div class="cr-hero-overlay"></div>
-
-    <!-- Content -->
     <div class="cr-hero-content">
-      <span class="cr-hero-badge">
-        <span class="cr-badge-dot"></span> COMPASS REALTY EXCLUSIVE
-      </span>
-      
+      <div class="cr-badge">
+        <span class="cr-badge-dot"></span>
+        COMPASS REALTY EXCLUSIVE
+      </div>
       <h1 class="cr-hero-title">
         Elevated Urban Living <br />
         <span class="cr-accent-text">At Its Finest</span>
       </h1>
-
-      <p class="cr-hero-subtitle">
-        Explore handpicked luxury residences in BGC & Makati, private estates in Ayala Alabang, and prime commercial properties across Metro Manila.
+      <p class="cr-hero-desc">
+        A prestigious portfolio of high-zone residences, private estates in Ayala Alabang, and prime commercial investments across Metro Manila.
       </p>
-
-      <div class="cr-hero-meta">
-        <div class="cr-meta-item">
+      <div class="cr-hero-stats">
+        <div class="cr-stat">
           <strong>BGC • Makati • Alabang</strong>
-          <span>Prime Metro Locations</span>
+          <span>Prime Locations</span>
         </div>
-        <div class="cr-divider"></div>
-        <div class="cr-meta-item">
+        <div class="cr-stat-divider"></div>
+        <div class="cr-stat">
           <strong>100% Verified</strong>
           <span>Clean Titles & Portfolios</span>
         </div>
-        <div class="cr-divider"></div>
-        <div class="cr-meta-item">
+        <div class="cr-stat-divider"></div>
+        <div class="cr-stat">
           <strong>PRC Lic. #4740</strong>
-          <span>Licensed Advisory</span>
+          <span>Licensed Brokerage</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- STYLES FOR HERO BANNER -->
 <style>
-  .cr-hero-wrapper {
-    max-width: 1280px;
-    margin: 28px auto;
+  .cr-hero-container {
+    max-width: 1200px;
+    margin: 24px auto;
     padding: 0 16px;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
-
-  .cr-hero-banner {
+  .cr-hero-card {
     position: relative;
-    min-height: 380px;
-    border-radius: 18px;
+    min-height: 340px;
+    border-radius: 16px;
     overflow: hidden;
     background-color: #0b1120;
+    /* Default background image until changed via Admin */
     background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: flex-end;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   }
-
   .cr-hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, #090d16 0%, rgba(9, 13, 22, 0.75) 50%, rgba(9, 13, 22, 0.2) 100%),
-                linear-gradient(to right, rgba(9, 13, 22, 0.9) 0%, rgba(9, 13, 22, 0.4) 60%, transparent 100%);
+    background: linear-gradient(to top, #090d16 0%, rgba(9, 13, 22, 0.7) 50%, rgba(9, 13, 22, 0.15) 100%),
+                linear-gradient(to right, rgba(9, 13, 22, 0.85) 0%, rgba(9, 13, 22, 0.4) 60%, transparent 100%);
   }
-
   .cr-hero-content {
     position: relative;
     z-index: 2;
-    padding: 36px 40px;
-    max-width: 680px;
+    padding: 32px 36px;
+    max-width: 650px;
     color: #ffffff;
   }
-
-  .cr-hero-badge {
+  .cr-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 14px;
-    border-radius: 9999px;
+    padding: 4px 12px;
+    border-radius: 999px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: #e2e8f0;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
   }
-
   .cr-badge-dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     background: #10b981;
     border-radius: 50%;
   }
-
   .cr-hero-title {
-    font-size: 38px;
-    line-height: 1.15;
+    font-size: 34px;
+    line-height: 1.2;
     font-weight: 800;
-    margin: 0 0 12px 0;
-    letter-spacing: -0.02em;
+    margin: 0 0 10px 0;
   }
-
   .cr-accent-text {
     background: linear-gradient(90deg, #fde68a, #d97706);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
-  .cr-hero-subtitle {
-    font-size: 15px;
+  .cr-hero-desc {
+    font-size: 14px;
     line-height: 1.6;
     color: #cbd5e1;
-    margin: 0 0 24px 0;
+    margin: 0 0 20px 0;
   }
-
-  .cr-hero-meta {
+  .cr-hero-stats {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
-
-  .cr-meta-item strong {
+  .cr-stat strong {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     color: #ffffff;
   }
-
-  .cr-meta-item span {
-    font-size: 12px;
+  .cr-stat span {
+    font-size: 11px;
     color: #94a3b8;
   }
-
-  .cr-divider {
+  .cr-stat-divider {
     width: 1px;
-    height: 28px;
+    height: 24px;
     background: rgba(255, 255, 255, 0.15);
   }
-
   @media (max-width: 640px) {
-    .cr-hero-content {
-      padding: 24px 20px;
-    }
-    .cr-hero-title {
-      font-size: 26px;
-    }
-    .cr-divider {
-      display: none;
-    }
+    .cr-hero-content { padding: 20px; }
+    .cr-hero-title { font-size: 24px; }
+    .cr-stat-divider { display: none; }
   }
 </style>
 
@@ -724,30 +703,160 @@
                 </div>
             </div>
 
-            <!-- SUBTAB 5: HERO BANNER ASSET UPLOADER (DRIVE FOLDER: 1U6PYIn8vwWL1-e4oWvqyjtLFV7qjBEDQ) -->
-            <div id="admin-panel-herobanner" class="hidden bg-white border border-neutral-300 p-6 space-y-6">
-                <div class="pb-3 border-b">
-                    <h3 class="text-base font-bold uppercase">HERO BANNER DRIVE ASSET MANAGER</h3>
-                    <p class="text-xs text-neutral-500">Upload a new hero banner image from your computer. It creates a folder and uploads directly to Google Drive (<code>1U6PYIn8vwWL1-e4oWvqyjtLFV7qjBEDQ</code>).</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                    <div class="space-y-4 border p-4 bg-neutral-50">
-                        <label class="block text-xs font-bold uppercase">UPLOAD LOCAL BANNER IMAGE</label>
-                        <input type="file" id="hero-banner-input" accept="image/*" class="w-full text-xs text-neutral-600 file:mr-3 file:py-2.5 file:px-4 file:border-0 file:text-xs file:font-semibold file:bg-black file:text-white hover:file:bg-brand-brown cursor-pointer">
-                        <button onclick="handleHeroBannerUpload()" id="hero-upload-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-bold tracking-widest transition-colors">
-                            UPLOAD TO GOOGLE DRIVE & UPDATE HERO
-                        </button>
-                    </div>
-
-                    <div>
-                        <span class="block text-xs font-bold uppercase mb-2">CURRENT HERO PREVIEW</span>
-                        <div id="hero-live-preview" class="h-44 border border-black bg-cover bg-center shadow-lg" style="background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(72, 57, 41, 0.85)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <!-- ========================================== -->
+<!-- ADMIN BANNER UPLOADER                      -->
+<!-- ========================================== -->
+<div class="cr-admin-panel">
+  <div class="cr-admin-header">
+    <div>
+      <h3 style="margin: 0; color: #fff; font-size: 18px;">Customize Hero Banner</h3>
+      <p style="margin: 4px 0 0; color: #94a3b8; font-size: 13px;">Upload an image to Google Drive folder <code>1IvhKA8...U5BTd</code></p>
     </div>
+  </div>
+
+  <!-- Live Mini Preview -->
+  <div class="cr-preview-box" id="adminPreviewBox">
+    <div class="cr-preview-overlay"></div>
+    <div style="position: relative; z-index: 2; padding: 16px; color: #fff;">
+      <span style="font-size: 10px; font-weight: bold; background: rgba(16,185,129,0.2); color: #34d399; padding: 2px 8px; border-radius: 4px;">PREVIEW</span>
+      <h4 style="margin: 6px 0 0; font-size: 18px;">Elevated Urban Living</h4>
+    </div>
+  </div>
+
+  <!-- Upload Area -->
+  <div class="cr-dropzone" onclick="document.getElementById('bannerFileInput').click()">
+    <input type="file" id="bannerFileInput" accept="image/*" style="display: none;" onchange="handleBannerSelect(event)">
+    <p id="fileLabel" style="margin: 0; color: #cbd5e1; font-size: 13px;">Click to select an image (JPG, PNG, WebP)</p>
+    <span style="font-size: 11px; color: #64748b;">Recommended: 1920 × 1080</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+    <div id="uploadStatus" style="font-size: 12px; color: #94a3b8;"></div>
+    <button id="uploadBtn" class="cr-upload-btn" onclick="uploadBannerToDrive()" disabled>
+      Upload & Set Live
+    </button>
+  </div>
+</div>
+
+<style>
+  .cr-admin-panel {
+    background: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: sans-serif;
+  }
+  .cr-preview-box {
+    position: relative;
+    height: 140px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+    background-size: cover;
+    background-position: center;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop');
+    display: flex;
+    align-items: flex-end;
+  }
+  .cr-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
+  }
+  .cr-dropzone {
+    border: 2px dashed #334155;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    background: #090d16;
+  }
+  .cr-dropzone:hover { border-color: #64748b; }
+  .cr-upload-btn {
+    background: #d97706;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .cr-upload-btn:disabled {
+    background: #334155;
+    color: #64748b;
+    cursor: not-allowed;
+  }
+</style>
+
+<script>
+  // Replace with your Google Apps Script Web App Deployment URL
+  const APPS_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+  let bannerBase64 = null;
+  let bannerFileMeta = {};
+
+  function handleBannerSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    bannerFileMeta = { name: file.name, type: file.type };
+    document.getElementById("fileLabel").innerText = file.name;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      bannerBase64 = e.target.result;
+      // Update preview immediately
+      document.getElementById("adminPreviewBox").style.backgroundImage = `url('${bannerBase64}')`;
+      document.getElementById("uploadBtn").disabled = false;
+      document.getElementById("uploadStatus").innerText = "Ready to upload.";
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function uploadBannerToDrive() {
+    if (!bannerBase64) return;
+
+    const btn = document.getElementById("uploadBtn");
+    const status = document.getElementById("uploadStatus");
+
+    btn.disabled = true;
+    btn.innerText = "Uploading...";
+    status.style.color = "#94a3b8";
+    status.innerText = "Saving to Google Drive...";
+
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          fileData: bannerBase64,
+          fileName: bannerFileMeta.name,
+          mimeType: bannerFileMeta.type
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        status.style.color = "#34d399";
+        status.innerText = "✓ Banner is now live on the website!";
+        btn.innerText = "Uploaded";
+
+        // Update the active website banner on index.html live:
+        const hero = document.getElementById("crHeroCard");
+        if (hero) hero.style.backgroundImage = `url('${data.url}')`;
+      } else {
+        throw new Error(data.error || "Failed to upload.");
+      }
+    } catch (err) {
+      status.style.color = "#f87171";
+      status.innerText = "Upload failed: " + err.message;
+      btn.disabled = false;
+      btn.innerText = "Try Again";
+    }
+  }
+</script>
 
     <!-- MODAL: ADD / EDIT REALTOR LISTING (WITH DRIVE UPLOADER) -->
     <div id="add-listing-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
