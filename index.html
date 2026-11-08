@@ -59,6 +59,7 @@
             transition: background-image 0.5s ease-in-out;
         }
 
+        /* WATERMARK OVERLAY: 45% WIDTH */
         .watermark-container {
             position: absolute;
             bottom: 0.85rem;
@@ -75,6 +76,9 @@
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 2px 6px rgba(0,0,0,0.65));
+        }
+        .watermark-light-drop {
+            filter: drop-shadow(0 2px 6px rgba(255,255,255,0.85)) !important;
         }
     </style>
 </head>
@@ -147,7 +151,6 @@
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'COMMERCIAL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">COMMERCIAL</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'CONDOMINIUM'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">CONDOMINIUM</a>
                             <a href="#" onclick="showMainApp(); filterProperties('Rent', 'HOUSE AND LOTS'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-black hover:bg-brand-brown hover:text-white border-b border-neutral-200">HOUSE AND LOTS</a>
-                            <a href="#" onclick="showMainApp(); filterProperties('Sale & Rent', 'ALL'); return false;" class="block px-4 py-3 text-xs tracking-wider uppercase text-brand-brown hover:bg-brand-brown hover:text-white font-bold">FOR SALE & RENT (DUAL)</a>
                         </div>
                     </div>
 
@@ -322,7 +325,7 @@
         </div>
     </div>
 
-    <!-- LIGHTBOX PHOTO STUDIO -->
+    <!-- LIGHTBOX PHOTO STUDIO (OVERLAY WITH WATERMARK & THUMBNAILS) -->
     <div id="lightbox-studio-modal" class="fixed inset-0 bg-black/95 z-[9999] flex flex-col items-center justify-between p-4 hidden select-none">
         <div class="w-full max-w-6xl flex justify-between items-center text-white pb-3 border-b border-neutral-800 z-50">
             <div>
@@ -336,6 +339,7 @@
             <button type="button" onclick="navigateLightbox(-1)" class="absolute left-2 sm:left-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&lang;</button>
             <div class="relative max-h-[70vh] max-w-full flex items-center justify-center overflow-hidden border border-neutral-800 shadow-2xl bg-black">
                 <img id="lightbox-main-img" src="" class="max-h-[70vh] max-w-full object-contain">
+                <div id="lightbox-watermark" class="watermark-container"></div>
             </div>
             <button type="button" onclick="navigateLightbox(1)" class="absolute right-2 sm:right-4 z-50 bg-black/85 hover:bg-brand-brown text-white w-12 h-12 flex items-center justify-center text-xl border border-neutral-700 shadow-2xl transition-colors">&rang;</button>
         </div>
@@ -798,6 +802,93 @@
             return url;
         }
 
+        // =========================================================================
+        // WATERMARK ASSETS & ENGINE (FROM ORIGINAL CODE)
+        // =========================================================================
+        const WATERMARK_WHITE_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
+                <g fill="#FFFFFF">
+                    <path d="M 65 0 C 29.1 0 0 29.1 0 65 C 0 100.9 29.1 130 65 130 C 95.8 130 121.7 108.6 128.3 80 L 114.2 80 C 108 101.2 88.3 117 65 117 C 36.3 117 13 93.7 13 65 C 13 36.3 36.3 13 65 13 C 88.3 13 108 28.8 114.2 50 L 128.3 50 C 121.7 21.4 95.8 0 65 0 Z"/>
+                    <polygon points="45,80 95,35 75,55"/>
+                    <text x="160" y="93" font-family="'Montserrat', sans-serif" font-weight="700" font-size="82" letter-spacing="3" fill="#FFFFFF">COMPASS REALTY</text>
+                </g>
+            </svg>
+        `);
+
+        const WATERMARK_BLACK_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
+                <g fill="#000000">
+                    <path d="M 65 0 C 29.1 0 0 29.1 0 65 C 0 100.9 29.1 130 65 130 C 95.8 130 121.7 108.6 128.3 80 L 114.2 80 C 108 101.2 88.3 117 65 117 C 36.3 117 13 93.7 13 65 C 13 36.3 36.3 13 65 13 C 88.3 13 108 28.8 114.2 50 L 128.3 50 C 121.7 21.4 95.8 0 65 0 Z"/>
+                    <polygon points="45,80 95,35 75,55"/>
+                    <text x="160" y="93" font-family="'Montserrat', sans-serif" font-weight="700" font-size="82" letter-spacing="3" fill="#000000">COMPASS REALTY</text>
+                </g>
+            </svg>
+        `);
+
+        const imageLuminanceCache = {};
+
+        function detectImageCornerBrightness(imgElement, callback) {
+            const src = imgElement.src || imgElement.currentSrc;
+            if (imageLuminanceCache[src]) {
+                callback(imageLuminanceCache[src]);
+                return;
+            }
+
+            const offCanvas = document.createElement('canvas');
+            const ctx = offCanvas.getContext('2d');
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+
+            img.onload = function() {
+                try {
+                    offCanvas.width = 64;
+                    offCanvas.height = 64;
+                    ctx.drawImage(img, 0, 0, 64, 64);
+                    const sampleWidth = Math.floor(64 * 0.45);
+                    const sampleHeight = Math.floor(64 * 0.30);
+                    const sampleY = 64 - sampleHeight;
+                    const imgData = ctx.getImageData(0, sampleY, sampleWidth, sampleHeight);
+                    const data = imgData.data;
+
+                    let totalLuminance = 0;
+                    let count = 0;
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i+1];
+                        const b = data[i+2];
+                        const lum = (0.299 * r) + (0.587 * g) + (0.114 * b);
+                        totalLuminance += lum;
+                        count++;
+                    }
+
+                    const avgLuminance = totalLuminance / (count || 1);
+                    const isDark = avgLuminance < 135;
+                    const result = isDark ? 'dark' : 'light';
+                    imageLuminanceCache[src] = result;
+                    callback(result);
+                } catch (err) {
+                    callback('dark');
+                }
+            };
+
+            img.onerror = function() {
+                callback('dark');
+            };
+
+            img.src = src;
+        }
+
+        function applyWatermarkToContainer(containerId, imgElement) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            detectImageCornerBrightness(imgElement, function(brightness) {
+                const logoSrc = brightness === 'dark' ? WATERMARK_WHITE_SVG : WATERMARK_BLACK_SVG;
+                const shadowClass = brightness === 'light' ? 'watermark-light-drop' : '';
+                container.innerHTML = `<img src="${logoSrc}" class="${shadowClass}" alt="Compass Realty Watermark">`;
+            });
+        }
+
         // STRICT STATUS NORMALIZER
         function normalizeStatus(val) {
             if (!val) return "Sale";
@@ -1044,7 +1135,6 @@
                 showAdminDashboard();
                 showToast("Admin Desk Activated!", "info");
             }
-            // Lightbox shortcuts
             const lb = document.getElementById('lightbox-studio-modal');
             if (lb && !lb.classList.contains('hidden')) {
                 if (e.key === 'Escape') closeLightboxStudio();
@@ -1077,7 +1167,7 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD BUILDER
+        // PUBLIC CARD BUILDER (WITH WATERMARK & ACTIONS)
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
@@ -1124,11 +1214,15 @@
             }
 
             const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolvedImages = images.map(resolveDriveImageUrl);
+            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
+            const currentImgIndex = cardCarouselIndices[prop.id];
+            const watermarkId = `wm-card-${prop.id}`;
 
             card.innerHTML = `
                 <div>
                     <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
-                        <img src="${images[0]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)">
+                        <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
                         
                         <div class="absolute top-3 left-3 z-20">
                             <span class="${badgeBg} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
@@ -1136,10 +1230,13 @@
                             </span>
                         </div>
 
-                        ${images.length > 1 ? `
+                        ${resolvedImages.length > 1 ? `
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
                         ` : ''}
+
+                        <!-- WATERMARK CONTAINER -->
+                        <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
                     <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
@@ -1164,11 +1261,17 @@
                     <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
                         VIEW DETAILS & INQUIRE
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
+                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
                         <i class="fa-solid fa-expand"></i>
                     </button>
                 </div>
             `;
+
+            setTimeout(() => {
+                const imgEl = card.querySelector(`#img-card-${prop.id}`);
+                if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
+            }, 10);
+
             return card;
         }
 
@@ -1180,7 +1283,11 @@
             if (resolved.length <= 1) return;
 
             cardCarouselIndices[propId] = (cardCarouselIndices[propId] + dir + resolved.length) % resolved.length;
-            renderPropertyList();
+            const imgEl = document.getElementById(`img-card-${propId}`);
+            if (imgEl) {
+                imgEl.src = resolved[cardCarouselIndices[propId]];
+                applyWatermarkToContainer(`wm-card-${propId}`, imgEl);
+            }
         }
 
         // =========================================================================
@@ -1226,7 +1333,7 @@
         }
 
         // =========================================================================
-        // VIEW DETAILS & INQUIRY MODAL (WITH DIRECT LIGHTBOX INTEGRATION)
+        // VIEW DETAILS & INQUIRY MODAL (WITH WATERMARK & LIGHTBOX)
         // =========================================================================
         function openPropertyModal(id) {
             const prop = properties.find(p => String(p.id) === String(id));
@@ -1246,7 +1353,7 @@
             container.innerHTML = `
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-4">
-                        <!-- MAIN MODAL PHOTO WITH DIRECT LIGHTBOX TRIGGER -->
+                        <!-- MAIN MODAL PHOTO WITH DIRECT LIGHTBOX TRIGGER & WATERMARK -->
                         <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
                             <img id="img-modal-prop" src="${propImages[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" title="Click to view full screen Photo Studio">
                             
@@ -1262,9 +1369,11 @@
                             <button type="button" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(propImages).replace(/"/g, '&quot;')}, activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/85 hover:bg-brand-brown text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow transition-colors">
                                 <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
                             </button>
+
+                            <div id="wm-modal-prop" class="watermark-container"></div>
                         </div>
 
-                        <!-- THUMBNAILS STRIP IN MODAL (CLICK TO PREVIEW OR OPEN LIGHTBOX) -->
+                        <!-- THUMBNAILS STRIP IN MODAL -->
                         ${propImages.length > 1 ? `
                             <div class="flex gap-2 overflow-x-auto py-1">
                                 ${propImages.map((img, idx) => `
@@ -1309,6 +1418,11 @@
                 </div>
             `;
             document.getElementById('property-modal').classList.remove('hidden');
+
+            setTimeout(() => {
+                const modalImg = document.getElementById('img-modal-prop');
+                if (modalImg) applyWatermarkToContainer('wm-modal-prop', modalImg);
+            }, 15);
         }
         function closePropertyModal() { document.getElementById('property-modal').classList.add('hidden'); }
 
@@ -1321,7 +1435,10 @@
             activeModalCarouselIndex = (activeModalCarouselIndex + dir + images.length) % images.length;
             const imgEl = document.getElementById('img-modal-prop');
             const indEl = document.getElementById('ind-modal-prop');
-            if (imgEl) imgEl.src = images[activeModalCarouselIndex];
+            if (imgEl) {
+                imgEl.src = images[activeModalCarouselIndex];
+                applyWatermarkToContainer('wm-modal-prop', imgEl);
+            }
             if (indEl) indEl.textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${images.length}`;
 
             const thumbs = document.querySelectorAll('.modal-thumb-btn');
@@ -1345,7 +1462,10 @@
             activeModalCarouselIndex = idx;
             const imgEl = document.getElementById('img-modal-prop');
             const indEl = document.getElementById('ind-modal-prop');
-            if (imgEl) imgEl.src = images[idx];
+            if (imgEl) {
+                imgEl.src = images[idx];
+                applyWatermarkToContainer('wm-modal-prop', imgEl);
+            }
             if (indEl) indEl.textContent = `IMAGE ${idx + 1} OF ${images.length}`;
 
             const thumbs = document.querySelectorAll('.modal-thumb-btn');
@@ -1956,7 +2076,9 @@
             setTimeout(() => toast.remove(), 3500);
         }
 
-        // LIGHTBOX ENGINE (Works universally across both cards and listing modal)
+        // =========================================================================
+        // LIGHTBOX ENGINE (WITH WATERMARK & NAVIGATION)
+        // =========================================================================
         let lbImgs = [];
         let lbIdx = 0;
         function openLightboxStudio(title, images, startIdx = 0) {
@@ -1970,24 +2092,31 @@
             `).join('');
             document.getElementById('lightbox-studio-modal').classList.remove('hidden');
         }
+
         function updateLb() {
             if (!lbImgs[lbIdx]) return;
-            document.getElementById('lightbox-main-img').src = lbImgs[lbIdx];
+            const mainImg = document.getElementById('lightbox-main-img');
+            mainImg.src = lbImgs[lbIdx];
             document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+            applyWatermarkToContainer('lightbox-watermark', mainImg);
+
             const thumbs = document.getElementById('lightbox-thumbnails').children;
             for (let i = 0; i < thumbs.length; i++) {
                 thumbs[i].className = i === lbIdx ? 'h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105' : 'h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 cursor-pointer';
             }
         }
+
         function navigateLightbox(dir) {
             if (lbImgs.length <= 1) return;
             lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
             updateLb();
         }
+
         function setLb(idx) {
             lbIdx = idx;
             updateLb();
         }
+
         function closeLightboxStudio() {
             document.getElementById('lightbox-studio-modal').classList.add('hidden');
         }
@@ -2002,8 +2131,9 @@
             document.getElementById('dev-projects-count').textContent = `${developerProjects.length} PROJECTS`;
             grid.innerHTML = developerProjects.map(p => `
                 <div class="bg-white border-2 border-black p-6 space-y-4">
-                    <div class="h-56 bg-neutral-900 overflow-hidden">
-                        <img src="${p.image}" class="w-full h-full object-cover">
+                    <div class="relative h-56 bg-neutral-900 overflow-hidden">
+                        <img id="img-proj-${p.id}" src="${p.image}" class="w-full h-full object-cover">
+                        <div id="wm-proj-${p.id}" class="watermark-container"></div>
                     </div>
                     <div>
                         <span class="text-[10px] text-brand-brown uppercase font-bold">${p.developer}</span>
@@ -2015,8 +2145,14 @@
                     </div>
                 </div>
             `).join('');
+
+            developerProjects.forEach(p => {
+                setTimeout(() => {
+                    const imgEl = document.getElementById(`img-proj-${p.id}`);
+                    if (imgEl) applyWatermarkToContainer(`wm-proj-${p.id}`, imgEl);
+                }, 10);
+            });
         }
     </script>
 </body>
 </html>
-
