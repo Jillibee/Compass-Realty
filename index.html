@@ -245,6 +245,170 @@
             </div>
         </div>
 
+        <!-- HERO BANNER SECTION (Place between Search Bar and Listings Grid) -->
+<section class="cr-hero-wrapper">
+  <div class="cr-hero-banner">
+    <!-- Dark Gradient Overlay -->
+    <div class="cr-hero-overlay"></div>
+
+    <!-- Content -->
+    <div class="cr-hero-content">
+      <span class="cr-hero-badge">
+        <span class="cr-badge-dot"></span> COMPASS REALTY EXCLUSIVE
+      </span>
+      
+      <h1 class="cr-hero-title">
+        Elevated Urban Living <br />
+        <span class="cr-accent-text">At Its Finest</span>
+      </h1>
+
+      <p class="cr-hero-subtitle">
+        Explore handpicked luxury residences in BGC & Makati, private estates in Ayala Alabang, and prime commercial properties across Metro Manila.
+      </p>
+
+      <div class="cr-hero-meta">
+        <div class="cr-meta-item">
+          <strong>BGC • Makati • Alabang</strong>
+          <span>Prime Metro Locations</span>
+        </div>
+        <div class="cr-divider"></div>
+        <div class="cr-meta-item">
+          <strong>100% Verified</strong>
+          <span>Clean Titles & Portfolios</span>
+        </div>
+        <div class="cr-divider"></div>
+        <div class="cr-meta-item">
+          <strong>PRC Lic. #4740</strong>
+          <span>Licensed Advisory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cr-hero-wrapper {
+    max-width: 1280px;
+    margin: 28px auto;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .cr-hero-banner {
+    position: relative;
+    min-height: 380px;
+    border-radius: 18px;
+    overflow: hidden;
+    background-color: #0b1120;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .cr-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #090d16 0%, rgba(9, 13, 22, 0.75) 50%, rgba(9, 13, 22, 0.2) 100%),
+                linear-gradient(to right, rgba(9, 13, 22, 0.9) 0%, rgba(9, 13, 22, 0.4) 60%, transparent 100%);
+  }
+
+  .cr-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 36px 40px;
+    max-width: 680px;
+    color: #ffffff;
+  }
+
+  .cr-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+    margin-bottom: 14px;
+  }
+
+  .cr-badge-dot {
+    width: 7px;
+    height: 7px;
+    background: #10b981;
+    border-radius: 50%;
+  }
+
+  .cr-hero-title {
+    font-size: 38px;
+    line-height: 1.15;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .cr-accent-text {
+    background: linear-gradient(90deg, #fde68a, #d97706);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .cr-hero-subtitle {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin: 0 0 24px 0;
+  }
+
+  .cr-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .cr-meta-item strong {
+    display: block;
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  .cr-meta-item span {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .cr-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 640px) {
+    .cr-hero-content {
+      padding: 24px 20px;
+    }
+    .cr-hero-title {
+      font-size: 26px;
+    }
+    .cr-divider {
+      display: none;
+    }
+  }
+</style>
+
         <!-- MAIN BROKERAGE CATALOG -->
         <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-black mb-8 gap-4">
