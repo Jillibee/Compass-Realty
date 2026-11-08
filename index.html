@@ -18,7 +18,7 @@
     <meta name="author" content="Compass Realty Exclusive">
     <link rel="canonical" href="https://www.compassprimerealty.com/">
 
-    <!-- Geo-Targeting: Philippines & Metro Manila Luxury Hubs -->
+    <!-- Geo-Targeting -->
     <meta name="geo.region" content="PH-00">
     <meta name="geo.placename" content="Bonifacio Global City, Makati, Muntinlupa, Taguig, Metro Manila">
     <meta name="geo.position" content="14.5547;121.0244">
@@ -41,7 +41,7 @@
     <meta name="twitter:description" content="Curated prime residences and high-yield real estate investments across Metro Manila and top Philippine leisure destinations.">
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop">
 
-    <!-- JSON-LD Structured Data: Google Knowledge Graph & SERP SearchBox -->
+    <!-- JSON-LD Structured Data: Enables Google SERP Sitelinks Searchbox -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -337,7 +337,7 @@
                         </div>
                     </div>
 
-                    <!-- FOR RENT DROPDOWN -->
+                    <!-- FOR LEASE DROPDOWN -->
                     <div class="relative dropdown-container py-6">
                         <button class="nav-link px-3 py-2 text-xs uppercase tracking-widest text-black hover:text-brand-brown flex items-center gap-1">
                             FOR LEASE <i class="fa-solid fa-chevron-down text-[9px] opacity-70"></i>
@@ -519,7 +519,7 @@
         </main>
     </div>
 
-    <!-- SEPARATE GROUP: DEVELOPERS PORTAL & TOWNSHIPS -->
+    <!-- SEPARATE GROUP: DEVELOPERS PORTAL & TOWNSHIPS (SHANG & ARTHALAND) -->
     <div id="developer-portal-view" class="hidden min-h-screen">
         <div id="dev-portal-banner" class="bg-black text-white py-16 lg:py-24 px-4 sm:px-8 border-b-4 border-brand-brown relative bg-cover bg-center transition-all duration-700" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=80');">
             <div class="max-w-7xl mx-auto space-y-8">
@@ -664,37 +664,37 @@
             <!-- METRIC CARDS -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white p-5 border border-neutral-300">
-                    <div class="text-[10px] uppercase font-bold text-neutral-500">LISTINGS</div>
+                    <div class="text-[10px] uppercase font-bold text-neutral-500">LISTINGS </div>
                     <div class="text-2xl font-bold mt-1" id="admin-stat-listings">0</div>
                 </div>
                 <div class="bg-white p-5 border border-neutral-300">
-                    <div class="text-[10px] uppercase font-bold text-neutral-500">DEV UNITS</div>
+                    <div class="text-[10px] uppercase font-bold text-neutral-500">DEV UNITS </div>
                     <div class="text-2xl font-bold text-brand-brown mt-1" id="admin-stat-devunits">0</div>
                 </div>
                 <div class="bg-white p-5 border border-neutral-300">
-                    <div class="text-[10px] uppercase font-bold text-neutral-500">INQUIRIES</div>
+                    <div class="text-[10px] uppercase font-bold text-neutral-500">INQUIRIES </div>
                     <div class="text-2xl font-bold text-blue-900 mt-1" id="admin-stat-inquiries">0</div>
                 </div>
                 <div class="bg-white p-5 border border-neutral-300">
-                    <div class="text-[10px] uppercase font-bold text-neutral-500">ENLISTMENTS</div>
+                    <div class="text-[10px] uppercase font-bold text-neutral-500">ENLISTMENTS </div>
                     <div class="text-2xl font-bold text-purple-900 mt-1" id="admin-stat-enlistments">0</div>
                 </div>
             </div>
 
             <!-- SUBTAB BUTTONS -->
             <div class="flex border-b border-black bg-white text-xs uppercase font-bold overflow-x-auto">
-                <button onclick="switchAdminTab('listings')" id="tab-btn-listings" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">1. SECONDARY LISTINGSbutton>
-                <button onclick="switchAdminTab('devunits')" id="tab-btn-devunits" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">2. DEVELOPER UNITS</button>
-                <button onclick="switchAdminTab('inquiries')" id="tab-btn-inquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">3. INQUIRIES & APPOINTMENTS</button>
-                <button onclick="switchAdminTab('enlistments')" id="tab-btn-enlistments" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">4. PROPERTY ENLISTMENTS</button>
+                <button onclick="switchAdminTab('listings')" id="tab-btn-listings" class="p-4 border-b-2 border-brand-brown text-black whitespace-nowrap">1. SECONDARY LISTINGS </button>
+                <button onclick="switchAdminTab('devunits')" id="tab-btn-devunits" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">2. DEVELOPER UNITS </button>
+                <button onclick="switchAdminTab('inquiries')" id="tab-btn-inquiries" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">3. INQUIRIES & APPOINTMENTS </button>
+                <button onclick="switchAdminTab('enlistments')" id="tab-btn-enlistments" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">4. PROPERTY ENLISTMENTS </button>
                 <button onclick="switchAdminTab('herobanner')" id="tab-btn-herobanner" class="p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap">5. HERO BANNER DRIVE ASSET</button>
             </div>
 
-            <!-- SUBTAB 1: LISTINGS (SHEET 1) -->
+            <!-- SUBTAB 1: LISTINGS  -->
             <div id="admin-panel-listings" class="bg-white border border-neutral-300 p-6 space-y-4">
                 <div class="flex justify-between items-center pb-3 border-b">
                     <div>
-                        <h3 class="text-base font-bold uppercase">REALTOR SECONDARY LISTINGS)</h3>
+                        <h3 class="text-base font-bold uppercase">REALTOR SECONDARY LISTINGS </h3>
                         <p class="text-xs text-neutral-500">Edits overwrite matching rows cleanly in Google Sheet 1.</p>
                     </div>
                     <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 uppercase font-semibold">
@@ -720,11 +720,11 @@
                 </div>
             </div>
 
-            <!-- SUBTAB 2: DEVELOPER UNITS (SHEET 5) -->
+            <!-- SUBTAB 2: DEVELOPER UNITS  -->
             <div id="admin-panel-devunits" class="hidden bg-white border border-neutral-300 p-6 space-y-4">
                 <div class="flex justify-between items-center pb-3 border-b">
                     <div>
-                        <h3 class="text-base font-bold uppercase">DEVELOPER UNITS INVENTORY</h3>
+                        <h3 class="text-base font-bold uppercase">DEVELOPER UNITS INVENTORY </h3>
                         <p class="text-xs text-neutral-500">Image uploads create a subfolder in Google Drive (<code>10jvOCl_FtQkWh_FNjdbijrWySKIOO5MJ</code>) named by Project & Unit Type.</p>
                     </div>
                     <button onclick="openAddDevUnitModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 uppercase font-semibold">
@@ -749,11 +749,11 @@
                 </div>
             </div>
 
-            <!-- SUBTAB 3: INQUIRIES & APPOINTMENTS (SHEET 2) -->
+            <!-- SUBTAB 3: INQUIRIES & APPOINTMENTS  -->
             <div id="admin-panel-inquiries" class="hidden bg-white border border-neutral-300 p-6 space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b gap-3">
                     <div>
-                        <h3 class="text-base font-bold uppercase">INQUIRIES & VIEWING APPOINTMENTS</h3>
+                        <h3 class="text-base font-bold uppercase">INQUIRIES & VIEWING APPOINTMENTS </h3>
                         <p class="text-xs text-neutral-500">Real-time log of client viewing schedules and property inquiries.</p>
                     </div>
                     <div class="flex items-center gap-2">
@@ -782,10 +782,10 @@
                 </div>
             </div>
 
-            <!-- SUBTAB 4: PROPERTY ENLISTMENTS (SHEET 4) -->
+            <!-- SUBTAB 4: PROPERTY ENLISTMENTS  -->
             <div id="admin-panel-enlistments" class="hidden bg-white border border-neutral-300 p-6 space-y-4">
                 <div class="pb-3 border-b">
-                    <h3 class="text-base font-bold uppercase">OWNER PROPERTY ENLISTMENTS</h3>
+                    <h3 class="text-base font-bold uppercase">OWNER PROPERTY ENLISTMENTS </h3>
                     <p class="text-xs text-neutral-500">Submissions from owners enlisting their secondary properties.</p>
                 </div>
                 <div class="overflow-x-auto">
@@ -948,7 +948,7 @@
     <div id="add-devunit-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
             <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
-            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD DEVELOPER UNIT</h3>
+            <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD DEVELOPER UNIT </h3>
             <p class="text-xs text-neutral-500 mb-4">Photos upload into Google Drive (<code>10jvOCl_FtQkWh_FNjdbijrWySKIOO5MJ</code>) inside a folder named <strong>[Project] - [Unit Type]</strong>.</p>
             
             <form onsubmit="handleSaveDevUnitSubmit(event)" class="space-y-4">
@@ -1154,7 +1154,6 @@
             return "Sale";
         }
 
-        // STRING NORMALIZER FOR EXACT COMPARISON
         function normalizeText(val) {
             if (!val) return "";
             return String(val)
@@ -1165,7 +1164,9 @@
                 .trim();
         }
 
-        // UNIVERSAL DATA SANITIZER (WITH IMAGE 001 REVERSAL & TITLE CLEANING)
+        // =========================================================================
+        // UNIVERSAL DATA SANITIZER (IMAGE 001 COVER GUARANTEE)
+        // =========================================================================
         function sanitizeListingRecord(item) {
             let title = String(item.title || "").trim();
             let desc = String(item.description || "").trim();
@@ -1175,7 +1176,7 @@
             let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
             let rawImg = item.image || item.images || "";
 
-            // 1. Clean duplicated ID from title (e.g., "1023 A. Maceda St." -> "A. Maceda St.")
+            // 1. Clean duplicated listing ID prefix from title
             if (item.id) {
                 title = title.replace(new RegExp(`^${item.id}[\\s\\-_]+`, 'i'), '');
             }
@@ -1229,14 +1230,18 @@
                 cleanStatus = "Sale";
             }
 
-            // 4. IMAGE 001 CORRECTION: Reverse comma-separated lists from Google Drive sync so 001 is first
+            // 4. IMAGE 001 REVERSAL LOGIC
+            // Google Drive folder sync lists files in reverse order: [003, 002, 001]
+            // We flip the list so Image 001 is guaranteed at index [0] (cover position)
             let imgList = [];
             if (Array.isArray(rawImg)) {
-                imgList = rawImg;
+                imgList = [...rawImg];
+                if (!item._imagesOrdered && imgList.length > 1) {
+                    imgList.reverse();
+                }
             } else if (typeof rawImg === 'string' && rawImg.trim()) {
                 const parsed = rawImg.split(',').map(s => s.trim()).filter(Boolean);
-                // When multiple images are saved in Drive, the natural order puts 001 at the end; reverse so 001 is first
-                imgList = (parsed.length > 1) ? parsed.reverse() : parsed;
+                imgList = (parsed.length > 1 && !item._imagesOrdered) ? parsed.reverse() : parsed;
             }
             if (imgList.length === 0) imgList = ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
 
@@ -1257,11 +1262,12 @@
                 description: desc,
                 isDeal: String(item.isdeal || item.isDeal).toUpperCase() === 'TRUE',
                 isFeatured: String(item.isfeatured || item.isFeatured).toUpperCase() === 'TRUE',
-                _locallyEdited: Boolean(item._locallyEdited)
+                _locallyEdited: Boolean(item._locallyEdited),
+                _imagesOrdered: true
             };
         }
 
-        // PERMANENT BASELINE PORTFOLIO
+        // PERMANENT BASELINE PORTFOLIO (WITH IMAGE 001 GUARANTEED FIRST)
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
@@ -1282,6 +1288,7 @@
                     "https://drive.google.com/thumbnail?id=1Kj3NTqU94MFEOCYYLXTreLV6U0TMxjgZ&sz=w1600",
                     "https://drive.google.com/thumbnail?id=1sQk6aymdhSuEf_4x2VBZPVcUnMIwgF4w&sz=w1600"
                 ],
+                _imagesOrdered: true,
                 description: "Elevated urban living at its finest. High zone corner unit with hotel-inspired amenities."
             },
             {
@@ -1302,6 +1309,7 @@
                 images: [
                     "https://drive.google.com/thumbnail?id=1by-VDTQz9--xXRotLMh68JPUBsERASrw&sz=w1600"
                 ],
+                _imagesOrdered: true,
                 description: "SOLD PROPERTY. Timeless prestige, privacy, and exceptional community in Ayala Alabang Village."
             },
             {
@@ -1320,9 +1328,10 @@
                 developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://drive.google.com/thumbnail?id=1qUk4ESSNQZzxR9mMHxxLq6aQq9CJbgka&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=14PTWtam0G8WEBqtCxcV5WRFlp-KVX0o6&sz=w1600",
                     "https://drive.google.com/thumbnail?id=1eFbAuPbcMWS4e3PqS3jKXccWMlSghq7v&sz=w1600"
                 ],
+                _imagesOrdered: true,
                 description: "FOR SALE & FOR LEASE. Live in the heart of Rockwell with direct mall access, high zone floor, and signature skyline views."
             },
             {
@@ -1343,6 +1352,7 @@
                 images: [
                     "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
                 ],
+                _imagesOrdered: true,
                 description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts."
             },
             {
@@ -1363,6 +1373,7 @@
                 images: [
                     "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
                 ],
+                _imagesOrdered: true,
                 description: "📍 Orchard Residential Estates, Dasmariñas Cavite\nWake up to serene mornings and panoramic championship golf course views."
             },
             {
@@ -1383,13 +1394,15 @@
                 images: [
                     "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
                 ],
+                _imagesOrdered: true,
                 description: "📍 Prime Land in Alaminos, Laguna\nExpansive 10-hectare prime property ideal for mixed-use residential development, solar farm adjacent, or institutional land banking."
             }
         ];
 
+        // Cache Buster (_v6) prevents old un-reversed order from showing
         let cached = null;
         try {
-            cached = JSON.parse(localStorage.getItem('cpr_cached_listings'));
+            cached = JSON.parse(localStorage.getItem('cpr_cached_listings_v6'));
         } catch(e) {}
         let properties = (cached && Array.isArray(cached) && cached.length > 0) ? cached : DEFAULT_PROPERTIES;
 
@@ -1398,7 +1411,7 @@
         let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
         let favorites = JSON.parse(localStorage.getItem('cpr_favorites')) || [];
 
-        // DEVELOPER TOWNSHIPS INVENTORY (SHANG & ARTHALAND)
+        // DEVELOPER TOWNSHIPS (SHANG PROPERTIES & ARTHALAND)
         let developerProjects = JSON.parse(localStorage.getItem('cpr_dev_projects_v4')) || [
             {
                 id: 'DEV-101',
@@ -1432,6 +1445,72 @@
                 image: 'https://arthaland.imgix.net/assets/site/DJI_0743.JPG?w=1600',
                 description: 'The largest multi-certified green office building in the Philippines.',
                 units: []
+            },
+            {
+                id: 'DEV-104',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Liv Katipunan',
+                township: 'Katipunan Ave., Quezon City',
+                turnover: 'Pre-selling',
+                image: 'https://arthaland.imgix.net/assets/site/Project-Teal-Hero-Desktop.png?w=1600',
+                description: 'Biophilic sustainable residences with direct Ateneo bridgeway access.',
+                units: []
+            },
+            {
+                id: 'DEV-105',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Lucima Cebu',
+                township: 'Cebu Business Park, Cebu City',
+                turnover: 'Pre-selling / Ready',
+                image: 'https://arthaland.imgix.net/assets/site/Lucima-Identity-Core-Vertical-lowres.png?w=1600',
+                description: 'Signature luxury green high-rise in Cebu Business Park developed with Haru Real Estate.',
+                units: []
+            },
+            {
+                id: 'DEV-106',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Savya Financial Center',
+                township: 'ARCA South, Taguig City',
+                turnover: 'Ready for Occupancy',
+                image: 'https://mediaassets.cbre.com/-/media/project/cbre/dotcom/asiapacific/philippines-emerald/properties/savya-financial-center/photos/savya-hero-banner-photo-20240522.jpg',
+                description: 'Grade-A green corporate twin towers developed with Mitsubishi Estate.',
+                units: []
+            },
+            {
+                id: 'DEV-107',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Sevina Park Villas',
+                township: 'Sevina Park, Biñan, Laguna',
+                turnover: 'Handover / Limited Inventory',
+                image: 'https://arthaland.imgix.net/assets/site/SEVINA-PARK-VILLAS-2BR138_Living-Area.jpg?w=1600',
+                description: 'LEED ND Platinum master-planned villas designed by Leandro V. Locsin Partners.',
+                units: []
+            },
+            {
+                id: 'DEV-108',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Sondris Makati',
+                township: 'Arnaiz Ave., Legazpi Village, Makati',
+                turnover: 'Pre-selling (2030)',
+                image: 'https://sondris.arthaland.com/wp-content/uploads/2026/10/DINING-scaled.webp',
+                description: '37-storey luxury tower developed in partnership with Mitsui Fudosan (Asia) and designed by AEDAS.',
+                units: []
+            },
+            {
+                id: 'DEV-109',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Una Apartments',
+                township: 'Sevina Park, Biñan, Laguna',
+                turnover: 'Pre-selling / Under Construction',
+                image: 'https://arthaland.imgix.net/assets/site/Una_Hero-Shot_Golden-Hour.jpg?w=1600',
+                description: 'Wellness-focused eco-condos beside DLSU Laguna with BALAI BERDE financing eligibility.',
+                units: []
             }
         ];
         let adminInquiries = [];
@@ -1441,7 +1520,7 @@
             const savedBanner = localStorage.getItem('cpr_custom_hero_banner');
             if (savedBanner) updateHeroBannerStyle(savedBanner);
 
-            // Read URL query parameter for search if arriving via Google SERP
+            // Read URL query parameter for search if arriving via Google SERP searchbox
             const urlParams = new URLSearchParams(window.location.search);
             const kwParam = urlParams.get('keyword');
             if (kwParam) {
@@ -1456,7 +1535,6 @@
             checkDirectURLRouting();
         });
 
-        // Instant Hash & Keyboard Shortcut Listeners for Admin Access
         window.addEventListener('hashchange', checkDirectURLRouting);
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
@@ -1495,7 +1573,7 @@
         }
 
         // =========================================================================
-        // PUBLIC CARD BUILDER (CORRECTED BADGES & IMAGE 001 RESOLUTION)
+        // PUBLIC CARD BUILDER (IMAGE 001 AS PRIMARY COVER PHOTO)
         // =========================================================================
         function createPropertyCard(prop) {
             const card = document.createElement('div');
@@ -1511,8 +1589,7 @@
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
 
-            // Status Badge Formatting
-            let badgeBg = "bg-black";
+            let badgeBg = "bg-black text-white";
             let badgeText = "FOR SALE";
 
             if (isSold) {
@@ -1546,6 +1623,7 @@
                 spec3Label = "GARAGE";
             }
 
+            // Image list is guaranteed to start with 001
             const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
             const resolvedImages = images.map(resolveDriveImageUrl);
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
@@ -1558,7 +1636,7 @@
                         <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
                         
                         <div class="absolute top-3 left-3 z-20">
-                            <span class="${badgeBg} text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                            <span class="${badgeBg} px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
                                 ${badgeText}
                             </span>
                         </div>
@@ -1568,7 +1646,6 @@
                             <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
                         ` : ''}
 
-                        <!-- WATERMARK CONTAINER -->
                         <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
@@ -1647,23 +1724,18 @@
             grid.innerHTML = '';
 
             let filtered = properties.filter(item => {
-                // 1. Status Filter
                 if (!isStatusMatch(item.status, currentFilters.status)) return false;
 
-                // 2. Category Filter (Normalized: HOUSE AND LOTS == House & Lots)
                 if (currentFilters.category !== 'ALL') {
                     if (normalizeText(item.category) !== normalizeText(currentFilters.category)) return false;
                 }
 
-                // 3. Flags
                 if (currentFilters.onlyDeals && !item.isDeal) return false;
                 if (currentFilters.onlyFeatured && !item.isFeatured) return false;
                 if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
 
-                // 4. Max Price Filter
                 if (currentFilters.maxPrice !== 'ALL' && Number(item.price) > parseInt(currentFilters.maxPrice)) return false;
 
-                // 5. Keyword Text Match
                 if (currentFilters.keyword.trim()) {
                     const kw = normalizeText(currentFilters.keyword);
                     const matchTitle = normalizeText(item.title).includes(kw);
@@ -1745,7 +1817,7 @@
 
                         <form onsubmit="handleInquirySubmit(event, '${escapeQuotes(prop.title)}')" class="space-y-3">
                             <label class="block text-xs font-bold uppercase">
-                                ${isSold ? 'INQUIRE SIMILAR ACTIVE PROPERTIES' : 'TRANSMIT INQUIRY / SCHEDULE'}
+                                ${isSold ? 'INQUIRE SIMILAR ACTIVE PROPERTIES' : 'TRANSMIT INQUIRY / SCHEDULE '}
                             </label>
                             
                             <div>
@@ -1763,7 +1835,7 @@
                             <textarea id="client-notes" rows="2" placeholder="Specific viewing requests or questions..." class="w-full bg-white border p-2 text-xs"></textarea>
 
                             <button type="submit" id="client-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-bold tracking-widest transition-colors">
-                                INQUIRE NOW
+                                TRANSMIT TO SHEET 2
                             </button>
                         </form>
                     </div>
@@ -2074,7 +2146,7 @@
         }
 
         // =========================================================================
-        // REALTOR LISTING EDIT / ADD / DELETE
+        // REALTOR LISTING EDIT / ADD / DELETE (SORTS 001 NUMERICALLY BEFORE UPLOAD)
         // =========================================================================
         function editListing(id) {
             const prop = properties.find(p => String(p.id) === String(id));
@@ -2123,8 +2195,13 @@
             const fileInput = document.getElementById('crud-local-files');
             let localFilesData = [];
             if (fileInput.files && fileInput.files.length > 0) {
-                for (let i = 0; i < fileInput.files.length; i++) {
-                    const f = fileInput.files[i];
+                // Natural numeric sorting ensures 001.jpg is always uploaded first
+                const sortedFiles = Array.from(fileInput.files).sort((a, b) =>
+                    a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+                );
+
+                for (let i = 0; i < sortedFiles.length; i++) {
+                    const f = sortedFiles[i];
                     const b64 = await new Promise((res, rej) => {
                         const r = new FileReader();
                         r.onload = () => res(r.result.split(',')[1]);
@@ -2157,7 +2234,8 @@
                 isFeatured: document.getElementById('crud-isfeatured').checked,
                 images: imagesArr,
                 localImages: localFilesData,
-                _locallyEdited: true
+                _locallyEdited: true,
+                _imagesOrdered: true
             };
 
             const sanitized = sanitizeListingRecord(payload);
@@ -2169,7 +2247,7 @@
             } else {
                 properties.unshift(sanitized);
             }
-            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            localStorage.setItem('cpr_cached_listings_v6', JSON.stringify(properties));
             renderPropertyList();
             renderAdminDashboard();
 
@@ -2191,7 +2269,7 @@
             const prop = properties.find(p => String(p.id) === String(id));
             if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Sheet 1.`)) return;
             properties = properties.filter(p => String(p.id) !== String(id));
-            localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+            localStorage.setItem('cpr_cached_listings_v6', JSON.stringify(properties));
             renderPropertyList();
             renderAdminDashboard();
 
@@ -2229,8 +2307,11 @@
             const fileInput = document.getElementById('unit-local-files');
             let localFiles = [];
             if (fileInput.files && fileInput.files.length > 0) {
-                for (let i = 0; i < fileInput.files.length; i++) {
-                    const f = fileInput.files[i];
+                const sorted = Array.from(fileInput.files).sort((a,b) =>
+                    a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+                );
+                for (let i = 0; i < sorted.length; i++) {
+                    const f = sorted[i];
                     const b64 = await new Promise((res, rej) => {
                         const r = new FileReader();
                         r.onload = () => res(r.result.split(',')[1]);
@@ -2348,7 +2429,7 @@
                         }
                         return sanitized;
                     });
-                    localStorage.setItem('cpr_cached_listings', JSON.stringify(properties));
+                    localStorage.setItem('cpr_cached_listings_v6', JSON.stringify(properties));
                     renderPropertyList();
                 }
 
@@ -2401,7 +2482,6 @@
         function setFilterCategory(cat) {
             currentFilters.category = cat;
             
-            // Sync with search filter dropdown
             const catSelect = document.getElementById('filter-category');
             if (catSelect) catSelect.value = cat;
 
@@ -2413,7 +2493,6 @@
             currentFilters.status = status;
             currentFilters.category = cat;
 
-            // Sync with search filter dropdowns
             const statusSelect = document.getElementById('filter-status');
             const catSelect = document.getElementById('filter-category');
             if (statusSelect) statusSelect.value = status;
