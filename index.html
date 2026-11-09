@@ -1221,6 +1221,19 @@
                 area = beds + " sqm";
                 beds = 0;
             }
+}           
+            let cleanPrice = 0;
+let cleanRentPrice = 0;
+
+const rawPriceStr = String(item.price || item.Price || "").trim();
+
+if (rawPriceStr.includes('/')) {
+    const parts = rawPriceStr.split('/');
+    cleanPrice = Number(parts[0].replace(/[^0-9]/g, '')) || 0;
+    cleanRentPrice = Number(parts[1].replace(/[^0-9]/g, '')) || 0;
+} else {
+    cleanPrice = Number(rawPriceStr.replace(/[^0-9]/g, '')) || 0;
+}
 
             let cleanPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
             let cleanStatus = normalizeStatus(item.status);
