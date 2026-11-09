@@ -1251,6 +1251,7 @@
                 category: cat,
                 location: loc || "Metro Manila",
                 price: cleanPrice,
+                rentPrice: cleanRentPrice,
                 status: cleanStatus,
                 area: area || "N/A",
                 beds: beds,
@@ -1265,6 +1266,17 @@
                 _locallyEdited: Boolean(item._locallyEdited),
                 _imagesOrdered: true
             };
+
+            // Find or parse rental price if status is 'Sale & Rent'
+let cleanRentPrice = Number(String(item.rentPrice || item.rent_price || "0").replace(/[^0-9]/g, '')) || 0;
+
+// Auto-detect rental price in description if not explicitly provided (e.g., "120,000/mo" or "Lease: 120k")
+if (!cleanRentPrice && desc) {
+    const rentMatch = desc.match(/(?:rent|lease|monthly)[\s:]*(?:php|₱)?\s*([\d,]+)(?:\s*\/\s*mo|\b)/i);
+    if (rentMatch && rentMatch[1]) {
+        cleanRentPrice = Number(rentMatch[1].replace(/,/g, '')) || 0;
+    }
+}
         }
 
         // PERMANENT BASELINE PORTFOLIO (WITH IMAGE 001 GUARANTEED FIRST)
@@ -1572,121 +1584,195 @@
             if (previewEl) previewEl.style.backgroundImage = `url('${resolved}')`;
         }
 
+        // Global tracker for currently viewed mode on dual listings ('sale' or 'rent')
+const activeDualMode = {};
+
+function formatMoney(amount, isRent = false) {
+    if (!amount || Number(amount) <= 0) return "PRICE UPON INQUIRY";
+    const formatted = new Intl.NumberFormat('en-PH', { 
+        style: 'currency', 
+        currency: 'PHP', 
+        maximumFractionDigits: 0 
+    }).format(amount);
+    return isRent ? `${formatted} / mo` : formatted;
+}
+
+function switchListingDualPrice(event, propId, mode) {
+    event.stopPropagation(); // Prevents clicking through to modal
+    activeDualMode[propId] = mode;
+    
+    const prop = properties.find(p => String(p.id) === String(propId));
+    if (!prop) return;
+
+    // Update Price Text
+    const priceEl = document.getElementById(`price-display-${propId}`);
+    if (priceEl) {
+        if (mode === 'rent') {
+            priceEl.innerHTML = `<span class="text-xs font-normal text-neutral-500 block uppercase tracking-wider">MONTHLY LEASE</span> ${formatMoney(prop.rentPrice, true)}`;
+        } else {
+            priceEl.innerHTML = `<span class="text-xs font-normal text-neutral-500 block uppercase tracking-wider">PURCHASE PRICE</span> ${formatMoney(prop.price, false)}`;
+        }
+    }
+
+    // Update Badge Label
+    const labelEl = document.getElementById(`dual-badge-label-${propId}`);
+    if (labelEl) {
+        labelEl.textContent = mode === 'rent' ? 'FOR LEASE' : 'FOR SALE';
+    }
+
+    // Close Dropdown menu
+    const menuEl = document.getElementById(`dual-menu-${propId}`);
+    if (menuEl) menuEl.classList.add('hidden');
+}
+
+function toggleDualMenu(event, propId) {
+    event.stopPropagation();
+    const menuEl = document.getElementById(`dual-menu-${propId}`);
+    if (menuEl) {
+        menuEl.classList.toggle('hidden');
+    }
+}
+
+// Close dropdowns if user clicks outside
+window.addEventListener('click', () => {
+    document.querySelectorAll('[id^="dual-menu-"]').forEach(menu => menu.classList.add('hidden'));
+});
+
         // =========================================================================
         // PUBLIC CARD BUILDER (IMAGE 001 AS PRIMARY COVER PHOTO)
         // =========================================================================
         function createPropertyCard(prop) {
-            const card = document.createElement('div');
-            const cleanStatus = normalizeStatus(prop.status);
-            const isSold = cleanStatus === "Sold";
-            
-            card.className = `bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative ${isSold ? 'is-sold-card' : ''}`;
-            
-            let priceFormatted = Number(prop.price) > 0 ? 
-                new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
-                "PRICE UPON INQUIRY";
+    const card = document.createElement('div');
+    const cleanStatus = normalizeStatus(prop.status);
+    const isSold = cleanStatus === "Sold";
+    const isDual = cleanStatus === "Sale & Rent";
+    
+    card.className = `bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative ${isSold ? 'is-sold-card' : ''}`;
 
-            let displayArea = prop.area;
-            if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+    const currentMode = activeDualMode[prop.id] || 'sale';
+    const activePrice = (isDual && currentMode === 'rent') 
+        ? formatMoney(prop.rentPrice, true) 
+        : formatMoney(prop.price, false);
 
-            let badgeBg = "bg-black text-white";
-            let badgeText = "FOR SALE";
-
-            if (isSold) {
-                badgeBg = "bg-red-700 text-white";
-                badgeText = "SOLD";
-            } else if (cleanStatus === "Sale & Rent") {
-                badgeBg = "bg-brand-brown text-white";
-                badgeText = "FOR SALE & LEASE";
-            } else if (cleanStatus === "Rent") {
-                badgeBg = "bg-neutral-900 text-white";
-                badgeText = "FOR LEASE";
-            }
-
-            let spec1Value = prop.beds;
-            let spec1Label = "BEDS";
-            let spec2Value = prop.baths;
-            let spec2Label = "BATHS";
-            let spec3Value = prop.parking;
-            let spec3Label = "PARKING";
-
-            if (prop.category === "LOTS") {
-                spec1Value = "VACANT LOT";
-                spec1Label = "TYPE";
-                spec2Value = "RESIDENTIAL";
-                spec2Label = "ZONE";
-                spec3Value = displayArea;
-                spec3Label = "LOT AREA";
-            } else if (prop.category === "COMMERCIAL") {
-                spec1Label = "ROOMS";
-            } else if (prop.category === "HOUSE AND LOTS") {
-                spec3Label = "GARAGE";
-            }
-
-            // Image list is guaranteed to start with 001
-            const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
-            const resolvedImages = images.map(resolveDriveImageUrl);
-            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
-            const currentImgIndex = cardCarouselIndices[prop.id];
-            const watermarkId = `wm-card-${prop.id}`;
-
-            card.innerHTML = `
-                <div>
-                    <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
-                        <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
-                        
-                        <div class="absolute top-3 left-3 z-20">
-                            <span class="${badgeBg} px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
-                                ${badgeText}
-                            </span>
-                        </div>
-
-                        ${resolvedImages.length > 1 ? `
-                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
-                            <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
-                        ` : ''}
-
-                        <div id="${watermarkId}" class="watermark-container"></div>
-                    </div>
-
-                    <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
-                            <span class="text-[10px] text-neutral-400 font-mono">${displayArea}</span>
-                        </div>
-                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
-                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
-                        
-                        <div class="text-lg font-bold text-black font-mono mb-4 ${isSold ? 'line-through text-neutral-400' : ''}">
-                            ${priceFormatted}
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
-                            <div><span class="block font-bold text-black">${spec1Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec1Label}</span></div>
-                            <div><span class="block font-bold text-black">${spec2Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec2Label}</span></div>
-                            <div><span class="block font-bold text-black">${spec3Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec3Label}</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-6 pt-0 flex gap-2">
-                    <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
-                        ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
+    // Build the Top-Left Status Badge
+    let badgeHtml = '';
+    if (isDual) {
+        badgeHtml = `
+            <div class="relative inline-block text-left z-30" onclick="event.stopPropagation()">
+                <button type="button" onclick="toggleDualMenu(event, '${prop.id}')" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow flex items-center gap-1.5 transition-colors">
+                    <span id="dual-badge-label-${prop.id}">${currentMode === 'rent' ? 'FOR LEASE' : 'FOR SALE'}</span>
+                    <i class="fa-solid fa-chevron-down text-[8px] opacity-80"></i>
+                </button>
+                <div id="dual-menu-${prop.id}" class="hidden absolute left-0 mt-1 w-36 bg-white border border-black shadow-xl z-50 text-black">
+                    <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'sale')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white border-b border-neutral-200 flex justify-between items-center">
+                        <span>FOR SALE</span>
+                        <i class="fa-solid fa-tag text-[9px] opacity-60"></i>
                     </button>
-                    <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
-                        <i class="fa-solid fa-expand"></i>
+                    <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'rent')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white flex justify-between items-center">
+                        <span>FOR LEASE</span>
+                        <i class="fa-solid fa-key text-[9px] opacity-60"></i>
                     </button>
                 </div>
-            `;
-
-            setTimeout(() => {
-                const imgEl = card.querySelector(`#img-card-${prop.id}`);
-                if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
-            }, 10);
-
-            return card;
+            </div>
+        `;
+    } else {
+        let badgeBg = "bg-black text-white";
+        let badgeText = "FOR SALE";
+        if (isSold) {
+            badgeBg = "bg-red-700 text-white";
+            badgeText = "SOLD";
+        } else if (cleanStatus === "Rent") {
+            badgeBg = "bg-neutral-900 text-white";
+            badgeText = "FOR LEASE";
         }
+        badgeHtml = `
+            <span class="${badgeBg} px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                ${badgeText}
+            </span>
+        `;
+    }
 
+    // Specifications setup
+    let displayArea = prop.area;
+    if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+    let spec1Value = prop.beds, spec1Label = "BEDS";
+    let spec2Value = prop.baths, spec2Label = "BATHS";
+    let spec3Value = prop.parking, spec3Label = "PARKING";
+
+    if (prop.category === "LOTS") {
+        spec1Value = "VACANT LOT"; spec1Label = "TYPE";
+        spec2Value = "RESIDENTIAL"; spec2Label = "ZONE";
+        spec3Value = displayArea; spec3Label = "LOT AREA";
+    } else if (prop.category === "COMMERCIAL") {
+        spec1Label = "ROOMS";
+    } else if (prop.category === "HOUSE AND LOTS") {
+        spec3Label = "GARAGE";
+    }
+
+    const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+    const resolvedImages = images.map(resolveDriveImageUrl);
+    cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
+    const currentImgIndex = cardCarouselIndices[prop.id];
+    const watermarkId = `wm-card-${prop.id}`;
+
+    card.innerHTML = `
+        <div>
+            <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
+                <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="${prop.title}" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)">
+                
+                <!-- BADGE CONTAINER -->
+                <div class="absolute top-3 left-3 z-30">
+                    ${badgeHtml}
+                </div>
+
+                ${resolvedImages.length > 1 ? `
+                    <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                    <button onclick="event.stopPropagation(); navigateCardCarousel(${prop.id}, 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                ` : ''}
+
+                <div id="${watermarkId}" class="watermark-container"></div>
+            </div>
+
+            <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
+                    <span class="text-[10px] text-neutral-400 font-mono">${displayArea}</span>
+                </div>
+                <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
+                <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                
+                <!-- DYNAMIC PRICE CONTAINER -->
+                <div id="price-display-${prop.id}" class="text-lg font-bold text-black font-mono mb-4 min-h-[44px] flex flex-col justify-end ${isSold ? 'line-through text-neutral-400' : ''}">
+                    ${isDual ? `<span class="text-[10px] font-normal text-neutral-500 uppercase tracking-wider">${currentMode === 'rent' ? 'MONTHLY LEASE' : 'PURCHASE PRICE'}</span>` : ''}
+                    ${activePrice}
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
+                    <div><span class="block font-bold text-black">${spec1Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec1Label}</span></div>
+                    <div><span class="block font-bold text-black">${spec2Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec2Label}</span></div>
+                    <div><span class="block font-bold text-black">${spec3Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec3Label}</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 pt-0 flex gap-2">
+            <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
+                ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
+            </button>
+            <button onclick="openLightboxStudio('${escapeQuotes(prop.title)}', ${JSON.stringify(resolvedImages).replace(/"/g, '&quot;')}, 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    `;
+
+    setTimeout(() => {
+        const imgEl = card.querySelector(`#img-card-${prop.id}`);
+        if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
+    }, 10);
+
+    return card;
+}
         function navigateCardCarousel(propId, dir) {
             const prop = properties.find(p => p.id === propId);
             if (!prop) return;
@@ -1765,9 +1851,28 @@
             const container = document.getElementById('modal-content-container');
             const isSold = normalizeStatus(prop.status) === 'Sold';
 
-            const priceFormatted = Number(prop.price) > 0 ? 
-                new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP', maximumFractionDigits: 0 }).format(prop.price) : 
-                "PRICE UPON INQUIRY";
+            let priceBoxHtml = '';
+if (normalizeStatus(prop.status) === 'Sale & Rent') {
+    priceBoxHtml = `
+        <div class="bg-black text-white p-4 space-y-2">
+            <div class="flex justify-between items-center border-b border-neutral-700 pb-2">
+                <span class="text-[10px] text-neutral-400 uppercase tracking-wider">SALE PRICE</span>
+                <span class="text-xl font-bold font-mono text-white">${formatMoney(prop.price, false)}</span>
+            </div>
+            <div class="flex justify-between items-center pt-1">
+                <span class="text-[10px] text-neutral-400 uppercase tracking-wider">MONTHLY LEASE</span>
+                <span class="text-xl font-bold font-mono text-amber-400">${formatMoney(prop.rentPrice, true)}</span>
+            </div>
+        </div>
+    `;
+} else {
+    priceBoxHtml = `
+        <div class="bg-black text-white p-4">
+            <span class="text-xs text-neutral-400 uppercase">${isSold ? 'CLOSED TRANSACTION' : 'TRANSACTION PRICE'}</span>
+            <div class="text-2xl font-bold font-mono ${isSold ? 'line-through text-neutral-400' : ''}">${priceFormatted}</div>
+        </div>
+    `;
+}
 
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
