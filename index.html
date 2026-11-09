@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,7 @@
     <link rel="icon" type="image/png" href="https://i.imgur.com/z2RzCbA.png" media="(prefers-color-scheme: dark)">
     <link rel="icon" type="image/png" href="https://i.imgur.com/zNCE455.png" media="(prefers-color-scheme: light)">
     
-    <!-- ======================================================== -->
     <!-- HIGH-MARKET LUXURY SEO & DIRECT SERP SEARCH BAR METADATA -->
-    <!-- ======================================================== -->
     <title>Compass Realty | Luxury Real Estate, Prime Estates & High-Yield Investments Philippines</title>
     <meta name="title" content="Compass Realty | Luxury Real Estate, Prime Estates & High-Yield Investments Philippines">
     <meta name="description" content="Premier luxury real estate advisory and high-yielding investment brokerage in the Philippines. Exclusive trophy residences in BGC, Makati, Ayala Alabang, coastal estates, and prime commercial developments. Licensed PRC #4740.">
@@ -40,7 +39,7 @@
     <meta name="twitter:description" content="Curated prime residences and high-yield real estate investments across Metro Manila and top Philippine leisure destinations.">
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop">
 
-    <!-- JSON-LD Structured Data: Enables Google SERP Sitelinks Searchbox -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -87,14 +86,6 @@
         }
       ]
     }
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MFT3RR2Q"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
     </script>
 
     <!-- Tailwind CSS & Fonts -->
@@ -270,7 +261,6 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        /* SOLD CARD EFFECTS */
         .is-sold-card img {
             filter: grayscale(45%);
             opacity: 0.88;
@@ -379,7 +369,7 @@
         </div>
     </header>
 
-    <!-- PUBLIC VIEW: SECONDARY REAL ESTATE BROKERAGE -->
+    <!-- PUBLIC VIEW CONTAINER -->
     <div id="public-view-container">
         <!-- TOP SEARCH PANEL -->
         <div id="hero-section" class="hero-bg py-16 lg:py-24 px-4 sm:px-6 lg:px-8 text-white relative">
@@ -393,7 +383,7 @@
                     </p>
                 </div>
 
-                <!-- SEARCH FILTER PANEL (TWO-WAY SYNCHRONIZED) -->
+                <!-- SEARCH FILTER PANEL -->
                 <div class="bg-white p-6 sm:p-8 text-black border-2 border-black shadow-2xl max-w-5xl">
                     <form id="search-form" onsubmit="handleSearchSubmit(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
                         <div class="lg:col-span-1">
@@ -444,7 +434,7 @@
             </div>
         </div>
 
-        <!-- COMPASS REALTY HERO BANNER -->
+        <!-- HERO BANNER -->
         <section class="cr-hero-container">
             <div class="cr-hero-card" id="crHeroCard">
                 <div class="cr-hero-overlay"></div>
@@ -558,7 +548,7 @@
         </main>
     </div>
 
-    <!-- BROKERAGE PROPERTY DETAILS & APPOINTMENT MODAL -->
+    <!-- DETAILS & INQUIRY MODAL -->
     <div id="property-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 hidden overflow-y-auto">
         <div class="bg-white w-full max-w-5xl my-8 border-2 border-black shadow-2xl relative flex flex-col max-h-[90vh]">
             <button onclick="closePropertyModal()" class="absolute top-4 right-4 z-20 bg-black text-white w-10 h-10 flex items-center justify-center text-xl font-bold hover:bg-brand-brown transition-colors">&times;</button>
@@ -719,7 +709,7 @@
                 <div class="flex justify-between items-center pb-3 border-b">
                     <div>
                         <h3 class="text-base font-bold uppercase">DEVELOPER UNITS INVENTORY</h3>
-                        <p class="text-xs text-neutral-500">Image uploads create a subfolder in Google Drive (<code>10jvOCl_FtQkWh_FNjdbijrWySKIOO5MJ</code>) named by Project & Unit Type.</p>
+                        <p class="text-xs text-neutral-500">Image uploads create a subfolder in Google Drive named by Project & Unit Type.</p>
                     </div>
                     <button onclick="openAddDevUnitModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 uppercase font-semibold">
                         + ADD UNIT TO PROJECT
@@ -947,7 +937,7 @@
         <div class="bg-white w-full max-w-2xl my-8 border-2 border-black p-6 sm:p-8 relative">
             <button onclick="closeAddDevUnitModal()" class="absolute top-4 right-4 text-xl font-bold">&times;</button>
             <h3 class="text-lg font-bold uppercase border-b border-black pb-2 mb-4">ADD DEVELOPER UNIT</h3>
-            <p class="text-xs text-neutral-500 mb-4">Photos upload into Google Drive (<code>10jvOCl_FtQkWh_FNjdbijrWySKIOO5MJ</code>) inside a folder named <strong>[Project] - [Unit Type]</strong>.</p>
+            <p class="text-xs text-neutral-500 mb-4">Photos upload into Google Drive inside a folder named <strong>[Project] - [Unit Type]</strong>.</p>
             
             <form onsubmit="handleSaveDevUnitSubmit(event)" class="space-y-4">
                 <div>
@@ -1042,6 +1032,19 @@
     <script>
         const GOOGLE_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbwv6Hb1HGT9Kw4GyDHNAIizcgZsRnEZknpt3fkV_FpOaR8baRpt-vH3w2qCijCf1qas6A/exec";
 
+        // SAFE LOCALSTORAGE HELPER (Never crashes in sandboxes)
+        const SafeStorage = {
+            get: function(key) {
+                try { return localStorage.getItem(key); } catch(e) { return null; }
+            },
+            set: function(key, val) {
+                try { localStorage.setItem(key, val); } catch(e) {}
+            },
+            remove: function(key) {
+                try { localStorage.removeItem(key); } catch(e) {}
+            }
+        };
+
         function resolveDriveImageUrl(url) {
             if (!url) return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
             url = String(url).trim();
@@ -1056,9 +1059,7 @@
             return url;
         }
 
-        // =========================================================================
-        // DUAL PRICE & BADGE DROPDOWN SWITCHER
-        // =========================================================================
+        // DUAL PRICE & BADGE SWITCHER
         const activeDualMode = {};
 
         function formatMoney(amount, isRent = false) {
@@ -1110,9 +1111,7 @@
             document.querySelectorAll('[id^="dual-menu-"]').forEach(menu => menu.classList.add('hidden'));
         });
 
-        // =========================================================================
-        // WATERMARK ASSETS & ENGINE
-        // =========================================================================
+        // WATERMARK SVG
         const WATERMARK_WHITE_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(`
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 130" width="1000" height="130">
                 <g fill="#FFFFFF">
@@ -1217,31 +1216,26 @@
                 .trim();
         }
 
-        // =========================================================================
-        // UNIVERSAL DATA SANITIZER (WITH DUAL PRICE PARSER)
-        // =========================================================================
+        // DATA SANITIZER
         function sanitizeListingRecord(item) {
-            let title = String(item.title || "").trim();
-            let desc = String(item.description || "").trim();
-            let dev = String(item.developer || "").trim();
-            let area = String(item.area || "").trim();
-            let loc = String(item.location || "").trim();
-            let cat = String(item.category || "CONDOMINIUM").toUpperCase().trim();
-            let rawImg = item.image || item.images || "";
+            let title = String(item.title || item.Title || item["Property Title"] || "Exclusive Property").trim();
+            let desc = String(item.description || item.Description || "").trim();
+            let dev = String(item.developer || item.Developer || "Compass Realty Exclusive").trim();
+            let area = String(item.area || item.Area || "N/A").trim();
+            let loc = String(item.location || item.Location || "Metro Manila").trim();
+            let cat = String(item.category || item.Category || "CONDOMINIUM").toUpperCase().trim();
+            let rawImg = item.image || item.images || item.Images || "";
 
-            // 1. Clean duplicated listing ID prefix from title
             if (item.id) {
                 title = title.replace(new RegExp(`^${item.id}[\\s\\-_]+`, 'i'), '');
             }
             title = title.replace(/^\d{4}\s+/, '').trim();
 
-            // 2. Guard against Image URL inside Area
             if (area.includes('http://') || area.includes('https://') || area.includes('drive.google.com')) {
                 if (!rawImg) rawImg = area;
-                area = "";
+                area = "N/A";
             }
 
-            // 3. Category normalizer
             const validCats = ['CONDOMINIUM', 'COMMERCIAL', 'LOTS', 'HOUSE AND LOTS'];
             if (validCats.includes(loc.toUpperCase()) && !validCats.includes(cat.toUpperCase())) {
                 const swap = cat;
@@ -1260,12 +1254,6 @@
             if (/\b(?:lot|lots|land)\b/i.test(title)) cat = 'LOTS';
             else if (/\b(?:commercial|hotel|building)\b/i.test(title)) cat = 'COMMERCIAL';
 
-            if (dev.length > 50 || dev.includes('\n')) {
-                if (!desc || desc.length < dev.length) desc = dev;
-                dev = "Compass Realty Exclusive";
-            }
-            if (!dev) dev = "Compass Realty Exclusive";
-
             let beds = Number(item.beds) || 0;
             if (cat === 'LOTS') {
                 if (beds > 0 && (!area || area === 'N/A')) area = beds + " sqm";
@@ -1275,7 +1263,7 @@
                 beds = 0;
             }
 
-            // 4. Clean price & dual rent price parsing
+            // Dual Price Logic
             let cleanPrice = 0;
             let cleanRentPrice = Number(String(item.rentPrice || item["Rent Price"] || "0").replace(/[^0-9]/g, '')) || 0;
             const rawPriceStr = String(item.price || item.Price || item.status || "0").trim();
@@ -1288,7 +1276,6 @@
                 cleanPrice = Number(rawPriceStr.replace(/[^0-9]/g, '')) || 0;
             }
 
-            // Fallback: look for lease/rent rate inside description if rentPrice is still 0
             if (!cleanRentPrice && desc) {
                 const rentMatch = desc.match(/(?:rent|lease|monthly)[\s:]*(?:php|₱)?\s*([\d,]+)(?:\s*\/\s*mo|\b)/i);
                 if (rentMatch && rentMatch[1]) {
@@ -1298,7 +1285,6 @@
 
             let cleanStatus = normalizeStatus(item.status);
 
-            // 5. IMAGE 001 REVERSAL LOGIC
             let imgList = [];
             if (Array.isArray(rawImg)) {
                 imgList = [...rawImg];
@@ -1323,7 +1309,7 @@
                 beds: beds,
                 baths: Number(item.baths) || 0,
                 parking: Number(item.parking) || 0,
-                developer: dev,
+                developer: dev || "Compass Realty Exclusive",
                 agentEmail: item.agentEmail || "gailamistoso@compassprimerealty.com",
                 images: imgList.map(resolveDriveImageUrl),
                 description: desc,
@@ -1334,7 +1320,7 @@
             };
         }
 
-        // PERMANENT BASELINE PORTFOLIO
+        // DEFAULT BASELINE PROPERTIES
         const DEFAULT_PROPERTIES = [
             {
                 id: 1001,
@@ -1421,4 +1407,1284 @@
                 developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?a
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+                ],
+                _imagesOrdered: true,
+                description: "FOR SALE 📍 ARMADA HOTEL, MALATE MANILA\nAn exceptional investment opportunity in one of Manila's most vibrant tourism and commercial districts."
+            },
+            {
+                id: 1024,
+                title: "Orchard Residential Estates Prime Lot",
+                location: "Dasmariñas, Cavite",
+                price: 13500000,
+                rentPrice: 0,
+                status: "Sale",
+                category: "LOTS",
+                isDeal: true,
+                isFeatured: true,
+                beds: 0,
+                baths: 0,
+                parking: 0,
+                area: "714 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
+                ],
+                _imagesOrdered: true,
+                description: "📍 Orchard Residential Estates, Dasmariñas Cavite\nSerene mornings and panoramic championship golf course views."
+            },
+            {
+                id: 1030,
+                title: "Prime Land in Alaminos",
+                location: "Alaminos, Laguna",
+                price: 200000000,
+                rentPrice: 0,
+                status: "Sale",
+                category: "LOTS",
+                isDeal: true,
+                isFeatured: true,
+                beds: 0,
+                baths: 0,
+                parking: 0,
+                area: "100000 sqm",
+                developer: "Compass Realty Exclusive",
+                agentEmail: "gailamistoso@compassprimerealty.com",
+                images: [
+                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                ],
+                _imagesOrdered: true,
+                description: "📍 Prime Land in Alaminos, Laguna\nExpansive 10-hectare prime property ideal for mixed-use residential development or land banking."
+            }
+        ];
+
+        // SAFE STATE INITIALIZATION
+        let cached = null;
+        try {
+            cached = JSON.parse(SafeStorage.get('cpr_cached_listings_v8'));
+        } catch(e) {}
+        let properties = (cached && Array.isArray(cached) && cached.length > 0) ? cached : DEFAULT_PROPERTIES;
+
+        let cardCarouselIndices = {};
+        let activeModalCarouselIndex = 0;
+        let currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+        let favorites = [];
+        try {
+            favorites = JSON.parse(SafeStorage.get('cpr_favorites')) || [];
+        } catch(e) { favorites = []; }
+
+        // DEVELOPER TOWNSHIPS (SHANG & ARTHALAND)
+        let developerProjects = [];
+        try {
+            developerProjects = JSON.parse(SafeStorage.get('cpr_dev_projects_v4')) || [];
+        } catch(e) {}
+        if (!developerProjects || developerProjects.length === 0) {
+            developerProjects = [
+                {
+                    id: 'DEV-101', devSlug: 'shang-properties', developer: 'Shang Properties',
+                    title: 'Aurelia Residences', township: 'Bonifacio Global City, Taguig',
+                    turnover: 'Turnover: 2026', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                    description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC.', units: []
+                },
+                {
+                    id: 'DEV-102', devSlug: 'arthaland', developer: 'Arthaland',
+                    title: 'Eluria Makati', township: 'Legazpi Village, Makati',
+                    turnover: 'Pre-selling / Handover', image: 'https://arthaland.imgix.net/assets/site/eluria-home-header-v3.png?w=1600',
+                    description: 'Ultra-luxury green residence with white-glove butler services.', units: []
+                },
+                {
+                    id: 'DEV-103', devSlug: 'arthaland', developer: 'Arthaland',
+                    title: 'Cebu Exchange', township: 'Salinas Drive, Cebu City',
+                    turnover: 'Ready for Occupancy', image: 'https://arthaland.imgix.net/assets/site/DJI_0743.JPG?w=1600',
+                    description: 'The largest multi-certified green office building in the Philippines.', units: []
+                }
+            ];
+        }
+
+        let adminInquiries = [];
+        let adminEnlistments = [];
+
+        // SELF-BOOTING APPLICATION CONTROLLER (Runs regardless of iframe readyState)
+        function initializeCompassApp() {
+            const savedBanner = SafeStorage.get('cpr_custom_hero_banner');
+            if (savedBanner) updateHeroBannerStyle(savedBanner);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const kwParam = urlParams.get('keyword');
+            if (kwParam) {
+                currentFilters.keyword = kwParam;
+                const kwInput = document.getElementById('filter-keyword');
+                if (kwInput) kwInput.value = kwParam;
+            }
+
+            try {
+                properties = properties.map(sanitizeListingRecord);
+            } catch(e) {
+                properties = DEFAULT_PROPERTIES.map(sanitizeListingRecord);
+            }
+
+            // Immediately render baseline cards
+            renderPropertyList();
+
+            // Fetch Google Sheets in background
+            fetchDatabaseFromGoogleSheets();
+            checkDirectURLRouting();
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeCompassApp);
+        } else {
+            initializeCompassApp();
+        }
+
+        window.addEventListener('hashchange', checkDirectURLRouting);
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                e.preventDefault();
+                showAdminDashboard();
+                showToast("Admin Desk Activated!", "info");
+            }
+            const lb = document.getElementById('lightbox-studio-modal');
+            if (lb && !lb.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightboxStudio();
+                else if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                else if (e.key === 'ArrowRight') navigateLightbox(1);
+            }
+        });
+
+        function checkDirectURLRouting() {
+            const hash = window.location.hash.toLowerCase();
+            const urlParams = new URLSearchParams(window.location.search);
+            const viewParam = urlParams.get('view')?.toLowerCase();
+            const hasAdminParam = urlParams.has('admin');
+
+            if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin' || hasAdminParam) {
+                showAdminDashboard();
+            } else if (hash === '#developer' || viewParam === 'developer') {
+                showDeveloperPortalView();
+            }
+        }
+
+        function updateHeroBannerStyle(url) {
+            const resolved = resolveDriveImageUrl(url);
+            const heroEl = document.getElementById('crHeroCard');
+            if (heroEl) heroEl.style.backgroundImage = `url('${resolved}')`;
+
+            const previewEl = document.getElementById('adminPreviewBox');
+            if (previewEl) previewEl.style.backgroundImage = `url('${resolved}')`;
+        }
+
+        // LIGHTBOX TRIGGER HELPER
+        function openListingLightbox(propId, startIndex = 0) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const imgs = (prop.images && prop.images.length > 0) ? prop.images : [];
+            openLightboxStudio(prop.title, imgs, startIndex);
+        }
+
+        // PROPERTY CARD GENERATOR
+        function createPropertyCard(prop) {
+            const card = document.createElement('div');
+            const cleanStatus = normalizeStatus(prop.status);
+            const isSold = cleanStatus === "Sold";
+            const isDual = cleanStatus === "Sale & Rent";
+            
+            card.className = `bg-white border border-black group flex flex-col justify-between hover:shadow-2xl transition-all duration-300 relative ${isSold ? 'is-sold-card' : ''}`;
+
+            const currentMode = activeDualMode[prop.id] || 'sale';
+            const activePrice = (isDual && currentMode === 'rent') 
+                ? formatMoney(prop.rentPrice, true) 
+                : formatMoney(prop.price, false);
+
+            let badgeHtml = '';
+            if (isDual) {
+                badgeHtml = `
+                    <div class="relative inline-block text-left z-30" onclick="event.stopPropagation()">
+                        <button type="button" onclick="toggleDualMenu(event, '${prop.id}')" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow flex items-center gap-1.5 transition-colors">
+                            <span id="dual-badge-label-${prop.id}">${currentMode === 'rent' ? 'FOR LEASE' : 'FOR SALE'}</span>
+                            <i class="fa-solid fa-chevron-down text-[8px] opacity-80"></i>
+                        </button>
+                        <div id="dual-menu-${prop.id}" class="hidden absolute left-0 mt-1 w-36 bg-white border border-black shadow-xl z-50 text-black">
+                            <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'sale')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white border-b border-neutral-200 flex justify-between items-center">
+                                <span>FOR SALE</span>
+                                <i class="fa-solid fa-tag text-[9px] opacity-60"></i>
+                            </button>
+                            <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'rent')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white flex justify-between items-center">
+                                <span>FOR LEASE</span>
+                                <i class="fa-solid fa-key text-[9px] opacity-60"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                let badgeBg = "bg-black text-white";
+                let badgeText = "FOR SALE";
+                if (isSold) {
+                    badgeBg = "bg-red-700 text-white";
+                    badgeText = "SOLD";
+                } else if (cleanStatus === "Rent") {
+                    badgeBg = "bg-neutral-900 text-white";
+                    badgeText = "FOR LEASE";
+                }
+                badgeHtml = `
+                    <span class="${badgeBg} px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow">
+                        ${badgeText}
+                    </span>
+                `;
+            }
+
+            let displayArea = prop.area;
+            if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+            let spec1Value = prop.beds, spec1Label = "BEDS";
+            let spec2Value = prop.baths, spec2Label = "BATHS";
+            let spec3Value = prop.parking, spec3Label = "PARKING";
+
+            if (prop.category === "LOTS") {
+                spec1Value = "VACANT LOT"; spec1Label = "TYPE";
+                spec2Value = "RESIDENTIAL"; spec2Label = "ZONE";
+                spec3Value = displayArea; spec3Label = "LOT AREA";
+            } else if (prop.category === "COMMERCIAL") {
+                spec1Label = "ROOMS";
+            } else if (prop.category === "HOUSE AND LOTS") {
+                spec3Label = "GARAGE";
+            }
+
+            const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolvedImages = images.map(resolveDriveImageUrl);
+            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
+            const currentImgIndex = cardCarouselIndices[prop.id];
+            const watermarkId = `wm-card-${prop.id}`;
+
+            card.innerHTML = `
+                <div>
+                    <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
+                        <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="Property photo" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openListingLightbox('${prop.id}', 0)">
+                        
+                        <div class="absolute top-3 left-3 z-30">
+                            ${badgeHtml}
+                        </div>
+
+                        ${resolvedImages.length > 1 ? `
+                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${prop.id}', -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${prop.id}', 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                        ` : ''}
+
+                        <div id="${watermarkId}" class="watermark-container"></div>
+                    </div>
+
+                    <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
+                            <span class="text-[10px] text-neutral-400 font-mono">${displayArea}</span>
+                        </div>
+                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
+                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        
+                        <div id="price-display-${prop.id}" class="text-lg font-bold text-black font-mono mb-4 min-h-[44px] flex flex-col justify-end ${isSold ? 'line-through text-neutral-400' : ''}">
+                            ${isDual ? `<span class="text-[10px] font-normal text-neutral-500 uppercase tracking-wider">${currentMode === 'rent' ? 'MONTHLY LEASE' : 'PURCHASE PRICE'}</span>` : ''}
+                            ${activePrice}
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
+                            <div><span class="block font-bold text-black">${spec1Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec1Label}</span></div>
+                            <div><span class="block font-bold text-black">${spec2Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec2Label}</span></div>
+                            <div><span class="block font-bold text-black">${spec3Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec3Label}</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 pt-0 flex gap-2">
+                    <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
+                        ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
+                    </button>
+                    <button onclick="openListingLightbox('${prop.id}', 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                </div>
+            `;
+
+            setTimeout(() => {
+                const imgEl = card.querySelector(`#img-card-${prop.id}`);
+                if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
+            }, 10);
+
+            return card;
+        }
+
+        function navigateCardCarousel(propId, dir) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const rawImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const resolved = rawImages.map(resolveDriveImageUrl);
+            if (resolved.length <= 1) return;
+
+            cardCarouselIndices[propId] = (cardCarouselIndices[propId] + dir + resolved.length) % resolved.length;
+            const imgEl = document.getElementById(`img-card-${propId}`);
+            if (imgEl) {
+                imgEl.src = resolved[cardCarouselIndices[propId]];
+                applyWatermarkToContainer(`wm-card-${propId}`, imgEl);
+            }
+        }
+
+        // RENDERING & FILTER ENGINE
+        function isStatusMatch(itemStatus, filterStatus) {
+            if (!filterStatus || filterStatus === 'ALL') return true;
+            const cleanItem = normalizeStatus(itemStatus).toLowerCase();
+            const filterNorm = String(filterStatus || '').toLowerCase().trim();
+
+            if (filterNorm === 'sale') return cleanItem === 'sale' || cleanItem === 'sale & rent';
+            if (filterNorm === 'rent') return cleanItem === 'rent' || cleanItem === 'sale & rent';
+            if (filterNorm === 'sale & rent') return cleanItem === 'sale & rent';
+            if (filterNorm === 'sold') return cleanItem === 'sold';
+            return cleanItem === filterNorm;
+        }
+
+        function renderPropertyList() {
+            const grid = document.getElementById('property-grid');
+            const emptyState = document.getElementById('empty-state');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (!properties || !Array.isArray(properties) || properties.length === 0) {
+                properties = DEFAULT_PROPERTIES.map(sanitizeListingRecord);
+            }
+
+            let filtered = [];
+            try {
+                filtered = properties.filter(item => {
+                    if (!isStatusMatch(item.status, currentFilters.status)) return false;
+
+                    if (currentFilters.category !== 'ALL') {
+                        if (normalizeText(item.category) !== normalizeText(currentFilters.category)) return false;
+                    }
+
+                    if (currentFilters.onlyDeals && !item.isDeal) return false;
+                    if (currentFilters.onlyFeatured && !item.isFeatured) return false;
+                    if (currentFilters.onlyFavs && !favorites.includes(item.id)) return false;
+
+                    if (currentFilters.maxPrice !== 'ALL' && Number(item.price) > parseInt(currentFilters.maxPrice)) return false;
+
+                    if (currentFilters.keyword && currentFilters.keyword.trim()) {
+                        const kw = normalizeText(currentFilters.keyword);
+                        const matchTitle = normalizeText(item.title).includes(kw);
+                        const matchLoc = normalizeText(item.location).includes(kw);
+                        const matchId = String(item.id).toLowerCase().includes(kw);
+                        const matchDesc = normalizeText(item.description).includes(kw);
+                        if (!matchTitle && !matchLoc && !matchId && !matchDesc) return false;
+                    }
+                    return true;
+                });
+            } catch(e) {
+                filtered = properties;
+            }
+
+            if (filtered.length === 0) {
+                emptyState?.classList.remove('hidden');
+            } else {
+                emptyState?.classList.add('hidden');
+                filtered.forEach(prop => {
+                    try {
+                        grid.appendChild(createPropertyCard(prop));
+                    } catch(err) {}
+                });
+            }
+        }
+
+        // VIEW DETAILS & INQUIRY MODAL
+        function openPropertyModal(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!prop) return;
+
+            activeModalCarouselIndex = 0;
+            const container = document.getElementById('modal-content-container');
+            const cleanStatus = normalizeStatus(prop.status);
+            const isSold = cleanStatus === 'Sold';
+            const isDual = cleanStatus === 'Sale & Rent';
+
+            let displayArea = prop.area;
+            if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
+
+            const propImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+
+            let priceBoxHtml = '';
+            if (isDual) {
+                priceBoxHtml = `
+                    <div class="bg-black text-white p-4 space-y-2">
+                        <div class="flex justify-between items-center border-b border-neutral-700 pb-2">
+                            <span class="text-[10px] text-neutral-400 uppercase tracking-wider">SALE PRICE</span>
+                            <span class="text-xl font-bold font-mono text-white">${formatMoney(prop.price, false)}</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-[10px] text-neutral-400 uppercase tracking-wider">MONTHLY LEASE</span>
+                            <span class="text-xl font-bold font-mono text-amber-400">${formatMoney(prop.rentPrice, true)}</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                priceBoxHtml = `
+                    <div class="bg-black text-white p-4">
+                        <span class="text-xs text-neutral-400 uppercase">${isSold ? 'CLOSED TRANSACTION' : 'TRANSACTION PRICE'}</span>
+                        <div class="text-2xl font-bold font-mono ${isSold ? 'line-through text-neutral-400' : ''}">${formatMoney(prop.price, cleanStatus === 'Rent')}</div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
+                            <img id="img-modal-prop" src="${propImages[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openListingLightbox('${prop.id}', activeModalCarouselIndex)" title="Click to view full screen Photo Studio">
+                            
+                            ${propImages.length > 1 ? `
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&lang;</button>
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&rang;</button>
+                                
+                                <div id="ind-modal-prop" class="absolute bottom-3 right-3 z-30 bg-black/85 text-[10px] font-mono text-white px-3 py-1 border border-neutral-700 pointer-events-none">
+                                    IMAGE 1 OF ${propImages.length}
+                                </div>
+                            ` : ''}
+
+                            <button type="button" onclick="openListingLightbox('${prop.id}', activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/85 hover:bg-brand-brown text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow transition-colors">
+                                <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
+                            </button>
+
+                            <div id="wm-modal-prop" class="watermark-container"></div>
+                        </div>
+
+                        ${propImages.length > 1 ? `
+                            <div class="flex gap-2 overflow-x-auto py-1">
+                                ${propImages.map((img, idx) => `
+                                    <img src="${img}" onclick="setModalCarouselIndex('${prop.id}', ${idx})" class="modal-thumb-btn h-14 w-20 object-cover cursor-pointer border-2 ${idx === 0 ? 'border-brand-brown opacity-100' : 'border-transparent opacity-60 hover:opacity-100'} transition-all flex-shrink-0">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
+                        <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black space-y-4">
+                        ${priceBoxHtml}
+
+                        <form onsubmit="handleInquirySubmit(event, '${prop.id}')" class="space-y-3">
+                            <label class="block text-xs font-bold uppercase">
+                                ${isSold ? 'INQUIRE SIMILAR ACTIVE PROPERTIES' : 'TRANSMIT INQUIRY / SCHEDULE'}
+                            </label>
+                            
+                            <div>
+                                <label class="block text-[10px] uppercase font-bold text-neutral-500 mb-1">Inquiry Type *</label>
+                                <select id="client-inquiry-type" class="w-full bg-white border p-2 text-xs font-bold uppercase">
+                                    <option value="Viewing Appointment">SCHEDULE VIEWING APPOINTMENT</option>
+                                    <option value="Property Inquiry">GENERAL PROPERTY INQUIRY</option>
+                                </select>
+                            </div>
+
+                            <input type="text" id="client-name" required placeholder="Your Full Name *" class="w-full bg-white border p-2 text-xs">
+                            <input type="email" id="client-email" required placeholder="Email Address *" class="w-full bg-white border p-2 text-xs">
+                            <input type="tel" id="client-phone" required placeholder="Phone Number *" class="w-full bg-white border p-2 text-xs">
+                            <input type="datetime-local" id="client-date" class="w-full bg-white border p-2 text-xs">
+                            <textarea id="client-notes" rows="2" placeholder="Specific viewing requests or questions..." class="w-full bg-white border p-2 text-xs"></textarea>
+
+                            <button type="submit" id="client-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-bold tracking-widest transition-colors">
+                                TRANSMIT TO SHEET 2
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            `;
+            document.getElementById('property-modal').classList.remove('hidden');
+
+            setTimeout(() => {
+                const modalImg = document.getElementById('img-modal-prop');
+                if (modalImg) applyWatermarkToContainer('wm-modal-prop', modalImg);
+            }, 15);
+        }
+        function closePropertyModal() { document.getElementById('property-modal').classList.add('hidden'); }
+
+        function navigateModalCarousel(propId, dir) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const images = (prop.images && prop.images.length > 0) ? prop.images : [];
+            if (images.length <= 1) return;
+
+            activeModalCarouselIndex = (activeModalCarouselIndex + dir + images.length) % images.length;
+            const imgEl = document.getElementById('img-modal-prop');
+            const indEl = document.getElementById('ind-modal-prop');
+            if (imgEl) {
+                imgEl.src = images[activeModalCarouselIndex];
+                applyWatermarkToContainer('wm-modal-prop', imgEl);
+            }
+            if (indEl) indEl.textContent = `IMAGE ${activeModalCarouselIndex + 1} OF ${images.length}`;
+
+            const thumbs = document.querySelectorAll('.modal-thumb-btn');
+            thumbs.forEach((tb, i) => {
+                if (i === activeModalCarouselIndex) {
+                    tb.classList.add('border-brand-brown', 'opacity-100');
+                    tb.classList.remove('border-transparent', 'opacity-60');
+                } else {
+                    tb.classList.remove('border-brand-brown', 'opacity-100');
+                    tb.classList.add('border-transparent', 'opacity-60');
+                }
+            });
+        }
+
+        function setModalCarouselIndex(propId, idx) {
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+            const images = prop.images || [];
+            if (!images[idx]) return;
+
+            activeModalCarouselIndex = idx;
+            const imgEl = document.getElementById('img-modal-prop');
+            const indEl = document.getElementById('ind-modal-prop');
+            if (imgEl) {
+                imgEl.src = images[idx];
+                applyWatermarkToContainer('wm-modal-prop', imgEl);
+            }
+            if (indEl) indEl.textContent = `IMAGE ${idx + 1} OF ${images.length}`;
+
+            const thumbs = document.querySelectorAll('.modal-thumb-btn');
+            thumbs.forEach((tb, i) => {
+                if (i === activeModalCarouselIndex) {
+                    tb.classList.add('border-brand-brown', 'opacity-100');
+                    tb.classList.remove('border-transparent', 'opacity-60');
+                } else {
+                    tb.classList.remove('border-brand-brown', 'opacity-100');
+                    tb.classList.add('border-transparent', 'opacity-60');
+                }
+            });
+        }
+
+        async function handleInquirySubmit(e, propId) {
+            e.preventDefault();
+            const prop = properties.find(p => String(p.id) === String(propId));
+            const btn = document.getElementById('client-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            const payload = {
+                sheetTab: "Sheet2",
+                action: "addAppointment",
+                propertyTitle: prop ? prop.title : "Property Inquiry",
+                inquiryType: document.getElementById('client-inquiry-type').value,
+                name: document.getElementById('client-name').value,
+                email: document.getElementById('client-email').value,
+                phone: document.getElementById('client-phone').value,
+                date: document.getElementById('client-date').value || "N/A",
+                notes: document.getElementById('client-notes').value || ""
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(err) {}
+
+            closePropertyModal();
+            showToast("Logged to Sheet 2! An advisor will reach out.", "success");
+        }
+
+        // ENLIST PROPERTY SUBMISSION
+        function openEnlistModal() { document.getElementById('enlist-modal').classList.remove('hidden'); }
+        function closeEnlistModal() { document.getElementById('enlist-modal').classList.add('hidden'); }
+
+        async function handleEnlistSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('enlist-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            const payload = {
+                sheetTab: "Sheet4",
+                action: "addEnlistment",
+                name: document.getElementById('enlist-name').value,
+                email: document.getElementById('enlist-email').value,
+                phone: document.getElementById('enlist-phone').value,
+                type: document.getElementById('enlist-type').value,
+                location: document.getElementById('enlist-loc').value || "N/A"
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(err) {}
+
+            closeEnlistModal();
+            showToast("Property enlisted! Logged to Sheet 4.", "success");
+        }
+
+        // ADMIN CONTROLLER
+        function showAdminDashboard() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.remove('hidden');
+            renderAdminDashboard();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showMainApp() {
+            document.getElementById('public-view-container').classList.remove('hidden');
+            document.getElementById('developer-portal-view').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDeveloperPortalView() {
+            document.getElementById('public-view-container').classList.add('hidden');
+            document.getElementById('admin-dashboard-container').classList.add('hidden');
+            document.getElementById('developer-portal-view').classList.remove('hidden');
+            filterDeveloperProjects();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function switchAdminTab(tabKey) {
+            ['listings', 'devunits', 'inquiries', 'enlistments', 'herobanner'].forEach(t => {
+                document.getElementById('admin-panel-' + t)?.classList.add('hidden');
+                const btn = document.getElementById('tab-btn-' + t);
+                if (btn) btn.className = "p-4 border-b-2 border-transparent text-neutral-400 whitespace-nowrap";
+            });
+            document.getElementById('admin-panel-' + tabKey)?.classList.remove('hidden');
+            const activeBtn = document.getElementById('tab-btn-' + tabKey);
+            if (activeBtn) activeBtn.className = "p-4 border-b-2 border-brand-brown text-black whitespace-nowrap";
+        }
+
+        function renderAdminDashboard() {
+            document.getElementById('admin-stat-listings').textContent = properties.length;
+            document.getElementById('admin-stat-inquiries').textContent = adminInquiries.length;
+            document.getElementById('admin-stat-enlistments').textContent = adminEnlistments.length;
+
+            let totalUnits = 0;
+            developerProjects.forEach(p => totalUnits += (p.units || []).length);
+            document.getElementById('admin-stat-devunits').textContent = totalUnits;
+
+            const tbodyListings = document.getElementById('admin-listings-table');
+            tbodyListings.innerHTML = properties.map(p => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono font-bold">${p.id}</td>
+                    <td class="p-3 font-bold">${p.title}</td>
+                    <td class="p-3 uppercase font-semibold">${p.category}</td>
+                    <td class="p-3 text-neutral-600">${p.location}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${p.status === 'Sold' ? 'bg-red-700 text-white' : 'bg-black text-white'}">${normalizeStatus(p.status)}</span></td>
+                    <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
+                    <td class="p-3 font-mono">${p.area}</td>
+                    <td class="p-3 text-right space-x-2 whitespace-nowrap">
+                        <button onclick="editListing('${p.id}')" class="bg-brand-brown text-white px-2.5 py-1 text-[10px] uppercase font-bold">EDIT</button>
+                        <button onclick="deleteListing('${p.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] uppercase font-bold">DELETE</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            const tbodyUnits = document.getElementById('admin-devunits-table');
+            const unitRows = [];
+            developerProjects.forEach(proj => {
+                (proj.units || []).forEach(u => {
+                    unitRows.push(`
+                        <tr class="hover:bg-neutral-50">
+                            <td class="p-3 font-bold">${proj.title}</td>
+                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
+                            <td class="p-3 font-semibold">${u.type}</td>
+                            <td class="p-3 font-mono">${u.area}</td>
+                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
+                            <td class="p-3"><span class="px-2 py-0.5 text-[9px] font-bold bg-black text-white">${u.status}</span></td>
+                            <td class="p-3 text-right">
+                                <button onclick="deleteDevUnit('${u.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] font-bold">DELETE</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+            tbodyUnits.innerHTML = unitRows.length ? unitRows.join('') : `<tr><td colspan="7" class="p-4 text-center text-neutral-400">No developer units synced yet.</td></tr>`;
+
+            filterAdminInquiries(document.getElementById('inquiry-type-filter')?.value || 'ALL');
+
+            const tbodyEn = document.getElementById('admin-enlistments-table');
+            tbodyEn.innerHTML = adminEnlistments.length ? adminEnlistments.map(e => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3 font-mono text-[10px]">${e.timestamp ? new Date(e.timestamp).toLocaleDateString() : 'N/A'}</td>
+                    <td class="p-3 font-bold">${e.name}</td>
+                    <td class="p-3 font-mono">${e.email}<br>${e.phone}</td>
+                    <td class="p-3 font-semibold uppercase">${e.propertyType}</td>
+                    <td class="p-3">${e.location}</td>
+                </tr>
+            `).join('') : `<tr><td colspan="5" class="p-4 text-center text-neutral-400">No owner enlistments recorded yet.</td></tr>`;
+        }
+
+        function filterAdminInquiries(type) {
+            const tbody = document.getElementById('admin-inquiries-table');
+            const filtered = adminInquiries.filter(i => {
+                if (type === 'ALL') return true;
+                return (i.inquiryType || '').toLowerCase() === type.toLowerCase();
+            });
+            tbody.innerHTML = filtered.length ? filtered.map(i => `
+                <tr class="hover:bg-neutral-50">
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${i.inquiryType === 'Viewing Appointment' ? 'bg-brand-brown text-white' : 'bg-black text-white'}">${i.inquiryType || 'Inquiry'}</span></td>
+                    <td class="p-3 font-bold">${i.propertyTitle}</td>
+                    <td class="p-3">${i.name}</td>
+                    <td class="p-3 font-mono">${i.email}<br>${i.phone}</td>
+                    <td class="p-3 font-mono text-xs">${i.date || 'N/A'}</td>
+                    <td class="p-3 text-neutral-600">${i.notes || ''}</td>
+                </tr>
+            `).join('') : `<tr><td colspan="6" class="p-4 text-center text-neutral-400">No records found.</td></tr>`;
+        }
+
+        // HERO BANNER UPLOADER
+        let selectedBannerFile = null;
+        let selectedBannerBase64 = null;
+
+        function handleBannerSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            selectedBannerFile = file;
+            document.getElementById('fileLabel').textContent = file.name;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                selectedBannerBase64 = e.target.result;
+                document.getElementById('adminPreviewBox').style.backgroundImage = `url('${selectedBannerBase64}')`;
+                document.getElementById('uploadBtn').disabled = false;
+                document.getElementById('uploadStatus').textContent = "Ready to upload.";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function uploadBannerToDrive() {
+            if (!selectedBannerBase64) return;
+
+            const btn = document.getElementById('uploadBtn');
+            const status = document.getElementById('uploadStatus');
+
+            btn.disabled = true;
+            btn.textContent = "Uploading to Drive...";
+            status.textContent = "Saving to Google Drive...";
+
+            try {
+                const resp = await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: "uploadHeroBanner",
+                        targetFolderId: "1IvhKA8KtU_-9qO1eRH73XYVDMm-U5BTd",
+                        files: [{ name: selectedBannerFile.name, type: selectedBannerFile.type, base64: selectedBannerBase64.split(',')[1] }]
+                    })
+                });
+                const resData = await resp.json();
+                if (resData.bannerUrl || resData.url) {
+                    const finalUrl = resData.bannerUrl || resData.url;
+                    SafeStorage.set('cpr_custom_hero_banner', finalUrl);
+                    updateHeroBannerStyle(finalUrl);
+                    status.textContent = "✓ Live on site!";
+                    showToast("Hero Banner uploaded to Drive & updated live!", "success");
+                }
+            } catch(e) {
+                SafeStorage.set('cpr_custom_hero_banner', selectedBannerBase64);
+                updateHeroBannerStyle(selectedBannerBase64);
+                status.textContent = "✓ Updated!";
+                showToast("Hero banner updated locally!", "info");
+            }
+            btn.disabled = false;
+            btn.textContent = "Upload & Set Live";
+        }
+
+        // CRUD OPERATIONS
+        function editListing(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!prop) return;
+
+            document.getElementById('crud-id').value = prop.id;
+            document.getElementById('crud-title').value = prop.title;
+            document.getElementById('crud-category').value = prop.category;
+            document.getElementById('crud-status').value = normalizeStatus(prop.status);
+            document.getElementById('crud-price').value = prop.price;
+            document.getElementById('crud-rentprice').value = prop.rentPrice || '';
+            document.getElementById('crud-area').value = prop.area;
+            document.getElementById('crud-beds').value = prop.beds;
+            document.getElementById('crud-baths').value = prop.baths;
+            document.getElementById('crud-parking').value = prop.parking;
+            document.getElementById('crud-location').value = prop.location;
+            document.getElementById('crud-developer').value = prop.developer;
+            document.getElementById('crud-images').value = (prop.images || []).join(', ');
+            document.getElementById('crud-description').value = prop.description;
+            document.getElementById('crud-isdeal').checked = Boolean(prop.isDeal);
+            document.getElementById('crud-isfeatured').checked = Boolean(prop.isFeatured);
+            document.getElementById('crud-local-files').value = '';
+
+            document.getElementById('add-listing-modal-title').textContent = `EDIT LISTING #${prop.id}`;
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+
+        function openAddListingModal() {
+            document.getElementById('listing-crud-form').reset();
+            document.getElementById('crud-id').value = '';
+            document.getElementById('crud-local-files').value = '';
+            document.getElementById('add-listing-modal-title').textContent = "ADD NEW LUXURY LISTING";
+            document.getElementById('add-listing-modal').classList.remove('hidden');
+        }
+        function closeAddListingModal() { document.getElementById('add-listing-modal').classList.add('hidden'); }
+
+        async function handleListingCrudSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('crud-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & OVERWRITING SHEET 1...`;
+
+            const idVal = document.getElementById('crud-id').value;
+            const isEdit = Boolean(idVal);
+            const listingId = isEdit ? idVal : String(Date.now());
+            const propTitle = document.getElementById('crud-title').value.trim();
+
+            const fileInput = document.getElementById('crud-local-files');
+            let localFilesData = [];
+            if (fileInput.files && fileInput.files.length > 0) {
+                const sortedFiles = Array.from(fileInput.files).sort((a, b) =>
+                    a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+                );
+
+                for (let i = 0; i < sortedFiles.length; i++) {
+                    const f = sortedFiles[i];
+                    const b64 = await new Promise((res, rej) => {
+                        const r = new FileReader();
+                        r.onload = () => res(r.result.split(',')[1]);
+                        r.onerror = rej;
+                        r.readAsDataURL(f);
+                    });
+                    localFilesData.push({ name: f.name, type: f.type, base64: b64 });
+                }
+            }
+
+            const rawImages = document.getElementById('crud-images').value;
+            const imagesArr = rawImages ? rawImages.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+            const payload = {
+                sheetTab: "Sheet1",
+                action: isEdit ? "updateListing" : "addListing",
+                id: listingId,
+                title: propTitle,
+                category: document.getElementById('crud-category').value.trim(),
+                status: normalizeStatus(document.getElementById('crud-status').value.trim()),
+                price: Number(document.getElementById('crud-price').value) || 0,
+                rentPrice: Number(document.getElementById('crud-rentprice').value) || 0,
+                area: document.getElementById('crud-area').value.trim(),
+                beds: Number(document.getElementById('crud-beds').value) || 0,
+                baths: Number(document.getElementById('crud-baths').value) || 0,
+                parking: Number(document.getElementById('crud-parking').value) || 0,
+                location: document.getElementById('crud-location').value.trim(),
+                developer: document.getElementById('crud-developer').value.trim() || "Compass Realty Exclusive",
+                description: document.getElementById('crud-description').value.trim(),
+                isDeal: document.getElementById('crud-isdeal').checked,
+                isFeatured: document.getElementById('crud-isfeatured').checked,
+                images: imagesArr,
+                localImages: localFilesData,
+                _locallyEdited: true,
+                _imagesOrdered: true
+            };
+
+            const sanitized = sanitizeListingRecord(payload);
+            sanitized._locallyEdited = true;
+
+            if (isEdit) {
+                const idx = properties.findIndex(p => String(p.id) === String(listingId));
+                if (idx !== -1) properties[idx] = sanitized;
+            } else {
+                properties.unshift(sanitized);
+            }
+            SafeStorage.set('cpr_cached_listings_v8', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+            } catch(e) {}
+
+            closeAddListingModal();
+            btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
+            showToast(`Listing #${listingId} saved!`, "success");
+        }
+
+        async function deleteListing(id) {
+            const prop = properties.find(p => String(p.id) === String(id));
+            if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Sheet 1.`)) return;
+            properties = properties.filter(p => String(p.id) !== String(id));
+            SafeStorage.set('cpr_cached_listings_v8', JSON.stringify(properties));
+            renderPropertyList();
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ sheetTab: "Sheet1", action: "deleteListing", id: id, title: prop ? prop.title : "" })
+                });
+            } catch(e) {}
+            showToast(`Listing #${id} deleted!`, "info");
+        }
+
+        function openAddDevUnitModal() {
+            const sel = document.getElementById('unit-target-project');
+            sel.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
+            document.getElementById('unit-local-files').value = '';
+            document.getElementById('add-devunit-modal').classList.remove('hidden');
+        }
+        function closeAddDevUnitModal() { document.getElementById('add-devunit-modal').classList.add('hidden'); }
+
+        async function handleSaveDevUnitSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('devunit-submit-btn');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> UPLOADING ASSETS & SAVING TO SHEET 5...`;
+
+            const projId = document.getElementById('unit-target-project').value;
+            const proj = developerProjects.find(p => p.id === projId) || developerProjects[0];
+            const unitType = document.getElementById('unit-form-type').value.trim();
+
+            const fileInput = document.getElementById('unit-local-files');
+            let localFiles = [];
+            if (fileInput.files && fileInput.files.length > 0) {
+                const sorted = Array.from(fileInput.files).sort((a,b) =>
+                    a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+                );
+                for (let i = 0; i < sorted.length; i++) {
+                    const f = sorted[i];
+                    const b64 = await new Promise((res, rej) => {
+                        const r = new FileReader();
+                        r.onload = () => res(r.result.split(',')[1]);
+                        r.onerror = rej;
+                        r.readAsDataURL(f);
+                    });
+                    localFiles.push({ name: f.name, type: f.type, base64: b64 });
+                }
+            }
+
+            const rawImgs = document.getElementById('unit-form-images').value;
+            const parsed = rawImgs.split(',').map(s => s.trim()).filter(Boolean);
+
+            const newUnit = {
+                id: 'UNIT-' + Date.now(),
+                type: unitType,
+                area: document.getElementById('unit-form-area').value.trim(),
+                priceRange: document.getElementById('unit-form-price').value.trim(),
+                status: document.getElementById('unit-form-status').value,
+                beds: 2, baths: 2,
+                images: parsed.length ? parsed : [proj.image]
+            };
+
+            proj.units = proj.units || [];
+            proj.units.push(newUnit);
+            SafeStorage.set('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        sheetTab: "Sheet5",
+                        action: "syncDeveloperUnit",
+                        projectId: proj.id,
+                        projectName: proj.title,
+                        developer: proj.developer,
+                        township: proj.township,
+                        turnover: proj.turnover,
+                        unitId: newUnit.id,
+                        unitType: newUnit.type,
+                        area: newUnit.area,
+                        priceRange: newUnit.priceRange,
+                        status: newUnit.status,
+                        beds: newUnit.beds,
+                        baths: newUnit.baths,
+                        images: newUnit.images,
+                        localImages: localFiles
+                    })
+                });
+            } catch(e) {}
+
+            closeAddDevUnitModal();
+            renderAdminDashboard();
+            btn.textContent = "SAVE UNIT & SYNC TO SHEET 5";
+            showToast(`Added unit to ${proj.title}!`, "success");
+        }
+
+        async function deleteDevUnit(unitId) {
+            if (!confirm(`Delete this unit? This will update Sheet 5.`)) return;
+            developerProjects.forEach(p => {
+                p.units = (p.units || []).filter(u => u.id !== unitId);
+            });
+            SafeStorage.set('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+            renderAdminDashboard();
+
+            try {
+                await fetch(GOOGLE_SHEETS_API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ sheetTab: "Sheet5", action: "deleteDeveloperUnit", unitId: unitId })
+                });
+            } catch(e) {}
+            showToast("Unit removed from Sheet 5!", "info");
+        }
+
+        // GOOGLE SHEETS ASYNC SYNC
+        async function fetchDatabaseFromGoogleSheets() {
+            try {
+                const res = await fetch(GOOGLE_SHEETS_API_URL);
+                const data = await res.json();
+
+                let incomingListings = [];
+                let incomingDevUnits = [];
+                let incomingAppts = [];
+                let incomingEnlistments = [];
+
+                if (Array.isArray(data)) {
+                    incomingListings = data;
+                } else if (data && typeof data === 'object') {
+                    if (Array.isArray(data.secondaryListings)) incomingListings = data.secondaryListings;
+                    else if (Array.isArray(data.listings)) incomingListings = data.listings;
+                    if (Array.isArray(data.developerUnits)) incomingDevUnits = data.developerUnits;
+                    if (Array.isArray(data.appointments)) incomingAppts = data.appointments;
+                    if (Array.isArray(data.enlistments)) incomingEnlistments = data.enlistments;
+                }
+
+                if (incomingListings && incomingListings.length > 0) {
+                    properties = incomingListings.map(item => {
+                        const sanitized = sanitizeListingRecord(item);
+                        const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
+                        
+                        if (existing && existing._locallyEdited) {
+                            if (sanitized.images && sanitized.images.length > 0 && !sanitized.images[0].includes('unsplash')) {
+                                existing.images = sanitized.images;
+                            }
+                            return existing;
+                        }
+                        if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
+                            sanitized.price = existing.price;
+                        }
+                        return sanitized;
+                    });
+                    SafeStorage.set('cpr_cached_listings_v8', JSON.stringify(properties));
+                    renderPropertyList();
+                }
+
+                if (incomingDevUnits && incomingDevUnits.length > 0) {
+                    incomingDevUnits.forEach(du => {
+                        let proj = developerProjects.find(p => p.id === du.projectId || p.title.toLowerCase() === (du.projectName || '').toLowerCase());
+                        if (proj) {
+                            proj.units = proj.units || [];
+                            const existUIdx = proj.units.findIndex(u => u.id === du.unitId);
+                            const uObj = {
+                                id: du.unitId,
+                                type: du.unitType,
+                                area: du.area,
+                                priceRange: du.priceRange,
+                                status: du.status,
+                                beds: Number(du.beds) || 2,
+                                baths: Number(du.baths) || 2,
+                                images: (du.images ? String(du.images).split(',').map(s=>s.trim()) : [proj.image]).map(resolveDriveImageUrl)
+                            };
+                            if (existUIdx !== -1) proj.units[existUIdx] = uObj;
+                            else proj.units.push(uObj);
+                        }
+                    });
+                    SafeStorage.set('cpr_dev_projects_v4', JSON.stringify(developerProjects));
+                }
+
+                if (incomingAppts.length > 0) adminInquiries = incomingAppts;
+                if (incomingEnlistments.length > 0) adminEnlistments = incomingEnlistments;
+
+                renderAdminDashboard();
+            } catch(e) {}
+        }
+
+        function updateCategoryButtonsUI(activeCat) {
+            ['ALL', 'CONDOMINIUM', 'HOUSE AND LOTS', 'COMMERCIAL', 'LOTS'].forEach(c => {
+                const btn = document.getElementById('cat-btn-' + c);
+                if (!btn) return;
+                const isMatch = normalizeText(c) === normalizeText(activeCat);
+                btn.className = isMatch
+                    ? 'px-3 py-1.5 text-xs font-semibold uppercase border border-black transition-all bg-black text-white'
+                    : 'px-3 py-1.5 text-xs font-semibold uppercase border border-neutral-300 hover:border-black transition-all bg-white text-black';
+            });
+        }
+
+        function setFilterCategory(cat) {
+            currentFilters.category = cat;
+            const catSelect = document.getElementById('filter-category');
+            if (catSelect) catSelect.value = cat;
+            updateCategoryButtonsUI(cat);
+            renderPropertyList();
+        }
+
+        function filterProperties(status, cat) {
+            currentFilters.status = status;
+            currentFilters.category = cat;
+
+            const statusSelect = document.getElementById('filter-status');
+            const catSelect = document.getElementById('filter-category');
+            if (statusSelect) statusSelect.value = status;
+            if (catSelect) catSelect.value = cat;
+
+            updateCategoryButtonsUI(cat);
+
+            let statusLabel = status === 'ALL' ? 'ALL' : (status === 'Sold' ? 'SOLD' : 'FOR ' + status.toUpperCase());
+            let catLabel = cat === 'ALL' ? 'PROPERTIES' : cat;
+            document.getElementById('current-view-title').textContent = `${statusLabel} ${catLabel}`;
+            
+            renderPropertyList();
+            document.getElementById('current-view-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function filterBySection(sec) {
+            currentFilters.status = 'ALL';
+            currentFilters.category = 'ALL';
+            currentFilters.onlyDeals = (sec === 'deals');
+            currentFilters.onlyFeatured = (sec === 'featured');
+
+            const statusSelect = document.getElementById('filter-status');
+            const catSelect = document.getElementById('filter-category');
+            if (statusSelect) statusSelect.value = 'ALL';
+            if (catSelect) catSelect.value = 'ALL';
+            updateCategoryButtonsUI('ALL');
+
+            document.getElementById('current-view-title').textContent = sec === 'deals' ? 'TOP 10 DEALS' : 'FEATURED PROPERTIES';
+            renderPropertyList();
+            document.getElementById('current-view-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function handleSearchSubmit(e) {
+            e.preventDefault();
+            currentFilters.keyword = document.getElementById('filter-keyword').value;
+            currentFilters.status = document.getElementById('filter-status').value;
+            currentFilters.category = document.getElementById('filter-category').value;
+            currentFilters.maxPrice = document.getElementById('filter-maxprice').value;
+
+            updateCategoryButtonsUI(currentFilters.category);
+
+            let statusLabel = currentFilters.status === 'ALL' ? 'ALL' : (currentFilters.status === 'Sold' ? 'SOLD' : 'FOR ' + currentFilters.status.toUpperCase());
+            let catLabel = currentFilters.category === 'ALL' ? 'PROPERTIES' : currentFilters.category;
+            document.getElementById('current-view-title').textContent = `${statusLabel} ${catLabel}`;
+
+            renderPropertyList();
+        }
+
+        function resetFilters() {
+            currentFilters = { status: 'ALL', category: 'ALL', keyword: '', maxPrice: 'ALL', onlyDeals: false, onlyFeatured: false, onlyFavs: false };
+            document.getElementById('search-form')?.reset();
+            updateCategoryButtonsUI('ALL');
+            document.getElementById('current-view-title').textContent = 'ALL PROPERTIES';
+            renderPropertyList();
+        }
+
+        function toggleFavoritesView() {
+            currentFilters.onlyFavs = !currentFilters.onlyFavs;
+            document.getElementById('current-view-title').textContent = currentFilters.onlyFavs ? 'SAVED PROPERTIES' : 'ALL PROPERTIES';
+            renderPropertyList();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function showToast(msg, type = "info") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-black text-white border border-brand-brown px-4 py-3 text-xs uppercase font-semibold shadow-2xl';
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        // LIGHTBOX
+        let lbImgs = [];
+        let lbIdx = 0;
+        function openLightboxStudio(title, images, startIdx = 0) {
+            lbImgs = (images && images.length > 0) ? images : [];
+            lbIdx = startIdx || 0;
+            document.getElementById('lightbox-title').textContent = title || "PROPERTY STUDIO";
+            updateLb();
+            const thumbs = document.getElementById('lightbox-thumbnails');
+            thumbs.innerHTML = lbImgs.map((img, i) => `
+                <img src="${img}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer transition-all">
+            `).join('');
+            document.getElementById('lightbox-studio-modal').classList.remove('hidden');
+        }
+
+        function updateLb() {
+            if (!lbImgs[lbIdx]) return;
+            const mainImg = document.getElementById('lightbox-main-img');
+            mainImg.src = lbImgs[lbIdx];
+            document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+            applyWatermarkToContainer('lightbox-watermark', mainImg);
+
+            const thumbs = document.getElementById('lightbox-thumbnails').children;
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].className = i === lbIdx ? 'h-12 w-16 object-cover border-2 border-brand-brown cursor-pointer scale-105' : 'h-12 w-16 object-cover border-2 border-neutral-700 opacity-60 cursor-pointer';
+            }
+        }
+
+        function navigateLightbox(dir) {
+            if (lbImgs.length <= 1) return;
+            lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length;
+            updateLb();
+        }
+
+        function setLb(idx) {
+            lbIdx = idx;
+            updateLb();
+        }
+
+        function closeLightboxStudio() {
+            document.getElementById('lightbox-studio-modal').classList.add('hidden');
+        }
+
+        // DEVELOPER LOGIC
+        function switchDeveloperBrand(val) {
+            filterDeveloperProjects(val);
+        }
+
+        function filterDeveloperProjects(brand = "ALL") {
+            const grid = document.getElementById('dev-projects-grid');
+            if (!grid) return;
+
+            let filtered = developerProjects;
+            if (brand && brand !== 'ALL') {
+                filtered = developerProjects.filter(p => p.devSlug === brand || p.developer.toLowerCase().includes(brand.toLowerCase()));
+            }
+
+            document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white border-2 border-black p-6 space-y-4">
+                    <div class="relative h-56 bg-neutral-900 overflow-hidden">
+                        <img id="img-proj-${p.id}" src="${p.image}" class="w-full h-full object-cover">
+                        <div id="wm-proj-${p.id}" class="watermark-container"></div>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-brand-brown uppercase font-bold">${p.developer}</span>
+                        <h3 class="text-lg font-bold uppercase">${p.title}</h3>
+                        <p class="text-xs text-neutral-600">${p.township}</p>
+                    </div>
+                    <div class="bg-neutral-50 p-2.5 text-xs font-mono border">
+                        Available Layouts: ${(p.units || []).length} Units
+                    </div>
+                </div>
+            `).join('');
+
+            filtered.forEach(p => {
+                setTimeout(() => {
+                    const imgEl = document.getElementById(`img-proj-${p.id}`);
+                    if (imgEl) applyWatermarkToContainer(`wm-proj-${p.id}`, imgEl);
+                }, 10);
+            });
+        }
+    </script>
+</body>
+</html>
