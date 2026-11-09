@@ -1471,32 +1471,126 @@ if (Array.isArray(rawImg)) {
         } catch(e) { favorites = []; }
 
         // DEVELOPER TOWNSHIPS (SHANG & ARTHALAND)
-        let developerProjects = [];
-        try {
-            developerProjects = JSON.parse(SafeStorage.get('cpr_dev_projects_v4')) || [];
-        } catch(e) {}
-        if (!developerProjects || developerProjects.length === 0) {
-            developerProjects = [
-                {
-                    id: 'DEV-101', devSlug: 'shang-properties', developer: 'Shang Properties',
-                    title: 'Aurelia Residences', township: 'Bonifacio Global City, Taguig',
-                    turnover: 'Turnover: 2026', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                    description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC.', units: []
-                },
-                {
-                    id: 'DEV-102', devSlug: 'arthaland', developer: 'Arthaland',
-                    title: 'Eluria Makati', township: 'Legazpi Village, Makati',
-                    turnover: 'Pre-selling / Handover', image: 'https://arthaland.imgix.net/assets/site/eluria-home-header-v3.png?w=1600',
-                    description: 'Ultra-luxury green residence with white-glove butler services.', units: []
-                },
-                {
-                    id: 'DEV-103', devSlug: 'arthaland', developer: 'Arthaland',
-                    title: 'Cebu Exchange', township: 'Salinas Drive, Cebu City',
-                    turnover: 'Ready for Occupancy', image: 'https://arthaland.imgix.net/assets/site/DJI_0743.JPG?w=1600',
-                    description: 'The largest multi-certified green office building in the Philippines.', units: []
-                }
-            ];
-        }
+        // =========================================================================
+        // OFFICIAL DEVELOPER TOWNSHIPS (SHANG PROPERTIES & ARTHALAND)
+        // =========================================================================
+        let developerProjects = [
+            // --- SHANG PROPERTIES ---
+            {
+                id: 'DEV-101',
+                devSlug: 'shang-properties',
+                developer: 'Shang Properties',
+                title: 'Aurelia Residences',
+                township: 'Bonifacio Global City, Taguig',
+                turnover: 'Turnover: 2026',
+                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+                description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC with signature skyline views.',
+                units: [
+                    { id: 'AUR-01', type: '3-Bedroom Deluxe', area: '245 sqm', priceRange: '₱150,000,000 - ₱175,000,000', status: 'Preselling', beds: 3, baths: 3 },
+                    { id: 'AUR-02', type: '4-Bedroom Sky Suite', area: '340 sqm', priceRange: '₱220,000,000 - ₱260,000,000', status: 'Few Units Left', beds: 4, baths: 4 }
+                ]
+            },
+
+            // --- ARTHALAND FLAGSHIP DEVELOPMENTS ---
+            {
+                id: 'DEV-102',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Eluria Makati',
+                township: 'Rada St., Legazpi Village, Makati',
+                turnover: 'Turnover: Q4 2025 / 2026',
+                image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
+                description: 'Ultra-luxury sustainable boutique tower with only 37 limited-edition residences and white-glove butler services trained at The International Butler Academy.',
+                units: [
+                    { id: 'ELU-01', type: '3-Bedroom Suite', area: '288 sqm', priceRange: '₱145,000,000 - ₱165,000,000', status: 'Preselling', beds: 3, baths: 3 },
+                    { id: 'ELU-02', type: '5-Bedroom Garden Residence', area: '579 sqm', priceRange: '₱290,000,000 - ₱330,000,000', status: 'Exclusive Penthouse', beds: 5, baths: 5 }
+                ]
+            },
+            {
+                id: 'DEV-103',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Cebu Exchange',
+                township: 'Salinas Drive, Cebu IT Park, Cebu City',
+                turnover: 'Ready for Occupancy',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+                description: 'The tallest office skyscraper in the Visayas and the world\'s largest EDGE Zero Carbon-certified green commercial tower (39 storeys, 108,490 sqm GFA).',
+                units: [
+                    { id: 'CEB-01', type: 'Office Suite (Mid Zone)', area: '95 sqm - 160 sqm', priceRange: '₱18,000,000 - ₱32,000,000', status: 'Ready for Occupancy', beds: 0, baths: 1 },
+                    { id: 'CEB-02', type: 'Whole Floor Office Plate', area: '2,200 sqm', priceRange: '₱420,000,000 - ₱480,000,000', status: 'Available for Sale/Lease', beds: 0, baths: 6 }
+                ]
+            },
+            {
+                id: 'DEV-104',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Lucima Cebu',
+                township: 'Cardinal Rosales Ave., Cebu Business Park',
+                turnover: 'Turnover: 2026',
+                image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+                description: 'Quadruple-certified luxury green residential high-rise developed in partnership with ARCH Capital. 36 storeys positioned directly opposite Ayala Center Cebu.',
+                units: [
+                    { id: 'LUC-01', type: '1-Bedroom Executive', area: '50 sqm', priceRange: '₱11,500,000 - ₱13,500,000', status: 'Preselling', beds: 1, baths: 1 },
+                    { id: 'LUC-02', type: '2-Bedroom Suite', area: '105 sqm', priceRange: '₱24,000,000 - ₱28,000,000', status: 'Few Units Left', beds: 2, baths: 2 }
+                ]
+            },
+            {
+                id: 'DEV-105',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Sevīna Park Villas',
+                township: 'Sevīna Park, Biñan, Laguna',
+                turnover: 'Handover / Ready for Occupancy',
+                image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80',
+                description: 'Southeast Asia’s first LEED Platinum certified neighborhood. Designer eco-villas by Leandro V. Locsin Partners with 60% green open space.',
+                units: [
+                    { id: 'SEV-01', type: '2-Bedroom Eco Villa', area: '138 sqm', priceRange: '₱22,000,000 - ₱25,000,000', status: 'Limited Inventory', beds: 2, baths: 2 },
+                    { id: 'SEV-02', type: '4-Bedroom Master Villa', area: '182 sqm', priceRange: '₱31,000,000 - ₱35,000,000', status: 'Ready for Occupancy', beds: 4, baths: 3 }
+                ]
+            },
+            {
+                id: 'DEV-106',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Una Apartments',
+                township: 'Sevīna Park, Biñan, Laguna',
+                turnover: 'Pre-selling (2026)',
+                image: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1200&q=80',
+                description: 'Wellness-focused sustainable condominiums adjacent to De La Salle University Laguna. Eligible for Pag-IBIG BALAI BERDE green home financing.',
+                units: [
+                    { id: 'UNA-01', type: 'Studio Apartment', area: '28 sqm', priceRange: '₱4,200,000 - ₱4,800,000', status: 'Preselling', beds: 1, baths: 1 },
+                    { id: 'UNA-02', type: '1-Bedroom Unit', area: '40 sqm', priceRange: '₱6,100,000 - ₱6,800,000', status: 'Preselling', beds: 1, baths: 1 }
+                ]
+            },
+            {
+                id: 'DEV-107',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Savya Financial Center',
+                township: 'ARCA South, Taguig City',
+                turnover: 'Ready for Occupancy',
+                image: 'https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1200&q=80',
+                description: 'Next-generation Grade-A corporate twin towers developed with Mitsubishi Estate, featuring sustainable smart building technologies in ARCA South.',
+                units: [
+                    { id: 'SAV-01', type: 'Corporate Office Suite', area: '120 sqm - 250 sqm', priceRange: '₱28,000,000 - ₱58,000,000', status: 'Ready for Occupancy', beds: 0, baths: 2 },
+                    { id: 'SAV-02', type: 'Whole Floor Commercial Plate', area: '1,400 sqm', priceRange: '₱310,000,000 - ₱350,000,000', status: 'Available for Sale/Lease', beds: 0, baths: 4 }
+                ]
+            },
+            {
+                id: 'DEV-108',
+                devSlug: 'arthaland',
+                developer: 'Arthaland',
+                title: 'Sondris Makati',
+                township: 'Arnaiz Ave., Legazpi Village, Makati',
+                turnover: 'Pre-selling (Turnover: 2030)',
+                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+                description: '37-storey luxury residential tower developed in partnership with Mitsui Fudosan (Asia) and designed by AEDAS in the heart of Legazpi Village.',
+                units: [
+                    { id: 'SON-01', type: '1-Bedroom Sky Suite', area: '62 sqm', priceRange: '₱23,000,000 - ₱26,000,000', status: 'Preselling', beds: 1, baths: 1 },
+                    { id: 'SON-02', type: '3-Bedroom Executive Suite', area: '185 sqm', priceRange: '₱75,000,000 - ₱88,000,000', status: 'Priority Launch', beds: 3, baths: 3 }
+                ]
+            }
+        ];
 
         let adminInquiries = [];
         let adminEnlistments = [];
