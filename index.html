@@ -1164,6 +1164,55 @@
                 .trim();
         }
 
+        const activeDualMode = {};
+
+        function formatMoney(amount, isRent = false) {
+            if (!amount || Number(amount) <= 0) return "PRICE UPON INQUIRY";
+            const formatted = new Intl.NumberFormat('en-PH', { 
+                style: 'currency', 
+                currency: 'PHP', 
+                maximumFractionDigits: 0 
+            }).format(amount);
+            return isRent ? `${formatted} / mo` : formatted;
+        }
+
+        function switchListingDualPrice(event, propId, mode) {
+            if (event) event.stopPropagation();
+            activeDualMode[propId] = mode;
+            
+            const prop = properties.find(p => String(p.id) === String(propId));
+            if (!prop) return;
+
+            const priceEl = document.getElementById(`price-display-${propId}`);
+            if (priceEl) {
+                if (mode === 'rent') {
+                    priceEl.innerHTML = `<span class="text-[10px] font-normal text-neutral-500 block uppercase tracking-wider">MONTHLY LEASE</span> ${formatMoney(prop.rentPrice, true)}`;
+                } else {
+                    priceEl.innerHTML = `<span class="text-[10px] font-normal text-neutral-500 block uppercase tracking-wider">PURCHASE PRICE</span> ${formatMoney(prop.price, false)}`;
+                }
+            }
+
+            const labelEl = document.getElementById(`dual-badge-label-${propId}`);
+            if (labelEl) {
+                labelEl.textContent = mode === 'rent' ? 'FOR LEASE' : 'FOR SALE';
+            }
+
+            const menuEl = document.getElementById(`dual-menu-${propId}`);
+            if (menuEl) menuEl.classList.add('hidden');
+        }
+
+        function toggleDualMenu(event, propId) {
+            if (event) event.stopPropagation();
+            const menuEl = document.getElementById(`dual-menu-${propId}`);
+            if (menuEl) {
+                menuEl.classList.toggle('hidden');
+            }
+        }
+
+        window.addEventListener('click', () => {
+            document.querySelectorAll('[id^="dual-menu-"]').forEach(menu => menu.classList.add('hidden'));
+        });
+
         // =========================================================================
         // UNIVERSAL DATA SANITIZER (IMAGE 001 COVER GUARANTEE)
         // =========================================================================
@@ -1221,31 +1270,31 @@
                 area = beds + " sqm";
                 beds = 0;
             }
-}           
+
+            // Clean price & dual rent price parsing
             let cleanPrice = 0;
-let cleanRentPrice = 0;
+            let cleanRentPrice = Number(String(item.rentPrice || item["Rent Price"] || "0").replace(/[^0-9]/g, '')) || 0;
+            const rawPriceStr = String(item.price || item.Price || item.status || "0").trim();
 
-const rawPriceStr = String(item.price || item.Price || "").trim();
-
-if (rawPriceStr.includes('/')) {
-    const parts = rawPriceStr.split('/');
-    cleanPrice = Number(parts[0].replace(/[^0-9]/g, '')) || 0;
-    cleanRentPrice = Number(parts[1].replace(/[^0-9]/g, '')) || 0;
-} else {
-    cleanPrice = Number(rawPriceStr.replace(/[^0-9]/g, '')) || 0;
-}
-
-            let cleanPrice = Number(String(item.price || "0").replace(/[^0-9]/g, '')) || 0;
-            let cleanStatus = normalizeStatus(item.status);
-
-            if (/^\d{5,}$/.test(String(item.status || "").trim())) {
-                cleanPrice = Number(String(item.status).replace(/[^0-9]/g, '')) || cleanPrice;
-                cleanStatus = "Sale";
+            if (rawPriceStr.includes('/')) {
+                const parts = rawPriceStr.split('/');
+                cleanPrice = Number(parts[0].replace(/[^0-9]/g, '')) || 0;
+                cleanRentPrice = Number(parts[1].replace(/[^0-9]/g, '')) || cleanRentPrice;
+            } else {
+                cleanPrice = Number(rawPriceStr.replace(/[^0-9]/g, '')) || 0;
             }
 
-            // 4. IMAGE 001 REVERSAL LOGIC
-            // Google Drive folder sync lists files in reverse order: [003, 002, 001]
-            // We flip the list so Image 001 is guaranteed at index [0] (cover position)
+            // Fallback: look for lease/rent rate inside description if rentPrice is still 0
+            if (!cleanRentPrice && desc) {
+                const rentMatch = desc.match(/(?:rent|lease|monthly)[\s:]*(?:php|₱)?\s*([\d,]+)(?:\s*\/\s*mo|\b)/i);
+                if (rentMatch && rentMatch[1]) {
+                    cleanRentPrice = Number(rentMatch[1].replace(/,/g, '')) || 0;
+                }
+            }
+
+            let cleanStatus = normalizeStatus(item.status);
+
+            // 4. Image ordering guarantee
             let imgList = [];
             if (Array.isArray(rawImg)) {
                 imgList = [...rawImg];
@@ -1279,17 +1328,6 @@ if (rawPriceStr.includes('/')) {
                 _locallyEdited: Boolean(item._locallyEdited),
                 _imagesOrdered: true
             };
-
-            // Find or parse rental price if status is 'Sale & Rent'
-let cleanRentPrice = Number(String(item.rentPrice || item.rent_price || "0").replace(/[^0-9]/g, '')) || 0;
-
-// Auto-detect rental price in description if not explicitly provided (e.g., "120,000/mo" or "Lease: 120k")
-if (!cleanRentPrice && desc) {
-    const rentMatch = desc.match(/(?:rent|lease|monthly)[\s:]*(?:php|₱)?\s*([\d,]+)(?:\s*\/\s*mo|\b)/i);
-    if (rentMatch && rentMatch[1]) {
-        cleanRentPrice = Number(rentMatch[1].replace(/,/g, '')) || 0;
-    }
-}
         }
 
         // PERMANENT BASELINE PORTFOLIO (WITH IMAGE 001 GUARANTEED FIRST)
