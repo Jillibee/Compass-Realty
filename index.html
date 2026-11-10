@@ -11,7 +11,7 @@
     <title>Compass Realty | Luxury Real Estate, Prime Estates & High-Yield Investments Philippines</title>
     <meta name="title" content="Compass Realty | Luxury Real Estate, Prime Estates & High-Yield Investments Philippines">
     <meta name="description" content="Premier luxury real estate advisory and high-yielding investment brokerage in the Philippines. Exclusive trophy residences in BGC, Makati, Ayala Alabang, coastal estates, and prime commercial developments. Licensed PRC #4740.">
-    <meta name="keywords" content="luxury real estate Philippines, high yield property investment Manila, BGC luxury condos for sale, Grand Hyatt Residences BGC, Aurelia Residences Taguig, One Roxas Triangle Makati, One Rockwell for sale, Ayala Alabang Village house for sale, Tali Beach house Nasugbu, commercial lot for sale Metro Manila, prime land investment Laguna Cavite, PRC licensed real estate broker Manila, trophy assets Philippines">
+    <meta name="keywords" content="luxury real estate Philippines, high yield property investment Manila, BGC luxury condos for sale, Grand Hyatt Residences BGC, One Roxas Triangle Makati, One Rockwell for sale, Ayala Alabang Village house for sale, Tali Beach house Nasugbu, commercial lot for sale Metro Manila, prime land investment Laguna Cavite, PRC licensed real estate broker Manila, trophy assets Philippines">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="Compass Realty Exclusive">
     <link rel="canonical" href="https://www.compassprimerealty.com/">
@@ -525,7 +525,6 @@
                         <label class="block text-[10px] uppercase tracking-widest text-neutral-300 font-bold mb-1">SELECT DEVELOPER BRAND</label>
                         <select id="dev-selector-dropdown" onchange="switchDeveloperBrand(this.value)" class="w-full lg:w-72 bg-white text-black text-xs font-semibold uppercase px-4 py-3 border border-black focus:outline-none cursor-pointer">
                             <option value="ALL">ALL DEVELOPERS & TOWNSHIPS</option>
-                            <option value="shang-properties">Shang Properties</option>
                             <option value="arthaland">Arthaland Sustainable Luxury</option>
                         </select>
                     </div>
@@ -1004,7 +1003,7 @@
                 <div>
                     <h4 class="text-xs font-bold uppercase tracking-widest text-brand-brown mb-4">PORTFOLIO</h4>
                     <ul class="space-y-2 text-xs text-neutral-300 font-light">
-                        <li><a href="#" onclick="showDeveloperPortalView(); return false;" class="text-white hover:text-brand-brown font-semibold">&bull; Developer Townships (Shang & Arthaland)</a></li>
+                        <li><a href="#" onclick="showDeveloperPortalView(); return false;" class="text-white hover:text-brand-brown font-semibold">&bull; Developer Townships (Arthaland)</a></li>
                         <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'ALL'); return false;" class="hover:text-white">&bull; Luxury Condominiums</a></li>
                         <li><a href="#" onclick="showMainApp(); filterProperties('Sale', 'HOUSE AND LOTS'); return false;" class="hover:text-white">&bull; Ayala Alabang Village Mansions</a></li>
                         <li><a href="#" onclick="showMainApp(); filterProperties('Sold', 'ALL'); return false;" class="hover:text-white">&bull; Closed / Sold Transactions</a></li>
@@ -1470,27 +1469,11 @@ if (Array.isArray(rawImg)) {
             favorites = JSON.parse(SafeStorage.get('cpr_favorites')) || [];
         } catch(e) { favorites = []; }
 
-        // DEVELOPER TOWNSHIPS (SHANG & ARTHALAND)
+        // ARTHALAND DEVELOPER PROJECTS
         // =========================================================================
-        // OFFICIAL DEVELOPER TOWNSHIPS (SHANG PROPERTIES & ARTHALAND)
+        // ARTHALAND PROJECT LISTINGS
         // =========================================================================
         let developerProjects = [
-            // --- SHANG PROPERTIES ---
-            {
-                id: 'DEV-101',
-                devSlug: 'shang-properties',
-                developer: 'Shang Properties',
-                title: 'Aurelia Residences',
-                township: 'Bonifacio Global City, Taguig',
-                turnover: 'Turnover: 2026',
-                image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-                description: 'An architectural icon positioned at McKinley Parkway and 5th Avenue, BGC with signature skyline views.',
-                units: [
-                    { id: 'AUR-01', type: '3-Bedroom Deluxe', area: '245 sqm', priceRange: '₱150,000,000 - ₱175,000,000', status: 'Preselling', beds: 3, baths: 3 },
-                    { id: 'AUR-02', type: '4-Bedroom Sky Suite', area: '340 sqm', priceRange: '₱220,000,000 - ₱260,000,000', status: 'Few Units Left', beds: 4, baths: 4 }
-                ]
-            },
-
             // --- ARTHALAND FLAGSHIP DEVELOPMENTS ---
             {
                 id: 'DEV-102',
@@ -2942,6 +2925,7 @@ if (Array.isArray(rawImg)) {
     </script>
 </body>
 </html>
+
 
 
 
