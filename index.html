@@ -1047,18 +1047,58 @@
             }
         };
 
-        function resolveDriveImageUrl(url) {
-            if (!url) return "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
-            url = String(url).trim();
-            if (url.includes('drive.google.com')) {
-                let fileId = null;
-                const match1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-                const match2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-                if (match1 && match1[1]) fileId = match1[1];
-                else if (match2 && match2[1]) fileId = match2[1];
-                if (fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
+        const FALLBACK_PROPERTY_IMAGE = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80";
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[char]));
+        }
+
+        function safeDomId(value) {
+            const id = String(value ?? '').trim();
+            const blockedIds = new Set(['__proto__', 'prototype', 'constructor', 'toString', 'valueOf', 'hasOwnProperty']);
+            return /^[A-Za-z0-9_-]{1,80}$/.test(id) && !blockedIds.has(id) ? id : '';
+        }
+
+        function safeImageUrl(value) {
+            const raw = String(value ?? '').trim();
+            if (/^data:image\/(?:png|jpeg|jpg|webp|gif|avif);base64,[a-z0-9+/=\s]+$/i.test(raw)) {
+                return raw.replace(/\s+/g, '');
             }
-            return url;
+            try {
+                const parsed = new URL(raw, window.location.origin);
+                const allowedHosts = new Set([
+                    'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
+                    'i.imgur.com', 'arthaland.imgix.net'
+                ]);
+                const sameOrigin = parsed.origin === window.location.origin;
+                if (parsed.username || parsed.password) return '';
+                if (parsed.protocol !== 'https:' && !(sameOrigin && parsed.protocol === 'http:')) return '';
+                if (!sameOrigin && !allowedHosts.has(parsed.hostname.toLowerCase())) return '';
+                return parsed.href;
+            } catch (err) {
+                return '';
+            }
+        }
+
+        function resolveDriveImageUrl(url) {
+            if (!url) return FALLBACK_PROPERTY_IMAGE;
+            const raw = String(url).trim();
+            if (/^data:image\//i.test(raw)) return safeImageUrl(raw) || FALLBACK_PROPERTY_IMAGE;
+            try {
+                const parsed = new URL(raw, window.location.origin);
+                if (parsed.hostname.toLowerCase() === 'drive.google.com') {
+                    const match1 = parsed.pathname.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+                    const fileId = (match1 && match1[1]) || parsed.searchParams.get('id');
+                    if (fileId && /^[a-zA-Z0-9_-]+$/.test(fileId)) {
+                        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`;
+                    }
+                }
+            } catch (err) {
+                return FALLBACK_PROPERTY_IMAGE;
+            }
+            return safeImageUrl(raw) || FALLBACK_PROPERTY_IMAGE;
         }
 
         // DUAL PRICE & BADGE SWITCHER
@@ -1842,6 +1882,8 @@ if (Array.isArray(rawImg)) {
         // PROPERTY CARD GENERATOR
         function createPropertyCard(prop) {
             const card = document.createElement('div');
+            const propKey = safeDomId(prop.id);
+            if (!propKey) { card.className = 'hidden'; return card; }
             const cleanStatus = normalizeStatus(prop.status);
             const isSold = cleanStatus === "Sold";
             const isDual = cleanStatus === "Sale & Rent";
@@ -1857,16 +1899,16 @@ if (Array.isArray(rawImg)) {
             if (isDual) {
                 badgeHtml = `
                     <div class="relative inline-block text-left z-30" onclick="event.stopPropagation()">
-                        <button type="button" onclick="toggleDualMenu(event, '${prop.id}')" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow flex items-center gap-1.5 transition-colors">
-                            <span id="dual-badge-label-${prop.id}">${currentMode === 'rent' ? 'FOR LEASE' : 'FOR SALE'}</span>
+                        <button type="button" onclick="toggleDualMenu(event, '${propKey}')" class="bg-brand-brown hover:bg-black text-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-widest border border-black shadow flex items-center gap-1.5 transition-colors">
+                            <span id="dual-badge-label-${propKey}">${currentMode === 'rent' ? 'FOR LEASE' : 'FOR SALE'}</span>
                             <i class="fa-solid fa-chevron-down text-[8px] opacity-80"></i>
                         </button>
-                        <div id="dual-menu-${prop.id}" class="hidden absolute left-0 mt-1 w-36 bg-white border border-black shadow-xl z-50 text-black">
-                            <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'sale')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white border-b border-neutral-200 flex justify-between items-center">
+                        <div id="dual-menu-${propKey}" class="hidden absolute left-0 mt-1 w-36 bg-white border border-black shadow-xl z-50 text-black">
+                            <button type="button" onclick="switchListingDualPrice(event, '${propKey}', 'sale')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white border-b border-neutral-200 flex justify-between items-center">
                                 <span>FOR SALE</span>
                                 <i class="fa-solid fa-tag text-[9px] opacity-60"></i>
                             </button>
-                            <button type="button" onclick="switchListingDualPrice(event, '${prop.id}', 'rent')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white flex justify-between items-center">
+                            <button type="button" onclick="switchListingDualPrice(event, '${propKey}', 'rent')" class="w-full text-left px-3 py-2 text-[10px] font-bold uppercase hover:bg-brand-brown hover:text-white flex justify-between items-center">
                                 <span>FOR LEASE</span>
                                 <i class="fa-solid fa-key text-[9px] opacity-60"></i>
                             </button>
@@ -1933,55 +1975,55 @@ if (Array.isArray(rawImg)) {
 
             const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
             const resolvedImages = images.map(resolveDriveImageUrl);
-            cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
-            const currentImgIndex = cardCarouselIndices[prop.id];
-            const watermarkId = `wm-card-${prop.id}`;
+            cardCarouselIndices[propKey] = cardCarouselIndices[propKey] || 0;
+            const currentImgIndex = Math.max(0, Math.min(resolvedImages.length - 1, Number(cardCarouselIndices[propKey]) || 0));
+            const watermarkId = `wm-card-${propKey}`;
             const shareUrl = propertyShareUrl(prop.id);
 
             card.innerHTML = `
                 <div>
                     <div class="relative h-64 overflow-hidden bg-neutral-900 group/img select-none">
-                        <img id="img-card-${prop.id}" src="${resolvedImages[currentImgIndex]}" alt="Property photo" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openListingLightbox('${prop.id}', 0)">
+                        <img id="img-card-${propKey}" src="${escapeHtml(resolvedImages[currentImgIndex])}" alt="Property photo" class="w-full h-full object-cover transition-transform duration-500 cursor-pointer" onclick="openListingLightbox('${propKey}', 0)">
                         
                         <div class="absolute top-3 left-3 z-30">
                             ${badgeHtml}
                         </div>
 
                         ${resolvedImages.length > 1 ? `
-                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${prop.id}', -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
-                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${prop.id}', 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
+                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${propKey}', -1);" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&lang;</button>
+                            <button type="button" onclick="event.stopPropagation(); navigateCardCarousel('${propKey}', 1);" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/80 hover:bg-brand-brown text-white w-8 h-8 flex items-center justify-center text-xs opacity-0 group-hover/img:opacity-100 transition-opacity border border-neutral-700 shadow">&rang;</button>
                         ` : ''}
 
                         <div id="${watermarkId}" class="watermark-container"></div>
                     </div>
 
-                    <div class="p-6 cursor-pointer" onclick="openPropertyModal('${prop.id}')">
+                    <div class="p-6 cursor-pointer" onclick="openPropertyModal('${propKey}')">
                         <div class="flex justify-between items-center mb-1">
-                            <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${prop.developer}</span>
-                            <span class="text-[10px] text-neutral-400 font-mono">${displayArea}</span>
+                            <span class="text-[10px] uppercase font-semibold text-brand-brown line-clamp-1 max-w-[65%]">${escapeHtml(prop.developer)}</span>
+                            <span class="text-[10px] text-neutral-400 font-mono">${escapeHtml(displayArea)}</span>
                         </div>
-                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${prop.title}</h3>
-                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        <h3 class="text-base font-bold text-black uppercase tracking-tight mb-1 line-clamp-1">${escapeHtml(prop.title)}</h3>
+                        <p class="text-xs text-neutral-600 font-light mb-3"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${escapeHtml(prop.location)}</p>
                         
-                        <div id="price-display-${prop.id}" class="text-lg font-bold text-black font-mono mb-4 min-h-[44px] flex flex-col justify-end ${isSold ? 'line-through text-neutral-400' : ''}">
+                        <div id="price-display-${propKey}" class="text-lg font-bold text-black font-mono mb-4 min-h-[44px] flex flex-col justify-end ${isSold ? 'line-through text-neutral-400' : ''}">
                             ${isDual ? `<span class="text-[10px] font-normal text-neutral-500 uppercase tracking-wider">${currentMode === 'rent' ? 'MONTHLY LEASE' : 'PURCHASE PRICE'}</span>` : ''}
                             ${activePrice}
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 py-3 border-y border-neutral-200 text-center text-xs">
-                            <div><span class="block font-bold text-black">${spec1Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec1Label}</span></div>
-                            <div><span class="block font-bold text-black">${spec2Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec2Label}</span></div>
-                            <div><span class="block font-bold text-black">${spec3Value}</span><span class="text-[9px] uppercase text-neutral-500">${spec3Label}</span></div>
+                            <div><span class="block font-bold text-black">${escapeHtml(spec1Value)}</span><span class="text-[9px] uppercase text-neutral-500">${escapeHtml(spec1Label)}</span></div>
+                            <div><span class="block font-bold text-black">${escapeHtml(spec2Value)}</span><span class="text-[9px] uppercase text-neutral-500">${escapeHtml(spec2Label)}</span></div>
+                            <div><span class="block font-bold text-black">${escapeHtml(spec3Value)}</span><span class="text-[9px] uppercase text-neutral-500">${escapeHtml(spec3Label)}</span></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="p-6 pt-0 space-y-2">
                     <div class="flex gap-2">
-                        <button type="button" onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
+                        <button type="button" onclick="openPropertyModal('${propKey}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
                             ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
                         </button>
-                        <button type="button" onclick="openListingLightbox('${prop.id}', 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
+                        <button type="button" onclick="openListingLightbox('${propKey}', 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
                             <i class="fa-solid fa-expand"></i>
                         </button>
                     </div>
@@ -1990,7 +2032,7 @@ if (Array.isArray(rawImg)) {
             `;
 
             setTimeout(() => {
-                const imgEl = card.querySelector(`#img-card-${prop.id}`);
+                const imgEl = card.querySelector(`#img-card-${propKey}`);
                 if (imgEl) applyWatermarkToContainer(watermarkId, imgEl);
             }, 10);
 
@@ -2080,6 +2122,8 @@ if (Array.isArray(rawImg)) {
         function openPropertyModal(id) {
             const prop = properties.find(p => String(p.id) === String(id));
             if (!prop) return;
+            const propKey = safeDomId(prop.id);
+            if (!propKey) return;
 
             activeModalCarouselIndex = 0;
             const container = document.getElementById('modal-content-container');
@@ -2090,7 +2134,7 @@ if (Array.isArray(rawImg)) {
             let displayArea = prop.area;
             if (displayArea.includes('http') || displayArea.includes('drive.google.com')) displayArea = "N/A";
 
-            const propImages = (prop.images && prop.images.length > 0) ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
+            const propImages = (prop.images && prop.images.length > 0) ? prop.images.map(resolveDriveImageUrl) : [FALLBACK_PROPERTY_IMAGE];
 
             let priceBoxHtml = '';
             if (isDual) {
@@ -2119,18 +2163,18 @@ if (Array.isArray(rawImg)) {
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     <div class="lg:col-span-7 space-y-4">
                         <div class="relative h-80 sm:h-96 bg-black border border-black overflow-hidden group select-none">
-                            <img id="img-modal-prop" src="${propImages[0]}" class="w-full h-full object-cover cursor-pointer" onclick="openListingLightbox('${prop.id}', activeModalCarouselIndex)" title="Click to view full screen Photo Studio">
+                            <img id="img-modal-prop" src="${escapeHtml(propImages[0])}" class="w-full h-full object-cover cursor-pointer" onclick="openListingLightbox('${propKey}', activeModalCarouselIndex)" title="Click to view full screen Photo Studio">
                             
                             ${propImages.length > 1 ? `
-                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&lang;</button>
-                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${prop.id}', 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&rang;</button>
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${propKey}', -1);" class="absolute left-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&lang;</button>
+                                <button type="button" onclick="event.stopPropagation(); navigateModalCarousel('${propKey}', 1);" class="absolute right-3 top-1/2 -translate-y-1/2 z-30 bg-black/80 hover:bg-brand-brown text-white w-10 h-10 flex items-center justify-center text-lg border border-neutral-700 shadow transition-colors">&rang;</button>
                                 
                                 <div id="ind-modal-prop" class="absolute bottom-3 right-3 z-30 bg-black/85 text-[10px] font-mono text-white px-3 py-1 border border-neutral-700 pointer-events-none">
                                     IMAGE 1 OF ${propImages.length}
                                 </div>
                             ` : ''}
 
-                            <button type="button" onclick="openListingLightbox('${prop.id}', activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/85 hover:bg-brand-brown text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow transition-colors">
+                            <button type="button" onclick="openListingLightbox('${propKey}', activeModalCarouselIndex)" class="absolute top-3 right-3 bg-black/85 hover:bg-brand-brown text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 border border-neutral-600 z-30 flex items-center gap-1.5 shadow transition-colors">
                                 <i class="fa-solid fa-expand"></i> FULL PHOTO STUDIO
                             </button>
 
@@ -2140,21 +2184,21 @@ if (Array.isArray(rawImg)) {
                         ${propImages.length > 1 ? `
                             <div class="flex gap-2 overflow-x-auto py-1">
                                 ${propImages.map((img, idx) => `
-                                    <img src="${img}" onclick="setModalCarouselIndex('${prop.id}', ${idx})" class="modal-thumb-btn h-14 w-20 object-cover cursor-pointer border-2 ${idx === 0 ? 'border-brand-brown opacity-100' : 'border-transparent opacity-60 hover:opacity-100'} transition-all flex-shrink-0">
+                                    <img src="${escapeHtml(img)}" onclick="setModalCarouselIndex('${propKey}', ${idx})" class="modal-thumb-btn h-14 w-20 object-cover cursor-pointer border-2 ${idx === 0 ? 'border-brand-brown opacity-100' : 'border-transparent opacity-60 hover:opacity-100'} transition-all flex-shrink-0">
                                 `).join('')}
                             </div>
                         ` : ''}
 
-                        <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
-                        <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        <h2 class="text-2xl font-bold uppercase">${escapeHtml(prop.title)}</h2>
+                        <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${escapeHtml(prop.location)}</p>
                         ${renderShareButtons(propertyShareUrl(prop.id), prop.title, 'listing')}
-                        <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
+                        <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${escapeHtml(prop.description)}</p>
                     </div>
 
                     <div class="lg:col-span-5 bg-neutral-50 p-6 border border-black space-y-4">
                         ${priceBoxHtml}
 
-                        <form onsubmit="handleInquirySubmit(event, '${prop.id}')" class="space-y-3">
+                        <form onsubmit="handleInquirySubmit(event, '${propKey}')" class="space-y-3">
                             <label class="block text-xs font-bold uppercase">
                                 ${isSold ? 'INQUIRE SIMILAR ACTIVE PROPERTIES' : 'TRANSMIT INQUIRY / SCHEDULE'}
                             </label>
@@ -2192,7 +2236,7 @@ if (Array.isArray(rawImg)) {
         function navigateModalCarousel(propId, dir) {
             const prop = properties.find(p => String(p.id) === String(propId));
             if (!prop) return;
-            const images = (prop.images && prop.images.length > 0) ? prop.images : [];
+            const images = (prop.images && prop.images.length > 0) ? prop.images.map(resolveDriveImageUrl) : [];
             if (images.length <= 1) return;
 
             activeModalCarouselIndex = (activeModalCarouselIndex + dir + images.length) % images.length;
@@ -2219,10 +2263,11 @@ if (Array.isArray(rawImg)) {
         function setModalCarouselIndex(propId, idx) {
             const prop = properties.find(p => String(p.id) === String(propId));
             if (!prop) return;
-            const images = prop.images || [];
+            const images = (prop.images || []).map(resolveDriveImageUrl);
             if (!images[idx]) return;
 
-            activeModalCarouselIndex = idx;
+            activeModalCarouselIndex = Number(idx);
+            if (!Number.isInteger(activeModalCarouselIndex) || activeModalCarouselIndex < 0 || activeModalCarouselIndex >= images.length) return;
             const imgEl = document.getElementById('img-modal-prop');
             const indEl = document.getElementById('ind-modal-prop');
             if (imgEl) {
@@ -2247,6 +2292,7 @@ if (Array.isArray(rawImg)) {
             e.preventDefault();
             const prop = properties.find(p => String(p.id) === String(propId));
             const btn = document.getElementById('client-submit-btn');
+            btn.disabled = true;
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
 
             const payload = {
@@ -2268,10 +2314,15 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
-            } catch(err) {}
+            } catch(err) {
+                btn.disabled = false;
+                btn.textContent = "SEND INQUIRY";
+                showToast("We could not send this inquiry. Please try again.", "error");
+                return;
+            }
 
             closePropertyModal();
-            showToast("Your inquiry has been submitted. An advisor will reach out.", "success");
+            showToast("Inquiry request sent. This site cannot confirm that the record was saved.", "info");
         }
 
         // ENLIST PROPERTY SUBMISSION
@@ -2281,6 +2332,7 @@ if (Array.isArray(rawImg)) {
         async function handleEnlistSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('enlist-submit-btn');
+            btn.disabled = true;
             btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING...`;
 
             const payload = {
@@ -2300,10 +2352,15 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
-            } catch(err) {}
+            } catch(err) {
+                btn.disabled = false;
+                btn.textContent = "TRANSMIT DETAILS";
+                showToast("We could not send these details. Please try again.", "error");
+                return;
+            }
 
             closeEnlistModal();
-            showToast("Property details submitted successfully.", "success");
+            showToast("Request sent. This site cannot confirm that the record was saved.", "info");
         }
 
         // ADMIN CONTROLLER
@@ -2353,16 +2410,16 @@ if (Array.isArray(rawImg)) {
             const tbodyListings = document.getElementById('admin-listings-table');
             tbodyListings.innerHTML = properties.map(p => `
                 <tr class="hover:bg-neutral-50">
-                    <td class="p-3 font-mono font-bold">${p.id}</td>
-                    <td class="p-3 font-bold">${p.title}</td>
-                    <td class="p-3 uppercase font-semibold">${p.category}</td>
-                    <td class="p-3 text-neutral-600">${p.location}</td>
+                    <td class="p-3 font-mono font-bold">${escapeHtml(p.id)}</td>
+                    <td class="p-3 font-bold">${escapeHtml(p.title)}</td>
+                    <td class="p-3 uppercase font-semibold">${escapeHtml(p.category)}</td>
+                    <td class="p-3 text-neutral-600">${escapeHtml(p.location)}</td>
                     <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${p.status === 'Sold' ? 'bg-red-700 text-white' : 'bg-black text-white'}">${normalizeStatus(p.status)}</span></td>
                     <td class="p-3 font-mono font-bold">₱${Number(p.price).toLocaleString()}</td>
-                    <td class="p-3 font-mono">${p.area}</td>
+                    <td class="p-3 font-mono">${escapeHtml(p.area)}</td>
                     <td class="p-3 text-right space-x-2 whitespace-nowrap">
-                        <button onclick="editListing('${p.id}')" class="bg-brand-brown text-white px-2.5 py-1 text-[10px] uppercase font-bold">EDIT</button>
-                        <button onclick="deleteListing('${p.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] uppercase font-bold">DELETE</button>
+                        <button onclick="editListing('${safeDomId(p.id)}')" class="bg-brand-brown text-white px-2.5 py-1 text-[10px] uppercase font-bold">EDIT</button>
+                        <button onclick="deleteListing('${safeDomId(p.id)}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] uppercase font-bold">DELETE</button>
                     </td>
                 </tr>
             `).join('');
@@ -2373,14 +2430,14 @@ if (Array.isArray(rawImg)) {
                 (proj.units || []).forEach(u => {
                     unitRows.push(`
                         <tr class="hover:bg-neutral-50">
-                            <td class="p-3 font-bold">${proj.title}</td>
-                            <td class="p-3 text-brand-brown font-semibold">${proj.developer}</td>
-                            <td class="p-3 font-semibold">${u.type}</td>
-                            <td class="p-3 font-mono">${u.area}</td>
-                            <td class="p-3 font-mono font-bold">${u.priceRange}</td>
-                            <td class="p-3"><span class="px-2 py-0.5 text-[9px] font-bold bg-black text-white">${u.status}</span></td>
+                            <td class="p-3 font-bold">${escapeHtml(proj.title)}</td>
+                            <td class="p-3 text-brand-brown font-semibold">${escapeHtml(proj.developer)}</td>
+                            <td class="p-3 font-semibold">${escapeHtml(u.type)}</td>
+                            <td class="p-3 font-mono">${escapeHtml(u.area)}</td>
+                            <td class="p-3 font-mono font-bold">${escapeHtml(u.priceRange)}</td>
+                            <td class="p-3"><span class="px-2 py-0.5 text-[9px] font-bold bg-black text-white">${escapeHtml(u.status)}</span></td>
                             <td class="p-3 text-right">
-                                <button onclick="deleteDevUnit('${u.id}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] font-bold">DELETE</button>
+                                <button onclick="deleteDevUnit('${safeDomId(u.id)}')" class="bg-red-700 text-white px-2.5 py-1 text-[10px] font-bold">DELETE</button>
                             </td>
                         </tr>
                     `);
@@ -2394,10 +2451,10 @@ if (Array.isArray(rawImg)) {
             tbodyEn.innerHTML = adminEnlistments.length ? adminEnlistments.map(e => `
                 <tr class="hover:bg-neutral-50">
                     <td class="p-3 font-mono text-[10px]">${e.timestamp ? new Date(e.timestamp).toLocaleDateString() : 'N/A'}</td>
-                    <td class="p-3 font-bold">${e.name}</td>
-                    <td class="p-3 font-mono">${e.email}<br>${e.phone}</td>
-                    <td class="p-3 font-semibold uppercase">${e.propertyType}</td>
-                    <td class="p-3">${e.location}</td>
+                    <td class="p-3 font-bold">${escapeHtml(e.name)}</td>
+                    <td class="p-3 font-mono">${escapeHtml(e.email)}<br>${escapeHtml(e.phone)}</td>
+                    <td class="p-3 font-semibold uppercase">${escapeHtml(e.propertyType)}</td>
+                    <td class="p-3">${escapeHtml(e.location)}</td>
                 </tr>
             `).join('') : `<tr><td colspan="5" class="p-4 text-center text-neutral-400">No owner enlistments recorded yet.</td></tr>`;
         }
@@ -2410,12 +2467,12 @@ if (Array.isArray(rawImg)) {
             });
             tbody.innerHTML = filtered.length ? filtered.map(i => `
                 <tr class="hover:bg-neutral-50">
-                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${i.inquiryType === 'Viewing Appointment' ? 'bg-brand-brown text-white' : 'bg-black text-white'}">${i.inquiryType || 'Inquiry'}</span></td>
-                    <td class="p-3 font-bold">${i.propertyTitle}</td>
-                    <td class="p-3">${i.name}</td>
-                    <td class="p-3 font-mono">${i.email}<br>${i.phone}</td>
-                    <td class="p-3 font-mono text-xs">${i.date || 'N/A'}</td>
-                    <td class="p-3 text-neutral-600">${i.notes || ''}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 text-[9px] uppercase font-bold ${i.inquiryType === 'Viewing Appointment' ? 'bg-brand-brown text-white' : 'bg-black text-white'}">${escapeHtml(i.inquiryType || 'Inquiry')}</span></td>
+                    <td class="p-3 font-bold">${escapeHtml(i.propertyTitle)}</td>
+                    <td class="p-3">${escapeHtml(i.name)}</td>
+                    <td class="p-3 font-mono">${escapeHtml(i.email)}<br>${escapeHtml(i.phone)}</td>
+                    <td class="p-3 font-mono text-xs">${escapeHtml(i.date || 'N/A')}</td>
+                    <td class="p-3 text-neutral-600">${escapeHtml(i.notes || '')}</td>
                 </tr>
             `).join('') : `<tr><td colspan="6" class="p-4 text-center text-neutral-400">No records found.</td></tr>`;
         }
@@ -2591,11 +2648,17 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
-            } catch(e) {}
+            } catch(e) {
+                btn.disabled = false;
+                btn.textContent = "SAVE PROPERTY LISTING";
+                showToast("The listing changed in this browser, but its sync request could not be sent.", "error");
+                return;
+            }
 
             closeAddListingModal();
+            btn.disabled = false;
             btn.textContent = "SAVE PROPERTY LISTING";
-            showToast(`Listing #${listingId} saved!`, "success");
+            showToast("Listing sync request sent. Refresh to confirm it was saved.", "info");
         }
 
         async function deleteListing(id) {
@@ -2613,13 +2676,16 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ sheetTab: "Sheet1", action: "deleteListing", id: id, title: prop ? prop.title : "" })
                 });
-            } catch(e) {}
-            showToast(`Listing #${id} deleted!`, "info");
+            } catch(e) {
+                showToast("Listing was removed from this browser, but the sync request could not be sent.", "error");
+                return;
+            }
+            showToast("Deletion request sent. Refresh to confirm the listing was removed.", "info");
         }
 
         function openAddDevUnitModal() {
             const sel = document.getElementById('unit-target-project');
-            sel.innerHTML = developerProjects.map(p => `<option value="${p.id}">${p.title} (${p.developer})</option>`).join('');
+            sel.innerHTML = developerProjects.filter(p => safeDomId(p.id)).map(p => `<option value="${safeDomId(p.id)}">${escapeHtml(p.title)} (${escapeHtml(p.developer)})</option>`).join('');
             document.getElementById('unit-local-files').value = '';
             document.getElementById('add-devunit-modal').classList.remove('hidden');
         }
@@ -2695,12 +2761,18 @@ if (Array.isArray(rawImg)) {
                         localImages: localFiles
                     })
                 });
-            } catch(e) {}
+            } catch(e) {
+                btn.disabled = false;
+                btn.textContent = "SAVE UNIT";
+                showToast("The unit changed in this browser, but its sync request could not be sent.", "error");
+                return;
+            }
 
             closeAddDevUnitModal();
             renderAdminDashboard();
+            btn.disabled = false;
             btn.textContent = "SAVE UNIT";
-            showToast(`Added unit to ${proj.title}!`, "success");
+            showToast("Unit sync request sent. Refresh to confirm it was saved.", "info");
         }
 
         async function deleteDevUnit(unitId) {
@@ -2718,8 +2790,11 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ sheetTab: "Sheet5", action: "deleteDeveloperUnit", unitId: unitId })
                 });
-            } catch(e) {}
-            showToast("Unit removed.", "info");
+            } catch(e) {
+                showToast("Unit was removed from this browser, but the sync request could not be sent.", "error");
+                return;
+            }
+            showToast("Unit deletion request sent. Refresh to confirm it was removed.", "info");
         }
 
         // GOOGLE SHEETS ASYNC SYNC
@@ -2896,13 +2971,13 @@ if (Array.isArray(rawImg)) {
         let lbImgs = [];
         let lbIdx = 0;
         function openLightboxStudio(title, images, startIdx = 0) {
-            lbImgs = (images && images.length > 0) ? images : [];
-            lbIdx = startIdx || 0;
+            lbImgs = (images && images.length > 0) ? images.map(resolveDriveImageUrl) : [];
+            lbIdx = Math.max(0, Math.min(lbImgs.length - 1, Number(startIdx) || 0));
             document.getElementById('lightbox-title').textContent = title || "PROPERTY STUDIO";
             updateLb();
             const thumbs = document.getElementById('lightbox-thumbnails');
             thumbs.innerHTML = lbImgs.map((img, i) => `
-                <img src="${img}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer transition-all">
+                <img src="${escapeHtml(img)}" onclick="setLb(${i})" class="h-12 w-16 object-cover border-2 ${i === lbIdx ? 'border-brand-brown' : 'border-neutral-700 opacity-60'} cursor-pointer transition-all">
             `).join('');
             document.getElementById('lightbox-studio-modal').classList.remove('hidden');
         }
@@ -2942,17 +3017,17 @@ if (Array.isArray(rawImg)) {
 
         function openDeveloperInquiry(projectId, unitId = '') {
             const proj = developerProjects.find(p => String(p.id) === String(projectId));
-            if (!proj) return;
-            const unit = (proj.units || []).find(u => String(u.id) === String(unitId));
+            if (!proj || !safeDomId(proj.id)) return;
+            const unit = (proj.units || []).find(u => safeDomId(u.id) && String(u.id) === String(unitId));
             const subject = unit ? `${proj.title} — ${unit.type}` : proj.title;
             document.getElementById('modal-content-container').innerHTML = `
                 <div class="max-w-xl mx-auto space-y-5">
                     <div>
                         <span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">ARTHALAND DEVELOPER INQUIRY</span>
-                        <h2 class="text-2xl font-bold uppercase mt-1">${subject}</h2>
+                        <h2 class="text-2xl font-bold uppercase mt-1">${escapeHtml(subject)}</h2>
                         <p class="text-sm text-neutral-600 mt-2">Send an inquiry about this ${unit ? 'unit type' : 'project'} and our team will follow up.</p>
                     </div>
-                    <form onsubmit="handleDeveloperInquirySubmit(event, '${proj.id}', '${unit ? unit.id : ''}')" class="space-y-3">
+                    <form onsubmit="handleDeveloperInquirySubmit(event, '${safeDomId(proj.id)}', '${unit ? safeDomId(unit.id) : ''}')" class="space-y-3">
                         <input type="text" id="developer-inquiry-name" required placeholder="Your Full Name *" class="w-full bg-white border p-3 text-sm">
                         <input type="email" id="developer-inquiry-email" required placeholder="Email Address *" class="w-full bg-white border p-3 text-sm">
                         <input type="tel" id="developer-inquiry-phone" required placeholder="Phone Number *" class="w-full bg-white border p-3 text-sm">
@@ -2969,8 +3044,8 @@ if (Array.isArray(rawImg)) {
 
         function openDeveloperSpecifications(projectId, unitId = '') {
             const proj = developerProjects.find(p => String(p.id) === String(projectId));
-            if (!proj) return;
-            const units = proj.units || [];
+            if (!proj || !safeDomId(proj.id)) return;
+            const units = (proj.units || []).filter(u => safeDomId(u.id));
             const selectedUnit = units.find(u => String(u.id) === String(unitId));
             const media = arthalandProjectMedia[proj.id] || { plans: [], renders: [], note: 'Floor plans and unit visuals are not available for this project.' };
             const unitPlanAssignments = {
@@ -3044,12 +3119,12 @@ if (Array.isArray(rawImg)) {
                 : (additionalArthalandMediaUrls[file] || arthalandMediaImageUrl(file));
             const renderMediaCards = (items, featured = false) => items.length ? items.map(item => `
                 <div class="block border border-neutral-200 bg-white">
-                    <div class="h-48 sm:h-56 bg-neutral-100 flex items-center justify-center overflow-hidden" ${featured ? 'style="height: min(68vh, 640px); min-height: 360px;"' : ''}><img src="${mediaImageUrl(item.file)}" alt="${item.label}" loading="lazy" class="h-full w-full object-contain" onerror="this.parentElement.parentElement.classList.add('hidden')"></div>
-                    <div class="p-3 text-xs font-semibold text-neutral-700">${item.label}</div>
+                    <div class="h-48 sm:h-56 bg-neutral-100 flex items-center justify-center overflow-hidden" ${featured ? 'style="height: min(68vh, 640px); min-height: 360px;"' : ''}><img src="${escapeHtml(safeImageUrl(mediaImageUrl(item.file)) || FALLBACK_PROPERTY_IMAGE)}" alt="${escapeHtml(item.label)}" loading="lazy" class="h-full w-full object-contain" onerror="this.parentElement.parentElement.classList.add('hidden')"></div>
+                    <div class="p-3 text-xs font-semibold text-neutral-700">${escapeHtml(item.label)}</div>
                 </div>`).join('') : '<p class="text-xs text-neutral-500 sm:col-span-2">No plan image is currently associated with this unit type.</p>';
             const unitPlanSection = `
                 <section class="space-y-4 border-t border-neutral-200 pt-5">
-                    <div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">${selectedUnit?.type || 'Selected unit'}</span><h3 class="text-lg font-bold uppercase mt-1">Unit Floor Plan</h3></div>
+                    <div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">${escapeHtml(selectedUnit?.type || 'Selected unit')}</span><h3 class="text-lg font-bold uppercase mt-1">Unit Floor Plan</h3></div>
                     <div class="grid gap-3">${renderMediaCards(selectedUnitPlans, true)}</div>
                 </section>`;
             const projectMediaSection = `
@@ -3059,38 +3134,38 @@ if (Array.isArray(rawImg)) {
                         <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Floor plans</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.plans || [])}</div></div>
                         <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Artistic renditions &amp; unit visuals</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.renders || [])}</div></div>
                     </div>
-                    ${media.note ? `<p class="text-[11px] text-neutral-500 leading-relaxed">${media.note}</p>` : ''}
+                    ${media.note ? `<p class="text-[11px] text-neutral-500 leading-relaxed">${escapeHtml(media.note)}</p>` : ''}
                     <p class="text-[10px] text-neutral-500">Images are from Arthaland’s official website. Renderings are illustrative; actual unit specifications and finishes may vary.</p>
                 </section>`;
             const unitsToRender = selectedUnit ? [selectedUnit] : units;
             const unitCards = unitsToRender.map(u => `
                 <article class="border ${String(u.id) === String(unitId) ? 'border-brand-brown ring-1 ring-brand-brown' : 'border-neutral-200'} bg-neutral-50 p-4 space-y-3">
                     <div class="flex flex-wrap justify-between gap-2 items-start">
-                        <div><h4 class="font-bold uppercase text-sm">${u.type}</h4><p class="text-xs text-neutral-600 mt-1">${u.area || 'Floor area available on request'}</p></div>
-                        <span class="text-[10px] uppercase font-bold text-brand-brown">${u.status || 'Ask about availability'}</span>
+                        <div><h4 class="font-bold uppercase text-sm">${escapeHtml(u.type)}</h4><p class="text-xs text-neutral-600 mt-1">${escapeHtml(u.area || 'Floor area available on request')}</p></div>
+                        <span class="text-[10px] uppercase font-bold text-brand-brown">${escapeHtml(u.status || 'Ask about availability')}</span>
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                        <div><span class="block text-neutral-500 uppercase text-[9px]">Price / Range</span><strong>${u.priceRange || 'Inquire for current pricing'}</strong></div>
+                        <div><span class="block text-neutral-500 uppercase text-[9px]">Price / Range</span><strong>${escapeHtml(u.priceRange || 'Inquire for current pricing')}</strong></div>
                         ${u.beds > 0 ? `<div><span class="block text-neutral-500 uppercase text-[9px]">Bedrooms</span><strong>${u.beds}</strong></div>` : ''}
                         ${u.baths > 0 ? `<div><span class="block text-neutral-500 uppercase text-[9px]">Bathrooms</span><strong>${u.baths}</strong></div>` : ''}
-                        <div><span class="block text-neutral-500 uppercase text-[9px]">Listing ID</span><strong>${u.id || 'Available on request'}</strong></div>
+                        <div><span class="block text-neutral-500 uppercase text-[9px]">Listing ID</span><strong>${escapeHtml(u.id || 'Available on request')}</strong></div>
                     </div>
-                    <button type="button" onclick="openDeveloperInquiry('${proj.id}', '${u.id}')" class="w-full bg-brand-brown hover:bg-black text-white py-2.5 text-[10px] uppercase font-bold tracking-wide">Inquire About This Unit</button>
+                    <button type="button" onclick="openDeveloperInquiry('${safeDomId(proj.id)}', '${safeDomId(u.id)}')" class="w-full bg-brand-brown hover:bg-black text-white py-2.5 text-[10px] uppercase font-bold tracking-wide">Inquire About This Unit</button>
                 </article>`).join('');
             document.getElementById('modal-content-container').innerHTML = `
                 <div class="max-w-5xl mx-auto space-y-6">
                     <div class="relative h-56 sm:h-72 bg-neutral-900 overflow-hidden">
-                        <img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover">
+                        <img src="${escapeHtml(resolveDriveImageUrl(proj.image))}" alt="${escapeHtml(proj.title)}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
-                        <div class="absolute bottom-5 left-5 right-5 text-white"><span class="text-[10px] uppercase tracking-widest font-bold">ARTHALAND · ${selectedUnit ? 'UNIT' : 'PROJECT'} SPECIFICATIONS</span><h2 class="text-2xl sm:text-3xl font-bold uppercase mt-1">${proj.title}${selectedUnit ? ` · ${selectedUnit.type}` : ''}</h2><p class="text-xs mt-1">${proj.township}</p></div>
+                        <div class="absolute bottom-5 left-5 right-5 text-white"><span class="text-[10px] uppercase tracking-widest font-bold">ARTHALAND · ${selectedUnit ? 'UNIT' : 'PROJECT'} SPECIFICATIONS</span><h2 class="text-2xl sm:text-3xl font-bold uppercase mt-1">${escapeHtml(proj.title)}${selectedUnit ? ` · ${escapeHtml(selectedUnit.type)}` : ''}</h2><p class="text-xs mt-1">${escapeHtml(proj.township)}</p></div>
                     </div>
                     ${selectedUnit ? unitPlanSection : `<div class="grid sm:grid-cols-3 gap-3">
-                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project Overview</span><p class="text-sm mt-2 leading-relaxed">${proj.description || 'Contact Compass Realty for project details.'}</p></div>
-                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Turnover</span><p class="text-sm mt-2">${proj.turnover || 'Ask Compass Realty for the current schedule.'}</p></div>
-                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project / Inventory Status</span><p class="text-sm mt-2">${projectStatus}</p></div>
+                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project Overview</span><p class="text-sm mt-2 leading-relaxed">${escapeHtml(proj.description || 'Contact Compass Realty for project details.')}</p></div>
+                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Turnover</span><p class="text-sm mt-2">${escapeHtml(proj.turnover || 'Ask Compass Realty for the current schedule.')}</p></div>
+                        <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project / Inventory Status</span><p class="text-sm mt-2">${escapeHtml(projectStatus)}</p></div>
                     </div>${projectMediaSection}`}
                     <section class="space-y-3"><div class="flex justify-between items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">${selectedUnit ? 'Selected unit listing' : 'Available listing types'}</span><h3 class="text-lg font-bold uppercase mt-1">${selectedUnit ? 'Unit Specifications' : 'Unit Types & Specifications'}</h3></div>${selectedUnit ? '' : `<span class="text-[10px] text-neutral-500">${units.length} TYPES</span>`}</div><div class="grid md:grid-cols-2 gap-3">${unitCards}</div></section>
-                    <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-4">${selectedUnit ? '' : `<button type="button" onclick="openDeveloperInquiry('${proj.id}')" class="bg-black hover:bg-brand-brown text-white px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Inquire About This Project</button>`}<button type="button" onclick="closePropertyModal()" class="border border-black px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Close Specifications</button></div>
+                    <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-4">${selectedUnit ? '' : `<button type="button" onclick="openDeveloperInquiry('${safeDomId(proj.id)}')" class="bg-black hover:bg-brand-brown text-white px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Inquire About This Project</button>`}<button type="button" onclick="closePropertyModal()" class="border border-black px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Close Specifications</button></div>
                     <p class="text-[10px] leading-relaxed text-neutral-500">${selectedUnit ? 'Unit availability and pricing may change. Contact Compass Realty to confirm this listing.' : 'Availability, pricing and turnover details may change. Contact Compass Realty to confirm current information.'}</p>
                 </div>`;
             document.getElementById('property-modal').classList.remove('hidden');
@@ -3119,24 +3194,30 @@ if (Array.isArray(rawImg)) {
                 type: 'Developer Inquiry - ' + inquiryDetails,
                 location: proj.title + ' | ' + proj.township + (unit ? ' | ' + unit.type + ' | ' + unit.area : '')
             };
+            const btn = document.querySelector('#modal-content-container form button[type="submit"]');
+            if (btn) { btn.disabled = true; btn.textContent = 'SENDING...'; }
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST', mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
-            } catch (err) {}
+            } catch (err) {
+                if (btn) { btn.disabled = false; btn.textContent = 'Send Inquiry'; }
+                showToast('We could not send this inquiry. Please try again.', 'error');
+                return;
+            }
             closePropertyModal();
-            showToast('Your developer inquiry has been submitted.', 'success');
+            showToast('Inquiry request sent. This site cannot confirm that the record was saved.', 'info');
         }
 
         function filterDeveloperProjects(brand = "ALL") {
             const grid = document.getElementById('dev-projects-grid');
             if (!grid) return;
 
-            let filtered = developerProjects;
+            let filtered = developerProjects.filter(p => safeDomId(p.id));
             if (brand && brand !== 'ALL') {
-                filtered = developerProjects.filter(p => p.devSlug === brand || p.developer.toLowerCase().includes(brand.toLowerCase()));
+                filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
             const arthaland = brand === 'arthaland';
@@ -3144,30 +3225,30 @@ if (Array.isArray(rawImg)) {
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
                     <div class="relative h-56 bg-neutral-900 overflow-hidden">
-                        <img id="img-proj-${p.id}" src="${p.image}" alt="${p.title}" class="w-full h-full object-cover">
-                        <div id="wm-proj-${p.id}" class="watermark-container"></div>
+                        <img id="img-proj-${safeDomId(p.id)}" src="${escapeHtml(resolveDriveImageUrl(p.image))}" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover">
+                        <div id="wm-proj-${safeDomId(p.id)}" class="watermark-container"></div>
                     </div>
                     <div class="p-5 space-y-4">
                         <div>
-                            <span class="text-[10px] text-brand-brown uppercase font-bold">${p.developer}</span>
-                            <h3 class="text-lg font-bold uppercase">${p.title}</h3>
-                            <p class="text-xs text-neutral-600">${p.township}</p>
-                            <p class="text-xs text-neutral-700 leading-relaxed mt-3">${p.description || ''}</p>
+                            <span class="text-[10px] text-brand-brown uppercase font-bold">${escapeHtml(p.developer)}</span>
+                            <h3 class="text-lg font-bold uppercase">${escapeHtml(p.title)}</h3>
+                            <p class="text-xs text-neutral-600">${escapeHtml(p.township)}</p>
+                            <p class="text-xs text-neutral-700 leading-relaxed mt-3">${escapeHtml(p.description || '')}</p>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button" onclick="openDeveloperSpecifications('${p.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-[10px] font-bold uppercase tracking-wide">Project Specifications</button>
-                            <button type="button" onclick="openDeveloperInquiry('${p.id}')" class="flex-1 border border-black hover:bg-neutral-100 py-2.5 text-[10px] font-bold uppercase tracking-wide">Inquire</button>
+                            <button type="button" onclick="openDeveloperSpecifications('${safeDomId(p.id)}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-[10px] font-bold uppercase tracking-wide">Project Specifications</button>
+                            <button type="button" onclick="openDeveloperInquiry('${safeDomId(p.id)}')" class="flex-1 border border-black hover:bg-neutral-100 py-2.5 text-[10px] font-bold uppercase tracking-wide">Inquire</button>
                         </div>
                         ${renderShareButtons(developerShareUrl(p.id), p.title, 'project')}
                         <div class="border-t border-neutral-200 pt-4 space-y-3">
-                            <div class="flex justify-between items-center"><h4 class="text-xs font-bold uppercase tracking-wide">${arthaland ? 'Unit Types' : 'Available Layouts'}</h4><span class="text-[10px] text-neutral-500">${(p.units || []).length} TYPES</span></div>
-                            ${(p.units || []).map(u => `
+                            <div class="flex justify-between items-center"><h4 class="text-xs font-bold uppercase tracking-wide">${arthaland ? 'Unit Types' : 'Available Layouts'}</h4><span class="text-[10px] text-neutral-500">${(p.units || []).filter(u => safeDomId(u.id)).length} TYPES</span></div>
+                            ${(p.units || []).filter(u => safeDomId(u.id)).map(u => `
                                 <div class="border border-neutral-200 bg-neutral-50 p-3 space-y-2">
-                                    <div class="flex justify-between gap-3"><strong class="text-xs uppercase">${u.type}</strong><span class="text-[10px] text-neutral-600 text-right">${u.area || 'Details on request'}</span></div>
-                                    <div class="flex justify-between gap-3 text-[10px] text-neutral-600"><span>${u.status || 'Contact for availability'}</span><span>${u.priceRange || 'Inquire for current pricing'}</span></div>
+                                    <div class="flex justify-between gap-3"><strong class="text-xs uppercase">${escapeHtml(u.type)}</strong><span class="text-[10px] text-neutral-600 text-right">${escapeHtml(u.area || 'Details on request')}</span></div>
+                                    <div class="flex justify-between gap-3 text-[10px] text-neutral-600"><span>${escapeHtml(u.status || 'Contact for availability')}</span><span>${escapeHtml(u.priceRange || 'Inquire for current pricing')}</span></div>
                                     <div class="flex gap-2 pt-1">
-                                        <button type="button" onclick="openDeveloperSpecifications('${p.id}', '${u.id}')" class="flex-1 border border-neutral-400 py-2 text-[9px] uppercase font-bold">Unit Specifications</button>
-                                        <button type="button" onclick="openDeveloperInquiry('${p.id}', '${u.id}')" class="flex-1 bg-brand-brown hover:bg-black text-white py-2 text-[9px] uppercase font-bold">Inquire About Unit</button>
+                                        <button type="button" onclick="openDeveloperSpecifications('${safeDomId(p.id)}', '${safeDomId(u.id)}')" class="flex-1 border border-neutral-400 py-2 text-[9px] uppercase font-bold">Unit Specifications</button>
+                                        <button type="button" onclick="openDeveloperInquiry('${safeDomId(p.id)}', '${safeDomId(u.id)}')" class="flex-1 bg-brand-brown hover:bg-black text-white py-2 text-[9px] uppercase font-bold">Inquire About Unit</button>
                                     </div>
                                     ${renderShareButtons(developerShareUrl(p.id, u.id), p.title + ' ' + u.type, 'unit')}
                                 </div>`).join('')}
@@ -3178,8 +3259,8 @@ if (Array.isArray(rawImg)) {
 
             filtered.forEach(p => {
                 setTimeout(() => {
-                    const imgEl = document.getElementById(`img-proj-${p.id}`);
-                    if (imgEl) applyWatermarkToContainer(`wm-proj-${p.id}`, imgEl);
+                    const imgEl = document.getElementById(`img-proj-${safeDomId(p.id)}`);
+                    if (imgEl) applyWatermarkToContainer(`wm-proj-${safeDomId(p.id)}`, imgEl);
                 }, 10);
             });
         }
