@@ -2964,7 +2964,8 @@ if (Array.isArray(rawImg)) {
                     ${media.note ? `<p class="text-[11px] text-neutral-500 leading-relaxed">${media.note}</p>` : ''}
                     <p class="text-[10px] text-neutral-500">Images are from Arthaland’s official website. Renderings are illustrative; actual unit specifications and finishes may vary.</p>
                 </section>`;
-            const unitCards = units.map(u => `
+            const unitsToRender = selectedUnit ? [selectedUnit] : units;
+            const unitCards = unitsToRender.map(u => `
                 <article class="border ${String(u.id) === String(unitId) ? 'border-brand-brown ring-1 ring-brand-brown' : 'border-neutral-200'} bg-neutral-50 p-4 space-y-3">
                     <div class="flex flex-wrap justify-between gap-2 items-start">
                         <div><h4 class="font-bold uppercase text-sm">${u.type}</h4><p class="text-xs text-neutral-600 mt-1">${u.area || 'Floor area available on request'}</p></div>
@@ -2983,18 +2984,16 @@ if (Array.isArray(rawImg)) {
                     <div class="relative h-56 sm:h-72 bg-neutral-900 overflow-hidden">
                         <img src="${proj.image}" alt="${proj.title}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
-                        <div class="absolute bottom-5 left-5 right-5 text-white"><span class="text-[10px] uppercase tracking-widest font-bold">ARTHALAND · PROJECT SPECIFICATIONS</span><h2 class="text-2xl sm:text-3xl font-bold uppercase mt-1">${proj.title}</h2><p class="text-xs mt-1">${proj.township}</p></div>
+                        <div class="absolute bottom-5 left-5 right-5 text-white"><span class="text-[10px] uppercase tracking-widest font-bold">ARTHALAND · ${selectedUnit ? 'UNIT' : 'PROJECT'} SPECIFICATIONS</span><h2 class="text-2xl sm:text-3xl font-bold uppercase mt-1">${proj.title}${selectedUnit ? ` · ${selectedUnit.type}` : ''}</h2><p class="text-xs mt-1">${proj.township}</p></div>
                     </div>
-                    <div class="grid sm:grid-cols-3 gap-3">
+                    ${selectedUnit ? '' : `<div class="grid sm:grid-cols-3 gap-3">
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project Overview</span><p class="text-sm mt-2 leading-relaxed">${proj.description || 'Contact Compass Realty for project details.'}</p></div>
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Turnover</span><p class="text-sm mt-2">${proj.turnover || 'Ask Compass Realty for the current schedule.'}</p></div>
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project / Inventory Status</span><p class="text-sm mt-2">${projectStatus}</p></div>
-                    </div>
-                    ${projectMediaSection}
-                    ${selectedUnit ? `<div class="bg-brand-brown/10 border-l-4 border-brand-brown p-4 text-sm"><strong>Selected unit type:</strong> ${selectedUnit.type} · ${selectedUnit.area || 'Area on request'} · ${selectedUnit.priceRange || 'Inquire for current pricing'}</div>` : ''}
-                    <section class="space-y-3"><div class="flex justify-between items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">Available listing types</span><h3 class="text-lg font-bold uppercase mt-1">Unit Specifications</h3></div><span class="text-[10px] text-neutral-500">${units.length} TYPES</span></div><div class="grid md:grid-cols-2 gap-3">${unitCards}</div></section>
-                    <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-4"><button type="button" onclick="openDeveloperInquiry('${proj.id}')" class="bg-black hover:bg-brand-brown text-white px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Inquire About This Project</button><button type="button" onclick="closePropertyModal()" class="border border-black px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Close Specifications</button></div>
-                    <p class="text-[10px] leading-relaxed text-neutral-500">Availability, pricing and turnover details may change. Contact Compass Realty to confirm current information.</p>
+                    </div>${projectMediaSection}`}
+                    <section class="space-y-3"><div class="flex justify-between items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">${selectedUnit ? 'Selected unit listing' : 'Available listing types'}</span><h3 class="text-lg font-bold uppercase mt-1">${selectedUnit ? 'Unit Specifications' : 'Unit Types & Specifications'}</h3></div>${selectedUnit ? '' : `<span class="text-[10px] text-neutral-500">${units.length} TYPES</span>`}</div><div class="grid md:grid-cols-2 gap-3">${unitCards}</div></section>
+                    <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-4">${selectedUnit ? '' : `<button type="button" onclick="openDeveloperInquiry('${proj.id}')" class="bg-black hover:bg-brand-brown text-white px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Inquire About This Project</button>`}<button type="button" onclick="closePropertyModal()" class="border border-black px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Close Specifications</button></div>
+                    <p class="text-[10px] leading-relaxed text-neutral-500">${selectedUnit ? 'Unit availability and pricing may change. Contact Compass Realty to confirm this listing.' : 'Availability, pricing and turnover details may change. Contact Compass Realty to confirm current information.'}</p>
                 </div>`;
             document.getElementById('property-modal').classList.remove('hidden');
         }
