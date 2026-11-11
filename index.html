@@ -1435,25 +1435,26 @@ if (Array.isArray(rawImg)) {
             },
             {
                 id: 1030,
-                title: "Prime Land in Alaminos",
-                location: "Alaminos, Laguna",
-                price: 200000000,
+                title: "Victoria Place",
+                location: "Victoria Place, Pasig City",
+                price: 46656000,
                 rentPrice: 0,
                 status: "Sale",
                 category: "LOTS",
-                isDeal: true,
-                isFeatured: true,
+                isDeal: false,
+                isFeatured: false,
                 beds: 0,
                 baths: 0,
                 parking: 0,
-                area: "100000 sqm",
+                area: "432 sqm",
                 developer: "Compass Realty Exclusive",
                 agentEmail: "gailamistoso@compassprimerealty.com",
                 images: [
-                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+                    "https://drive.google.com/thumbnail?id=1t37kyMlIPN3_7V_RnnWsGLg3jZs0JKYM&sz=w1600",
+                    "https://drive.google.com/thumbnail?id=1VFoS45ngw4K7e65MCIJcEmJbnqeTomXN&sz=w1600"
                 ],
                 _imagesOrdered: true,
-                description: "📍 Prime Land in Alaminos, Laguna\nExpansive 10-hectare prime property ideal for mixed-use residential development or land banking."
+                description: "FOR SALE\n\nVictoria Place, Pasig City\n\nEXCLUSIVITY MEETS PRIME LOCATION IN PASIG CITY\n\nBuild your dream home in Victoria Place, an ultra-low-density, high-end sanctuary reserved for only 180 homeowners. Tucked just minutes away from Valle Verde and C5, this rare property offers privacy, accessibility, and peace of mind.\n\nProperty highlights\nLot area: 432 sqm\nWide frontage: 22.79 meters, ideal for a modern architectural design\n100 percent flood-free zone\nHighly accessible to BGC, Ortigas Center, top international schools, and premier lifestyle hubs\n\nInvestment value\nMarket value: PHP 125,000 per sqm\nExclusive selling price: PHP 108,000 per sqm\nTotal investment: PHP 46,656,000\nSave over PHP 7.3 million below market price\n\nLots with this frontage and price point are rarely available in Victoria Place. Ideal for high-end buyers looking to build a multi-generational residence or make a prime land investment.\n\nContact us for private inquiries and site viewings. Serious buyers only.\nProperty code: 1030."
             }
         ];
 
@@ -1823,13 +1824,37 @@ if (Array.isArray(rawImg)) {
             let spec3Value = prop.parking, spec3Label = "PARKING";
 
             if (prop.category === "LOTS") {
-                spec1Value = "VACANT LOT"; spec1Label = "TYPE";
-                spec2Value = "RESIDENTIAL"; spec2Label = "ZONE";
-                spec3Value = displayArea; spec3Label = "LOT AREA";
+                if (String(prop.id) === "1032") {
+                    spec1Value = "PRIVATE ISLAND"; spec1Label = "TYPE";
+                    spec2Value = "PALAWAN"; spec2Label = "PROVINCE";
+                    spec3Value = displayArea; spec3Label = "LAND AREA";
+                } else if (String(prop.id) === "1031") {
+                    spec1Value = "DEVELOPMENT LOT"; spec1Label = "TYPE";
+                    spec2Value = "60"; spec2Label = "MAX STOREYS";
+                    spec3Value = displayArea; spec3Label = "LOT AREA";
+                } else if (String(prop.id) === "1030") {
+                    spec1Value = "RESIDENTIAL"; spec1Label = "LOT TYPE";
+                    spec2Value = "PASIG CITY"; spec2Label = "LOCATION";
+                    spec3Value = displayArea; spec3Label = "LOT AREA";
+                } else {
+                    spec1Value = "VACANT LOT"; spec1Label = "TYPE";
+                    spec2Value = "RESIDENTIAL"; spec2Label = "ZONE";
+                    spec3Value = displayArea; spec3Label = "LOT AREA";
+                }
             } else if (prop.category === "COMMERCIAL") {
                 spec1Label = "ROOMS";
+                if (String(prop.id) === "1029") {
+                    spec1Label = "BEDROOMS";
+                    spec2Value = "700 sqm"; spec2Label = "FLOOR AREA";
+                    spec3Value = "2 CAR"; spec3Label = "GARAGE";
+                }
             } else if (prop.category === "HOUSE AND LOTS") {
                 spec3Label = "GARAGE";
+            }
+
+            if (String(prop.id) === "1017") {
+                spec3Value = "N/A";
+                spec3Label = "PARKING";
             }
 
             const images = prop.images && prop.images.length > 0 ? prop.images : ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"];
