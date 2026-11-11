@@ -1583,47 +1583,24 @@ if (Array.isArray(rawImg)) {
                     { id: 'LIV-01', type: 'Studio / Residential Unit', area: 'Details available on request', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 0, baths: 1 }
                 ]
             },
-            {
-                id: 'DEV-110', devSlug: 'arthaland', developer: 'Arthaland',
-                title: 'Arthaland Century Pacific Tower', township: 'Bonifacio Global City, Taguig',
-                turnover: 'Ask Compass Realty for current availability',
-                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-                description: 'A sustainable office tower in Bonifacio Global City. See the Compass Realty specifications card for project and unit details.',
-                units: [
-                    { id: 'ACP-01', type: 'Office Unit', area: 'Details available on request', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 0, baths: 1 }
-                ]
-            },
-            {
-                id: 'DEV-111', devSlug: 'arthaland', developer: 'Arthaland',
-                title: 'Arya Residences', township: 'Bonifacio Global City, Taguig',
-                turnover: 'Ask Compass Realty for current availability',
-                image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
-                description: 'A residential development in Bonifacio Global City. See the Compass Realty specifications card for project and unit details.',
-                units: [
-                    { id: 'ARY-01', type: 'Residential Unit', area: 'Details available on request', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 0, baths: 1 }
-                ]
-            }
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
         const arthalandCatalogOverrides = {
-            'DEV-102': { title: 'Eluria', township: 'Rada Street, Legazpi Village, Makati City', turnover: 'Completion scheduled for 2026', image: 'assets/arthaland/Eluria.png', description: 'A low-density, multi-certified residential development by Arthaland and ARCH Capital with 37 limited-edition residences and white-glove butler services.', units: [{ id: 'ELU-01', type: 'Limited-edition residence', area: 'Details available on request', priceRange: 'Inquire for current pricing', status: 'Limited inventory; inquire', beds: 0, baths: 0 }] },
+            'DEV-102': { title: 'Eluria', township: 'Rada Street, Legazpi Village, Makati City', turnover: 'Completion scheduled for 2026', image: 'assets/arthaland/Eluria.png', description: 'A low-density, multi-certified residential development by Arthaland and ARCH Capital with 37 limited-edition residences and white-glove butler services.', units: [{ id: 'ELU-01', type: 'Three-Bedroom South Residence', area: '294 sqm', priceRange: 'Inquire for current pricing', status: 'Limited inventory; inquire', beds: 3, baths: 3 }, { id: 'ELU-02', type: 'Five-Bedroom Garden Residence', area: '579 sqm', priceRange: 'Inquire for current pricing', status: 'Limited inventory; inquire', beds: 5, baths: 5 }] },
             'DEV-103': { title: 'Cebu Exchange', township: 'Salinas Drive, Lahug, Cebu IT Park, Cebu City', turnover: 'Ready for occupancy; units for sale or lease', image: 'assets/arthaland/Cebu-Exchange.JPG', description: 'A 39-storey office and commercial development in Cebu IT Park with 301 units, flexible office cut-ups, retail space and sustainable building features.', units: [{ id: 'CEB-01', type: 'Office unit', area: 'Flexible unit cut-ups; inquire for floor area', priceRange: 'Inquire for sale or lease pricing', status: 'Ready for occupancy; availability varies', beds: 0, baths: 0 }, { id: 'CEB-02', type: 'Retail unit', area: 'Ground-floor retail; inquire for floor area', priceRange: 'Inquire for sale or lease pricing', status: 'Ready for occupancy; availability varies', beds: 0, baths: 0 }] },
-            'DEV-104': { title: 'Lucima', township: 'Cebu Business Park, Cebu City', turnover: 'Ask Compass Realty for current handover details', image: 'assets/arthaland/Lucima.jpg', description: 'A 37-storey sustainable residential condominium by Arthaland and ARCH Capital with 265 homes designed by Saraiva+Associados.', units: [{ id: 'LUC-01', type: '1-Bedroom Classic', area: '38-318 sqm across all layouts', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-02', type: '1-Bedroom Executive', area: '38-318 sqm across all layouts', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-03', type: '1-Bedroom Suite', area: '38-318 sqm across all layouts', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-04', type: '2-Bedroom Suite', area: '38-318 sqm across all layouts', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 2, baths: 2 }, { id: 'LUC-05', type: '3-Bedroom Suite', area: '38-318 sqm across all layouts', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 3, baths: 3 }] },
+            'DEV-104': { title: 'Lucima', township: 'Cebu Business Park, Cebu City', turnover: 'Ask Compass Realty for current handover details', image: 'assets/arthaland/Lucima.jpg', description: 'A 37-storey sustainable residential condominium by Arthaland and ARCH Capital with 265 homes designed by Saraiva+Associados.', units: [{ id: 'LUC-01', type: '1-Bedroom Classic', area: 'See selected floor plan for exact area', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-02', type: '1-Bedroom Executive', area: 'See selected floor plan for exact area', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-03', type: '1-Bedroom Suite', area: 'See selected floor plan for exact area', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 1, baths: 1 }, { id: 'LUC-04', type: '2-Bedroom Suite', area: 'See selected floor plan for exact area', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 2, baths: 2 }, { id: 'LUC-05', type: '3-Bedroom Suite', area: 'See selected floor plan for exact area', priceRange: 'Inquire for current pricing', status: 'Contact for availability', beds: 3, baths: 3 }] },
             'DEV-105': { title: 'Sevina Park', township: 'Cecilia Araneta Parkway, Binan, Laguna', turnover: 'Inquire for current villa availability', image: 'assets/arthaland/Sevina-Park.jpg', description: 'An 8.1-hectare masterplanned mixed-use community with 60% green open space, including Sevina Park Villas and Una Apartments.', units: [{ id: 'SEV-01', type: 'Two-Bedroom Villa 138', area: '138 sqm', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 2, baths: 0 }, { id: 'SEV-02', type: 'Three-Bedroom Villa 162', area: '162 sqm', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 3, baths: 0 }, { id: 'SEV-03', type: 'Four-Bedroom Villa 182', area: '182 sqm', priceRange: 'Inquire for current pricing', status: 'Inquire for availability', beds: 4, baths: 0 }] },
             'DEV-106': { title: 'Una Apartments', township: 'Sevina Park, Binan, Laguna', turnover: 'Tower 1: Dec 2026; Tower 2: Dec 2028; Tower 3: Sep 2030', image: 'assets/arthaland/Una-Apartments.jpg', description: 'A sustainable three-tower residential condominium with furnished balcony units, wellness features and amenities inside Sevina Park.', units: [{ id: 'UNA-01', type: 'Studio Apartment', area: 'Floor plans available on request', priceRange: 'Inquire for current pricing', status: 'Tower-based availability; inquire', beds: 0, baths: 1 }, { id: 'UNA-02', type: 'One-Bedroom Apartment', area: 'Floor plans available on request', priceRange: 'Inquire for current pricing', status: 'Tower-based availability; inquire', beds: 1, baths: 1 }] },
             'DEV-107': { title: 'Savya Financial Center', township: 'ARCA South, Taguig City', turnover: 'Ready for occupancy; units for sale or lease', image: 'assets/arthaland/Savya-Financial-Center.jpg', description: 'A sustainable office and commercial development in ARCA South with adaptive office cut-ups, business and retail spaces, and smart building features.', units: [{ id: 'SAV-01', type: 'Office unit', area: 'Flexible unit cut-ups; inquire for floor area', priceRange: 'Inquire for sale or lease pricing', status: 'Ready for occupancy; availability varies', beds: 0, baths: 0 }, { id: 'SAV-02', type: 'Retail space', area: 'Inquire for floor area', priceRange: 'Inquire for sale or lease pricing', status: 'Availability varies', beds: 0, baths: 0 }] },
             'DEV-108': { title: 'Sondris', township: 'Arnaiz Avenue, Legazpi Village, Makati City', turnover: 'Completion scheduled for April 2030', image: 'assets/arthaland/Sondris.png', description: 'A 37-storey, 252-residence condominium developed with Mitsui Fudosan (Asia) and designed by AEDAS.', units: [{ id: 'SON-01', type: 'One-Bedroom', area: '46-61 sqm', priceRange: 'PHP 21.1M-30.3M', status: 'Pre-selling; inquire for availability', beds: 1, baths: 0 }, { id: 'SON-02', type: 'Two-Bedroom', area: '91-114 sqm', priceRange: 'PHP 45.1M-65.8M', status: 'Pre-selling; inquire for availability', beds: 2, baths: 0 }, { id: 'SON-03', type: 'Three-Bedroom', area: '135-137 sqm', priceRange: 'PHP 76.4M-83.2M', status: 'Pre-selling; inquire for availability', beds: 3, baths: 0 }, { id: 'SON-04', type: 'Garden Unit', area: '180-230 sqm', priceRange: 'PHP 92.1M-104.7M', status: 'Pre-selling; inquire for availability', beds: 3, baths: 0 }] },
             'DEV-109': { title: 'Liv', township: 'Katipunan Avenue, Loyola Heights, Quezon City', turnover: 'Liv North completion: 2031', image: 'assets/arthaland/Liv-Katipunan-Facade.avif', description: 'A sustainable vertical neighborhood near Ateneo with an exclusive campus bridgeway, wellness spaces and studio to two-bedroom homes.', units: [{ id: 'LIV-01', type: 'Studio', area: '24-29 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 0, baths: 1 }, { id: 'LIV-02', type: 'One-Bedroom', area: '40-47 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 1, baths: 1 }, { id: 'LIV-03', type: 'Two-Bedroom', area: '68-70 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 2, baths: 1 }] },
-            'DEV-110': { title: 'Arthaland Century Pacific Tower', township: '5th Avenue corner 30th Street, Bonifacio Global City, Taguig', turnover: 'Fully leased out', image: 'assets/arthaland/Arthaland-Century-Pacific-Tower.jpg', description: 'A 30-storey, 76-unit premium office tower in BGC, certified LEED Platinum and BERDE 5-star and the first EDGE Zero Carbon-certified building.', units: [{ id: 'ACP-01', type: 'Office unit', area: 'Details available on request', priceRange: 'Inquire for leasing information', status: 'Fully leased out', beds: 0, baths: 0 }] },
-            'DEV-111': { title: 'Arya Residences', township: 'McKinley Parkway, Bonifacio Global City, Taguig', turnover: '100% sold', image: 'assets/arthaland/Arya-Residences.png', description: 'A two-tower residential condominium in BGC with LEED Gold and BERDE 4-star certification; all units are reported as sold.', units: [{ id: 'ARY-01', type: 'Residential unit', area: 'Details available on request', priceRange: 'No active inventory listed', status: '100% sold', beds: 0, baths: 0 }] }
         };
 
         // Unit layouts and representative visuals linked from Arthaland's official property pages.
         // Some projects do not publish unit-level plans; those gaps are stated in the modal.
         const arthalandProjectMedia = {
             'DEV-102': {
-                source: 'https://arthaland.com/eluria/design',
                 plans: [
                     { file: 'three-bedroom-south-residence-plan-2.png', label: 'Three-Bedroom South Residence · 294 sqm' },
                     { file: 'five-bedroom-garden-residence-plans.png', label: 'Five-Bedroom Garden Residence · 579 sqm' }
@@ -1635,7 +1612,6 @@ if (Array.isArray(rawImg)) {
                 note: 'The North Residence plan is available through the View the Plans control on Arthaland’s design page.'
             },
             'DEV-103': {
-                source: 'https://arthaland.com/properties/cebu-exchange',
                 plans: [
                     { file: 'Cebu-Exchange-Low-Zone-9th-to-11th-Floor.png', label: 'Low Zone · floors 9–11' },
                     { file: 'Cebu-Exchange-Low-Zone-12th-Floor.png', label: 'Low Zone · floor 12' },
@@ -1647,7 +1623,6 @@ if (Array.isArray(rawImg)) {
                 note: 'The official page also publishes Mid Zone and High Zone layouts; see its floor plan section.'
             },
             'DEV-104': {
-                source: 'https://arthaland.com/properties/lucima',
                 plans: [
                     { file: 'Lucima-1BR-Classic-Type-B.png', label: 'One-Bedroom Classic · Type B' },
                     { file: 'Lucima-1BR-Executive-Type-A.png', label: 'One-Bedroom Executive · Type A' },
@@ -1659,13 +1634,11 @@ if (Array.isArray(rawImg)) {
                 note: 'Arthaland’s page has more living-space visuals and layout variations.'
             },
             'DEV-105': {
-                source: 'https://arthaland.com/properties/sevina-park',
                 plans: [],
                 renders: [{ file: 'Sevina_Park-Image.png', label: 'Sevina Park Villas · official project visual' }],
                 note: 'The official page identifies Villa 138, Villa 162, and Villa 182 but does not publish their floor plan images.'
             },
             'DEV-106': {
-                source: 'https://arthaland.com/properties/una-apartments',
                 plans: [
                     { file: 'UNA-Apartments-Typical-Floor-Plan-June-2026.png', label: 'Typical floor plan · June 2026' },
                     { file: 'UNA-TOWER-3-STUDIO-THUMBNAIL-SMALL.png', label: 'Studio · Tower 3' },
@@ -1678,7 +1651,6 @@ if (Array.isArray(rawImg)) {
                 note: 'The model units are styled to show possible design ideas and may differ from the delivered units.'
             },
             'DEV-107': {
-                source: 'https://arthaland.com/properties/savya-financial-center',
                 plans: [
                     { file: 'Savya-Financial-Center-Ground-Floor.png', label: 'Ground Floor' },
                     { file: 'Savya-Financial-Center-5th-Floor.png', label: '5th Floor' }
@@ -1687,7 +1659,6 @@ if (Array.isArray(rawImg)) {
                 note: 'The official page publishes additional office floor plans, including floors 6–12 and 15–17.'
             },
             'DEV-108': {
-                source: 'https://arthaland.com/properties/sondris',
                 plans: [
                     { file: '1BR-Thumbnail-Adjusted-01302026-Update-Layout.png', label: 'One-Bedroom · 46–61 sqm' },
                     { file: '2BR-Thumbnail-Adjust-01302026-Update-Layout.png', label: 'Two-Bedroom · 91–114 sqm' },
@@ -1700,7 +1671,6 @@ if (Array.isArray(rawImg)) {
                 ]
             },
             'DEV-109': {
-                source: 'https://arthaland.com/properties/liv',
                 plans: [{ file: 'Project-Teal-Popup-Pattern.png', label: 'Liv · official unit layout image' }],
                 renders: [
                     { file: 'Project-Teal-Studio-Enlarged.png', label: 'Studio · architect’s rendition' },
@@ -1708,18 +1678,6 @@ if (Array.isArray(rawImg)) {
                     { file: 'Project-Teal-2BR-Enlarged-Updated.png', label: 'Two-Bedroom · architect’s rendition' }
                 ]
             },
-            'DEV-110': {
-                source: 'https://arthaland.com/properties/arthaland-century-pacific-tower',
-                plans: [],
-                renders: [],
-                note: 'The official page does not publish office unit floor plans or unit renderings for this fully leased tower.'
-            },
-            'DEV-111': {
-                source: 'https://arthaland.com/properties/arya-residences',
-                plans: [],
-                renders: [{ file: 'Copy-of-Arya-Swimming-Pool.jpg', label: 'Arya Residences · official gallery image' }],
-                note: 'Arya Residences is reported as fully sold. The official page does not publish unit floor plans.'
-            }
         };
 
         developerProjects = developerProjects.map(project => arthalandCatalogOverrides[project.id] ? { ...project, ...arthalandCatalogOverrides[project.id] } : project);        let adminInquiries = [];
@@ -2906,7 +2864,33 @@ if (Array.isArray(rawImg)) {
             if (!proj) return;
             const units = proj.units || [];
             const selectedUnit = units.find(u => String(u.id) === String(unitId));
-            const media = arthalandProjectMedia[proj.id] || { source: 'https://arthaland.com/properties', plans: [], renders: [], note: 'Official floor plans and unit visuals are not listed for this project.' };
+            const media = arthalandProjectMedia[proj.id] || { plans: [], renders: [], note: 'Floor plans and unit visuals are not available for this project.' };
+            const unitPlanAssignments = {
+                'DEV-102': {
+                    'ELU-01': ['three-bedroom-south-residence-plan-2.png'],
+                    'ELU-02': ['five-bedroom-garden-residence-plans.png']
+                },
+                'DEV-104': {
+                    'LUC-01': ['Lucima-1BR-Classic-Type-B.png'],
+                    'LUC-02': ['Lucima-1BR-Executive-Type-A.png'],
+                    'LUC-03': ['Lucima-1BR-Suite-Type-A.png'],
+                    'LUC-04': ['Lucima-2BR-Suite-Type-D2.png'],
+                    'LUC-05': ['Lucima-3BR-Suite-Type-A1.png']
+                },
+                'DEV-106': {
+                    'UNA-01': ['UNA-TOWER-3-STUDIO-THUMBNAIL-SMALL.png'],
+                    'UNA-02': ['UNA-TOWER-3-1BR-THUMBNAIL-SMALL.png']
+                },
+                'DEV-108': {
+                    'SON-01': ['1BR-Thumbnail-Adjusted-01302026-Update-Layout.png'],
+                    'SON-02': ['2BR-Thumbnail-Adjust-01302026-Update-Layout.png'],
+                    'SON-03': ['3BR-Thumbnail-01302026-Update-Layout.png'],
+                    'SON-04': ['Garden-Thumbnail-01302026-Update-Layout.png']
+                }
+            };
+            const localFloorPlanFiles = new Set(Object.values(unitPlanAssignments).flatMap(projectUnits => Object.values(projectUnits).flat()));
+            const selectedPlanFiles = selectedUnit ? (unitPlanAssignments[proj.id]?.[selectedUnit.id] || []) : [];
+            const selectedUnitPlans = (media.plans || []).filter(item => selectedPlanFiles.includes(item.file));
             const projectStatus = [...new Set(units.map(u => u.status).filter(Boolean))].join(' · ') || 'Contact us for current availability';
             const arthalandMediaImageUrl = (file) => ({
                 'three-bedroom-south-residence-plan-2.png': 'https://arthaland.imgix.net/assets/site/three-bedroom-south-residence-plan-2.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=7a3bb9cba1e64e60dd44a65dd1dd7b08&usm=20&w=2000',
@@ -2940,7 +2924,6 @@ if (Array.isArray(rawImg)) {
                 'Project-Teal-1BR-Enlarged.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-1BR-Enlarged.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2622&ixlib=php-3.3.1&q=82&s=6f3f24e749c90acd8add152792c4c519&usm=20&w=2000',
                 'Project-Teal-2BR-Enlarged-Updated.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-2BR-Enlarged-Updated.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2622&ixlib=php-3.3.1&q=82&s=e629bf1603c8cb80bc2526eab4ce16a5&usm=20&w=2000',
                 'Project-Teal-Popup-Pattern.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-Popup-Pattern.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=5982&ixlib=php-3.3.1&q=82&s=e4781c2de0f64507b5acd2f1abc5b509&usm=20&w=2000',
-                'Copy-of-Arya-Swimming-Pool.jpg': 'https://arthaland.imgix.net/assets/site/Copy-of-Arya-Swimming-Pool.jpg?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=345bc3c6681f4cdd25f2c73f6fbe49bc&w=2000'
             }[file] || `https://arthaland.imgix.net/assets/site/${encodeURIComponent(file)}`);
             const additionalArthalandMediaUrls = {
                 'Cebu-Exchange.JPG': 'assets/arthaland/Cebu-Exchange.JPG',
@@ -2948,15 +2931,22 @@ if (Array.isArray(rawImg)) {
                 'UNA-TOWER-2-STUDIO.png': 'https://arthaland.imgix.net/assets/site/UNA-TOWER-2-STUDIO.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2000&ixlib=php-3.3.1&q=82&s=13b4b5274728f6346d02df65d1d737b9&usm=20&w=2000',
                 '7N8A0567.jpg': 'https://arthaland.imgix.net/assets/site/7N8A0567.jpg?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=7f1a8cf247366ac75d958195ea9546f5&w=2000'
             };
-            const mediaImageUrl = (file) => additionalArthalandMediaUrls[file] || arthalandMediaImageUrl(file);
-            const renderMediaCards = (items) => items.length ? items.map(item => `
-                <a href="${mediaImageUrl(item.file)}" target="_blank" rel="noopener noreferrer" class="group block border border-neutral-200 bg-white hover:border-brand-brown">
-                    <div class="h-48 sm:h-56 bg-neutral-100 flex items-center justify-center overflow-hidden"><img src="${mediaImageUrl(item.file)}" alt="${item.label}" loading="lazy" class="h-full w-full object-contain transition-transform group-hover:scale-[1.02]" onerror="this.parentElement.parentElement.classList.add('hidden')"></div>
+            const mediaImageUrl = (file) => localFloorPlanFiles.has(file)
+                ? `assets/arthaland/floor-plans/${encodeURIComponent(file)}`
+                : (additionalArthalandMediaUrls[file] || arthalandMediaImageUrl(file));
+            const renderMediaCards = (items, featured = false) => items.length ? items.map(item => `
+                <div class="block border border-neutral-200 bg-white">
+                    <div class="h-48 sm:h-56 bg-neutral-100 flex items-center justify-center overflow-hidden" ${featured ? 'style="height: min(68vh, 640px); min-height: 360px;"' : ''}><img src="${mediaImageUrl(item.file)}" alt="${item.label}" loading="lazy" class="h-full w-full object-contain" onerror="this.parentElement.parentElement.classList.add('hidden')"></div>
                     <div class="p-3 text-xs font-semibold text-neutral-700">${item.label}</div>
-                </a>`).join('') : '<p class="text-xs text-neutral-500 sm:col-span-2">No unit-specific images are published in the official project page gallery.</p>';
+                </div>`).join('') : '<p class="text-xs text-neutral-500 sm:col-span-2">No plan image is currently associated with this unit type.</p>';
+            const unitPlanSection = `
+                <section class="space-y-4 border-t border-neutral-200 pt-5">
+                    <div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">${selectedUnit?.type || 'Selected unit'}</span><h3 class="text-lg font-bold uppercase mt-1">Unit Floor Plan</h3></div>
+                    <div class="grid gap-3">${renderMediaCards(selectedUnitPlans, true)}</div>
+                </section>`;
             const projectMediaSection = `
                 <section class="space-y-4 border-t border-neutral-200 pt-5">
-                    <div class="flex flex-wrap justify-between gap-3 items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">Official Arthaland project media</span><h3 class="text-lg font-bold uppercase mt-1">Floor Plans &amp; Unit Renditions</h3></div><a href="${media.source}" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase font-bold underline underline-offset-4">View source page ↗</a></div>
+                    <div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">Project media</span><h3 class="text-lg font-bold uppercase mt-1">Floor Plans &amp; Unit Renditions</h3></div>
                     <div class="grid lg:grid-cols-2 gap-5">
                         <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Floor plans</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.plans || [])}</div></div>
                         <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Artistic renditions &amp; unit visuals</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.renders || [])}</div></div>
@@ -2986,7 +2976,7 @@ if (Array.isArray(rawImg)) {
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
                         <div class="absolute bottom-5 left-5 right-5 text-white"><span class="text-[10px] uppercase tracking-widest font-bold">ARTHALAND · ${selectedUnit ? 'UNIT' : 'PROJECT'} SPECIFICATIONS</span><h2 class="text-2xl sm:text-3xl font-bold uppercase mt-1">${proj.title}${selectedUnit ? ` · ${selectedUnit.type}` : ''}</h2><p class="text-xs mt-1">${proj.township}</p></div>
                     </div>
-                    ${selectedUnit ? '' : `<div class="grid sm:grid-cols-3 gap-3">
+                    ${selectedUnit ? unitPlanSection : `<div class="grid sm:grid-cols-3 gap-3">
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project Overview</span><p class="text-sm mt-2 leading-relaxed">${proj.description || 'Contact Compass Realty for project details.'}</p></div>
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Turnover</span><p class="text-sm mt-2">${proj.turnover || 'Ask Compass Realty for the current schedule.'}</p></div>
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project / Inventory Status</span><p class="text-sm mt-2">${projectStatus}</p></div>
