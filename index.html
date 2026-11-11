@@ -1618,6 +1618,110 @@ if (Array.isArray(rawImg)) {
             'DEV-110': { title: 'Arthaland Century Pacific Tower', township: '5th Avenue corner 30th Street, Bonifacio Global City, Taguig', turnover: 'Fully leased out', image: 'assets/arthaland/Arthaland-Century-Pacific-Tower.jpg', description: 'A 30-storey, 76-unit premium office tower in BGC, certified LEED Platinum and BERDE 5-star and the first EDGE Zero Carbon-certified building.', units: [{ id: 'ACP-01', type: 'Office unit', area: 'Details available on request', priceRange: 'Inquire for leasing information', status: 'Fully leased out', beds: 0, baths: 0 }] },
             'DEV-111': { title: 'Arya Residences', township: 'McKinley Parkway, Bonifacio Global City, Taguig', turnover: '100% sold', image: 'assets/arthaland/Arya-Residences.png', description: 'A two-tower residential condominium in BGC with LEED Gold and BERDE 4-star certification; all units are reported as sold.', units: [{ id: 'ARY-01', type: 'Residential unit', area: 'Details available on request', priceRange: 'No active inventory listed', status: '100% sold', beds: 0, baths: 0 }] }
         };
+
+        // Unit layouts and representative visuals linked from Arthaland's official property pages.
+        // Some projects do not publish unit-level plans; those gaps are stated in the modal.
+        const arthalandProjectMedia = {
+            'DEV-102': {
+                source: 'https://arthaland.com/eluria/design',
+                plans: [
+                    { file: 'three-bedroom-south-residence-plan-2.png', label: 'Three-Bedroom South Residence · 294 sqm' },
+                    { file: 'five-bedroom-garden-residence-plans.png', label: 'Five-Bedroom Garden Residence · 579 sqm' }
+                ],
+                renders: [
+                    { file: '8f91dafb5daf0529590d1d47e8234843.png', label: 'Three-Bedroom North Residence · official design gallery' },
+                    { file: 'c5d6afc1a0c713c339d49bf838f33174.png', label: 'Five-Bedroom Garden Residence · official design gallery' }
+                ],
+                note: 'The North Residence plan is available through the View the Plans control on Arthaland’s design page.'
+            },
+            'DEV-103': {
+                source: 'https://arthaland.com/properties/cebu-exchange',
+                plans: [
+                    { file: 'Cebu-Exchange-Low-Zone-9th-to-11th-Floor.png', label: 'Low Zone · floors 9–11' },
+                    { file: 'Cebu-Exchange-Low-Zone-12th-Floor.png', label: 'Low Zone · floor 12' },
+                    { file: 'Cebu-Exchange-Low-Zone-15th-Floor.png', label: 'Low Zone · floor 15' },
+                    { file: 'Cebu-Exchange-Mid-Zone-16th-Floor.png', label: 'Mid Zone · floor 16' },
+                    { file: 'Cebu-Exchange-High-Zone-30th-Floor.png', label: 'High Zone · floor 30' }
+                ],
+                renders: [{ file: 'Cebu-Exchange.JPG', label: 'Cebu Exchange · official project visual' }],
+                note: 'The official page also publishes Mid Zone and High Zone layouts; see its floor plan section.'
+            },
+            'DEV-104': {
+                source: 'https://arthaland.com/properties/lucima',
+                plans: [
+                    { file: 'Lucima-1BR-Classic-Type-B.png', label: 'One-Bedroom Classic · Type B' },
+                    { file: 'Lucima-1BR-Executive-Type-A.png', label: 'One-Bedroom Executive · Type A' },
+                    { file: 'Lucima-1BR-Suite-Type-A.png', label: 'One-Bedroom Suite · Type A' },
+                    { file: 'Lucima-2BR-Suite-Type-D2.png', label: 'Two-Bedroom Suite · Type D2' },
+                    { file: 'Lucima-3BR-Suite-Type-A1.png', label: 'Three-Bedroom Suite · Type A1' }
+                ],
+                renders: [{ file: 'ARTHALAND-REVISED_-198.jpg', label: 'Lucima · official unit gallery visual' }],
+                note: 'Arthaland’s page has more living-space visuals and layout variations.'
+            },
+            'DEV-105': {
+                source: 'https://arthaland.com/properties/sevina-park',
+                plans: [],
+                renders: [{ file: 'Sevina_Park-Image.png', label: 'Sevina Park Villas · official project visual' }],
+                note: 'The official page identifies Villa 138, Villa 162, and Villa 182 but does not publish their floor plan images.'
+            },
+            'DEV-106': {
+                source: 'https://arthaland.com/properties/una-apartments',
+                plans: [
+                    { file: 'UNA-Apartments-Typical-Floor-Plan-June-2026.png', label: 'Typical floor plan · June 2026' },
+                    { file: 'UNA-TOWER-3-STUDIO-THUMBNAIL-SMALL.png', label: 'Studio · Tower 3' },
+                    { file: 'UNA-TOWER-3-1BR-THUMBNAIL-SMALL.png', label: 'One-Bedroom · Tower 3' }
+                ],
+                renders: [
+                    { file: 'UNA-TOWER-2-STUDIO.png', label: 'Studio · official unit visual' },
+                    { file: 'One-Bedroom-Dining-Living-and-Balcony.png', label: 'One-Bedroom · dining, living, and balcony' }
+                ],
+                note: 'The model units are styled to show possible design ideas and may differ from the delivered units.'
+            },
+            'DEV-107': {
+                source: 'https://arthaland.com/properties/savya-financial-center',
+                plans: [
+                    { file: 'Savya-Financial-Center-Ground-Floor.png', label: 'Ground Floor' },
+                    { file: 'Savya-Financial-Center-5th-Floor.png', label: '5th Floor' }
+                ],
+                renders: [{ file: '7N8A0567.jpg', label: 'Savya Financial Center · official project gallery visual' }],
+                note: 'The official page publishes additional office floor plans, including floors 6–12 and 15–17.'
+            },
+            'DEV-108': {
+                source: 'https://arthaland.com/properties/sondris',
+                plans: [
+                    { file: '1BR-Thumbnail-Adjusted-01302026-Update-Layout.png', label: 'One-Bedroom · 46–61 sqm' },
+                    { file: '2BR-Thumbnail-Adjust-01302026-Update-Layout.png', label: 'Two-Bedroom · 91–114 sqm' },
+                    { file: '3BR-Thumbnail-01302026-Update-Layout.png', label: 'Three-Bedroom · 135–137 sqm' },
+                    { file: 'Garden-Thumbnail-01302026-Update-Layout.png', label: 'Garden Unit · 180–230 sqm' }
+                ],
+                renders: [
+                    { file: 'ONE-BEDROOM-TYPE-C-LIVING-AREA-DINING-KITCHEN-AND-BALCONY.png', label: 'One-Bedroom · living, dining, kitchen, and balcony' },
+                    { file: 'TWO-BEDROOM-TYPE-A-LIVING-AREA-AND-KITCHEN.png', label: 'Two-Bedroom · living area and kitchen' }
+                ]
+            },
+            'DEV-109': {
+                source: 'https://arthaland.com/properties/liv',
+                plans: [{ file: 'Project-Teal-Popup-Pattern.png', label: 'Liv · official unit layout image' }],
+                renders: [
+                    { file: 'Project-Teal-Studio-Enlarged.png', label: 'Studio · architect’s rendition' },
+                    { file: 'Project-Teal-1BR-Enlarged.png', label: 'One-Bedroom · architect’s rendition' },
+                    { file: 'Project-Teal-2BR-Enlarged-Updated.png', label: 'Two-Bedroom · architect’s rendition' }
+                ]
+            },
+            'DEV-110': {
+                source: 'https://arthaland.com/properties/arthaland-century-pacific-tower',
+                plans: [],
+                renders: [],
+                note: 'The official page does not publish office unit floor plans or unit renderings for this fully leased tower.'
+            },
+            'DEV-111': {
+                source: 'https://arthaland.com/properties/arya-residences',
+                plans: [],
+                renders: [{ file: 'Copy-of-Arya-Swimming-Pool.jpg', label: 'Arya Residences · official gallery image' }],
+                note: 'Arya Residences is reported as fully sold. The official page does not publish unit floor plans.'
+            }
+        };
+
         developerProjects = developerProjects.map(project => arthalandCatalogOverrides[project.id] ? { ...project, ...arthalandCatalogOverrides[project.id] } : project);        let adminInquiries = [];
         let adminEnlistments = [];
 
@@ -2802,7 +2906,64 @@ if (Array.isArray(rawImg)) {
             if (!proj) return;
             const units = proj.units || [];
             const selectedUnit = units.find(u => String(u.id) === String(unitId));
+            const media = arthalandProjectMedia[proj.id] || { source: 'https://arthaland.com/properties', plans: [], renders: [], note: 'Official floor plans and unit visuals are not listed for this project.' };
             const projectStatus = [...new Set(units.map(u => u.status).filter(Boolean))].join(' · ') || 'Contact us for current availability';
+            const arthalandMediaImageUrl = (file) => ({
+                'three-bedroom-south-residence-plan-2.png': 'https://arthaland.imgix.net/assets/site/three-bedroom-south-residence-plan-2.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=7a3bb9cba1e64e60dd44a65dd1dd7b08&usm=20&w=2000',
+                'five-bedroom-garden-residence-plans.png': 'https://arthaland.imgix.net/assets/site/five-bedroom-garden-residence-plans.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=755a07275311fdff337ccdcbff94ce57&usm=20&w=2000',
+                '8f91dafb5daf0529590d1d47e8234843.png': 'https://arthaland.imgix.net/assets/site/8f91dafb5daf0529590d1d47e8234843.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1500&ixlib=php-3.3.1&q=82&s=76c8efcfa5a8eae131a188938e4663c8&usm=20&w=2000',
+                'c5d6afc1a0c713c339d49bf838f33174.png': 'https://arthaland.imgix.net/assets/site/c5d6afc1a0c713c339d49bf838f33174.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2000&ixlib=php-3.3.1&q=82&s=b6537a69737208ecb0f7eca10e81860e&usm=20&w=2000',
+                'Cebu-Exchange-Low-Zone-9th-to-11th-Floor.png': 'https://arthaland.imgix.net/assets/site/Cebu-Exchange-Low-Zone-9th-to-11th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=c41142178e14a22090a50456564b1f35&usm=20&w=2000',
+                'Cebu-Exchange-Low-Zone-12th-Floor.png': 'https://arthaland.imgix.net/assets/site/Cebu-Exchange-Low-Zone-12th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=f54d859c2eba3d472f675fc394c68ba4&usm=20&w=2000',
+                'Cebu-Exchange-Low-Zone-15th-Floor.png': 'https://arthaland.imgix.net/assets/site/Cebu-Exchange-Low-Zone-15th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=58df29604f7d0ada9a9ffabf7c903fe3&usm=20&w=2000',
+                'Cebu-Exchange-Mid-Zone-16th-Floor.png': 'https://arthaland.imgix.net/assets/site/Cebu-Exchange-Mid-Zone-16th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=b7c6452d7f39f32afd981d2454256990&usm=20&w=2000',
+                'Cebu-Exchange-High-Zone-30th-Floor.png': 'https://arthaland.imgix.net/assets/site/Cebu-Exchange-High-Zone-30th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=eadf2ae2f148211ba3d38283d48d3996&usm=20&w=2000',
+                'Lucima-1BR-Classic-Type-B.png': 'https://arthaland.imgix.net/assets/site/Lucima-1BR-Classic-Type-B.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=1536ce843af1faf3ccb77a44b5430fed&usm=20&w=2000',
+                'Lucima-1BR-Executive-Type-A.png': 'https://arthaland.imgix.net/assets/site/Lucima-1BR-Executive-Type-A.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=1bf93e74918dbe0f826fe91cc4e88434&usm=20&w=2000',
+                'Lucima-1BR-Suite-Type-A.png': 'https://arthaland.imgix.net/assets/site/Lucima-1BR-Suite-Type-A.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=22bca2a9d86cd42d78fd57343628294b&usm=20&w=2000',
+                'Lucima-2BR-Suite-Type-D2.png': 'https://arthaland.imgix.net/assets/site/Lucima-2BR-Suite-Type-D2.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=ee9e834d61092403c125e3feb5fe9bb4&usm=20&w=2000',
+                'Lucima-3BR-Suite-Type-A1.png': 'https://arthaland.imgix.net/assets/site/Lucima-3BR-Suite-Type-A1.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=dd13d80ba31254fa1a9c6e179be720b6&usm=20&w=2000',
+                'Sevina_Park-Image.png': 'https://arthaland.imgix.net/assets/site/Sevina_Park-Image.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2094&ixlib=php-3.3.1&q=82&s=56ed1496f86c1bad0a457f671f0dcf2f&usm=20&w=2000',
+                'UNA-Apartments-Typical-Floor-Plan-June-2026.png': 'https://arthaland.imgix.net/assets/site/UNA-Apartments-Typical-Floor-Plan-June-2026.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1125&ixlib=php-3.3.1&q=82&s=3e0f3eecd418cbcec83b7b3468adefc7&usm=20&w=2000',
+                'UNA-TOWER-3-STUDIO-THUMBNAIL-SMALL.png': 'https://arthaland.imgix.net/assets/site/UNA-TOWER-3-STUDIO-THUMBNAIL-SMALL.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2133&ixlib=php-3.3.1&q=82&s=56ac283a22c71eeed5e72c7e78aab43d&usm=20&w=2000',
+                'UNA-TOWER-3-1BR-THUMBNAIL-SMALL.png': 'https://arthaland.imgix.net/assets/site/UNA-TOWER-3-1BR-THUMBNAIL-SMALL.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2133&ixlib=php-3.3.1&q=82&s=675da723a0f17b633098870e1752e99f&usm=20&w=2000',
+                'One-Bedroom-Dining-Living-and-Balcony.png': 'https://arthaland.imgix.net/assets/site/One-Bedroom-Dining-Living-and-Balcony.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=0f4f81ecc9c6e559200190a137efc896&w=2000',
+                'Savya-Financial-Center-Ground-Floor.png': 'https://arthaland.imgix.net/assets/site/Savya-Financial-Center-Ground-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1266&ixlib=php-3.3.1&q=82&s=9ab451a7b36cff56836fdcbb9d8b7886&usm=20&w=2000',
+                'Savya-Financial-Center-5th-Floor.png': 'https://arthaland.imgix.net/assets/site/Savya-Financial-Center-5th-Floor.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1266&ixlib=php-3.3.1&q=82&s=6620371a23c0b737f2082b353d43fb72&w=2000',
+                '1BR-Thumbnail-Adjusted-01302026-Update-Layout.png': 'https://arthaland.imgix.net/assets/site/1BR-Thumbnail-Adjusted-01302026-Update-Layout.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1514&ixlib=php-3.3.1&q=82&s=3af236339a63afb96788ea582b935f08&usm=20&w=2000',
+                '2BR-Thumbnail-Adjust-01302026-Update-Layout.png': 'https://arthaland.imgix.net/assets/site/2BR-Thumbnail-Adjust-01302026-Update-Layout.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1514&ixlib=php-3.3.1&q=82&s=951ff5a61fec9299bf786113f879771a&usm=20&w=2000',
+                '3BR-Thumbnail-01302026-Update-Layout.png': 'https://arthaland.imgix.net/assets/site/3BR-Thumbnail-01302026-Update-Layout.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1514&ixlib=php-3.3.1&q=82&s=5012df290ac58fe2f0bbc6654acb1b8b&usm=20&w=2000',
+                'Garden-Thumbnail-01302026-Update-Layout.png': 'https://arthaland.imgix.net/assets/site/Garden-Thumbnail-01302026-Update-Layout.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1514&ixlib=php-3.3.1&q=82&s=96d50e5329b1aa47ef520625d4ea0a63&usm=20&w=2000',
+                'ONE-BEDROOM-TYPE-C-LIVING-AREA-DINING-KITCHEN-AND-BALCONY.png': 'https://arthaland.imgix.net/assets/site/ONE-BEDROOM-TYPE-C-LIVING-AREA-DINING-KITCHEN-AND-BALCONY.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1500&ixlib=php-3.3.1&q=82&s=bcae0002834576a2708f4d8bb8c87947&w=2000',
+                'TWO-BEDROOM-TYPE-A-LIVING-AREA-AND-KITCHEN.png': 'https://arthaland.imgix.net/assets/site/TWO-BEDROOM-TYPE-A-LIVING-AREA-AND-KITCHEN.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1538&ixlib=php-3.3.1&q=82&s=9afc86bb4043da505507b71b7026860c&w=2000',
+                'Project-Teal-Studio-Enlarged.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-Studio-Enlarged.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2622&ixlib=php-3.3.1&q=82&s=99bca0b418e602b7e05d59c6c55af0bb&usm=20&w=2000',
+                'Project-Teal-1BR-Enlarged.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-1BR-Enlarged.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2622&ixlib=php-3.3.1&q=82&s=6f3f24e749c90acd8add152792c4c519&usm=20&w=2000',
+                'Project-Teal-2BR-Enlarged-Updated.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-2BR-Enlarged-Updated.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2622&ixlib=php-3.3.1&q=82&s=e629bf1603c8cb80bc2526eab4ce16a5&usm=20&w=2000',
+                'Project-Teal-Popup-Pattern.png': 'https://arthaland.imgix.net/assets/site/Project-Teal-Popup-Pattern.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=5982&ixlib=php-3.3.1&q=82&s=e4781c2de0f64507b5acd2f1abc5b509&usm=20&w=2000',
+                'Copy-of-Arya-Swimming-Pool.jpg': 'https://arthaland.imgix.net/assets/site/Copy-of-Arya-Swimming-Pool.jpg?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=345bc3c6681f4cdd25f2c73f6fbe49bc&w=2000'
+            }[file] || `https://arthaland.imgix.net/assets/site/${encodeURIComponent(file)}`);
+            const additionalArthalandMediaUrls = {
+                'Cebu-Exchange.JPG': 'assets/arthaland/Cebu-Exchange.JPG',
+                'ARTHALAND-REVISED_-198.jpg': 'https://arthaland.imgix.net/assets/site/ARTHALAND-REVISED_-198.jpg?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=2bb412169f0e3945ce1ae2e9018a671c&w=2000',
+                'UNA-TOWER-2-STUDIO.png': 'https://arthaland.imgix.net/assets/site/UNA-TOWER-2-STUDIO.png?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=2000&ixlib=php-3.3.1&q=82&s=13b4b5274728f6346d02df65d1d737b9&usm=20&w=2000',
+                '7N8A0567.jpg': 'https://arthaland.imgix.net/assets/site/7N8A0567.jpg?auto=format&crop=focalpoint&domain=arthaland.imgix.net&fit=crop&fp-x=0.5&fp-y=0.5&h=1333&ixlib=php-3.3.1&q=82&s=7f1a8cf247366ac75d958195ea9546f5&w=2000'
+            };
+            const mediaImageUrl = (file) => additionalArthalandMediaUrls[file] || arthalandMediaImageUrl(file);
+            const renderMediaCards = (items) => items.length ? items.map(item => `
+                <a href="${mediaImageUrl(item.file)}" target="_blank" rel="noopener noreferrer" class="group block border border-neutral-200 bg-white hover:border-brand-brown">
+                    <div class="h-48 sm:h-56 bg-neutral-100 flex items-center justify-center overflow-hidden"><img src="${mediaImageUrl(item.file)}" alt="${item.label}" loading="lazy" class="h-full w-full object-contain transition-transform group-hover:scale-[1.02]" onerror="this.parentElement.parentElement.classList.add('hidden')"></div>
+                    <div class="p-3 text-xs font-semibold text-neutral-700">${item.label}</div>
+                </a>`).join('') : '<p class="text-xs text-neutral-500 sm:col-span-2">No unit-specific images are published in the official project page gallery.</p>';
+            const projectMediaSection = `
+                <section class="space-y-4 border-t border-neutral-200 pt-5">
+                    <div class="flex flex-wrap justify-between gap-3 items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">Official Arthaland project media</span><h3 class="text-lg font-bold uppercase mt-1">Floor Plans &amp; Unit Renditions</h3></div><a href="${media.source}" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase font-bold underline underline-offset-4">View source page ↗</a></div>
+                    <div class="grid lg:grid-cols-2 gap-5">
+                        <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Floor plans</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.plans || [])}</div></div>
+                        <div class="space-y-2"><h4 class="text-xs uppercase tracking-wide font-bold">Artistic renditions &amp; unit visuals</h4><div class="grid sm:grid-cols-2 gap-3">${renderMediaCards(media.renders || [])}</div></div>
+                    </div>
+                    ${media.note ? `<p class="text-[11px] text-neutral-500 leading-relaxed">${media.note}</p>` : ''}
+                    <p class="text-[10px] text-neutral-500">Images are from Arthaland’s official website. Renderings are illustrative; actual unit specifications and finishes may vary.</p>
+                </section>`;
             const unitCards = units.map(u => `
                 <article class="border ${String(u.id) === String(unitId) ? 'border-brand-brown ring-1 ring-brand-brown' : 'border-neutral-200'} bg-neutral-50 p-4 space-y-3">
                     <div class="flex flex-wrap justify-between gap-2 items-start">
@@ -2829,6 +2990,7 @@ if (Array.isArray(rawImg)) {
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Turnover</span><p class="text-sm mt-2">${proj.turnover || 'Ask Compass Realty for the current schedule.'}</p></div>
                         <div class="border border-neutral-200 p-4"><span class="text-[9px] uppercase text-neutral-500 font-bold">Project / Inventory Status</span><p class="text-sm mt-2">${projectStatus}</p></div>
                     </div>
+                    ${projectMediaSection}
                     ${selectedUnit ? `<div class="bg-brand-brown/10 border-l-4 border-brand-brown p-4 text-sm"><strong>Selected unit type:</strong> ${selectedUnit.type} · ${selectedUnit.area || 'Area on request'} · ${selectedUnit.priceRange || 'Inquire for current pricing'}</div>` : ''}
                     <section class="space-y-3"><div class="flex justify-between items-end"><div><span class="text-[10px] uppercase tracking-widest text-brand-brown font-bold">Available listing types</span><h3 class="text-lg font-bold uppercase mt-1">Unit Specifications</h3></div><span class="text-[10px] text-neutral-500">${units.length} TYPES</span></div><div class="grid md:grid-cols-2 gap-3">${unitCards}</div></section>
                     <div class="flex flex-wrap gap-3 border-t border-neutral-200 pt-4"><button type="button" onclick="openDeveloperInquiry('${proj.id}')" class="bg-black hover:bg-brand-brown text-white px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Inquire About This Project</button><button type="button" onclick="closePropertyModal()" class="border border-black px-5 py-3 text-[10px] uppercase font-bold tracking-wide">Close Specifications</button></div>
