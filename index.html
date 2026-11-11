@@ -1893,7 +1893,7 @@ if (Array.isArray(rawImg)) {
             const currentMode = activeDualMode[prop.id] || 'sale';
             const activePrice = (isDual && currentMode === 'rent') 
                 ? formatMoney(prop.rentPrice, true) 
-                : formatMoney(prop.price, false);
+                : formatMoney(prop.price, cleanStatus === "Rent");
 
             let badgeHtml = '';
             if (isDual) {
