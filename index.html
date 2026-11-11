@@ -587,7 +587,7 @@
             <div class="border-b border-black pb-4 mb-6">
                 <span class="text-[10px] uppercase font-semibold tracking-widest text-brand-brown block">CONCIERGE ONBOARDING</span>
                 <h2 class="text-2xl font-bold uppercase tracking-tight text-black">ENLIST YOUR LUXURY PROPERTY</h2>
-                <p class="text-xs text-neutral-600 font-light mt-1">Submit properties for appraisal and representation (Auto-updates Sheet 4).</p>
+                <p class="text-xs text-neutral-600 font-light mt-1">Submit your property for appraisal and representation. Our team will review your submission.</p>
             </div>
             <form id="enlist-form" onsubmit="handleEnlistSubmit(event)" class="space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -620,7 +620,7 @@
                     <input type="text" id="enlist-loc" placeholder="e.g. Dasmariñas Cavite, Makati, or BGC" class="w-full bg-neutral-100 border p-2.5 text-xs">
                 </div>
                 <button type="submit" id="enlist-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors">
-                    SUBMIT ENLISTMENT (DISPATCHES TO SHEET 4)
+                    SUBMIT ENLISTMENT
                 </button>
             </form>
         </div>
@@ -681,7 +681,7 @@
                 <div class="flex justify-between items-center pb-3 border-b">
                     <div>
                         <h3 class="text-base font-bold uppercase">REALTOR SECONDARY LISTINGS</h3>
-                        <p class="text-xs text-neutral-500">Edits overwrite matching rows cleanly in Google Sheet 1.</p>
+                        <p class="text-xs text-neutral-500">Edits update the selected listing details.</p>
                     </div>
                     <button onclick="openAddListingModal()" class="bg-brand-brown hover:bg-black text-white text-xs px-4 py-2 uppercase font-semibold">
                         + ADD NEW LISTING
@@ -928,7 +928,7 @@
                 </div>
 
                 <button type="submit" id="crud-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold tracking-widest transition-colors mt-2">
-                    SAVE PROPERTY LISTING & OVERWRITE SHEET 1
+                    SAVE PROPERTY LISTING
                 </button>
             </form>
         </div>
@@ -981,7 +981,7 @@
                     <textarea id="unit-form-images" rows="2" class="w-full bg-neutral-100 border p-2.5 text-xs font-mono"></textarea>
                 </div>
                 <button type="submit" id="devunit-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-semibold">
-                    SAVE UNIT & SYNC TO SHEET 5
+                    SAVE UNIT
                 </button>
             </form>
         </div>
@@ -1721,6 +1721,7 @@ if (Array.isArray(rawImg)) {
         }
 
         window.addEventListener('hashchange', checkDirectURLRouting);
+        window.addEventListener('popstate', checkDirectURLRouting);
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
                 e.preventDefault();
@@ -1739,13 +1740,86 @@ if (Array.isArray(rawImg)) {
             const hash = window.location.hash.toLowerCase();
             const urlParams = new URLSearchParams(window.location.search);
             const viewParam = urlParams.get('view')?.toLowerCase();
+            const listingId = urlParams.get('listing');
+            const developerProjectId = urlParams.get('devProject');
             const hasAdminParam = urlParams.has('admin');
+
+            if (listingId) {
+                const listing = properties.find(item => String(item.id) === String(listingId));
+                if (listing) {
+                    showMainApp();
+                    openPropertyModal(listing.id);
+                }
+                return;
+            }
+
+            if (developerProjectId) {
+                const project = developerProjects.find(item => String(item.id) === String(developerProjectId));
+                if (project) {
+                    showDeveloperPortalView();
+                    openDeveloperSpecifications(project.id, urlParams.get('devUnit') || '');
+                }
+                return;
+            }
 
             if (hash === '#admin' || hash === '#admin-dashboard' || viewParam === 'admin' || hasAdminParam) {
                 showAdminDashboard();
             } else if (hash === '#developer' || viewParam === 'developer') {
                 showDeveloperPortalView();
             }
+        }
+
+        function propertyShareUrl(listingId) {
+            const url = new URL(window.location.href);
+            url.search = '';
+            url.hash = '';
+            url.searchParams.set('listing', String(listingId));
+            return url.toString();
+        }
+
+        function developerShareUrl(projectId, unitId = '') {
+            const url = new URL(window.location.href);
+            url.search = '';
+            url.hash = '';
+            url.searchParams.set('devProject', String(projectId));
+            if (unitId) url.searchParams.set('devUnit', String(unitId));
+            return url.toString();
+        }
+
+        async function copyShareLink(url, event) {
+            event?.stopPropagation?.();
+            try {
+                if (navigator.clipboard?.writeText) {
+                    await navigator.clipboard.writeText(url);
+                } else {
+                    const copyField = document.createElement('textarea');
+                    copyField.value = url;
+                    copyField.setAttribute('readonly', '');
+                    copyField.style.position = 'fixed';
+                    copyField.style.opacity = '0';
+                    document.body.appendChild(copyField);
+                    copyField.select();
+                    const copied = document.execCommand('copy');
+                    copyField.remove();
+                    if (!copied) throw new Error('Clipboard unavailable');
+                }
+                showToast('Link copied.', 'success');
+            } catch (error) {
+                showToast('Could not copy the link. Please copy it from the address bar.', 'error');
+            }
+        }
+
+        function renderShareButtons(url, title, contentType = 'listing') {
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(title + ' | Compass Realty');
+            const buttonClass = 'inline-flex items-center justify-center w-8 h-8 border border-neutral-300 hover:bg-brand-brown hover:text-white transition-colors';
+            return '<div class="flex items-center gap-1.5 pt-2" aria-label="Share this ' + contentType + '" onclick="event.stopPropagation()">' +
+                '<span class="text-[9px] uppercase tracking-wide text-neutral-500 mr-1">Share</span>' +
+                '<a class="' + buttonClass + '" href="https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+                '<a class="' + buttonClass + '" href="https://api.whatsapp.com/send?text=' + encodeURIComponent(title + ' | Compass Realty ' + url) + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+                '<a class="' + buttonClass + '" href="https://twitter.com/intent/tweet?text=' + encodedText + '&url=' + encodedUrl + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on X" title="X"><i class="fa-brands fa-x-twitter"></i></a>' +
+                '<button type="button" class="' + buttonClass + '" onclick="copyShareLink(decodeURIComponent(\'' + encodedUrl + '\'), event)" aria-label="Copy ' + contentType + ' link" title="Copy link"><i class="fa-regular fa-copy"></i></button>' +
+            '</div>';
         }
 
         function updateHeroBannerStyle(url) {
@@ -1862,6 +1936,7 @@ if (Array.isArray(rawImg)) {
             cardCarouselIndices[prop.id] = cardCarouselIndices[prop.id] || 0;
             const currentImgIndex = cardCarouselIndices[prop.id];
             const watermarkId = `wm-card-${prop.id}`;
+            const shareUrl = propertyShareUrl(prop.id);
 
             card.innerHTML = `
                 <div>
@@ -1901,13 +1976,16 @@ if (Array.isArray(rawImg)) {
                     </div>
                 </div>
 
-                <div class="p-6 pt-0 flex gap-2">
-                    <button onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
-                        ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
-                    </button>
-                    <button onclick="openListingLightbox('${prop.id}', 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
-                        <i class="fa-solid fa-expand"></i>
-                    </button>
+                <div class="p-6 pt-0 space-y-2">
+                    <div class="flex gap-2">
+                        <button type="button" onclick="openPropertyModal('${prop.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-xs font-semibold uppercase">
+                            ${isSold ? 'VIEW SOLD RECORD' : 'VIEW DETAILS & INQUIRE'}
+                        </button>
+                        <button type="button" onclick="openListingLightbox('${prop.id}', 0)" class="bg-neutral-800 hover:bg-black text-white px-3.5 py-2.5 text-xs" title="Open Photo Studio">
+                            <i class="fa-solid fa-expand"></i>
+                        </button>
+                    </div>
+                    ${renderShareButtons(shareUrl, prop.title, 'listing')}
                 </div>
             `;
 
@@ -2069,6 +2147,7 @@ if (Array.isArray(rawImg)) {
 
                         <h2 class="text-2xl font-bold uppercase">${prop.title}</h2>
                         <p class="text-xs text-neutral-600"><i class="fa-solid fa-location-dot text-brand-brown"></i> ${prop.location}</p>
+                        ${renderShareButtons(propertyShareUrl(prop.id), prop.title, 'listing')}
                         <p class="text-xs text-neutral-700 whitespace-pre-line border-l-2 border-brand-brown pl-4">${prop.description}</p>
                     </div>
 
@@ -2095,7 +2174,7 @@ if (Array.isArray(rawImg)) {
                             <textarea id="client-notes" rows="2" placeholder="Specific viewing requests or questions..." class="w-full bg-white border p-2 text-xs"></textarea>
 
                             <button type="submit" id="client-submit-btn" class="w-full bg-brand-brown hover:bg-black text-white p-3 text-xs uppercase font-bold tracking-widest transition-colors">
-                                TRANSMIT TO SHEET 2
+                                SEND INQUIRY
                             </button>
                         </form>
                     </div>
@@ -2192,7 +2271,7 @@ if (Array.isArray(rawImg)) {
             } catch(err) {}
 
             closePropertyModal();
-            showToast("Logged to Sheet 2! An advisor will reach out.", "success");
+            showToast("Your inquiry has been submitted. An advisor will reach out.", "success");
         }
 
         // ENLIST PROPERTY SUBMISSION
@@ -2224,7 +2303,7 @@ if (Array.isArray(rawImg)) {
             } catch(err) {}
 
             closeEnlistModal();
-            showToast("Property enlisted! Logged to Sheet 4.", "success");
+            showToast("Property details submitted successfully.", "success");
         }
 
         // ADMIN CONTROLLER
@@ -2439,7 +2518,7 @@ if (Array.isArray(rawImg)) {
         async function handleListingCrudSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('crud-submit-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING & OVERWRITING SHEET 1...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> SAVING LISTING...`;
 
             const idVal = document.getElementById('crud-id').value;
             const isEdit = Boolean(idVal);
@@ -2515,13 +2594,13 @@ if (Array.isArray(rawImg)) {
             } catch(e) {}
 
             closeAddListingModal();
-            btn.textContent = "SAVE PROPERTY LISTING & OVERWRITE SHEET 1";
+            btn.textContent = "SAVE PROPERTY LISTING";
             showToast(`Listing #${listingId} saved!`, "success");
         }
 
         async function deleteListing(id) {
             const prop = properties.find(p => String(p.id) === String(id));
-            if (!confirm(`Are you sure you want to delete Listing #${id}? This will remove it from Sheet 1.`)) return;
+            if (!confirm(`Are you sure you want to permanently remove Listing #${id}?`)) return;
             properties = properties.filter(p => String(p.id) !== String(id));
             SafeStorage.set('cpr_cached_listings_v8', JSON.stringify(properties));
             renderPropertyList();
@@ -2549,7 +2628,7 @@ if (Array.isArray(rawImg)) {
         async function handleSaveDevUnitSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('devunit-submit-btn');
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> UPLOADING ASSETS & SAVING TO SHEET 5...`;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> UPLOADING ASSETS & SAVING UNIT...`;
 
             const projId = document.getElementById('unit-target-project').value;
             const proj = developerProjects.find(p => p.id === projId) || developerProjects[0];
@@ -2620,12 +2699,12 @@ if (Array.isArray(rawImg)) {
 
             closeAddDevUnitModal();
             renderAdminDashboard();
-            btn.textContent = "SAVE UNIT & SYNC TO SHEET 5";
+            btn.textContent = "SAVE UNIT";
             showToast(`Added unit to ${proj.title}!`, "success");
         }
 
         async function deleteDevUnit(unitId) {
-            if (!confirm(`Delete this unit? This will update Sheet 5.`)) return;
+            if (!confirm(`Permanently delete this unit?`)) return;
             developerProjects.forEach(p => {
                 p.units = (p.units || []).filter(u => u.id !== unitId);
             });
@@ -2640,7 +2719,7 @@ if (Array.isArray(rawImg)) {
                     body: JSON.stringify({ sheetTab: "Sheet5", action: "deleteDeveloperUnit", unitId: unitId })
                 });
             } catch(e) {}
-            showToast("Unit removed from Sheet 5!", "info");
+            showToast("Unit removed.", "info");
         }
 
         // GOOGLE SHEETS ASYNC SYNC
@@ -2712,6 +2791,7 @@ if (Array.isArray(rawImg)) {
 
                 renderAdminDashboard();
             } catch(e) {}
+            checkDirectURLRouting();
         }
 
         function updateCategoryButtonsUI(activeCat) {
@@ -3047,7 +3127,7 @@ if (Array.isArray(rawImg)) {
                 });
             } catch (err) {}
             closePropertyModal();
-            showToast('Developer inquiry submitted and logged to Sheet 4.', 'success');
+            showToast('Your developer inquiry has been submitted.', 'success');
         }
 
         function filterDeveloperProjects(brand = "ALL") {
@@ -3078,6 +3158,7 @@ if (Array.isArray(rawImg)) {
                             <button type="button" onclick="openDeveloperSpecifications('${p.id}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-[10px] font-bold uppercase tracking-wide">Project Specifications</button>
                             <button type="button" onclick="openDeveloperInquiry('${p.id}')" class="flex-1 border border-black hover:bg-neutral-100 py-2.5 text-[10px] font-bold uppercase tracking-wide">Inquire</button>
                         </div>
+                        ${renderShareButtons(developerShareUrl(p.id), p.title, 'project')}
                         <div class="border-t border-neutral-200 pt-4 space-y-3">
                             <div class="flex justify-between items-center"><h4 class="text-xs font-bold uppercase tracking-wide">${arthaland ? 'Unit Types' : 'Available Layouts'}</h4><span class="text-[10px] text-neutral-500">${(p.units || []).length} TYPES</span></div>
                             ${(p.units || []).map(u => `
@@ -3088,6 +3169,7 @@ if (Array.isArray(rawImg)) {
                                         <button type="button" onclick="openDeveloperSpecifications('${p.id}', '${u.id}')" class="flex-1 border border-neutral-400 py-2 text-[9px] uppercase font-bold">Unit Specifications</button>
                                         <button type="button" onclick="openDeveloperInquiry('${p.id}', '${u.id}')" class="flex-1 bg-brand-brown hover:bg-black text-white py-2 text-[9px] uppercase font-bold">Inquire About Unit</button>
                                     </div>
+                                    ${renderShareButtons(developerShareUrl(p.id, u.id), p.title + ' ' + u.type, 'unit')}
                                 </div>`).join('')}
                         </div>
                     </div>
