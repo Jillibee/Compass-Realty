@@ -2606,9 +2606,12 @@ if (Array.isArray(rawImg)) {
             let localFilesData = [];
             let localImagePreviews = [];
             if (fileInput.files && fileInput.files.length > 0) {
-                const sortedFiles = Array.from(fileInput.files).sort((a, b) =>
-                    a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
-                );
+                const is001Image = file => /^001(?:$|[ ._-])/i.test(file.name.replace(/\.[^.]+$/, '').trim());
+                const sortedFiles = Array.from(fileInput.files).sort((a, b) => {
+                    const primaryOrder = Number(is001Image(b)) - Number(is001Image(a));
+                    if (primaryOrder) return primaryOrder;
+                    return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+                });
 
                 for (let i = 0; i < sortedFiles.length; i++) {
                     const f = sortedFiles[i];
