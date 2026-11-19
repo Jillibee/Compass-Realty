@@ -1367,6 +1367,7 @@ if (Array.isArray(rawImg)) {
                 isDeal: String(item.isdeal || item.isDeal).toUpperCase() === 'TRUE',
                 isFeatured: String(item.isfeatured || item.isFeatured).toUpperCase() === 'TRUE',
                 _locallyEdited: Boolean(item._locallyEdited),
+                _localEditAt: Number(item._localEditAt) || 0,
                 _imagesOrdered: true
             };
         }
@@ -2663,6 +2664,7 @@ if (Array.isArray(rawImg)) {
                 cardCarouselIndices[listingId] = 0;
             }
             sanitized._locallyEdited = true;
+            sanitized._localEditAt = Date.now();
 
             if (isEdit) {
                 const idx = properties.findIndex(p => String(p.id) === String(listingId));
@@ -2674,6 +2676,7 @@ if (Array.isArray(rawImg)) {
             renderPropertyList();
             renderAdminDashboard();
 
+            let syncResult = null;
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -2681,7 +2684,7 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(payload)
                 });
-                await fetchDatabaseFromGoogleSheets();
+                syncResult = await fetchDatabaseFromGoogleSheets();
             } catch(e) {
                 btn.disabled = false;
                 btn.textContent = "SAVE PROPERTY LISTING";
@@ -2692,7 +2695,13 @@ if (Array.isArray(rawImg)) {
             closeAddListingModal();
             btn.disabled = false;
             btn.textContent = "SAVE PROPERTY LISTING";
-            showToast("Listing update sent. Images preview now and open pages refresh automatically.", "info");
+            const listingSyncConfirmed = Boolean(syncResult?.ok && syncResult.listingIds.includes(String(listingId)));
+            showToast(
+                listingSyncConfirmed
+                    ? "Listing synced to Sheet1."
+                    : "Listing is saved here, but Sheet1 has not confirmed the sync yet.",
+                listingSyncConfirmed ? "success" : "info"
+            );
         }
 
         async function deleteListing(id) {
@@ -2703,6 +2712,7 @@ if (Array.isArray(rawImg)) {
             renderPropertyList();
             renderAdminDashboard();
 
+            let syncResult = null;
             try {
                 await fetch(GOOGLE_SHEETS_API_URL, {
                     method: 'POST',
@@ -2710,11 +2720,18 @@ if (Array.isArray(rawImg)) {
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ sheetTab: "Sheet1", action: "deleteListing", id: id, title: prop ? prop.title : "" })
                 });
+                syncResult = await fetchDatabaseFromGoogleSheets();
             } catch(e) {
                 showToast("Listing was removed from this browser, but the sync request could not be sent.", "error");
                 return;
             }
-            showToast("Deletion request sent. Refresh to confirm the listing was removed.", "info");
+            const deletionSyncConfirmed = Boolean(syncResult?.ok && !syncResult.listingIds.includes(String(id)));
+            showToast(
+                deletionSyncConfirmed
+                    ? "Listing deletion confirmed in Sheet1."
+                    : "Deletion was requested, but Sheet1 has not confirmed it yet.",
+                deletionSyncConfirmed ? "success" : "info"
+            );
         }
 
         function openAddDevUnitModal() {
@@ -2832,46 +2849,95 @@ if (Array.isArray(rawImg)) {
         }
 
         // GOOGLE SHEETS ASYNC SYNC
+        const LOCAL_LISTING_SYNC_GRACE_MS = 120000;
+
+        function listingSyncValuesMatch(localRecord, remoteRecord) {
+            const fields = ['title', 'category', 'location', 'price', 'rentPrice', 'status', 'area', 'beds', 'baths', 'parking', 'developer', 'description', 'isDeal', 'isFeatured'];
+            return fields.every(field => {
+                const localValue = localRecord[field] ?? '';
+                const remoteValue = remoteRecord[field] ?? '';
+                if (typeof localValue === 'number' || typeof remoteValue === 'number') {
+                    return (Number(localValue) || 0) === (Number(remoteValue) || 0);
+                }
+                return String(localValue).trim() === String(remoteValue).trim();
+            });
+        }
+
+        function isRecentLocalListingEdit(record) {
+            const editedAt = Number(record?._localEditAt) || 0;
+            const age = Date.now() - editedAt;
+            return Boolean(record?._locallyEdited && editedAt > 0 && age >= 0 && age < LOCAL_LISTING_SYNC_GRACE_MS);
+        }
+
         async function fetchDatabaseFromGoogleSheets(checkRoutesAfterRefresh = false) {
-            if (databaseRefreshInFlight) return;
+            if (databaseRefreshInFlight) return { ok: false, reason: 'refresh-in-progress', listingIds: [] };
             databaseRefreshInFlight = true;
+            let syncResult = { ok: false, reason: 'unavailable', listingIds: [] };
             try {
                 const res = await fetch(GOOGLE_SHEETS_API_URL);
+                if (!res.ok) throw new Error('The shared listing source could not be read.');
                 const data = await res.json();
 
                 let incomingListings = [];
+                let hasListingPayload = false;
                 let incomingDevUnits = [];
                 let incomingAppts = [];
                 let incomingEnlistments = [];
 
                 if (Array.isArray(data)) {
                     incomingListings = data;
+                    hasListingPayload = true;
                 } else if (data && typeof data === 'object') {
-                    if (Array.isArray(data.secondaryListings)) incomingListings = data.secondaryListings;
-                    else if (Array.isArray(data.listings)) incomingListings = data.listings;
+                    if (Array.isArray(data.secondaryListings)) {
+                        incomingListings = data.secondaryListings;
+                        hasListingPayload = true;
+                    } else if (Array.isArray(data.listings)) {
+                        incomingListings = data.listings;
+                        hasListingPayload = true;
+                    }
                     if (Array.isArray(data.developerUnits)) incomingDevUnits = data.developerUnits;
                     if (Array.isArray(data.appointments)) incomingAppts = data.appointments;
                     if (Array.isArray(data.enlistments)) incomingEnlistments = data.enlistments;
                 }
 
-                if (incomingListings && incomingListings.length > 0) {
-                    properties = incomingListings.map(item => {
+                if (hasListingPayload) {
+                    const previousProperties = properties;
+                    const remoteListingIds = new Set(incomingListings.map(item => String(item.id ?? '')).filter(Boolean));
+                    const remoteProperties = incomingListings.map(item => {
                         const sanitized = sanitizeListingRecord(item);
-                        const existing = properties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
-                        
+                        const existing = previousProperties.find(p => String(p.id) === String(sanitized.id) || p.title.toLowerCase() === sanitized.title.toLowerCase());
+
                         if (existing && existing._locallyEdited) {
-                            if (sanitized.images && sanitized.images.length > 0 && !sanitized.images[0].includes('unsplash')) {
-                                existing.images = sanitized.images;
+                            if (listingSyncValuesMatch(existing, sanitized)) {
+                                sanitized._locallyEdited = false;
+                                sanitized._localEditAt = 0;
+                                return sanitized;
                             }
-                            return existing;
+                            if (isRecentLocalListingEdit(existing)) {
+                                if (sanitized.images && sanitized.images.length > 0 && !sanitized.images[0].includes('unsplash')) {
+                                    existing.images = sanitized.images;
+                                }
+                                return existing;
+                            }
                         }
+
                         if (existing && Number(existing.price) > 0 && Number(sanitized.price) === 0) {
                             sanitized.price = existing.price;
                         }
                         return sanitized;
                     });
+
+                    const pendingLocalAdds = previousProperties
+                        .filter(p => isRecentLocalListingEdit(p) && !remoteListingIds.has(String(p.id)))
+                        .map(p => ({ ...p }));
+                    properties = [...remoteProperties, ...pendingLocalAdds];
                     persistCachedListings();
                     renderPropertyList();
+                    syncResult = {
+                        ok: true,
+                        reason: 'refreshed',
+                        listingIds: incomingListings.map(item => String(item.id ?? '')).filter(Boolean)
+                    };
                 }
 
                 if (incomingDevUnits && incomingDevUnits.length > 0) {
@@ -2903,10 +2969,12 @@ if (Array.isArray(rawImg)) {
                 renderAdminDashboard();
             } catch(e) {
                 // Keep the last rendered data available when the shared source is temporarily unreachable.
+                syncResult = { ok: false, reason: 'unavailable', listingIds: [] };
             } finally {
                 databaseRefreshInFlight = false;
             }
             if (checkRoutesAfterRefresh) checkDirectURLRouting();
+            return syncResult;
         }
 
         function updateCategoryButtonsUI(activeCat) {
