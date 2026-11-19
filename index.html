@@ -2695,7 +2695,12 @@ if (Array.isArray(rawImg)) {
             closeAddListingModal();
             btn.disabled = false;
             btn.textContent = "SAVE PROPERTY LISTING";
-            const listingSyncConfirmed = Boolean(syncResult?.ok && syncResult.listingIds.includes(String(listingId)));
+            const syncedListing = syncResult?.listingRecords?.find(item => String(item.id) === String(listingId));
+            const listingSyncConfirmed = Boolean(
+                syncResult?.ok &&
+                syncedListing &&
+                listingSyncValuesMatch(sanitized, syncedListing)
+            );
             showToast(
                 listingSyncConfirmed
                     ? "Listing synced to Sheet1."
@@ -2936,7 +2941,8 @@ if (Array.isArray(rawImg)) {
                     syncResult = {
                         ok: true,
                         reason: 'refreshed',
-                        listingIds: incomingListings.map(item => String(item.id ?? '')).filter(Boolean)
+                        listingIds: incomingListings.map(item => String(item.id ?? '')).filter(Boolean),
+                        listingRecords: incomingListings.map(item => sanitizeListingRecord(item))
                     };
                 }
 
