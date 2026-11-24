@@ -532,6 +532,7 @@
                             <option value="ayala-land">Ayala Land</option>
                             <option value="shang-properties">Shang Properties</option>
                             <option value="rockwell">Rockwell</option>
+                            <option value="ortigas-land">Ortigas Land</option>
                         </select>
                     </div>
                 </div>
@@ -1086,7 +1087,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1785,6 +1786,51 @@ if (Array.isArray(rawImg)) {
                     { id: 'LIN-05', type: 'Garden Villa', area: '255–314 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 0, baths: 0 }
                 ]
             },
+            // --- ORTIGAS LAND RESIDENCES ---
+            {
+                id: 'DEV-119',
+                devSlug: 'ortigas-land',
+                developer: 'Ortigas Land',
+                title: 'Residences at The Galleon',
+                township: 'ADB Avenue, Ortigas Center, Pasig City',
+                turnover: 'Ask Ortigas Land for the current handover schedule',
+                image: 'https://assets.ortigas.com.ph/data/uploads/2020/02/Residences_at_The_Galleon_01.jpg',
+                description: 'The residential tower of The Galleon, a two-tower mixed-use development in Ortigas Center. Ortigas Land describes 509 residences with one-bedroom, two-bedroom, and penthouse layouts.',
+                units: [
+                    { id: 'GAL-01', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 1, baths: 0 },
+                    { id: 'GAL-02', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 2, baths: 0 },
+                    { id: 'GAL-03', type: 'Penthouse', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 0, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-120',
+                devSlug: 'ortigas-land',
+                developer: 'Ortigas Land',
+                title: 'Empress at Capitol Commons',
+                township: 'Capitol Commons, Pasig City',
+                turnover: 'Ask Ortigas Land for the current handover schedule',
+                image: 'https://assets.ortigas.com.ph/data/uploads/2019/10/Empress_011.jpg',
+                description: 'A 56-storey residential tower facing Capitol Commons Park, planned around wellness and smart-home living.',
+                units: [
+                    { id: 'EMP-01', type: 'Studio', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 0, baths: 0 },
+                    { id: 'EMP-02', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 1, baths: 0 },
+                    { id: 'EMP-03', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 2, baths: 0 },
+                    { id: 'EMP-04', type: 'Three-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 3, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-121',
+                devSlug: 'ortigas-land',
+                developer: 'Ortigas Land',
+                title: 'Olin at Jade Drive',
+                township: 'Jade Drive corner Exchange Road, Ortigas Center, Pasig City',
+                turnover: 'Ask Ortigas Land for the current handover schedule',
+                image: 'https://assets.ortigas.com.ph/data/uploads/2023/04/Olin_at_Jade_Drive_Tower2.jpg',
+                description: 'A 52-storey residential property in Ortigas Center with a co-working space, gym, garden lounges, pools, and function hall.',
+                units: [
+                    { id: 'OLN-01', type: 'Residential Unit', area: 'Ask for current unit types and floor plans', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 0, baths: 0 }
+                ]
+            },
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
@@ -1942,6 +1988,27 @@ if (Array.isArray(rawImg)) {
                     { url: 'https://e-rockwell.com/wp-content/uploads/2024/09/Homepage-1440x7531-1.png', label: 'Lincoln at IPI Center · official unit visual' }
                 ],
                 note: 'Rockwell publishes an overall project price range. Contact Compass Realty to confirm the price and availability of a specific unit.'
+            },
+            'DEV-119': {
+                plans: [],
+                renders: [
+                    { url: 'https://assets.ortigas.com.ph/data/uploads/2020/02/Residences_at_The_Galleon_09_thumb.jpg', label: 'Residences at The Galleon · official project visual' }
+                ],
+                note: 'Contact Compass Realty for current floor plans, prices, and unit availability.'
+            },
+            'DEV-120': {
+                plans: [],
+                renders: [
+                    { url: 'https://assets.ortigas.com.ph/data/uploads/2019/10/EMPRESS_02.jpg', label: 'Empress at Capitol Commons · official project visual' }
+                ],
+                note: 'Contact Compass Realty for current floor plans, prices, and unit availability.'
+            },
+            'DEV-121': {
+                plans: [],
+                renders: [
+                    { url: 'https://assets.ortigas.com.ph/data/uploads/2023/04/Olin_at_Jade_Drive.jpg', label: 'Olin at Jade Drive · official project visual' }
+                ],
+                note: 'Contact Compass Realty for current unit types, floor plans, prices, and availability.'
             },
 
         };
@@ -3473,7 +3540,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
