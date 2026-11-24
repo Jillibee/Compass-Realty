@@ -530,6 +530,7 @@
                             <option value="ALL">ALL DEVELOPERS & TOWNSHIPS</option>
                             <option value="arthaland">Arthaland Sustainable Luxury</option>
                             <option value="ayala-land">Ayala Land</option>
+                            <option value="shang-properties">Shang Properties</option>
                         </select>
                     </div>
                 </div>
@@ -1084,7 +1085,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1688,6 +1689,57 @@ if (Array.isArray(rawImg)) {
                 ]
             },
 
+            // --- SHANG PROPERTIES DEVELOPMENTS ---
+            {
+                id: 'DEV-113',
+                devSlug: 'shang-properties',
+                developer: 'Shang Properties',
+                title: 'Haraya Residences',
+                township: 'Bridgetowne Destination Estate, Barangay Rosario, Pasig City',
+                turnover: 'Ask Compass Realty for current turnover details',
+                image: 'https://shangproperties.com/wp-content/uploads/2026/05/Haraya-1.png.webp',
+                description: 'A two-tower vertical gated village by Shang Robinsons Properties, Inc., with 533 residences in the South Tower and 362 in the North Tower.',
+                units: [
+                    { id: 'HAR-01', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 1, baths: 0 },
+                    { id: 'HAR-02', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 2, baths: 0 },
+                    { id: 'HAR-03', type: 'Three-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 3, baths: 0 },
+                    { id: 'HAR-04', type: 'Garden Villa', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 },
+                    { id: 'HAR-05', type: 'Garden Suite', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 },
+                    { id: 'HAR-06', type: 'Sky Suite', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 },
+                    { id: 'HAR-07', type: 'Penthouse', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-114',
+                devSlug: 'shang-properties',
+                developer: 'Shang Properties',
+                title: 'Shang Summit',
+                township: 'South Triangle, Quezon City',
+                turnover: 'Ask Compass Realty for current turnover details',
+                image: 'https://shangproperties.com/wp-content/uploads/2026/05/Summit-1.png.webp',
+                description: 'Shang Properties’ first residential development in Quezon City. The East Tower has 1,019 residences, with studio through three-bedroom layouts.',
+                units: [
+                    { id: 'SUM-01', type: 'Studio', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 },
+                    { id: 'SUM-02', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 1, baths: 0 },
+                    { id: 'SUM-03', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 2, baths: 0 },
+                    { id: 'SUM-04', type: 'Three-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 3, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-115',
+                devSlug: 'shang-properties',
+                developer: 'Shang Properties',
+                title: 'Aurelia Residences',
+                township: 'McKinley Parkway corner 5th Avenue and 21st Drive, Bonifacio Global City, Taguig',
+                turnover: 'Ask Compass Realty for current turnover details',
+                image: 'https://shangproperties.com/wp-content/uploads/2026/05/split-aurelia-1.webp',
+                description: 'An ultra-luxury development by Shang Robinsons Properties, Inc. with a limited collection of 285 residences in BGC.',
+                units: [
+                    { id: 'AUR-01', type: 'Three-Bedroom Residence', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 3, baths: 0 },
+                    { id: 'AUR-02', type: 'Four-Bedroom Residence', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 4, baths: 0 },
+                    { id: 'AUR-03', type: 'Penthouse', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 }
+                ]
+            },
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
@@ -1803,6 +1855,27 @@ if (Array.isArray(rawImg)) {
                     { url: 'https://cdn.sanity.io/images/4f3ey4m9/production/9711a1c80d57dd61a2d944ae2ebbab7ddbbdace3-2000x1209.jpg?auto=format&crop=entropy&fit=crop&h=560&q=75&w=840', label: 'Ayala Land Quezon City residential overview visual' }
                 ],
                 note: 'The shown image is a Quezon City overview visual from Ayala Land. Contact Compass Realty for Vertis Residences plans and current availability.'
+            },
+            'DEV-113': {
+                plans: [],
+                renders: [
+                    { url: 'https://shangproperties.com/wp-content/uploads/2026/05/1.-Drop-off-1024x576.jpg.webp', label: 'Haraya Residences · official project gallery image' }
+                ],
+                note: 'Contact Compass Realty for current floor plans and unit availability.'
+            },
+            'DEV-114': {
+                plans: [],
+                renders: [
+                    { url: 'https://shangproperties.com/wp-content/uploads/2026/05/Picture-%E2%86%92-1.-Drop-off-1024x576.jpg.webp_.png.webp', label: 'Shang Summit · official project gallery image' }
+                ],
+                note: 'Contact Compass Realty for current floor plans and unit availability.'
+            },
+            'DEV-115': {
+                plans: [],
+                renders: [
+                    { url: 'https://shangproperties.com/wp-content/uploads/2026/06/new-developments-aurelia.png', label: 'Aurelia Residences · official project visual' }
+                ],
+                note: 'Contact Compass Realty for current floor plans and unit availability.'
             },
 
         };
@@ -3336,7 +3409,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
