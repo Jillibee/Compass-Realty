@@ -534,6 +534,7 @@
                             <option value="rockwell">Rockwell</option>
                             <option value="ortigas-land">Ortigas Land</option>
                             <option value="rhk-land">RHK Land</option>
+                            <option value="robinsons-land">Robinsons Land</option>
                         </select>
                     </div>
                 </div>
@@ -1088,7 +1089,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com', 'rlcresidences.com'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1850,6 +1851,52 @@ if (Array.isArray(rawImg)) {
                     { id: 'VEL-06', type: 'Four-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 4, baths: 0 }
                 ]
             },
+            {
+                id: 'DEV-123',
+                devSlug: 'robinsons-land',
+                developer: 'Robinsons Land',
+                title: 'Le Pont Residences',
+                township: 'Bridgetowne, Brgy. Rosario, Pasig City',
+                turnover: 'Pre-selling; ask RLC for the current handover schedule',
+                image: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/b5335775-fc93-4214-900c-8dc00afe3ddf/le-pont-residences.webp?w=500',
+                description: 'Two 50-storey towers in Bridgetowne with one- to four-bedroom residences and penthouses. RLC Residences publishes an overall price range of PHP 14.3M–134.7M.',
+                units: [
+                    { id: 'LP-01', type: 'Executive One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 1, baths: 0 },
+                    { id: 'LP-02', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 1, baths: 0 },
+                    { id: 'LP-03', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 2, baths: 0 },
+                    { id: 'LP-04', type: 'Three-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 3, baths: 0 },
+                    { id: 'LP-05', type: 'Four-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 4, baths: 0 },
+                    { id: 'LP-06', type: 'Penthouse', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask for availability', beds: 0, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-124',
+                devSlug: 'robinsons-land',
+                developer: 'Robinsons Land',
+                title: 'MIRA',
+                township: 'Mirasol Street, Brgy. San Roque, Quezon City',
+                turnover: 'Target completion: Tower 1 Feb 2031; Tower 2 Jun 2031',
+                image: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/fc2aa8da-f771-4591-b5ba-88bbe1eb34b6/mira.png?w=500',
+                description: 'A four-tower, family-oriented condominium. Towers 1 and 2 are pre-selling, with studio, one-bedroom, and two-bedroom layouts. Published overall price range: PHP 6.3M–17.6M.',
+                units: [
+                    { id: 'MIR-01', type: 'Studio', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask by tower', beds: 0, baths: 0 },
+                    { id: 'MIR-02', type: 'One-Bedroom (balcony option)', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask by tower', beds: 1, baths: 0 },
+                    { id: 'MIR-03', type: 'Two-Bedroom (balcony option)', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Pre-selling; ask by tower', beds: 2, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-125',
+                devSlug: 'robinsons-land',
+                developer: 'Robinsons Land',
+                title: 'Cirrus',
+                township: 'Bridgetowne East, Pasig City',
+                turnover: 'Ready for occupancy; ask about current availability',
+                image: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/d1ae0c01-b19b-4989-a72b-70422940b89d/cirrus.jpg?w=500',
+                description: 'A 40-storey high-rise within Bridgetowne Destination Estate. RLC Residences publishes an overall price range of PHP 6.6M–7.5M, with one tower ready for occupancy.',
+                units: [
+                    { id: 'CIR-01', type: 'Studio', area: 'Ask for current floor plan', priceRange: 'Inquire for unit-specific pricing', status: 'Ready for occupancy; availability varies', beds: 0, baths: 0 }
+                ]
+            },
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
@@ -2035,6 +2082,27 @@ if (Array.isArray(rawImg)) {
                     { url: 'https://rhkland.com/wp-content/uploads/2019/11/section1-img_03.jpg', label: 'The Velaris Residences · official facade image' }
                 ],
                 note: 'Contact Compass Realty for current floor plans, pricing, availability, and handover details.'
+            },
+            'DEV-123': {
+                plans: [],
+                renders: [
+                    { url: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/b5335775-fc93-4214-900c-8dc00afe3ddf/le-pont-residences.webp?w=500', label: 'Le Pont Residences · official project image' }
+                ],
+                note: 'RLC Residences publishes an overall price range of PHP 14.3M–134.7M. Contact Compass Realty for current unit-specific pricing, availability, and handover details.'
+            },
+            'DEV-124': {
+                plans: [],
+                renders: [
+                    { url: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/fc2aa8da-f771-4591-b5ba-88bbe1eb34b6/mira.png?w=500', label: 'MIRA · official project image' }
+                ],
+                note: 'RLC Residences publishes an overall price range of PHP 6.3M–17.6M. Confirm current unit-specific pricing, availability, and tower schedule with Compass Realty.'
+            },
+            'DEV-125': {
+                plans: [],
+                renders: [
+                    { url: 'https://rlcresidences.com/web/production/uploads/gallery/condominiums/d1ae0c01-b19b-4989-a72b-70422940b89d/cirrus.jpg?w=500', label: 'Cirrus · official project image' }
+                ],
+                note: 'RLC Residences publishes an overall price range of PHP 6.6M–7.5M and lists one tower as ready for occupancy. Confirm current unit availability with Compass Realty.'
             },
 
         };
@@ -3566,7 +3634,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land' || brand === 'rhk-land';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land' || brand === 'rhk-land' || brand === 'robinsons-land';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
