@@ -1089,16 +1089,6 @@
             return /^[A-Za-z0-9_-]{1,80}$/.test(id) && !blockedIds.has(id) ? id : '';
         }
 
-        function safeProjectPageUrl(value) {
-            try {
-                const parsed = new URL(String(value ?? '').trim(), window.location.origin);
-                if (parsed.username || parsed.password || parsed.protocol !== 'https:') return '';
-                return parsed.href;
-            } catch (err) {
-                return '';
-            }
-        }
-
         function safeImageUrl(value) {
             const raw = String(value ?? '').trim();
             if (/^data:image\/(?:png|jpeg|jpg|webp|gif|avif);base64,[a-z0-9+/=\s]+$/i.test(raw)) {
@@ -1107,9 +1097,7 @@
             try {
                 const parsed = new URL(raw, window.location.origin);
                 const allowedHosts = new Set([
-                    'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
-                    'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com', 'rlcresidences.com', 'smdc.com', 'phirstparkhomesph.com', 'filigree.com.ph', 'filinvestland.com', 'theestatemakati.com'
+                    'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com', 'i.imgur.com', 'arthaland.imgix.net', 'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com', 'rlcresidences.com', 'smdc.com', 'phirstparkhomesph.com', 'filigree.com.ph', 'filinvestland.com', 'theestatemakati.com', 'filinvestcity.com', 'greenfield.com.ph', 'fng.ph', 'federalland.ph', 'i.ytimg.com', 'mb.com.ph', 'megaworldinternational.com', 'www.megaworldglobalcondos.com', 'theresidencespuntafuego.landco.ph', 'www.century-properties.com', 'www.centuryproperties.ph'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1931,16 +1919,15 @@ if (Array.isArray(rawImg)) {
             'DEV-109': { title: 'Liv', township: 'Katipunan Avenue, Loyola Heights, Quezon City', turnover: 'Liv North completion: 2031', image: 'assets/arthaland/Liv-Katipunan-Facade.avif', description: 'A sustainable vertical neighborhood near Ateneo with an exclusive campus bridgeway, wellness spaces and studio to two-bedroom homes.', units: [{ id: 'LIV-01', type: 'Studio', area: '24-29 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 0, baths: 1 }, { id: 'LIV-02', type: 'One-Bedroom', area: '40-47 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 1, baths: 1 }, { id: 'LIV-03', type: 'Two-Bedroom', area: '68-70 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 2, baths: 1 }] },
         };
 
-        // Current developer catalogs assembled from official project pages. Availability and prices should be reconfirmed with each developer.
+        // Current developer catalogs assembled from project information. Availability and prices should be reconfirmed with each developer.
         const appendedDeveloperCatalog = [
           {
                     "devSlug": "filinvest-land",
                     "developer": "Filinvest Land",
                     "title": "Botanika Nature Residences",
                     "township": "Filinvest City, Alabang, Muntinlupa",
-                    "sourceUrl": "https://filigree.com.ph/properties/botanika-tower-one/",
                     "image": "https://filigree.com.ph/wp-content/uploads/2024/05/30155051-botanika-tower-1-pool_cover_1600x1068-1024x684.jpg",
-                    "description": "Filinvest City's Botanika Nature Residences. The official Filigree page lists one- and three-bedroom residence sizes; confirm current RFO inventory and pricing.",
+                    "description": "Filinvest City's Botanika Nature Residences. One- and three-bedroom residence sizes; confirm current RFO inventory and pricing with Compass Realty.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -1966,7 +1953,6 @@ if (Array.isArray(rawImg)) {
                     "developer": "Filinvest Land",
                     "title": "The Levels",
                     "township": "Filinvest City, Alabang, Muntinlupa",
-                    "sourceUrl": "https://filinvestland.com/project/the-levels",
                     "image": "https://filinvestland.com/_next/image?q=75&url=https%3A%2F%2Ffilinvest-bbdcgrc0ehbqeuar.z02.azurefd.net%2FThe%2BLevels.jpg&w=3840",
                     "description": "Residential project in Filinvest City, Alabang. Confirm current inventory, floor plans and pricing with Filinvest Land.",
                     "turnover": "Confirm current availability with the developer.",
@@ -1994,8 +1980,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Filinvest Land",
                     "title": "Parkway Corporate Center",
                     "township": "Filinvest City, Alabang, Muntinlupa",
-                    "sourceUrl": "https://www.parkwaycorporate.com/the-office-condo-units/",
-                    "image": "",
+                    "image": "https://filinvestcity.com/sites/default/files/editor/dev01_cpi_0117_-min.jpg",
                     "description": "Office condominium in Filinvest City. Ask for current unit availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2014,8 +1999,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Greenfield",
                     "title": "NAVA",
                     "township": "Greenfield Alabang, Cupang, Muntinlupa",
-                    "sourceUrl": "https://greenfield.com.ph/project/nava/",
-                    "image": "",
+                    "image": "https://greenfield.com.ph/wp-content/uploads/2026/01/nava-master-planned-community-1024x683.jpg",
                     "description": "Residential lots at Greenfield Alabang. Confirm current lot availability and total price with Greenfield.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2034,8 +2018,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Federal Land",
                     "title": "The Observatory",
                     "township": "Mandaluyong City",
-                    "sourceUrl": "https://federalland.ph/news-and-events/federal-land-nomura-fng-delivers-preview-of-famed-japanese-lifestyle/",
-                    "image": "",
+                    "image": "https://fng.ph/wp-content/uploads/2025/09/Observatory_Facade-Tower-1_D1-2-min-e1758019511527-936x1024.jpg",
                     "description": "Federal Land's Japanese-inspired residential development in Mandaluyong. Ask for current RFO inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2086,8 +2069,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Federal Land",
                     "title": "Riverpark",
                     "township": "General Trias, Cavite",
-                    "sourceUrl": "https://federalland.ph/communities/riverpark/",
-                    "image": "",
+                    "image": "https://federalland.ph/app/uploads/2026/07/rp-2.webp",
                     "description": "Federal Land's Riverpark township in General Trias. Ask the developer which residential offerings and lots are currently available.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2106,8 +2088,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Federal Land",
                     "title": "Yume at Riverpark",
                     "township": "Riverpark, General Trias, Cavite",
-                    "sourceUrl": "https://federalland.ph/communities/riverpark/japanese-inspired-design/",
-                    "image": "",
+                    "image": "https://fng.ph/wp-content/uploads/2024/08/Yume_Render_13-1536x1024.webp",
                     "description": "Japanese-inspired residential lots in Riverpark. Confirm current lot availability and pricing with Federal Land.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2126,8 +2107,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "SM Signature",
                     "title": "Susana Heights Village",
                     "township": "Susana Heights, Muntinlupa City",
-                    "sourceUrl": "https://signatures.com.ph/press-release/susana-heights-where-strong-foundations-shape-intentional-living/",
-                    "image": "",
+                    "image": "https://i.ytimg.com/vi/-LuKTKuApUA/maxresdefault.jpg",
                     "description": "Build-ready lots at Susana Heights Village. Confirm current lot inventory and pricing with SM Signature.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -2146,7 +2126,6 @@ if (Array.isArray(rawImg)) {
                     "developer": "SM Signature",
                     "title": "The Estate Makati",
                     "township": "Ayala Avenue, Makati City",
-                    "sourceUrl": "https://theestatemakati.com/",
                     "image": "https://theestatemakati.com/app/webp-express/webp-images/doc-root/app/uploads/2024/05/Screen-Shot-2021-09-09-at-4.59.png.webp",
                     "description": "Luxury residences on Ayala Avenue. Ask SM Signature for current available units, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
@@ -2166,9 +2145,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "ICE Tower",
                     "township": "Mall of Asia Complex, Pasay City",
-                    "sourceUrl": "https://smdc.com/properties/heights/ice-tower-residencial-offices/",
                     "image": "https://smdc.com/app/uploads/2026/01/Ice-Tower-Facade-680x480px-01.webp",
-                    "description": "Current SMDC Ice Tower Residential Offices listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Ice Tower Residential Offices listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2202,9 +2180,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Shore 2 Residences",
                     "township": "Mall of Asia, Pasay City",
-                    "sourceUrl": "https://smdc.com/properties/heights/shore-2-residences/",
                     "image": "https://smdc.com/app/uploads/2025/07/Shore3-Facade-1920x1080px-01-1.png",
-                    "description": "Current SMDC Shore 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Shore 2 Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2230,9 +2207,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Shore 3 Residences",
                     "township": "Confirm project location",
-                    "sourceUrl": "https://smdc.com/properties/heights/shore-3-residences/",
                     "image": "https://smdc.com/app/uploads/2025/07/Shore3-Facade-1920x1080px-01-1.png",
-                    "description": "Current SMDC Shore 3 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Shore 3 Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2250,9 +2226,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Mint Residences",
                     "township": "Chino Roces, Makati City",
-                    "sourceUrl": "https://smdc.com/properties/heights/mint-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/MintResidences-Facade-2026.webp",
-                    "description": "Current SMDC Mint Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Mint Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2278,9 +2253,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Light 2 Residences",
                     "township": "EDSA-Boni MRT Station",
-                    "sourceUrl": "https://smdc.com/properties/heights/light-2-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Light-2-680x480px-01.webp",
-                    "description": "Current SMDC Light 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Light 2 Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2314,9 +2288,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Twin Residences",
                     "township": "Las Piñas City",
-                    "sourceUrl": "https://smdc.com/properties/heights/twin-residences/",
                     "image": "https://smdc.com/app/uploads/2026/02/TwinResidences-Facade-2026.webp",
-                    "description": "Current SMDC Twin Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Twin Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2350,9 +2323,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Air Residences",
                     "township": "Makati City",
-                    "sourceUrl": "https://smdc.com/properties/heights/air-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Air-Facade-680x480px-01.webp",
-                    "description": "Current SMDC Air Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Air Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2402,9 +2374,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Coast Residences",
                     "township": "Roxas Boulevard, Manila",
-                    "sourceUrl": "https://smdc.com/properties/heights/coast-residences/",
                     "image": "https://smdc.com/app/uploads/2026/02/Coast-Residences-Facade-1.webp",
-                    "description": "Current SMDC Coast Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Coast Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2438,9 +2409,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Gold City",
                     "township": "Parañaque City",
-                    "sourceUrl": "https://smdc.com/properties/heights/gold-city/",
                     "image": "https://smdc.com/app/uploads/2026/02/Gold-Residences-Facade.webp",
-                    "description": "Current SMDC Gold City listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Gold City listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2474,9 +2444,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Sands Residences",
                     "township": "Mall of Asia, Pasay City",
-                    "sourceUrl": "https://smdc.com/properties/heights/sands-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Sands-Facade-680x480px-01.webp",
-                    "description": "Current SMDC Sands Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Sands Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2510,9 +2479,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Lush Residences",
                     "township": "Makati City",
-                    "sourceUrl": "https://smdc.com/properties/heights/lush-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Lush-Residences-Facade.webp",
-                    "description": "Current SMDC Lush Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Lush Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2546,9 +2514,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Fame Residences",
                     "township": "EDSA, Mandaluyong",
-                    "sourceUrl": "https://smdc.com/properties/heights/fame-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Fame-Facade-680x480px-01.webp",
-                    "description": "Current SMDC Fame Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Fame Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2574,9 +2541,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Glam Residences",
                     "township": "Quezon City",
-                    "sourceUrl": "https://smdc.com/properties/heights/glam-residences/",
                     "image": "https://smdc.com/app/uploads/2025/09/Glam-Residences-Facade-1.jpg",
-                    "description": "Current SMDC Glam Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Glam Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2602,9 +2568,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Gem Residences",
                     "township": "C5 Road, Pasig City",
-                    "sourceUrl": "https://smdc.com/properties/heights/gem/",
                     "image": "https://smdc.com/app/uploads/2025/07/Gem-facade-2-scaled.png",
-                    "description": "Current SMDC Gem Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Gem Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2638,9 +2603,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Red Residences",
                     "township": "Red Residences rises along Chino Roces – where art spaces, boutique agencies, and lifestyle studios are redefining what it means to live and work in the city.",
-                    "sourceUrl": "https://smdc.com/properties/heights/red/",
                     "image": "https://smdc.com/app/uploads/2025/07/Red-Facade-1920x1080px-01-1.png",
-                    "description": "Current SMDC Red Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Red Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2674,9 +2638,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Jade Residences",
                     "township": "Jade Residences places you at the center of everything—where connectivity is effortless, and every destination is within reach.",
-                    "sourceUrl": "https://smdc.com/properties/heights/jade/",
                     "image": "https://smdc.com/app/uploads/2025/07/JADE-RESIDENCES_RENDER_20230515-Building-Facade-with-Podium-Logo-1-scaled.jpg",
-                    "description": "Current SMDC Jade Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Jade Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2718,9 +2681,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Sail Residences",
                     "township": "Located in the heart of the Mall of Asia (MOA) Complex, offering unparalleled access to world-class shopping, dining, and entertainment.",
-                    "sourceUrl": "https://smdc.com/properties/heights/sail/",
                     "image": "https://smdc.com/app/uploads/2025/07/sail-residences-scaled.png",
-                    "description": "Current SMDC Sail Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Sail Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2754,9 +2716,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Cool Suites",
                     "township": "Tagaytay City, Cavite",
-                    "sourceUrl": "https://smdc.com/properties/nature/cool-suites/",
-                    "image": "",
-                    "description": "Current SMDC Cool Suites listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "image": "https://mb.com.ph/uploads/imported_images/jpeg_optimizer_facade_night_2_1_c86d11bff5.jpg",
+                    "description": "Current SMDC Cool Suites listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2782,9 +2743,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Park Residences",
                     "township": "Sta. Rosa City, Laguna",
-                    "sourceUrl": "https://smdc.com/properties/nature/park-residences/",
                     "image": "https://smdc.com/app/uploads/2025/12/Park-Facade.jpg",
-                    "description": "Current SMDC Park Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Park Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2810,9 +2770,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "South Residences",
                     "township": "SM South Mall, Las Piñas City",
-                    "sourceUrl": "https://smdc.com/properties/nature/south-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/South-680x480px.png",
-                    "description": "Current SMDC South Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC South Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2838,9 +2797,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Parkville",
                     "township": "Bacolod City",
-                    "sourceUrl": "https://smdc.com/properties/nature/parkville/",
                     "image": "https://smdc.com/app/uploads/2026/01/Parkville-Hero-1080x1920px.webp",
-                    "description": "Current SMDC Parkville listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Parkville listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2858,9 +2816,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Hill Residences",
                     "township": "Novaliches, Quezon City",
-                    "sourceUrl": "https://smdc.com/properties/nature/hill-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Hill-680x480px.png",
-                    "description": "Current SMDC Hill Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Hill Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2878,9 +2835,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "South 2 Residences",
                     "township": "Las Piñas City",
-                    "sourceUrl": "https://smdc.com/properties/nature/south-2-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/South-680x480px.png",
-                    "description": "Current SMDC South 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC South 2 Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2906,9 +2862,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Calm Residences",
                     "township": "Santa Rosa City, Laguna",
-                    "sourceUrl": "https://smdc.com/properties/nature/calm-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Calm-680x480px.png",
-                    "description": "Current SMDC Calm Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Calm Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2934,9 +2889,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Joy Residences",
                     "township": "Baliwag, Bulacan",
-                    "sourceUrl": "https://smdc.com/properties/nature/joy-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Joy-680x480px.png",
-                    "description": "Current SMDC Joy Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Joy Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2962,9 +2916,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Cheer Residences",
                     "township": "Marilao, Bulacan",
-                    "sourceUrl": "https://smdc.com/properties/nature/cheer-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Cheer-680x480px.png",
-                    "description": "Current SMDC Cheer Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Cheer Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -2982,9 +2935,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Field Residences",
                     "township": "Sucat, Parañaque",
-                    "sourceUrl": "https://smdc.com/properties/nature/field-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Field-680x480px.png",
-                    "description": "Current SMDC Field Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Field Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3010,9 +2962,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Smile Residences",
                     "township": "SM City Bacolod",
-                    "sourceUrl": "https://smdc.com/properties/nature/smile-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Smile-680x480px.png",
-                    "description": "Current SMDC Smile Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Smile Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3038,9 +2989,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Vail Residences",
                     "township": "Cagayan De Oro City",
-                    "sourceUrl": "https://smdc.com/properties/nature/vail-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Vail-680x480px.png",
-                    "description": "Current SMDC Vail Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Vail Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3058,9 +3008,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Spring Residences",
                     "township": "Bicutan, Parañaque",
-                    "sourceUrl": "https://smdc.com/properties/nature/spring-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Spring-Facade.jpg",
-                    "description": "Current SMDC Spring Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Spring Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3086,9 +3035,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Vine Residences",
                     "township": "SM City Novaliches",
-                    "sourceUrl": "https://smdc.com/properties/nature/vine-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Vine-680x480px.png",
-                    "description": "Current SMDC Vine Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Vine Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3106,9 +3054,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Leaf Residences",
                     "township": "Susana Heights, Muntinlupa City",
-                    "sourceUrl": "https://smdc.com/properties/nature/leaf-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Leaf-680x480px.png",
-                    "description": "Current SMDC Leaf Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Leaf Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3150,9 +3097,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Green 2 Residences",
                     "township": "Dasmariñas, Cavite",
-                    "sourceUrl": "https://smdc.com/properties/nature/green-2-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Green2-Hero-1080x1920px.png",
-                    "description": "Current SMDC Green 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Green 2 Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3178,9 +3124,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Hope Residences",
                     "township": "SM City Trece Martires, Cavite",
-                    "sourceUrl": "https://smdc.com/properties/nature/hope-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Hope-680x480px.png",
-                    "description": "Current SMDC Hope Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Hope Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3206,9 +3151,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Turf Residences",
                     "township": "Biñan City, Laguna",
-                    "sourceUrl": "https://smdc.com/properties/nature/turf/",
                     "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-5.png",
-                    "description": "Current SMDC Turf Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Turf Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3234,9 +3178,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Zeal Residences",
                     "township": "General Trias, Cavite",
-                    "sourceUrl": "https://smdc.com/properties/nature/zeal/",
                     "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-4.png",
-                    "description": "Current SMDC Zeal Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Zeal Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3262,9 +3205,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Bloom Residences",
                     "township": "Cavite",
-                    "sourceUrl": "https://smdc.com/properties/nature/bloom/",
                     "image": "https://smdc.com/app/uploads/2025/07/Model-Unit-8-800x800-1-1.png",
-                    "description": "Current SMDC Bloom Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Bloom Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3314,9 +3256,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Glade Residences",
                     "township": "Jaro, Iloilo City",
-                    "sourceUrl": "https://smdc.com/properties/nature/glade/",
                     "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-2.png",
-                    "description": "Current SMDC Glade Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Glade Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3350,9 +3291,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Charm Residences",
                     "township": "Confirm project location with SMDC",
-                    "sourceUrl": "https://smdc.com/properties/nature/charm/",
                     "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-1.png",
-                    "description": "Current SMDC Charm Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Charm Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3402,9 +3342,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Now Residences",
                     "township": "Angeles City, Pampanga",
-                    "sourceUrl": "https://smdc.com/properties/nature/now-residences/",
                     "image": "https://smdc.com/app/uploads/2026/01/Now-680x480px.png",
-                    "description": "Current SMDC Now Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Now Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3430,9 +3369,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Wind Residences",
                     "township": "Tagaytay City",
-                    "sourceUrl": "https://smdc.com/properties/nature/wind-residences/",
                     "image": "https://smdc.com/app/uploads/2025/12/Wind-680x480px.png",
-                    "description": "Current SMDC Wind Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Wind Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3458,9 +3396,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Grace Residences",
                     "township": "Barangay Ususan, Taguig City",
-                    "sourceUrl": "https://smdc.com/properties/nature/grace-residences/",
                     "image": "https://smdc.com/app/uploads/2025/12/Grace-680x480px.png",
-                    "description": "Current SMDC Grace Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Grace Residences listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3478,9 +3415,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Symphony Homes Mabalacat",
                     "township": "Mabalacat, Pampanga",
-                    "sourceUrl": "https://smdc.com/properties/symphony-homes/symphony-homes/",
                     "image": "https://smdc.com/app/uploads/2025/07/0827-SH-ModelUnit_v01.jpg",
-                    "description": "Current SMDC Symphony Homes Mabalacat listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Symphony Homes Mabalacat listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3506,9 +3442,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Cheerful Homes 2",
                     "township": "Pampanga",
-                    "sourceUrl": "https://smdc.com/properties/symphony-homes/cheerful-homes-2/",
                     "image": "https://smdc.com/app/uploads/2025/07/0701-CH2-MainKV-01-1.png",
-                    "description": "Current SMDC Cheerful Homes 2 listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Cheerful Homes 2 listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3534,9 +3469,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "SMDC",
                     "title": "Cheerful Homes",
                     "township": "Pampanga",
-                    "sourceUrl": "https://smdc.com/properties/symphony-homes/cheerful-homes/",
                     "image": "https://smdc.com/app/uploads/2025/07/CHEERFUL-HOMES_RENDER_20170425-Guardhouse-Entrance-scaled.jpg",
-                    "description": "Current SMDC Cheerful Homes listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "description": "Current SMDC Cheerful Homes listing. Contact Compass Realty for current unit inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3570,8 +3504,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Megaworld",
                     "title": "Uptown Modern",
                     "township": "Uptown Bonifacio, Taguig City",
-                    "sourceUrl": "https://www.megaworldcorp.com/residences/uptown-modern",
-                    "image": "",
+                    "image": "https://megaworldinternational.com/wp-content/uploads/2023/09/Uptown-Modern-1-640x427.png",
                     "description": "Megaworld residential project in Uptown Bonifacio. Ask for current inventory, floor plans and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3622,8 +3555,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Megaworld",
                     "title": "The Albany",
                     "township": "Fort Bonifacio, Taguig City",
-                    "sourceUrl": "https://www.megaworldcorp.com/residences/the-albany",
-                    "image": "",
+                    "image": "https://www.megaworldglobalcondos.com/uploads/1/1/5/4/11548917/thealbany-022019-r_1_orig.jpg",
                     "description": "Megaworld residential development in Fort Bonifacio. Confirm current availability and pricing with the developer.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3642,8 +3574,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Landco",
                     "title": "Fuego Condo (The Residences at Punta Fuego)",
                     "township": "Nasugbu, Batangas",
-                    "sourceUrl": "https://theresidencespuntafuego.landco.ph/",
-                    "image": "",
+                    "image": "https://theresidencespuntafuego.landco.ph/wp-content/uploads/2024/02/Exterior-View-1-w_-Entrourage.webp",
                     "description": "The Residences at Terrazas de Punta Fuego. Ask Landco for current available residences and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3678,9 +3609,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "Cathay Land Inc",
                     "title": "Wave",
                     "township": "Confirm location with Cathay Land",
-                    "sourceUrl": "https://www.cathaylandinc.com/developments/",
                     "image": "",
-                    "description": "Cathay Land project. Current published unit mix, location and prices were not available on the official development page; request current listing details.",
+                    "description": "Project details could not be verified for this developer; confirm the project name, location and current listing details with Compass Realty.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3698,9 +3628,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "Cathay Land Inc",
                     "title": "Mira Costa",
                     "township": "Confirm location with Cathay Land",
-                    "sourceUrl": "https://www.cathaylandinc.com/developments/",
                     "image": "",
-                    "description": "Cathay Land project. Current published unit mix, location and prices were not available on the official development page; request current listing details.",
+                    "description": "Project details could not be verified for this developer; confirm the project name, location and current listing details with Compass Realty.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3718,8 +3647,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Century Properties",
                     "title": "Cerulean Residences",
                     "township": "General Trias, Cavite",
-                    "sourceUrl": "https://www.cerulean.com.ph/",
-                    "image": "",
+                    "image": "https://www.century-properties.com/wp-content/uploads/2026/02/coral-exterior-1-scaled.webp",
                     "description": "Current Century Properties residential community in General Trias. Confirm available house models and pricing with the developer.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3754,8 +3682,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Century Properties",
                     "title": "Azure North Townvillas",
                     "township": "San Fernando, Pampanga",
-                    "sourceUrl": "https://www.azurenorth.com.ph/",
-                    "image": "",
+                    "image": "https://www.century-properties.com/wp-content/uploads/2022/08/azn-townvillas.jpeg",
                     "description": "Townvilla offering at Azure North in San Fernando, Pampanga. Confirm current RFO inventory and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3774,8 +3701,7 @@ if (Array.isArray(rawImg)) {
                     "developer": "Century Properties",
                     "title": "Nuliv Townvillas at Acqua",
                     "township": "Mandaluyong City",
-                    "sourceUrl": "https://www.century-properties.com/new-residential-and-estates/",
-                    "image": "",
+                    "image": "https://www.centuryproperties.ph/uploads/5/4/9/5/5495221/aetv-2025-0688-fb-ad-posts-set-b-05_orig.jpg",
                     "description": "Current townvilla offering at Acqua. Confirm current inventory, floor plans and pricing with Century Properties.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
@@ -3794,9 +3720,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Balanga",
                     "township": "Balanga, Bataan",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-balanga/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Balanga, Bataan. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Pass-Central-Basketball-Court.jpg",
+                    "description": "Current PHirst Park Homes community in Balanga, Bataan. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3814,9 +3739,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Baliwag",
                     "township": "Baliwag, Bulacan",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-baliwag/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Baliwag, Bulacan. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/PRIME-HUB-Village-Clubhouse.jpg",
+                    "description": "Current PHirst Park Homes community in Baliwag, Bulacan. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3834,9 +3758,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Gapan",
                     "township": "Gapan, Nueva Ecija",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-gapan/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Gapan, Nueva Ecija. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Basketball-Court.jpg",
+                    "description": "Current PHirst Park Homes community in Gapan, Nueva Ecija. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3854,9 +3777,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Hermosa Centrale",
                     "township": "Hermosa, Bataan",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-hermosa/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Hermosa, Bataan. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/PHirst-Stop-1-1.jpg",
+                    "description": "Current PHirst Park Homes community in Hermosa, Bataan. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3874,9 +3796,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Magalang",
                     "township": "Magalang, Pampanga",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-magalang/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/TRACK-LANE-Jogging-Lane-7.jpeg",
+                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3894,9 +3815,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Magalang East",
                     "township": "Magalang, Pampanga",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-magalang-east/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Calista-Mid-v2-1.jpg",
+                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3914,9 +3834,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Pandi",
                     "township": "Pandi, Bulacan",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-pandi/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Pandi, Bulacan. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/FIT-ZONE-Worm-Climber-1.jpg",
+                    "description": "Current PHirst Park Homes community in Pandi, Bulacan. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3934,9 +3853,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Batulao",
                     "township": "Nasugbu, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-batulao/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Play-Pen.jpg",
+                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3954,9 +3872,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Batulao Editions v2",
                     "township": "Nasugbu, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-batulao-editions/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/Cartland-exterior-8.jpg",
+                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3974,9 +3891,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Bay",
                     "township": "Bay, Laguna",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-sights-bay/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Bay, Laguna. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/alora-exterior-3-1.jpeg",
+                    "description": "Current PHirst Park Homes community in Bay, Laguna. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -3994,9 +3910,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Calauan",
                     "township": "Calauan, Laguna",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-sights-calauan/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Calauan, Laguna. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/alora-exterior-3-1.jpeg",
+                    "description": "Current PHirst Park Homes community in Calauan, Laguna. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4014,9 +3929,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Calamba",
                     "township": "Calamba, Laguna",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-calamba/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Calamba, Laguna. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Basketball-Court_072817-1.jpg",
+                    "description": "Current PHirst Park Homes community in Calamba, Laguna. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4034,9 +3948,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Lipa",
                     "township": "Lipa, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-lipa/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Lipa, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/PEDAL-LANE-Cycling-Path-4.jpg",
+                    "description": "Current PHirst Park Homes community in Lipa, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4054,9 +3967,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst The Cove at Lipa",
                     "township": "Lipa, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-the-cove-lipa/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Lipa, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/PRIME-HUB-Village-Clubhouse-3.png",
+                    "description": "Current PHirst Park Homes community in Lipa, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4074,9 +3986,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Gentri",
                     "township": "General Trias, Cavite",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-general-trias-cavite/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in General Trias, Cavite. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/gentri-acitivitynode3.jpg",
+                    "description": "Current PHirst Park Homes community in General Trias, Cavite. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4094,9 +4005,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Naic",
                     "township": "Naic, Cavite",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-naic/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Naic, Cavite. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Outdoor-Gym-1-2.jpg",
+                    "description": "Current PHirst Park Homes community in Naic, Cavite. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4114,9 +4024,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Padre Garcia",
                     "township": "Padre Garcia, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/sights-batangas/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Padre Garcia, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/alora-exterior-3-1.jpeg",
+                    "description": "Current PHirst Park Homes community in Padre Garcia, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4134,9 +4043,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst San Pablo",
                     "township": "San Pablo, Laguna",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-san-pablo/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/POWER-SHACK-Chinning-Bars-2.jpg",
+                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4154,9 +4062,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst San Pablo East",
                     "township": "San Pablo, Laguna",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-san-pablo-east/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Calista-Mid-1.jpg",
+                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4174,9 +4081,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Sto. Tomas",
                     "township": "Sto. Tomas, Batangas",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-sto-tomas/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Sto. Tomas, Batangas. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Calista-Mid-scaled-3.jpg",
+                    "description": "Current PHirst Park Homes community in Sto. Tomas, Batangas. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4194,9 +4100,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Tayabas",
                     "township": "Tayabas, Quezon",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-tayabas/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Tayabas, Quezon. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/09/Amenities-Jungle-Station.jpg",
+                    "description": "Current PHirst Park Homes community in Tayabas, Quezon. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4214,9 +4119,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Iloilo",
                     "township": "Iloilo City",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-iloilo/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Iloilo City. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/Anami-mid-1.jpg",
+                    "description": "Current PHirst Park Homes community in Iloilo City. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4234,9 +4138,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst General Santos",
                     "township": "General Santos City",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-gensan/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in General Santos City. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/Anami-End-1.jpg",
+                    "description": "Current PHirst Park Homes community in General Santos City. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4254,9 +4157,8 @@ if (Array.isArray(rawImg)) {
                     "developer": "PHirst Park Homes",
                     "title": "PHirst Bacolod",
                     "township": "Bacolod City",
-                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-bacolod/",
-                    "image": "",
-                    "description": "Current PHirst Park Homes community in Bacolod City. See the official listing for model availability and current pricing.",
+                    "image": "https://phirstparkhomesph.com/wp-content/uploads/2025/10/Anami-mid-1.jpg",
+                    "description": "Current PHirst Park Homes community in Bacolod City. Contact Compass Realty for current model availability and pricing.",
                     "turnover": "Confirm current availability with the developer.",
                     "units": [
                               {
@@ -4297,7 +4199,6 @@ if (Array.isArray(rawImg)) {
                 turnover: project.turnover,
                 image: project.image || '',
                 description: project.description || '',
-                sourceUrl: project.sourceUrl || '',
                 units
             });
         });
@@ -6039,7 +5940,6 @@ if (Array.isArray(rawImg)) {
                             <h3 class="text-lg font-bold uppercase">${escapeHtml(p.title)}</h3>
                             <p class="text-xs text-neutral-600">${escapeHtml(p.township)}</p>
                             <p class="text-xs text-neutral-700 leading-relaxed mt-3">${escapeHtml(p.description || '')}</p>
-                            ${safeProjectPageUrl(p.sourceUrl) ? `<a href="${escapeHtml(safeProjectPageUrl(p.sourceUrl))}" target="_blank" rel="noopener noreferrer" class="inline-block text-[10px] font-bold uppercase tracking-wide underline underline-offset-2">Official project page ↗</a>` : ''}
                         </div>
                         <div class="flex gap-2">
                             <button type="button" onclick="openDeveloperSpecifications('${safeDomId(p.id)}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-[10px] font-bold uppercase tracking-wide">Project Specifications</button>
