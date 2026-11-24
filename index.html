@@ -2081,13 +2081,11 @@ if (Array.isArray(rawImg)) {
 
         function renderShareButtons(url, title, contentType = 'listing') {
             const encodedUrl = encodeURIComponent(url);
-            const encodedText = encodeURIComponent(title + ' | Compass Realty');
             const buttonClass = 'inline-flex items-center justify-center w-8 h-8 border border-neutral-300 hover:bg-brand-brown hover:text-white transition-colors';
             return '<div class="flex items-center gap-1.5 pt-2" aria-label="Share this ' + contentType + '" onclick="event.stopPropagation()">' +
                 '<span class="text-[9px] uppercase tracking-wide text-neutral-500 mr-1">Share</span>' +
                 '<a class="' + buttonClass + '" href="https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
                 '<a class="' + buttonClass + '" href="https://api.whatsapp.com/send?text=' + encodeURIComponent(title + ' | Compass Realty ' + url) + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on WhatsApp" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
-                '<a class="' + buttonClass + '" href="https://twitter.com/intent/tweet?text=' + encodedText + '&url=' + encodedUrl + '" target="_blank" rel="noopener noreferrer" aria-label="Share ' + contentType + ' on X" title="X"><i class="fa-brands fa-x-twitter"></i></a>' +
                 '<button type="button" class="' + buttonClass + '" onclick="copyShareLink(decodeURIComponent(\'' + encodedUrl + '\'), event)" aria-label="Copy ' + contentType + ' link" title="Copy link"><i class="fa-regular fa-copy"></i></button>' +
             '</div>';
         }
