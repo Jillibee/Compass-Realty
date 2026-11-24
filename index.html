@@ -531,6 +531,7 @@
                             <option value="arthaland">Arthaland Sustainable Luxury</option>
                             <option value="ayala-land">Ayala Land</option>
                             <option value="shang-properties">Shang Properties</option>
+                            <option value="rockwell">Rockwell</option>
                         </select>
                     </div>
                 </div>
@@ -1085,7 +1086,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1740,6 +1741,50 @@ if (Array.isArray(rawImg)) {
                     { id: 'AUR-03', type: 'Penthouse', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Inquire for current availability', beds: 0, baths: 0 }
                 ]
             },
+            // --- ROCKWELL DEVELOPMENTS ---
+            {
+                id: 'DEV-116',
+                devSlug: 'rockwell',
+                developer: 'Rockwell',
+                title: 'The Samanean at Paradise Farms',
+                township: 'San Jose del Monte City, Bulacan',
+                turnover: 'Ask Rockwell for the current lot handover schedule',
+                image: 'https://e-rockwell.com/wp-content/uploads/2024/12/Ridge-View-1-scaled.jpg',
+                description: 'A 110-hectare residential lot community by Rockwell with two phases and 469 residential lots. Rockwell publishes a project price range of PHP 8.5M–18M.',
+                units: [
+                    { id: 'SAM-LOT-01', type: 'Residential Lot', area: '252–644 sqm', priceRange: 'PHP 8.5M–18M', status: 'Ask for current lot availability', beds: 0, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-117',
+                devSlug: 'rockwell',
+                developer: 'Rockwell',
+                title: 'Lauan Ridges by Rockwell',
+                township: 'Mataasnakahoy and Lipa, Batangas',
+                turnover: 'Ask Rockwell for the current lot handover schedule',
+                image: 'https://e-rockwell.com/wp-content/uploads/2024/09/Aerial-View-1.jpg',
+                description: 'A 38-hectare hillside residential lot community in Batangas. Phase 1 spans 17 hectares and includes 259 residential lots. Rockwell publishes a price range of PHP 10M–30M.',
+                units: [
+                    { id: 'LAU-LOT-01', type: 'Residential Lot', area: '250–600 sqm', priceRange: 'PHP 10M–30M', status: 'Ask for current lot availability', beds: 0, baths: 0 }
+                ]
+            },
+            {
+                id: 'DEV-118',
+                devSlug: 'rockwell',
+                developer: 'Rockwell',
+                title: 'Lincoln at IPI Center',
+                township: 'Pope John Paul II Avenue, Cebu City',
+                turnover: 'Ask Rockwell for the current turnover schedule',
+                image: 'https://e-rockwell.com/wp-content/uploads/2024/09/Homepage-1440x753-1.png',
+                description: 'Rockwell’s 53-storey residential tower within the 3.6-hectare IPI Center mixed-use community in Cebu. Rockwell publishes an overall project price range of PHP 11.1M–105M; confirm current unit-specific pricing.',
+                units: [
+                    { id: 'LIN-01', type: 'Studio', area: '33–35 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 0, baths: 0 },
+                    { id: 'LIN-02', type: 'One-Bedroom', area: '39–65 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 1, baths: 0 },
+                    { id: 'LIN-03', type: 'Two-Bedroom', area: '104 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 2, baths: 0 },
+                    { id: 'LIN-04', type: 'Three-Bedroom', area: '154 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 3, baths: 0 },
+                    { id: 'LIN-05', type: 'Garden Villa', area: '255–314 sqm', priceRange: 'Inquire for current unit pricing', status: 'Ask for current availability', beds: 0, baths: 0 }
+                ]
+            },
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
@@ -1876,6 +1921,27 @@ if (Array.isArray(rawImg)) {
                     { url: 'https://shangproperties.com/wp-content/uploads/2026/06/new-developments-aurelia.png', label: 'Aurelia Residences · official project visual' }
                 ],
                 note: 'Contact Compass Realty for current floor plans and unit availability.'
+            },
+            'DEV-116': {
+                plans: [],
+                renders: [
+                    { url: 'https://e-rockwell.com/wp-content/uploads/2024/12/AERIAL-PHASE-2-min-scaled.jpg', label: 'The Samanean at Paradise Farms · official project image' }
+                ],
+                note: 'Confirm current lot availability, pricing, and handover details with Rockwell.'
+            },
+            'DEV-117': {
+                plans: [],
+                renders: [
+                    { url: 'https://e-rockwell.com/wp-content/uploads/2024/09/Amphitheater-1.jpg', label: 'Lauan Ridges · official community image' }
+                ],
+                note: 'Confirm current lot availability, pricing, and handover details with Rockwell.'
+            },
+            'DEV-118': {
+                plans: [],
+                renders: [
+                    { url: 'https://e-rockwell.com/wp-content/uploads/2024/09/Homepage-1440x7531-1.png', label: 'Lincoln at IPI Center · official unit visual' }
+                ],
+                note: 'Rockwell publishes an overall project price range. Contact Compass Realty to confirm the price and availability of a specific unit.'
             },
 
         };
@@ -3409,7 +3475,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
