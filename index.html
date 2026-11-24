@@ -535,6 +535,16 @@
                             <option value="ortigas-land">Ortigas Land</option>
                             <option value="rhk-land">RHK Land</option>
                             <option value="robinsons-land">Robinsons Land</option>
+                            <option value="filinvest-land">Filinvest Land</option>
+                            <option value="greenfield">Greenfield</option>
+                            <option value="federal-land">Federal Land</option>
+                            <option value="sm-signature">SM Signature</option>
+                            <option value="smdc">SMDC</option>
+                            <option value="megaworld">Megaworld</option>
+                            <option value="landco">Landco</option>
+                            <option value="cathay-land">Cathay Land Inc</option>
+                            <option value="century-properties">Century Properties</option>
+                            <option value="phirst-park-homes">PHirst Park Homes</option>
                         </select>
                     </div>
                 </div>
@@ -1079,6 +1089,16 @@
             return /^[A-Za-z0-9_-]{1,80}$/.test(id) && !blockedIds.has(id) ? id : '';
         }
 
+        function safeProjectPageUrl(value) {
+            try {
+                const parsed = new URL(String(value ?? '').trim(), window.location.origin);
+                if (parsed.username || parsed.password || parsed.protocol !== 'https:') return '';
+                return parsed.href;
+            } catch (err) {
+                return '';
+            }
+        }
+
         function safeImageUrl(value) {
             const raw = String(value ?? '').trim();
             if (/^data:image\/(?:png|jpeg|jpg|webp|gif|avif);base64,[a-z0-9+/=\s]+$/i.test(raw)) {
@@ -1089,7 +1109,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com', 'rlcresidences.com'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com', 'rlcresidences.com', 'smdc.com', 'phirstparkhomesph.com', 'filigree.com.ph', 'filinvestland.com', 'theestatemakati.com'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1910,6 +1930,2377 @@ if (Array.isArray(rawImg)) {
             'DEV-108': { title: 'Sondris', township: 'Arnaiz Avenue, Legazpi Village, Makati City', turnover: 'Completion scheduled for April 2030', image: 'assets/arthaland/Sondris.png', description: 'A 37-storey, 252-residence condominium developed with Mitsui Fudosan (Asia) and designed by AEDAS.', units: [{ id: 'SON-01', type: 'One-Bedroom', area: '46-61 sqm', priceRange: 'PHP 21.1M-30.3M', status: 'Pre-selling; inquire for availability', beds: 1, baths: 0 }, { id: 'SON-02', type: 'Two-Bedroom', area: '91-114 sqm', priceRange: 'PHP 45.1M-65.8M', status: 'Pre-selling; inquire for availability', beds: 2, baths: 0 }, { id: 'SON-03', type: 'Three-Bedroom', area: '135-137 sqm', priceRange: 'PHP 76.4M-83.2M', status: 'Pre-selling; inquire for availability', beds: 3, baths: 0 }, { id: 'SON-04', type: 'Garden Unit', area: '180-230 sqm', priceRange: 'PHP 92.1M-104.7M', status: 'Pre-selling; inquire for availability', beds: 3, baths: 0 }] },
             'DEV-109': { title: 'Liv', township: 'Katipunan Avenue, Loyola Heights, Quezon City', turnover: 'Liv North completion: 2031', image: 'assets/arthaland/Liv-Katipunan-Facade.avif', description: 'A sustainable vertical neighborhood near Ateneo with an exclusive campus bridgeway, wellness spaces and studio to two-bedroom homes.', units: [{ id: 'LIV-01', type: 'Studio', area: '24-29 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 0, baths: 1 }, { id: 'LIV-02', type: 'One-Bedroom', area: '40-47 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 1, baths: 1 }, { id: 'LIV-03', type: 'Two-Bedroom', area: '68-70 sqm', priceRange: 'From PHP 8.3M; confirm current price', status: 'Pre-selling; inquire for availability', beds: 2, baths: 1 }] },
         };
+
+        // Current developer catalogs assembled from official project pages. Availability and prices should be reconfirmed with each developer.
+        const appendedDeveloperCatalog = [
+          {
+                    "devSlug": "filinvest-land",
+                    "developer": "Filinvest Land",
+                    "title": "Botanika Nature Residences",
+                    "township": "Filinvest City, Alabang, Muntinlupa",
+                    "sourceUrl": "https://filigree.com.ph/properties/botanika-tower-one/",
+                    "image": "https://filigree.com.ph/wp-content/uploads/2024/05/30155051-botanika-tower-1-pool_cover_1600x1068-1024x684.jpg",
+                    "description": "Filinvest City's Botanika Nature Residences. The official Filigree page lists one- and three-bedroom residence sizes; confirm current RFO inventory and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "One-Bedroom Residence",
+                                        "area": "72–84 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Three-Bedroom Residence",
+                                        "area": "169–190 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "filinvest-land",
+                    "developer": "Filinvest Land",
+                    "title": "The Levels",
+                    "township": "Filinvest City, Alabang, Muntinlupa",
+                    "sourceUrl": "https://filinvestland.com/project/the-levels",
+                    "image": "https://filinvestland.com/_next/image?q=75&url=https%3A%2F%2Ffilinvest-bbdcgrc0ehbqeuar.z02.azurefd.net%2FThe%2BLevels.jpg&w=3840",
+                    "description": "Residential project in Filinvest City, Alabang. Confirm current inventory, floor plans and pricing with Filinvest Land.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "One-Bedroom Residence",
+                                        "area": "From approximately 36 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Two-Bedroom Residence",
+                                        "area": "Confirm current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "filinvest-land",
+                    "developer": "Filinvest Land",
+                    "title": "Parkway Corporate Center",
+                    "township": "Filinvest City, Alabang, Muntinlupa",
+                    "sourceUrl": "https://www.parkwaycorporate.com/the-office-condo-units/",
+                    "image": "",
+                    "description": "Office condominium in Filinvest City. Ask for current unit availability and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Office Condominium",
+                                        "area": "35–252 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "greenfield",
+                    "developer": "Greenfield",
+                    "title": "NAVA",
+                    "township": "Greenfield Alabang, Cupang, Muntinlupa",
+                    "sourceUrl": "https://greenfield.com.ph/project/nava/",
+                    "image": "",
+                    "description": "Residential lots at Greenfield Alabang. Confirm current lot availability and total price with Greenfield.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Residential Lot",
+                                        "area": "192–290 sqm",
+                                        "priceRange": "PHP 129,000–147,000 per sqm",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "federal-land",
+                    "developer": "Federal Land",
+                    "title": "The Observatory",
+                    "township": "Mandaluyong City",
+                    "sourceUrl": "https://federalland.ph/news-and-events/federal-land-nomura-fng-delivers-preview-of-famed-japanese-lifestyle/",
+                    "image": "",
+                    "description": "Federal Land's Japanese-inspired residential development in Mandaluyong. Ask for current RFO inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "One-Bedroom",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Two-Bedroom",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Three-Bedroom",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Penthouse",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "federal-land",
+                    "developer": "Federal Land",
+                    "title": "Riverpark",
+                    "township": "General Trias, Cavite",
+                    "sourceUrl": "https://federalland.ph/communities/riverpark/",
+                    "image": "",
+                    "description": "Federal Land's Riverpark township in General Trias. Ask the developer which residential offerings and lots are currently available.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Township Property Inquiry",
+                                        "area": "Ask for current property type and size",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "federal-land",
+                    "developer": "Federal Land",
+                    "title": "Yume at Riverpark",
+                    "township": "Riverpark, General Trias, Cavite",
+                    "sourceUrl": "https://federalland.ph/communities/riverpark/japanese-inspired-design/",
+                    "image": "",
+                    "description": "Japanese-inspired residential lots in Riverpark. Confirm current lot availability and pricing with Federal Land.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Residential Lot",
+                                        "area": "300–527 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "sm-signature",
+                    "developer": "SM Signature",
+                    "title": "Susana Heights Village",
+                    "township": "Susana Heights, Muntinlupa City",
+                    "sourceUrl": "https://signatures.com.ph/press-release/susana-heights-where-strong-foundations-shape-intentional-living/",
+                    "image": "",
+                    "description": "Build-ready lots at Susana Heights Village. Confirm current lot inventory and pricing with SM Signature.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Build-Ready Residential Lot",
+                                        "area": "500–900 sqm",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "sm-signature",
+                    "developer": "SM Signature",
+                    "title": "The Estate Makati",
+                    "township": "Ayala Avenue, Makati City",
+                    "sourceUrl": "https://theestatemakati.com/",
+                    "image": "https://theestatemakati.com/app/webp-express/webp-images/doc-root/app/uploads/2024/05/Screen-Shot-2021-09-09-at-4.59.png.webp",
+                    "description": "Luxury residences on Ayala Avenue. Ask SM Signature for current available units, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Customizable Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "ICE Tower",
+                    "township": "Mall of Asia Complex, Pasay City",
+                    "sourceUrl": "https://smdc.com/properties/heights/ice-tower-residencial-offices/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Ice-Tower-Facade-680x480px-01.webp",
+                    "description": "Current SMDC Ice Tower Residential Offices listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 7,500,000–12,500,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 7,500,000–12,500,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 7,500,000–12,500,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Shore 2 Residences",
+                    "township": "Mall of Asia, Pasay City",
+                    "sourceUrl": "https://smdc.com/properties/heights/shore-2-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Shore3-Facade-1920x1080px-01-1.png",
+                    "description": "Current SMDC Shore 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts a PHP 6,000,000 - PHP 21,400,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts a PHP 6,000,000 - PHP 21,400,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Shore 3 Residences",
+                    "township": "Confirm project location",
+                    "sourceUrl": "https://smdc.com/properties/heights/shore-3-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Shore3-Facade-1920x1080px-01-1.png",
+                    "description": "Current SMDC Shore 3 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Family Suite with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 6,700,000–27,700,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Mint Residences",
+                    "township": "Chino Roces, Makati City",
+                    "sourceUrl": "https://smdc.com/properties/heights/mint-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/MintResidences-Facade-2026.webp",
+                    "description": "Current SMDC Mint Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,300,000 - PHP 16,900,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,300,000 - PHP 16,900,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Light 2 Residences",
+                    "township": "EDSA-Boni MRT Station",
+                    "sourceUrl": "https://smdc.com/properties/heights/light-2-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Light-2-680x480px-01.webp",
+                    "description": "Current SMDC Light 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,700,000 - PHP 11,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,700,000 - PHP 11,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,700,000 - PHP 11,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Twin Residences",
+                    "township": "Las Piñas City",
+                    "sourceUrl": "https://smdc.com/properties/heights/twin-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/02/TwinResidences-Facade-2026.webp",
+                    "description": "Current SMDC Twin Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,700,000 - PHP 5,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,700,000 - PHP 5,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,700,000 - PHP 5,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Air Residences",
+                    "township": "Makati City",
+                    "sourceUrl": "https://smdc.com/properties/heights/air-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Air-Facade-680x480px-01.webp",
+                    "description": "Current SMDC Air Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,700,000 - PHP 7,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,700,000 - PHP 7,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,700,000 - PHP 7,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,700,000 - PHP 7,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,700,000 - PHP 7,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Coast Residences",
+                    "township": "Roxas Boulevard, Manila",
+                    "sourceUrl": "https://smdc.com/properties/heights/coast-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/02/Coast-Residences-Facade-1.webp",
+                    "description": "Current SMDC Coast Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 5,100,000–22,700,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 5,100,000–22,700,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 5,100,000–22,700,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Gold City",
+                    "township": "Parañaque City",
+                    "sourceUrl": "https://smdc.com/properties/heights/gold-city/",
+                    "image": "https://smdc.com/app/uploads/2026/02/Gold-Residences-Facade.webp",
+                    "description": "Current SMDC Gold City listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Php 7,800,000-9,900,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Php 7,800,000-9,900,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom End Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Php 7,800,000-9,900,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Sands Residences",
+                    "township": "Mall of Asia, Pasay City",
+                    "sourceUrl": "https://smdc.com/properties/heights/sands-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Sands-Facade-680x480px-01.webp",
+                    "description": "Current SMDC Sands Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,000,000 - PHP 17,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,000,000 - PHP 17,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,000,000 - PHP 17,500,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Lush Residences",
+                    "township": "Makati City",
+                    "sourceUrl": "https://smdc.com/properties/heights/lush-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Lush-Residences-Facade.webp",
+                    "description": "Current SMDC Lush Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,800,000 - PHP 10,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,800,000 - PHP 10,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,800,000 - PHP 10,100,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Fame Residences",
+                    "township": "EDSA, Mandaluyong",
+                    "sourceUrl": "https://smdc.com/properties/heights/fame-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Fame-Facade-680x480px-01.webp",
+                    "description": "Current SMDC Fame Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts PHP 5,000,000 - PHP 9,400,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts PHP 5,000,000 - PHP 9,400,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Glam Residences",
+                    "township": "Quezon City",
+                    "sourceUrl": "https://smdc.com/properties/heights/glam-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/09/Glam-Residences-Facade-1.jpg",
+                    "description": "Current SMDC Glam Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at Php 5,700,000 - Php 13,900,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at Php 5,700,000 - Php 13,900,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Gem Residences",
+                    "township": "C5 Road, Pasig City",
+                    "sourceUrl": "https://smdc.com/properties/heights/gem/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Gem-facade-2-scaled.png",
+                    "description": "Current SMDC Gem Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit with Den and Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,000,000 - PHP 9,400,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,000,000 - PHP 9,400,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 5,000,000 - PHP 9,400,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Red Residences",
+                    "township": "Red Residences rises along Chino Roces – where art spaces, boutique agencies, and lifestyle studios are redefining what it means to live and work in the city.",
+                    "sourceUrl": "https://smdc.com/properties/heights/red/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Red-Facade-1920x1080px-01-1.png",
+                    "description": "Current SMDC Red Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "2-Bedroom with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,500,000 - PHP 15,200,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1-Bedroom with Balcony, Den",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,500,000 - PHP 15,200,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1-Bedroom with Den",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,500,000 - PHP 15,200,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Jade Residences",
+                    "township": "Jade Residences places you at the center of everything—where connectivity is effortless, and every destination is within reach.",
+                    "sourceUrl": "https://smdc.com/properties/heights/jade/",
+                    "image": "https://smdc.com/app/uploads/2025/07/JADE-RESIDENCES_RENDER_20230515-Building-Facade-with-Podium-Logo-1-scaled.jpg",
+                    "description": "Current SMDC Jade Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,311,000 - PHP 12,264,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,311,000 - PHP 12,264,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,311,000 - PHP 12,264,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 6,311,000 - PHP 12,264,000",
+                                        "status": "Current SMDC catalog listing; confirm RFO or pre-selling availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Sail Residences",
+                    "township": "Located in the heart of the Mall of Asia (MOA) Complex, offering unparalleled access to world-class shopping, dining, and entertainment.",
+                    "sourceUrl": "https://smdc.com/properties/heights/sail/",
+                    "image": "https://smdc.com/app/uploads/2025/07/sail-residences-scaled.png",
+                    "description": "Current SMDC Sail Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "3 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 8,600,000 - PHP 24,600,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 8,600,000 - PHP 24,600,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 8,600,000 - PHP 24,600,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Cool Suites",
+                    "township": "Tagaytay City, Cavite",
+                    "sourceUrl": "https://smdc.com/properties/nature/cool-suites/",
+                    "image": "",
+                    "description": "Current SMDC Cool Suites listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Php 4,300,000 - Php 4,800,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom End Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Php 4,300,000 - Php 4,800,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Park Residences",
+                    "township": "Sta. Rosa City, Laguna",
+                    "sourceUrl": "https://smdc.com/properties/nature/park-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/12/Park-Facade.jpg",
+                    "description": "Current SMDC Park Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi Suite Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 4,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 4,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "South Residences",
+                    "township": "SM South Mall, Las Piñas City",
+                    "sourceUrl": "https://smdc.com/properties/nature/south-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/South-680x480px.png",
+                    "description": "Current SMDC South Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,400,000 - PHP 6,000,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,400,000 - PHP 6,000,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Parkville",
+                    "township": "Bacolod City",
+                    "sourceUrl": "https://smdc.com/properties/nature/parkville/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Parkville-Hero-1080x1920px.webp",
+                    "description": "Current SMDC Parkville listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Lot Area",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,700,000 -PHP 4,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Hill Residences",
+                    "township": "Novaliches, Quezon City",
+                    "sourceUrl": "https://smdc.com/properties/nature/hill-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Hill-680x480px.png",
+                    "description": "Current SMDC Hill Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi suite Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 3,200,000 - 3,900,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "South 2 Residences",
+                    "township": "Las Piñas City",
+                    "sourceUrl": "https://smdc.com/properties/nature/south-2-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/South-680x480px.png",
+                    "description": "Current SMDC South 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 5,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 5,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Calm Residences",
+                    "township": "Santa Rosa City, Laguna",
+                    "sourceUrl": "https://smdc.com/properties/nature/calm-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Calm-680x480px.png",
+                    "description": "Current SMDC Calm Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Joy Residences",
+                    "township": "Baliwag, Bulacan",
+                    "sourceUrl": "https://smdc.com/properties/nature/joy-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Joy-680x480px.png",
+                    "description": "Current SMDC Joy Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Cheer Residences",
+                    "township": "Marilao, Bulacan",
+                    "sourceUrl": "https://smdc.com/properties/nature/cheer-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Cheer-680x480px.png",
+                    "description": "Current SMDC Cheer Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi Suite Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,100,000 - PHP 4,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Field Residences",
+                    "township": "Sucat, Parañaque",
+                    "sourceUrl": "https://smdc.com/properties/nature/field-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Field-680x480px.png",
+                    "description": "Current SMDC Field Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,300,000 – PHP 7,000,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,300,000 – PHP 7,000,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Smile Residences",
+                    "township": "SM City Bacolod",
+                    "sourceUrl": "https://smdc.com/properties/nature/smile-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Smile-680x480px.png",
+                    "description": "Current SMDC Smile Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi Suite Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Vail Residences",
+                    "township": "Cagayan De Oro City",
+                    "sourceUrl": "https://smdc.com/properties/nature/vail-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Vail-680x480px.png",
+                    "description": "Current SMDC Vail Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,500,000 - PHP 4,000,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Spring Residences",
+                    "township": "Bicutan, Parañaque",
+                    "sourceUrl": "https://smdc.com/properties/nature/spring-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Spring-Facade.jpg",
+                    "description": "Current SMDC Spring Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Family Suite Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 4,200,000 - PHP 5,400,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 4,200,000 - PHP 5,400,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Vine Residences",
+                    "township": "SM City Novaliches",
+                    "sourceUrl": "https://smdc.com/properties/nature/vine-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Vine-680x480px.png",
+                    "description": "Current SMDC Vine Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,870,000 - PHP 6,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Leaf Residences",
+                    "township": "Susana Heights, Muntinlupa City",
+                    "sourceUrl": "https://smdc.com/properties/nature/leaf-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Leaf-680x480px.png",
+                    "description": "Current SMDC Leaf Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 7,900,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 7,900,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 7,900,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "3 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 - PHP 7,900,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Green 2 Residences",
+                    "township": "Dasmariñas, Cavite",
+                    "sourceUrl": "https://smdc.com/properties/nature/green-2-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Green2-Hero-1080x1920px.png",
+                    "description": "Current SMDC Green 2 Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 – PHP 6,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,200,000 – PHP 6,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Hope Residences",
+                    "township": "SM City Trece Martires, Cavite",
+                    "sourceUrl": "https://smdc.com/properties/nature/hope-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Hope-680x480px.png",
+                    "description": "Current SMDC Hope Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi Suite End Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 4,500,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Flexi Suite, Studio",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,900,000 - PHP 4,500,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Turf Residences",
+                    "township": "Biñan City, Laguna",
+                    "sourceUrl": "https://smdc.com/properties/nature/turf/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-5.png",
+                    "description": "Current SMDC Turf Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1-Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,500,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,500,000 - PHP 3,300,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Zeal Residences",
+                    "township": "General Trias, Cavite",
+                    "sourceUrl": "https://smdc.com/properties/nature/zeal/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-4.png",
+                    "description": "Current SMDC Zeal Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 2,700,000 - 3,600,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "PHP 2,700,000 - 3,600,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Bloom Residences",
+                    "township": "Cavite",
+                    "sourceUrl": "https://smdc.com/properties/nature/bloom/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Model-Unit-8-800x800-1-1.png",
+                    "description": "Current SMDC Bloom Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "2 Bedroom End Unit with Mezzanine and Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 6,600,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom End Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 6,600,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom End Unit with Mezzanine",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 6,600,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit with Mezzanine and Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 6,600,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 4,000,000 - PHP 6,600,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Glade Residences",
+                    "township": "Jaro, Iloilo City",
+                    "sourceUrl": "https://smdc.com/properties/nature/glade/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-2.png",
+                    "description": "Current SMDC Glade Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,000,000 - PHP 3,200,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Studio End Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,000,000 - PHP 3,200,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,000,000 - PHP 3,200,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Charm Residences",
+                    "township": "Confirm project location with SMDC",
+                    "sourceUrl": "https://smdc.com/properties/nature/charm/",
+                    "image": "https://smdc.com/app/uploads/2025/07/Facade-1920x1080-1.png",
+                    "description": "Current SMDC Charm Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "3 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price start at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price start at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "2 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price start at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit with Balcony",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price start at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "1 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price start at PHP 3,800,000 - PHP 5,200,000",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Now Residences",
+                    "township": "Angeles City, Pampanga",
+                    "sourceUrl": "https://smdc.com/properties/nature/now-residences/",
+                    "image": "https://smdc.com/app/uploads/2026/01/Now-680x480px.png",
+                    "description": "Current SMDC Now Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Wind Residences",
+                    "township": "Tagaytay City",
+                    "sourceUrl": "https://smdc.com/properties/nature/wind-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/12/Wind-680x480px.png",
+                    "description": "Current SMDC Wind Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "3 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "4 Bedroom Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Grace Residences",
+                    "township": "Barangay Ususan, Taguig City",
+                    "sourceUrl": "https://smdc.com/properties/nature/grace-residences/",
+                    "image": "https://smdc.com/app/uploads/2025/12/Grace-680x480px.png",
+                    "description": "Current SMDC Grace Residences listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "1 Bedroom Units",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "RFO listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Symphony Homes Mabalacat",
+                    "township": "Mabalacat, Pampanga",
+                    "sourceUrl": "https://smdc.com/properties/symphony-homes/symphony-homes/",
+                    "image": "https://smdc.com/app/uploads/2025/07/0827-SH-ModelUnit_v01.jpg",
+                    "description": "Current SMDC Symphony Homes Mabalacat listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Aria",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,350,000 - PHP 9,800,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Sonata",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 3,350,000 - PHP 9,800,000",
+                                        "status": "Pre-selling listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Cheerful Homes 2",
+                    "township": "Pampanga",
+                    "sourceUrl": "https://smdc.com/properties/symphony-homes/cheerful-homes-2/",
+                    "image": "https://smdc.com/app/uploads/2025/07/0701-CH2-MainKV-01-1.png",
+                    "description": "Current SMDC Cheerful Homes 2 listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Loft Type Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,271,000 - PHP 4,955,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Shophouse Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 2,271,000 - PHP 4,955,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "smdc",
+                    "developer": "SMDC",
+                    "title": "Cheerful Homes",
+                    "township": "Pampanga",
+                    "sourceUrl": "https://smdc.com/properties/symphony-homes/cheerful-homes/",
+                    "image": "https://smdc.com/app/uploads/2025/07/CHEERFUL-HOMES_RENDER_20170425-Guardhouse-Entrance-scaled.jpg",
+                    "description": "Current SMDC Cheerful Homes listing. See the official project page for current unit inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Flexi Home Corner Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 1,277,000 - PHP 2,086,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Flexi Home End Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 1,277,000 - PHP 2,086,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Flexi Home Inner Unit",
+                                        "area": "Ask SMDC for current floor area",
+                                        "priceRange": "Price starts at PHP 1,277,000 - PHP 2,086,000",
+                                        "status": "Move-in ready listing; confirm current unit availability.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "megaworld",
+                    "developer": "Megaworld",
+                    "title": "Uptown Modern",
+                    "township": "Uptown Bonifacio, Taguig City",
+                    "sourceUrl": "https://www.megaworldcorp.com/residences/uptown-modern",
+                    "image": "",
+                    "description": "Megaworld residential project in Uptown Bonifacio. Ask for current inventory, floor plans and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Studio Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "One-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Two-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Two-Bedroom Loft",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Three-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "megaworld",
+                    "developer": "Megaworld",
+                    "title": "The Albany",
+                    "township": "Fort Bonifacio, Taguig City",
+                    "sourceUrl": "https://www.megaworldcorp.com/residences/the-albany",
+                    "image": "",
+                    "description": "Megaworld residential development in Fort Bonifacio. Confirm current availability and pricing with the developer.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Residential Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "landco",
+                    "developer": "Landco",
+                    "title": "Fuego Condo (The Residences at Punta Fuego)",
+                    "township": "Nasugbu, Batangas",
+                    "sourceUrl": "https://theresidencespuntafuego.landco.ph/",
+                    "image": "",
+                    "description": "The Residences at Terrazas de Punta Fuego. Ask Landco for current available residences and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "One-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Two-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "Three-Bedroom Residence",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "cathay-land",
+                    "developer": "Cathay Land Inc",
+                    "title": "Wave",
+                    "township": "Confirm location with Cathay Land",
+                    "sourceUrl": "https://www.cathaylandinc.com/developments/",
+                    "image": "",
+                    "description": "Cathay Land project. Current published unit mix, location and prices were not available on the official development page; request current listing details.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Project Inquiry",
+                                        "area": "Ask for current property type and size",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "cathay-land",
+                    "developer": "Cathay Land Inc",
+                    "title": "Mira Costa",
+                    "township": "Confirm location with Cathay Land",
+                    "sourceUrl": "https://www.cathaylandinc.com/developments/",
+                    "image": "",
+                    "description": "Cathay Land project. Current published unit mix, location and prices were not available on the official development page; request current listing details.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Project Inquiry",
+                                        "area": "Ask for current property type and size",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "century-properties",
+                    "developer": "Century Properties",
+                    "title": "Cerulean Residences",
+                    "township": "General Trias, Cavite",
+                    "sourceUrl": "https://www.cerulean.com.ph/",
+                    "image": "",
+                    "description": "Current Century Properties residential community in General Trias. Confirm available house models and pricing with the developer.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "The Marina — House and Lot",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "The Coral — House and Lot",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              },
+                              {
+                                        "type": "The Isla — House and Lot",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "century-properties",
+                    "developer": "Century Properties",
+                    "title": "Azure North Townvillas",
+                    "township": "San Fernando, Pampanga",
+                    "sourceUrl": "https://www.azurenorth.com.ph/",
+                    "image": "",
+                    "description": "Townvilla offering at Azure North in San Fernando, Pampanga. Confirm current RFO inventory and pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Townvilla",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "century-properties",
+                    "developer": "Century Properties",
+                    "title": "Nuliv Townvillas at Acqua",
+                    "township": "Mandaluyong City",
+                    "sourceUrl": "https://www.century-properties.com/new-residential-and-estates/",
+                    "image": "",
+                    "description": "Current townvilla offering at Acqua. Confirm current inventory, floor plans and pricing with Century Properties.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "Townvilla",
+                                        "area": "Ask for current floor plan",
+                                        "priceRange": "Inquire for current pricing",
+                                        "status": "Confirm current unit availability with the developer.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Balanga",
+                    "township": "Balanga, Bataan",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-balanga/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Balanga, Bataan. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.9M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Baliwag",
+                    "township": "Baliwag, Bulacan",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-baliwag/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Baliwag, Bulacan. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.5M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Gapan",
+                    "township": "Gapan, Nueva Ecija",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-gapan/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Gapan, Nueva Ecija. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.0M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Hermosa Centrale",
+                    "township": "Hermosa, Bataan",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-hermosa/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Hermosa, Bataan. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.1M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Magalang",
+                    "township": "Magalang, Pampanga",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-magalang/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.3M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Magalang East",
+                    "township": "Magalang, Pampanga",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-magalang-east/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Magalang, Pampanga. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.3M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Pandi",
+                    "township": "Pandi, Bulacan",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-pandi/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Pandi, Bulacan. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.6M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Batulao",
+                    "township": "Nasugbu, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-batulao/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.9M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Batulao Editions v2",
+                    "township": "Nasugbu, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-batulao-editions/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Nasugbu, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱6.5M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Bay",
+                    "township": "Bay, Laguna",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-sights-bay/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Bay, Laguna. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.7M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Calauan",
+                    "township": "Calauan, Laguna",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-sights-calauan/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Calauan, Laguna. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.7M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Calamba",
+                    "township": "Calamba, Laguna",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-calamba/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Calamba, Laguna. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.4M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Lipa",
+                    "township": "Lipa, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-lipa/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Lipa, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.9M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst The Cove at Lipa",
+                    "township": "Lipa, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-the-cove-lipa/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Lipa, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.9M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Gentri",
+                    "township": "General Trias, Cavite",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-general-trias-cavite/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in General Trias, Cavite. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱3.1M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Naic",
+                    "township": "Naic, Cavite",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-naic/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Naic, Cavite. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.3M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Padre Garcia",
+                    "township": "Padre Garcia, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/sights-batangas/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Padre Garcia, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.3M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst San Pablo",
+                    "township": "San Pablo, Laguna",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-san-pablo/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.0M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst San Pablo East",
+                    "township": "San Pablo, Laguna",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-san-pablo-east/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in San Pablo, Laguna. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.0M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Sto. Tomas",
+                    "township": "Sto. Tomas, Batangas",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-sto-tomas/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Sto. Tomas, Batangas. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱2.6M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Tayabas",
+                    "township": "Tayabas, Quezon",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-tayabas/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Tayabas, Quezon. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.8M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Iloilo",
+                    "township": "Iloilo City",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-iloilo/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Iloilo City. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.5M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst General Santos",
+                    "township": "General Santos City",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-gensan/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in General Santos City. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.8M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          },
+          {
+                    "devSlug": "phirst-park-homes",
+                    "developer": "PHirst Park Homes",
+                    "title": "PHirst Bacolod",
+                    "township": "Bacolod City",
+                    "sourceUrl": "https://phirstparkhomesph.com/locations/phirst-park-homes-bacolod/",
+                    "image": "",
+                    "description": "Current PHirst Park Homes community in Bacolod City. See the official listing for model availability and current pricing.",
+                    "turnover": "Confirm current availability with the developer.",
+                    "units": [
+                              {
+                                        "type": "House and Lot",
+                                        "area": "Ask for available model and lot size",
+                                        "priceRange": "Starting at ₱1.6M; confirm current pricing",
+                                        "status": "Current PHirst community listing; confirm available unit models.",
+                                        "beds": 0,
+                                        "baths": 0
+                              }
+                    ]
+          }
+];
+
+        appendedDeveloperCatalog.forEach((project, projectIndex) => {
+            const projectNumber = 126 + projectIndex;
+            const units = (project.units && project.units.length ? project.units : [{
+                type: 'Project Inquiry',
+                area: 'Ask the developer for current details',
+                priceRange: 'Inquire for current pricing',
+                status: 'Confirm current availability with the developer.'
+            }]).map((unit, unitIndex) => ({
+                id: `CAT${projectNumber}-${String(unitIndex + 1).padStart(2, '0')}`,
+                type: unit.type,
+                area: unit.area,
+                priceRange: unit.priceRange,
+                status: unit.status,
+                beds: unit.beds || 0,
+                baths: unit.baths || 0
+            }));
+
+            developerProjects.push({
+                id: `DEV-${projectNumber}`,
+                devSlug: project.devSlug,
+                developer: project.developer,
+                title: project.title,
+                township: project.township,
+                turnover: project.turnover,
+                image: project.image || '',
+                description: project.description || '',
+                sourceUrl: project.sourceUrl || '',
+                units
+            });
+        });
 
         // Unit layouts and representative visuals linked from Arthaland's official property pages.
         // Some projects do not publish unit-level plans; those gaps are stated in the modal.
@@ -3634,7 +6025,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land' || brand === 'rhk-land' || brand === 'robinsons-land';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land' || brand === 'rhk-land' || brand === 'robinsons-land' || brand === 'filinvest-land' || brand === 'greenfield' || brand === 'federal-land' || brand === 'sm-signature' || brand === 'smdc' || brand === 'megaworld' || brand === 'landco' || brand === 'cathay-land' || brand === 'century-properties' || brand === 'phirst-park-homes';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
@@ -3648,6 +6039,7 @@ if (Array.isArray(rawImg)) {
                             <h3 class="text-lg font-bold uppercase">${escapeHtml(p.title)}</h3>
                             <p class="text-xs text-neutral-600">${escapeHtml(p.township)}</p>
                             <p class="text-xs text-neutral-700 leading-relaxed mt-3">${escapeHtml(p.description || '')}</p>
+                            ${safeProjectPageUrl(p.sourceUrl) ? `<a href="${escapeHtml(safeProjectPageUrl(p.sourceUrl))}" target="_blank" rel="noopener noreferrer" class="inline-block text-[10px] font-bold uppercase tracking-wide underline underline-offset-2">Official project page ↗</a>` : ''}
                         </div>
                         <div class="flex gap-2">
                             <button type="button" onclick="openDeveloperSpecifications('${safeDomId(p.id)}')" class="flex-1 bg-black hover:bg-brand-brown text-white py-2.5 text-[10px] font-bold uppercase tracking-wide">Project Specifications</button>
