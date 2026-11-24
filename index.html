@@ -533,6 +533,7 @@
                             <option value="shang-properties">Shang Properties</option>
                             <option value="rockwell">Rockwell</option>
                             <option value="ortigas-land">Ortigas Land</option>
+                            <option value="rhk-land">RHK Land</option>
                         </select>
                     </div>
                 </div>
@@ -1087,7 +1088,7 @@
                 const allowedHosts = new Set([
                     'drive.google.com', 'lh3.googleusercontent.com', 'images.unsplash.com',
                     'i.imgur.com', 'arthaland.imgix.net',
-                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land'
+                    'www.alveoland.com.ph', 'rbgcms-alb-prod.ayalaland.com', 'cdn.sanity.io', 'shangproperties.com', 'e-rockwell.com', 'assets.ortigas.com.ph', 'info.ortigas.land', 'rhkland.com'
                 ]);
                 const sameOrigin = parsed.origin === window.location.origin;
                 if (parsed.username || parsed.password) return '';
@@ -1831,6 +1832,24 @@ if (Array.isArray(rawImg)) {
                     { id: 'OLN-01', type: 'Residential Unit', area: 'Ask for current unit types and floor plans', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 0, baths: 0 }
                 ]
             },
+            {
+                id: 'DEV-122',
+                devSlug: 'rhk-land',
+                developer: 'RHK Land',
+                title: 'The Velaris Residences',
+                township: 'Bridgetowne Boulevard, Brgy. Rosario, Pasig City',
+                turnover: 'Ask RHK Land for the current handover schedule',
+                image: 'https://rhkland.com/wp-content/uploads/2019/11/section1-img_03.jpg',
+                description: 'An award-winning three-tower residential enclave in Bridgetowne. RHK Land currently presents the 40-storey North Tower, with spacious layouts and indoor patios.',
+                units: [
+                    { id: 'VEL-01', type: 'One-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 1, baths: 0 },
+                    { id: 'VEL-02', type: 'One-and-a-Half-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 1.5, baths: 0 },
+                    { id: 'VEL-03', type: 'Two-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 2, baths: 0 },
+                    { id: 'VEL-04', type: 'Three-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 3, baths: 0 },
+                    { id: 'VEL-05', type: 'Three-Bedroom Premium', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 3, baths: 0 },
+                    { id: 'VEL-06', type: 'Four-Bedroom', area: 'Ask for current floor plan', priceRange: 'Inquire for current pricing', status: 'Ask for current availability', beds: 4, baths: 0 }
+                ]
+            },
         ];
 
         // Verified against Arthaland project pages on 10 Nov 2026. Keep inventory and pricing inquiry-led where the source does not publish current details.
@@ -2009,6 +2028,13 @@ if (Array.isArray(rawImg)) {
                     { url: 'https://assets.ortigas.com.ph/data/uploads/2023/04/Olin_at_Jade_Drive.jpg', label: 'Olin at Jade Drive · official project visual' }
                 ],
                 note: 'Contact Compass Realty for current unit types, floor plans, prices, and availability.'
+            },
+            'DEV-122': {
+                plans: [],
+                renders: [
+                    { url: 'https://rhkland.com/wp-content/uploads/2019/11/section1-img_03.jpg', label: 'The Velaris Residences · official facade image' }
+                ],
+                note: 'Contact Compass Realty for current floor plans, pricing, availability, and handover details.'
             },
 
         };
@@ -3540,7 +3566,7 @@ if (Array.isArray(rawImg)) {
                 filtered = filtered.filter(p => p.devSlug === brand || String(p.developer || '').toLowerCase().includes(brand.toLowerCase()));
             }
 
-            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land';
+            const showUnitTypes = brand === 'arthaland' || brand === 'ayala-land' || brand === 'shang-properties' || brand === 'rockwell' || brand === 'ortigas-land' || brand === 'rhk-land';
             document.getElementById('dev-projects-count').textContent = `${filtered.length} PROJECTS`;
             grid.innerHTML = filtered.map(p => `
                 <article class="bg-white border-2 border-black overflow-hidden">
